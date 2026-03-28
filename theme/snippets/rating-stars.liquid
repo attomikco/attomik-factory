@@ -1,0 +1,54 @@
+{%- comment -%}
+  Renders a star rating display.
+  Usage: {% render 'rating-stars', rating_value: product.metafields.reviews.rating.value, rating_count: product.metafields.reviews.rating_count.value %}
+{%- endcomment -%}
+
+{%- liquid
+  assign rating = rating_value | round: 1 | default: 0
+  assign count = rating_count | default: 0
+  assign full_stars = rating | floor
+  assign has_half = false
+  assign decimal = rating | minus: full_stars
+  if decimal >= 0.3 and decimal <= 0.7
+    assign has_half = true
+  elsif decimal > 0.7
+    assign full_stars = full_stars | plus: 1
+  endif
+  assign empty_stars = 5 | minus: full_stars
+  if has_half
+    assign empty_stars = empty_stars | minus: 1
+  endif
+-%}
+
+{%- if rating > 0 -%}
+  <div class="rating-stars" role="img" aria-label="{{ rating }} out of 5 stars, {{ count }} reviews">
+    <div class="rating-stars__icons">
+      {%- for i in (1..full_stars) -%}
+        <svg class="rating-stars__star rating-stars__star--full" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/>
+        </svg>
+      {%- endfor -%}
+
+      {%- if has_half -%}
+        <svg class="rating-stars__star rating-stars__star--half" width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="half-{{ section.id }}-{{ rating_product_id }}">
+              <stop offset="50%" stop-color="currentColor"/>
+              <stop offset="50%" stop-color="transparent"/>
+            </linearGradient>
+          </defs>
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" fill="url(#half-{{ section.id }}-{{ rating_product_id }})" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      {%- endif -%}
+
+      {%- for i in (1..empty_stars) -%}
+        {%- if empty_stars > 0 -%}
+          <svg class="rating-stars__star rating-stars__star--empty" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/>
+          </svg>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <span class="rating-stars__count">({{ count }})</span>
+  </div>
+{%- endif -%}

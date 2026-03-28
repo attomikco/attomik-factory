@@ -1,0 +1,191 @@
+{%- liquid
+  assign bg_color = section.settings.background_color
+  assign text_color = section.settings.text_color
+  assign speed = section.settings.speed
+  assign text_size = section.settings.text_size
+
+  case text_size
+    when 'small'
+      assign size_class = 'ticker--sm'
+    when 'medium'
+      assign size_class = 'ticker--md'
+    when 'large'
+      assign size_class = 'ticker--lg'
+  endcase
+-%}
+
+<section
+  class="ticker {{ size_class }}"
+  id="section-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="ingredient-ticker"
+  style="
+    --ticker-bg: {{ bg_color }};
+    --ticker-text: {{ text_color }};
+    --ticker-speed: {{ speed }}s;
+  "
+>
+  <div class="ticker__track">
+    {%- for pass in (1..2) -%}
+      <div class="ticker__set" aria-hidden="{{ pass | minus: 1 | at_least: 1 }}">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.show_divider -%}
+            <span class="ticker__divider" aria-hidden="true">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 0L7 4L4 8L1 4L4 0Z" fill="currentColor"/>
+              </svg>
+            </span>
+          {%- endif -%}
+          <span class="ticker__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .ticker {
+    width: 100%;
+    height: 48px;
+    overflow: hidden;
+    background-color: var(--ticker-bg);
+    color: var(--ticker-text);
+  }
+
+  .ticker__track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: max-content;
+    animation: tickerScroll var(--ticker-speed) linear infinite;
+  }
+
+  .ticker__set {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .ticker__item {
+    flex-shrink: 0;
+    padding: 0 var(--space-5);
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  /* Text size variants */
+  .ticker--sm .ticker__item { font-size: var(--text-xs); }
+  .ticker--md .ticker__item { font-size: var(--text-sm); }
+  .ticker--lg .ticker__item { font-size: var(--text-base); }
+
+  /* Divider */
+  .ticker__divider {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ticker-text);
+    opacity: 0.5;
+  }
+
+  /* Scroll keyframes */
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Reduced motion — stop scrolling, show items static */
+  @media (prefers-reduced-motion: reduce) {
+    .ticker__track {
+      animation: none;
+      overflow-x: auto;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .ticker__set:last-child {
+      display: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Ingredient Ticker",
+  "tag": "section",
+  "class": "section-ingredient-ticker",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll speed (seconds)",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "default": 30,
+      "info": "Lower = faster. Time for one full loop."
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Text size",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Claim text"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_divider",
+          "label": "Show divider",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Ingredient Ticker",
+      "category": "Text",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Organic Ingredients", "show_divider": true } },
+        { "type": "item", "settings": { "text": "No Artificial Flavors", "show_divider": true } },
+        { "type": "item", "settings": { "text": "Third Party Tested", "show_divider": true } },
+        { "type": "item", "settings": { "text": "Non-GMO Verified", "show_divider": true } },
+        { "type": "item", "settings": { "text": "Sustainably Sourced", "show_divider": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

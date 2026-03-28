@@ -1,0 +1,400 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Attomik Base Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Attomik",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary",
+        "default": "#1A1A1A",
+        "info": "Main brand color — used for headings, buttons, and key UI elements."
+      },
+      {
+        "type": "color",
+        "id": "color_primary_light",
+        "label": "Primary light",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_dark",
+        "label": "Primary dark",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary",
+        "default": "#E85D04",
+        "info": "Accent brand color — used for CTAs and highlights."
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_light",
+        "label": "Secondary light",
+        "default": "#FF7B2E"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_dark",
+        "label": "Secondary dark",
+        "default": "#C44B00"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#2D6A4F",
+        "info": "Tertiary accent — badges, tags, supplementary elements."
+      },
+      {
+        "type": "color",
+        "id": "color_accent_light",
+        "label": "Accent light",
+        "default": "#52B788"
+      },
+      {
+        "type": "header",
+        "content": "Surface colors"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_alt",
+        "label": "Background alternate",
+        "default": "#F8F7F4",
+        "info": "Used for alternating section backgrounds."
+      },
+      {
+        "type": "color",
+        "id": "color_bg_dark",
+        "label": "Background dark",
+        "default": "#1A1A1A",
+        "info": "Dark-mode sections, footer, overlays."
+      },
+      {
+        "type": "text",
+        "id": "color_bg_overlay",
+        "label": "Overlay color",
+        "default": "rgba(0, 0, 0, 0.55)",
+        "info": "RGBA value for hero/image overlays."
+      },
+      {
+        "type": "header",
+        "content": "Text colors"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Body text",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Secondary text",
+        "default": "#5C5C5C"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Muted text",
+        "default": "#999999"
+      },
+      {
+        "type": "color",
+        "id": "color_text_inverse",
+        "label": "Inverse text",
+        "default": "#FFFFFF",
+        "info": "Text on dark backgrounds."
+      },
+      {
+        "type": "color",
+        "id": "color_text_link",
+        "label": "Link color",
+        "default": "#E85D04"
+      },
+      {
+        "type": "header",
+        "content": "Border colors"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border",
+        "default": "#E0E0E0"
+      },
+      {
+        "type": "color",
+        "id": "color_border_dark",
+        "label": "Border dark",
+        "default": "#CCCCCC"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font families"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "inter_n6",
+        "info": "Used for all headings (h1–h4)."
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "inter_n4",
+        "info": "Used for paragraphs, labels, and UI text."
+      },
+      {
+        "type": "text",
+        "id": "font_accent",
+        "label": "Accent font stack",
+        "default": "'Georgia', 'Times New Roman', serif",
+        "info": "CSS font-family string for decorative or editorial text."
+      },
+      {
+        "type": "header",
+        "content": "Font sizes"
+      },
+      {
+        "type": "range",
+        "id": "scale_heading_desktop",
+        "label": "Heading scale (desktop)",
+        "min": 80,
+        "max": 150,
+        "step": 5,
+        "default": 100,
+        "unit": "%",
+        "info": "Scales all heading sizes on desktop viewports."
+      },
+      {
+        "type": "range",
+        "id": "scale_heading_mobile",
+        "label": "Heading scale (mobile)",
+        "min": 70,
+        "max": 120,
+        "step": 5,
+        "default": 100,
+        "unit": "%",
+        "info": "Scales all heading sizes on mobile viewports."
+      },
+      {
+        "type": "range",
+        "id": "scale_body",
+        "label": "Body text scale",
+        "min": 85,
+        "max": 120,
+        "step": 5,
+        "default": 100,
+        "unit": "%",
+        "info": "Scales base body text size."
+      }
+    ]
+  },
+  {
+    "name": "Spacing & Layout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content widths"
+      },
+      {
+        "type": "range",
+        "id": "width_content",
+        "label": "Content max-width",
+        "min": 1000,
+        "max": 1400,
+        "step": 20,
+        "default": 1200,
+        "unit": "px",
+        "info": "Maximum width of the main content area."
+      },
+      {
+        "type": "range",
+        "id": "width_narrow",
+        "label": "Narrow content width",
+        "min": 600,
+        "max": 900,
+        "step": 20,
+        "default": 720,
+        "unit": "px",
+        "info": "Used for text-heavy sections like blog posts."
+      },
+      {
+        "type": "range",
+        "id": "width_wide",
+        "label": "Wide content width",
+        "min": 1200,
+        "max": 1600,
+        "step": 20,
+        "default": 1440,
+        "unit": "px",
+        "info": "Used for full-width section containers."
+      },
+      {
+        "type": "header",
+        "content": "Section spacing"
+      },
+      {
+        "type": "range",
+        "id": "section_vertical_padding",
+        "label": "Section vertical padding",
+        "min": 20,
+        "max": 120,
+        "step": 4,
+        "default": 64,
+        "unit": "px",
+        "info": "Top and bottom padding for each section."
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "label": "Grid gap",
+        "min": 8,
+        "max": 48,
+        "step": 4,
+        "default": 24,
+        "unit": "px",
+        "info": "Gap between grid items in product grids, card layouts, etc."
+      }
+    ]
+  },
+  {
+    "name": "Borders & Corners",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Border radius"
+      },
+      {
+        "type": "range",
+        "id": "radius_sm",
+        "label": "Small radius",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "default": 4,
+        "unit": "px",
+        "info": "Inputs, tags, small elements."
+      },
+      {
+        "type": "range",
+        "id": "radius_md",
+        "label": "Medium radius",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "default": 8,
+        "unit": "px",
+        "info": "Cards, buttons, containers."
+      },
+      {
+        "type": "range",
+        "id": "radius_lg",
+        "label": "Large radius",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "default": 12,
+        "unit": "px",
+        "info": "Modals, hero images."
+      },
+      {
+        "type": "range",
+        "id": "radius_xl",
+        "label": "Extra-large radius",
+        "min": 0,
+        "max": 48,
+        "step": 1,
+        "default": 16,
+        "unit": "px",
+        "info": "Feature cards, large containers."
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Transition durations"
+      },
+      {
+        "type": "range",
+        "id": "duration_fast",
+        "label": "Fast",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "default": 120,
+        "unit": "ms",
+        "info": "Hover states, small toggles."
+      },
+      {
+        "type": "range",
+        "id": "duration_base",
+        "label": "Base",
+        "min": 100,
+        "max": 400,
+        "step": 10,
+        "default": 200,
+        "unit": "ms",
+        "info": "Standard interactions — buttons, links."
+      },
+      {
+        "type": "range",
+        "id": "duration_slow",
+        "label": "Slow",
+        "min": 200,
+        "max": 600,
+        "step": 10,
+        "default": 350,
+        "unit": "ms",
+        "info": "Dropdowns, accordions, drawers."
+      },
+      {
+        "type": "range",
+        "id": "duration_slower",
+        "label": "Slower",
+        "min": 300,
+        "max": 800,
+        "step": 10,
+        "default": 500,
+        "unit": "ms",
+        "info": "Page-level transitions, carousels."
+      },
+      {
+        "type": "checkbox",
+        "id": "animations_enabled",
+        "label": "Enable animations",
+        "default": true,
+        "info": "Disable to respect prefers-reduced-motion globally."
+      }
+    ]
+  }
+]
