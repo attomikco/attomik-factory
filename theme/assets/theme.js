@@ -120,5 +120,6 @@
   document.addEventListener('DOMContentLoaded', function () {
     initAjaxCart();
     initVariantPills();
+    updateCartCount();
   });
 })();
