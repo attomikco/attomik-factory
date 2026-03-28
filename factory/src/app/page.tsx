@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Client, ClientStatus } from '@/lib/types';
 
@@ -67,9 +68,12 @@ export default function Dashboard() {
             </h1>
             <span className="font-mono text-xs text-muted">v1.0</span>
           </div>
-          <button className="border border-accent px-4 py-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:bg-accent hover:text-black">
+          <Link
+            href="/clients/new"
+            className="border border-accent px-4 py-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:bg-accent hover:text-black"
+          >
             + New Client
-          </button>
+          </Link>
         </div>
       </header>
 
