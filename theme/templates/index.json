@@ -1,174 +1,1244 @@
 {
   "sections": {
-    "hero-fullbleed": {
-      "type": "hero-fullbleed",
-      "settings": {
-        "layout": "image_right",
-        "section_height": "full",
-        "overlay_opacity": 35,
-        "eyebrow": "New Formula",
-        "headline": "Fuel your body, naturally.",
-        "subheadline": "Clean ingredients. Real results. Wellness without compromise.",
-        "cta_primary_label": "Shop Now",
-        "cta_primary_url": "/collections/all",
-        "cta_secondary_label": "Learn More",
-        "cta_secondary_url": "/pages/about"
-      }
-    },
-    "ingredient-ticker": {
-      "type": "ingredient-ticker",
-      "settings": {
-        "background_color": "#000000",
-        "text_color": "#00ff97",
-        "speed": 30,
-        "text_size": "medium"
-      },
+    "de4cc432-8e1c-49bc-8935-1f94a9d9d797": {
+      "type": "banner",
       "blocks": {
-        "ticker-1": { "type": "item", "settings": { "text": "Organic Ingredients", "show_divider": true } },
-        "ticker-2": { "type": "item", "settings": { "text": "No Artificial Flavors", "show_divider": true } },
-        "ticker-3": { "type": "item", "settings": { "text": "Third Party Tested", "show_divider": true } },
-        "ticker-4": { "type": "item", "settings": { "text": "Non-GMO Verified", "show_divider": true } },
-        "ticker-5": { "type": "item", "settings": { "text": "Sustainably Sourced", "show_divider": true } }
-      },
-      "block_order": ["ticker-1", "ticker-2", "ticker-3", "ticker-4", "ticker-5"]
-    },
-    "brand-pillars": {
-      "type": "brand-pillars",
-      "settings": {
-        "section_title": "Why Choose Us",
-        "columns": "3",
-        "show_dividers": false,
-        "background": "#ffffff",
-        "text_align": "center"
-      },
-      "blocks": {
-        "pillar-1": {
-          "type": "pillar",
+        "8adfc70a-eb67-46a2-adf4-6f8358aaac51": {
+          "type": "heading",
           "settings": {
-            "headline": "Clean Ingredients",
-            "description": "Every ingredient is carefully sourced and third-party tested for purity."
+            "content": "",
+            "font_size_mobile": 34,
+            "font_size_desktop": 50
           }
         },
-        "pillar-2": {
-          "type": "pillar",
+        "template--15898491977911__de4cc432-8e1c-49bc-8935-1f94a9d9d797-content-1": {
+          "type": "content",
           "settings": {
-            "headline": "Sustainable Process",
-            "description": "Carbon-neutral production from farm to shelf, with fully recyclable packaging."
+            "content": ""
           }
         },
-        "pillar-3": {
-          "type": "pillar",
+        "buttons_tAAWWt": {
+          "type": "buttons",
           "settings": {
-            "headline": "Proven Results",
-            "description": "Backed by clinical research and trusted by thousands of customers daily."
+            "button_label": "",
+            "button_url": "",
+            "color_button": "btn",
+            "secondary_button_label": "",
+            "secondary_button_url": "",
+            "secondary_color_button": "btn btn--plain",
+            "floating_button_label": "",
+            "floating_button_url": "",
+            "floating_color_button": "btn"
           }
         }
       },
-      "block_order": ["pillar-1", "pillar-2", "pillar-3"]
-    },
-    "product-collection": {
-      "type": "product-collection",
+      "block_order": [
+        "8adfc70a-eb67-46a2-adf4-6f8358aaac51",
+        "template--15898491977911__de4cc432-8e1c-49bc-8935-1f94a9d9d797-content-1",
+        "buttons_tAAWWt"
+      ],
       "settings": {
-        "section_title": "Shop Our Bestsellers",
-        "section_subtitle": "Fan favorites, backed by science and loved by thousands.",
-        "products_to_show": 6,
-        "show_rating": true,
-        "show_unit_price": true,
-        "background": "#f5f5f5"
+        "url": "",
+        "image_background_desktop": null,
+        "image_background_mobile": null,
+        "show_image": true,
+        "show_video_background_mobile": true,
+        "layout_y_spacing": "banner--h-xl",
+        "color_scheme": "color__bg-overlay-1 color__text",
+        "color_text": "color__light",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": true,
+        "enable_background_overlay": false,
+        "style_border": "",
+        "layout_y_alignment": "items-end",
+        "layout_x_alignment": "justify-center text-center",
+        "enable_header_overlap": false,
+        "enable_margin": true,
+        "enable_border_margin": false,
+        "enable_max_width": true,
+        "visibility": ""
       }
     },
-    "founder-story": {
-      "type": "founder-story",
+    "marquee_jKNrxf": {
+      "type": "marquee",
+      "blocks": {
+        "heading_8QW9RE": {
+          "type": "heading",
+          "settings": {
+            "content": ""
+          }
+        },
+        "image_D6dgwc": {
+          "type": "image",
+          "settings": {
+            "image": null,
+            "image_height": 100
+          }
+        }
+      },
+      "block_order": [
+        "heading_8QW9RE",
+        "image_D6dgwc"
+      ],
+      "disabled": true,
+      "name": "t:sections.marquee.name",
       "settings": {
-        "layout": "image_left",
-        "eyebrow": "Our Story",
-        "headline": "Built from a Kitchen, Backed by Science",
-        "body": "<p>We started with a simple question: why does healthy have to taste bad? After two years of R&D and hundreds of formulations, we created something we're proud to share with you.</p><p>Every ingredient is intentional. Every decision is transparent. This is wellness without compromise.</p>",
-        "founder_name": "The Founders",
-        "founder_title": "",
-        "background": "#ffffff"
+        "spacing_top": 10,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-primary",
+        "color_background": "#ffffff",
+        "color_text": "color__light",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": false,
+        "enable_fade": false,
+        "style_border": "border--b-width",
+        "enable_margin": false,
+        "use_reverse_animation": false,
+        "animation_speed": 100,
+        "visibility": ""
       }
     },
-    "comparison-table": {
-      "type": "comparison-table",
+    "text_66CPj8": {
+      "type": "text",
+      "name": "t:sections.text.name",
       "settings": {
-        "section_title": "How We Compare",
-        "brand_column_label": "Our Brand",
-        "competitor_column_label": "Other Brands",
-        "background": "#f5f5f5"
-      },
-      "blocks": {
-        "row-1": { "type": "row", "settings": { "attribute": "Organic Certified", "brand_has_it": true, "brand_value": "", "competitor_has_it": false, "competitor_value": "" } },
-        "row-2": { "type": "row", "settings": { "attribute": "No Artificial Sweeteners", "brand_has_it": true, "brand_value": "", "competitor_has_it": false, "competitor_value": "" } },
-        "row-3": { "type": "row", "settings": { "attribute": "Third-Party Lab Tested", "brand_has_it": true, "brand_value": "", "competitor_has_it": false, "competitor_value": "" } },
-        "row-4": { "type": "row", "settings": { "attribute": "Sustainably Sourced", "brand_has_it": true, "brand_value": "", "competitor_has_it": true, "competitor_value": "" } },
-        "row-5": { "type": "row", "settings": { "attribute": "Sugar per Serving", "brand_has_it": true, "brand_value": "0g", "competitor_has_it": false, "competitor_value": "12g" } }
-      },
-      "block_order": ["row-1", "row-2", "row-3", "row-4", "row-5"]
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "style_text_alignment": "text-center",
+        "layout_x_alignment": "justify-center",
+        "layout_column_width": 80,
+        "enable_margin": true,
+        "visibility": ""
+      }
     },
-    "reviews-carousel": {
-      "type": "reviews-carousel",
-      "settings": {
-        "section_title": "What Customers Are Saying",
-        "background": "#ffffff",
-        "card_background": "#f5f5f5"
-      },
+    "content_grid_Hr7EPJ": {
+      "type": "content-grid",
       "blocks": {
-        "review-1": { "type": "review", "settings": { "review_text": "Best tasting functional beverage I've tried. Clean ingredients and you can actually feel the difference.", "reviewer_name": "Sarah M.", "reviewer_subtitle": "Verified Buyer" } },
-        "review-2": { "type": "review", "settings": { "review_text": "I was skeptical at first, but after a month I'm completely hooked. The subscription makes it so easy.", "reviewer_name": "James R.", "reviewer_subtitle": "Verified Buyer" } },
-        "review-3": { "type": "review", "settings": { "review_text": "Finally a brand that actually delivers on its promises. No artificial anything and it tastes amazing.", "reviewer_name": "Emily K.", "reviewer_subtitle": "Verified Buyer" } },
-        "review-4": { "type": "review", "settings": { "review_text": "My whole family loves this. Great knowing it's organic and sustainably sourced. Will keep ordering.", "reviewer_name": "David L.", "reviewer_subtitle": "Austin, TX" } }
+        "content_WRQxiC": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--neutral",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
       },
-      "block_order": ["review-1", "review-2", "review-3", "review-4"]
+      "block_order": [
+        "content_WRQxiC"
+      ],
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 60,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 4,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "md:hidden"
+      }
     },
-    "subscription-banner": {
-      "type": "subscription-banner",
-      "settings": {
-        "layout": "centered",
-        "eyebrow": "Subscribe & Save",
-        "headline": "Never Run Out — Get 20% Off Every Order",
-        "cta_label": "Start Your Subscription",
-        "cta_url": "/pages/subscribe",
-        "fine_print": "Cancel anytime. Free shipping on all subscription orders.",
-        "background_color": "#000000",
-        "overlay_opacity": 0,
-        "text_color": "light"
-      },
+    "content_grid_GcCrBN": {
+      "type": "content-grid",
       "blocks": {
-        "benefit-1": { "type": "benefit", "settings": { "text": "20% off every order" } },
-        "benefit-2": { "type": "benefit", "settings": { "text": "Free shipping, always" } },
-        "benefit-3": { "type": "benefit", "settings": { "text": "Skip or pause anytime" } },
-        "benefit-4": { "type": "benefit", "settings": { "text": "Exclusive subscriber flavors" } }
+        "content_MrcgbY": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": true,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 500,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_x7iHYJ": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--neutral",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        }
       },
-      "block_order": ["benefit-1", "benefit-2", "benefit-3", "benefit-4"]
+      "block_order": [
+        "content_MrcgbY",
+        "content_x7iHYJ"
+      ],
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--outline-alt",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 4,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "hidden md:block"
+      }
     },
-    "faq-accordion": {
-      "type": "faq-accordion",
-      "settings": {
-        "section_title": "Frequently Asked Questions",
-        "section_subtitle": "",
-        "close_others": true,
-        "background": "#f5f5f5"
-      },
+    "da6bf027-8e85-4143-a167-722478adcde1": {
+      "type": "testimonial-slider",
       "blocks": {
-        "faq-1": { "type": "item", "settings": { "question": "What ingredients do you use?", "answer": "<p>We use only certified organic, non-GMO ingredients. Every batch is third-party tested for purity and potency. You can view our full ingredient list on each product page.</p>" } },
-        "faq-2": { "type": "item", "settings": { "question": "How does subscription work?", "answer": "<p>Choose your products and delivery frequency. You'll save 20% on every order and get free shipping. You can skip, pause, or cancel anytime from your account dashboard — no commitments.</p>" } },
-        "faq-3": { "type": "item", "settings": { "question": "What is your return policy?", "answer": "<p>We offer a 30-day satisfaction guarantee. If you're not happy with your purchase, contact us and we'll make it right with a full refund or replacement — no questions asked.</p>" } },
-        "faq-4": { "type": "item", "settings": { "question": "Where do you ship?", "answer": "<p>We ship to all 50 US states. Orders over $50 qualify for free standard shipping. Expedited shipping options are available at checkout.</p>" } },
-        "faq-5": { "type": "item", "settings": { "question": "Are your products vegan and gluten-free?", "answer": "<p>Yes — all of our products are 100% plant-based, gluten-free, and free from the top 8 allergens. We manufacture in a dedicated facility to prevent cross-contamination.</p>" } }
+        "template--16628482343091__da6bf027-8e85-4143-a167-722478adcde1-testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "name": "",
+            "title": "",
+            "logo_height": 32,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_Lfa7Rn": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "name": "",
+            "title": "",
+            "logo_height": 32,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_FH8rDD": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "name": "",
+            "title": "",
+            "logo_height": 32,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_qyMayt": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "name": "",
+            "title": "",
+            "logo_height": 44,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_3T6htQ": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "name": "",
+            "title": "",
+            "logo_height": 44,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        }
       },
-      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5"]
+      "block_order": [
+        "template--16628482343091__da6bf027-8e85-4143-a167-722478adcde1-testimonial-1",
+        "testimonial_Lfa7Rn",
+        "testimonial_FH8rDD",
+        "testimonial_qyMayt",
+        "testimonial_3T6htQ"
+      ],
+      "settings": {
+        "announcement_delay": 4,
+        "spacing_top": 100,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-body",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_y_alignment": "items-end",
+        "layout_x_alignment": "justify-center",
+        "layout_column_width": 80,
+        "enable_margin": true,
+        "visibility": ""
+      }
+    },
+    "video_C7nywJ": {
+      "type": "video",
+      "name": "t:sections.video.name",
+      "settings": {
+        "video": null,
+        "auto_play": true,
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 50,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "table_68DHki": {
+      "type": "table",
+      "blocks": {
+        "content_HcMQWf": {
+          "type": "content",
+          "settings": {
+            "label": "",
+            "tooltip": "",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "",
+            "column_2_content": "",
+            "column_2_icon": "",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "",
+            "column_4_icon": "slash",
+            "color_scheme": "color__bg-transparent"
+          }
+        },
+        "content_qzG3qg": {
+          "type": "content",
+          "settings": {
+            "label": "",
+            "tooltip": "",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "",
+            "column_2_content": "",
+            "column_2_icon": "",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "",
+            "column_4_icon": "slash",
+            "color_scheme": "color__bg-transparent"
+          }
+        },
+        "content_R6jMnh": {
+          "type": "content",
+          "settings": {
+            "label": "",
+            "tooltip": "",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "",
+            "column_2_content": "",
+            "column_2_icon": "",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "",
+            "column_4_icon": "slash",
+            "color_scheme": "color__bg-transparent"
+          }
+        },
+        "content_KHmemf": {
+          "type": "content",
+          "settings": {
+            "label": "",
+            "tooltip": "",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "",
+            "column_2_content": "",
+            "column_2_icon": "",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "",
+            "column_4_icon": "",
+            "color_scheme": "color__bg-body color__text"
+          }
+        },
+        "content_hHjfg6": {
+          "type": "content",
+          "settings": {
+            "label": "",
+            "tooltip": "",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "",
+            "column_2_content": "",
+            "column_2_icon": "",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "",
+            "column_4_icon": "",
+            "color_scheme": "color__bg-body color__text"
+          }
+        }
+      },
+      "block_order": [
+        "content_HcMQWf",
+        "content_qzG3qg",
+        "content_R6jMnh",
+        "content_KHmemf",
+        "content_hHjfg6"
+      ],
+      "settings": {
+        "table_headings": "",
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 50,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn",
+        "enable_color_fade": false,
+        "style_border": "",
+        "style_column_border": "1",
+        "layout_x_alignment": "text-center justify-center flex-col items-center",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "hotspot_zMQhyE": {
+      "type": "hotspot",
+      "blocks": {
+        "product_TMLHXa": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "layout_y_alignment": 35,
+            "layout_x_alignment": 68,
+            "layout_y_alignment_mobile": 38,
+            "layout_x_alignment_mobile": 72
+          }
+        },
+        "product_mhMQqa": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "layout_y_alignment": 87,
+            "layout_x_alignment": 11,
+            "layout_y_alignment_mobile": 77,
+            "layout_x_alignment_mobile": 55
+          }
+        }
+      },
+      "block_order": [
+        "product_TMLHXa",
+        "product_mhMQqa"
+      ],
+      "name": "t:sections.hotspot.name",
+      "settings": {
+        "image_background_desktop": null,
+        "image_background_mobile": null,
+        "show_entire_image": false,
+        "layout_y_spacing": "min-h-[450px] md:min-h-[550px]",
+        "color_scheme": "color__bg-overlay-3 color__text",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": true,
+        "enable_background_overlay": false,
+        "style_border": "border--b-width",
+        "layout_y_alignment": "items-center",
+        "layout_x_alignment": "justify-center text-center",
+        "enable_header_overlap": false,
+        "enable_margin": true,
+        "enable_max_width": true,
+        "visibility": ""
+      }
+    },
+    "content_grid_zkMhzF": {
+      "type": "content-grid",
+      "blocks": {
+        "content_KRrNeM": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 400,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--neutral",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_nbkPaz": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": true,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": false,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--secondary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_dtrDnp": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": false,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--neutral",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_tdT9JF": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 400,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--neutral",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_KRrNeM",
+        "content_nbkPaz",
+        "content_dtrDnp",
+        "content_tdT9JF"
+      ],
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "hidden md:block"
+      }
+    },
+    "product_grid_RjMqHX": {
+      "type": "product-grid",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products_count": 2,
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": true,
+        "style_border": "",
+        "layout_row_desktop": 2,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "text-center justify-center flex-col items-center",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "text_highlight_FK7cc3": {
+      "type": "text-highlight",
+      "blocks": {
+        "heading_48iQ8M": {
+          "type": "heading",
+          "settings": {
+            "content": "",
+            "layout_x_alignment": "text-center"
+          }
+        }
+      },
+      "block_order": [
+        "heading_48iQ8M"
+      ],
+      "disabled": true,
+      "settings": {
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-overlay-1",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": true,
+        "style_border": "",
+        "layout_column_width": 50,
+        "layout_x_alignment": "items-center",
+        "enable_margin": true,
+        "enable_sticky_layout": true,
+        "visibility": ""
+      }
+    },
+    "content_grid_NUTXMx": {
+      "type": "content-grid",
+      "blocks": {
+        "content_RchLyw": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 0,
+            "enable_padding": false,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--secondary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_RNrrV4": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--plain",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_LgppXJ": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 0,
+            "enable_padding": false,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--plain",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        }
+      },
+      "block_order": [
+        "content_RchLyw",
+        "content_RNrrV4",
+        "content_LgppXJ"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 50,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 6,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "d508d7f2-ab32-4de7-b0f5-07c0fc755b51": {
+      "type": "icon-grid",
+      "blocks": {
+        "template--16628482343091__d508d7f2-ab32-4de7-b0f5-07c0fc755b51-icon-1": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-32",
+            "heading": "",
+            "content": "",
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "alignment": "flex-row",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "54152c4b-4fca-46e6-802e-ef313f236c4e": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-32",
+            "heading": "",
+            "content": "",
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "alignment": "flex-row",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "e5b5ea4b-be8f-4673-a833-0ca548dff15c": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-32",
+            "heading": "",
+            "content": "",
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "alignment": "flex-row",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "template--16628482343091__d508d7f2-ab32-4de7-b0f5-07c0fc755b51-icon-1",
+        "54152c4b-4fca-46e6-802e-ef313f236c4e",
+        "e5b5ea4b-be8f-4673-a833-0ca548dff15c"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "border--b-width",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "featured_product_HnGnUB": {
+      "type": "featured-product",
+      "blocks": {
+        "title_fQQtKF": {
+          "type": "title",
+          "settings": {
+            "content": "",
+            "spacing_top": 20,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "left",
+            "savings_badge": "none",
+            "enable_badges": true,
+            "enable_type": false,
+            "enable_vendor": false,
+            "enable_sku": false
+          }
+        },
+        "price_GWjtjP": {
+          "type": "price",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "font": "type__body",
+            "position": "left"
+          }
+        },
+        "description_XPmhyh": {
+          "type": "description",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 10,
+            "color_scheme": "btn--plain",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "left",
+            "layout_x_alignment": "left",
+            "enable_accordion": false,
+            "enable_open": true
+          }
+        },
+        "options_ehdwnc": {
+          "type": "options",
+          "settings": {
+            "spacing_top": 20,
+            "spacing_bottom": 0,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "add_pWFWPf": {
+          "type": "add",
+          "settings": {
+            "content": "",
+            "spacing_top": 20,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "color_button": "btn",
+            "style_border": "",
+            "position": "right",
+            "enable_quantity": false,
+            "enable_dynamic_checkout": false,
+            "enable_gift_card_recipient": false
+          }
+        }
+      },
+      "block_order": [
+        "title_fQQtKF",
+        "price_GWjtjP",
+        "description_XPmhyh",
+        "options_ehdwnc",
+        "add_pWFWPf"
+      ],
+      "disabled": true,
+      "settings": {
+        "product": "",
+        "enable_default_variant": true,
+        "enable_default_plans": true,
+        "enable_default_selling_plan_widget": true,
+        "media_gallery_style": "slider",
+        "media_gallery_position": "top",
+        "media_slider_size_desktop": 50,
+        "media_slider_size_mobile": 100,
+        "media_grid_size": 4,
+        "indicator_type": "standard",
+        "enable_arrows": true,
+        "enable_alt": false,
+        "enable_variant_images": false,
+        "enable_header_overlap": false,
+        "enable_zoom": true,
+        "zoom_level": "scale-[1.5]",
+        "media_color_scheme": "color__bg-shade-1 color__text",
+        "media_border": "outline--width color__outline-divider-1",
+        "media_ratio": "aspect-[1/1]",
+        "media_object_sizing": "cover",
+        "enable_ratio": true,
+        "spacing_top": 0,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "enable_color_fade": false,
+        "mobile_column_layout": "left_first",
+        "layout_column_width": 60,
+        "enable_media_margin": true,
+        "enable_main_margin": true
+      }
+    },
+    "hotspot_3bEbej": {
+      "type": "hotspot",
+      "blocks": {
+        "product_gQk4qq": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "layout_y_alignment": 16,
+            "layout_x_alignment": 40,
+            "layout_y_alignment_mobile": 20,
+            "layout_x_alignment_mobile": 20
+          }
+        },
+        "product_7JAB4w": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "layout_y_alignment": 21,
+            "layout_x_alignment": 45,
+            "layout_y_alignment_mobile": 20,
+            "layout_x_alignment_mobile": 20
+          }
+        },
+        "product_excnyy": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "layout_y_alignment": 42,
+            "layout_x_alignment": 50,
+            "layout_y_alignment_mobile": 20,
+            "layout_x_alignment_mobile": 20
+          }
+        }
+      },
+      "block_order": [
+        "product_gQk4qq",
+        "product_7JAB4w",
+        "product_excnyy"
+      ],
+      "disabled": true,
+      "settings": {
+        "show_entire_image": false,
+        "layout_y_spacing": "min-h-[450px] md:min-h-[550px]",
+        "color_scheme": "color__bg-overlay-3 color__text",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": false,
+        "enable_background_overlay": false,
+        "style_border": "",
+        "layout_y_alignment": "items-center",
+        "layout_x_alignment": "justify-start",
+        "enable_header_overlap": false,
+        "enable_margin": true,
+        "enable_max_width": true,
+        "visibility": ""
+      }
+    },
+    "marquee_qtxfHc": {
+      "type": "marquee",
+      "blocks": {
+        "heading_cEiMYU": {
+          "type": "heading",
+          "settings": {
+            "content": ""
+          }
+        },
+        "heading_LWcyPG": {
+          "type": "heading",
+          "settings": {
+            "content": ""
+          }
+        },
+        "heading_UQ7NWf": {
+          "type": "heading",
+          "settings": {
+            "content": ""
+          }
+        },
+        "heading_aedQCm": {
+          "type": "heading",
+          "settings": {
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_cEiMYU",
+        "heading_LWcyPG",
+        "heading_UQ7NWf",
+        "heading_aedQCm"
+      ],
+      "disabled": true,
+      "settings": {
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#bb060a",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": false,
+        "enable_fade": false,
+        "style_border": "",
+        "enable_margin": false,
+        "use_reverse_animation": false,
+        "animation_speed": 200,
+        "visibility": ""
+      }
+    },
+    "testimonial_grid_F88UCY": {
+      "type": "testimonial-grid",
+      "blocks": {
+        "testimonial_jf6eQE": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "title": "",
+            "avatar": null
+          }
+        },
+        "testimonial_mxWxEU": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "title": "",
+            "avatar": null
+          }
+        },
+        "testimonial_dQ4Y4K": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "title": "",
+            "avatar": null
+          }
+        },
+        "testimonial_6GaDgh": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "title": "",
+            "avatar": null
+          }
+        },
+        "testimonial_Ebp6Bz": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "title": "",
+            "avatar": null
+          }
+        },
+        "testimonial_QVdnAe": {
+          "type": "testimonial",
+          "settings": {
+            "content": "",
+            "title": "",
+            "avatar": null
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_jf6eQE",
+        "testimonial_mxWxEU",
+        "testimonial_dQ4Y4K",
+        "testimonial_6GaDgh",
+        "testimonial_Ebp6Bz",
+        "testimonial_QVdnAe"
+      ],
+      "name": "t:sections.testimonial_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "text-center justify-center flex-col items-center",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
     }
   },
   "order": [
-    "hero-fullbleed",
-    "ingredient-ticker",
-    "brand-pillars",
-    "product-collection",
-    "founder-story",
-    "comparison-table",
-    "reviews-carousel",
-    "subscription-banner",
-    "faq-accordion"
+    "de4cc432-8e1c-49bc-8935-1f94a9d9d797",
+    "marquee_jKNrxf",
+    "text_66CPj8",
+    "content_grid_Hr7EPJ",
+    "content_grid_GcCrBN",
+    "da6bf027-8e85-4143-a167-722478adcde1",
+    "video_C7nywJ",
+    "table_68DHki",
+    "hotspot_zMQhyE",
+    "content_grid_zkMhzF",
+    "product_grid_RjMqHX",
+    "text_highlight_FK7cc3",
+    "content_grid_NUTXMx",
+    "d508d7f2-ab32-4de7-b0f5-07c0fc755b51",
+    "featured_product_HnGnUB",
+    "hotspot_3bEbej",
+    "marquee_qtxfHc",
+    "testimonial_grid_F88UCY"
   ]
 }

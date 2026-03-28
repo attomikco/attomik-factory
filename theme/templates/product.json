@@ -1,0 +1,813 @@
+{
+  "sections": {
+    "1638995507af787164": {
+      "type": "product__main",
+      "blocks": {
+        "liquid_L9kTGq": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "",
+            "spacing_top": 10,
+            "spacing_bottom": 0,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "853ae7f0-85c9-45dc-8326-6e4044bcf5e5": {
+          "type": "title",
+          "settings": {
+            "content": "<p>High-performance hydrators and calming actives built to protect and repair skin under heat, sweat, and friction.</p>",
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right",
+            "savings_badge": "none",
+            "enable_badges": true,
+            "enable_type": false,
+            "enable_vendor": false,
+            "enable_sku": false
+          }
+        },
+        "klaviyo_reviews_average_rating_Ww9hgC": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/average-rating/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "disabled": true,
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "liquid_GjLPeC": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "",
+            "spacing_top": 0,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "2b5d0315-b88c-44b6-b63c-d68fbe584a4c": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "content": "<p>High-performance hydrators and calming actives built to protect and repair skin under heat, sweat, and friction.<br/><br/>\u2713 Reduces post-training irritation<br/>\u2713 Strengthens skin barrier<br/>\u2713 Controls oil without over-drying<br/>\u2713 Built for active lifestyles</p><p></p>",
+            "spacing_top": 0,
+            "spacing_bottom": 30,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right",
+            "layout_x_alignment": "left"
+          }
+        },
+        "62c29cd6-a0b5-4f8b-86c0-a48660869d22": {
+          "type": "price",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "font": "type__nav",
+            "position": "right"
+          }
+        },
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d58": {
+          "type": "options",
+          "settings": {
+            "spacing_top": 20,
+            "spacing_bottom": 0,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "paywhirl_subscriptions_paywhirl_plan_selector_TCjzTJ": {
+          "type": "shopify://apps/paywhirl-subscriptions/blocks/paywhirl-plan-selector/41e95d60-82cf-46e8-84de-618d7e4c37b7",
+          "settings": {
+            "theme": "classic",
+            "font_scale": 100,
+            "show_prices": "default",
+            "show_per_delivery_prices": "default",
+            "show_save_badge": "default",
+            "selling_plans_first": true,
+            "one_time_purchase_description": "<p>Buy this product as a one-time purchase.</p>",
+            "selling_plans_description": "<p>Subscribe to this product and receive it on a regular basis.</p>",
+            "theme_color": "#334fb4",
+            "sleek_theme_color_preset": "default",
+            "sleek_color_background": "",
+            "sleek_color_primary_button": "",
+            "sleek_color_primary_button_label": "",
+            "sleek_color_primary_button_icon": "",
+            "sleek_color_secondary_button": "",
+            "sleek_color_secondary_button_label": "",
+            "sleek_color_secondary_button_icon": "",
+            "sleek_color_text": "",
+            "color_badge": "",
+            "color_badge_label": "",
+            "one_time_purchase_icon": "default",
+            "subscription_icon": "default",
+            "product": "{{product}}"
+          }
+        },
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d53": {
+          "type": "add",
+          "settings": {
+            "content": "",
+            "spacing_top": 20,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "color__border-divider-1",
+            "color_button": "btn",
+            "style_border": "",
+            "position": "right",
+            "enable_quantity": false,
+            "enable_dynamic_checkout": false,
+            "enable_gift_card_recipient": false
+          }
+        },
+        "123fd04c-91f3-4248-a65a-614e2f64fdeb": {
+          "type": "description",
+          "settings": {
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "color_scheme": "btn--plain",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right",
+            "layout_x_alignment": "left",
+            "enable_accordion": true,
+            "enable_open": true
+          }
+        },
+        "accordion_gJ6baw": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients",
+            "content": "<p>Water, Butylene Glycol, Glycerin, Sodium Hyaluronate, 1,2-Hexanediol, Glycereth-26, Polyglyceryl-10 Laurate, Sorbeth-30 Tetraoleate, Chamomilla Recutita Flower Extract, Eucalyptus Globulus Leaf Oil, Olea Europaea Fruit Oil, Camellia Sinensis Leaf Extract, Cucumis Sativus (Cucumber) Fruit Extract, Caprylic/Capric Triglyceride, Sodium benzoate, Disodium EDTA, Phenoxyethanol, Ethylhexylglycerin, Citric acid.</p>",
+            "icon": "",
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "color_scheme": "btn--plain",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right",
+            "enable_open": false
+          }
+        },
+        "accordion_ERmP7y": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping Information",
+            "content": "<p>We offer free shipping on all orders over $50.</p><p>For orders under $50, standard ground shipping is a flat rate of $4.99 to anywhere in the U.S.</p><p>Standard ground delivery times typically range from 3\u20137 business days.</p>",
+            "icon": "",
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "color_scheme": "btn--plain",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right",
+            "enable_open": false
+          }
+        },
+        "moast_carousel_eeK4GX": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {
+            "dynamic": false,
+            "feed": "default",
+            "feed_usage": "back_up",
+            "header": "",
+            "slide_type": "cards",
+            "product_cards": "none",
+            "autoplay_mode": "none",
+            "autoscroll_duration": 0,
+            "slide_size": "100",
+            "aspect_ratio": "vertical",
+            "border": 0,
+            "border_color": "linear-gradient(to right, #833ab4, #fd1d1d, #fcb045)",
+            "slide_rounding": "20",
+            "slide_spacing": 16,
+            "padding_top": 40,
+            "pagination": "below",
+            "alignment": "center",
+            "click_action": "fullscreen",
+            "float_location": "bottom_right",
+            "float_size": "medium",
+            "show_captions": false,
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "liquid_L9kTGq",
+        "853ae7f0-85c9-45dc-8326-6e4044bcf5e5",
+        "klaviyo_reviews_average_rating_Ww9hgC",
+        "liquid_GjLPeC",
+        "2b5d0315-b88c-44b6-b63c-d68fbe584a4c",
+        "62c29cd6-a0b5-4f8b-86c0-a48660869d22",
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d58",
+        "paywhirl_subscriptions_paywhirl_plan_selector_TCjzTJ",
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d53",
+        "123fd04c-91f3-4248-a65a-614e2f64fdeb",
+        "accordion_gJ6baw",
+        "accordion_ERmP7y",
+        "moast_carousel_eeK4GX"
+      ],
+      "settings": {
+        "enable_default_variant": true,
+        "enable_default_plans": false,
+        "enable_default_selling_plan_widget": false,
+        "media_gallery_style": "grid",
+        "media_gallery_position": "left",
+        "media_slider_size_desktop": 100,
+        "media_slider_size_mobile": 100,
+        "media_grid_size": 1,
+        "indicator_type": "standard",
+        "enable_arrows": false,
+        "enable_alt": false,
+        "enable_variant_images": false,
+        "enable_header_overlap": false,
+        "enable_zoom": true,
+        "zoom_level": "scale-[1.5]",
+        "media_color_scheme": "color__bg-body color__text",
+        "media_border": "outline--width color__outline-divider-1",
+        "media_ratio": "aspect-[1/1]",
+        "media_object_sizing": "cover",
+        "enable_ratio": true,
+        "spacing_top": 20,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "enable_color_fade": false,
+        "layout_column_width": 50,
+        "enable_media_margin": true,
+        "enable_main_margin": true
+      }
+    },
+    "liquid_Eg9DLr": {
+      "type": "liquid",
+      "name": "t:sections.liquid.name",
+      "settings": {
+        "liquid": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": false,
+        "style_border": "",
+        "enable_margin": true,
+        "visibility": ""
+      }
+    },
+    "tabs_pPJfTK": {
+      "type": "tabs",
+      "blocks": {
+        "content_KR9AFb": {
+          "type": "content",
+          "settings": {
+            "tab": "For Athletes",
+            "content": "<h6>REFRESH & RECOVER</h6><p>A facial cleansing solution for your on-the-go lifestyle. Our formula is engineered for sport, and formulated by Korean skincare experts. Our wipes avoid the micro-abrasions and chemical ingredients of our competitors and instead offer gentle, clean ingredients that will leave your skin fresh and replenished. We created a wipe that is non-stripping, non-irritating, and strong enough to tackle sweat and dirt no matter when or where.</p><p>Our wipes have plenty of real estate to swipe sweat, made of 100% Rayon biodegradable material.</p><p>Lightly scented with our signature eucalyptus scent to leave skin invigorated.</p>"
+          }
+        },
+        "content_Lfk9RG": {
+          "type": "content",
+          "settings": {
+            "tab": "Ingredients",
+            "content": "<h6>Ingredients</h6><p>Water, Butylene Glycol, Glycerin, Sodium Hyaluronate, 1,2-Hexanediol, Glycereth-26, Polyglyceryl-10 Laurate, Sorbeth-30 Tetraoleate, Chamomilla Recutita Flower Extract, Eucalyptus Globulus Leaf Oil, Olea Europaea Fruit Oil, Camellia Sinensis Leaf Extract, Cucumis Sativus (Cucumber) Fruit Extract, Caprylic/Capric Triglyceride, Sodium benzoate, Disodium EDTA, Phenoxyethanol, Ethylhexylglycerin, Citric acid.</p>"
+          }
+        },
+        "content_F7r9bE": {
+          "type": "content",
+          "settings": {
+            "tab": "Usage & Details",
+            "content": "<h6>Directions:</h6><p>Use in sweeping and circular motions all over face and neck. No need to rinse. Avoid direct contact in eyes.</p><h6>Details:</h6><p>Best used after workouts, activity, or any time you need a quick refresh throughout the day.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "content_KR9AFb",
+        "content_Lfk9RG",
+        "content_F7r9bE"
+      ],
+      "disabled": true,
+      "settings": {
+        "tabs": "For Athletes, Ingredients, Usage & Details",
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 50,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#fff4eb",
+        "color_text": "color__dark",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_max_width": false,
+        "enable_split": false,
+        "enable_split_heading": true,
+        "visibility": ""
+      }
+    },
+    "content_grid_iHEyff": {
+      "type": "content-grid",
+      "blocks": {
+        "content_4XpVhj": {
+          "type": "content",
+          "settings": {
+            "heading": "Engineered to Restore",
+            "content": "<p>Calms irritation, removes sweat buildup, and reinforces your skin barrier \u2014 all in one step.</p>",
+            "button_label": "",
+            "url": "shopify://collections/all",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "above",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_NwqJNJ": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "<p>Removes sweat, oil, and grime while restoring hydration \u2014 before irritation sets in.</p>",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_4XpVhj",
+        "content_NwqJNJ"
+      ],
+      "disabled": true,
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 0,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "border--b-width",
+        "layout_row_desktop": 4,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "md:hidden"
+      }
+    },
+    "content_grid_3hACbz": {
+      "type": "content-grid",
+      "blocks": {
+        "content_3Cfc69": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": false,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-2",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_m6RnQ6": {
+          "type": "content",
+          "settings": {
+            "heading": "Engineered to Restore",
+            "content": "<p>Calms irritation, removes sweat buildup, and reinforces your skin barrier \u2014 all in one step.</p>",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 350,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-selected-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline-alt",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-2",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_QwKMAh": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "<p>Removes sweat, oil, and grime while restoring hydration \u2014 before irritation sets in.</p>",
+            "button_label": "",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 360,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-selected-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline-alt",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_fWhffE": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": true,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": false,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--secondary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        }
+      },
+      "block_order": [
+        "content_3Cfc69",
+        "content_m6RnQ6",
+        "content_QwKMAh",
+        "content_fWhffE"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "hidden md:block"
+      }
+    },
+    "icon_grid_i3hgda": {
+      "type": "icon-grid",
+      "blocks": {
+        "icon_yA8KDn": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-8",
+            "heading": "",
+            "content": "<p>Derm Tested</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "outline--width color__outline-selected-1",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_yww7Ff": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-8",
+            "heading": "",
+            "content": "<p>100% Organic</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "outline--width color__outline-selected-1",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_p7FxUq": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-8",
+            "heading": "",
+            "content": "<p>Made in Canada</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "outline--width color__outline-selected-1",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_yyaKRn": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-8",
+            "heading": "",
+            "content": "<p>5000+ 5 Star reviews</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "outline--width color__outline-selected-1",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_eUdhxz": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-8",
+            "heading": "",
+            "content": "<p>Award winning</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "outline--width color__outline-selected-1",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_LCBphW": {
+          "type": "icon",
+          "settings": {
+            "icon_height": "h-8",
+            "heading": "",
+            "content": "<p>Chef approved</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "outline--width color__outline-selected-1",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "icon_yA8KDn",
+        "icon_yww7Ff",
+        "icon_p7FxUq",
+        "icon_yyaKRn",
+        "icon_eUdhxz",
+        "icon_LCBphW"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 10,
+        "spacing_bottom": 100,
+        "color_scheme": "custom",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": true,
+        "style_border": "",
+        "layout_row_desktop": 6,
+        "layout_row_mobile": 2,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "165592515341576314": {
+      "type": "accordions",
+      "blocks": {
+        "165592515344a810fb-0": {
+          "type": "content",
+          "settings": {
+            "heading": "What makes these different from regular wipes?",
+            "content": "",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": true
+          }
+        },
+        "content_GrH4dd": {
+          "type": "content",
+          "settings": {
+            "heading": "Will this dry my skin out?",
+            "content": "<p>No. Our formula hydrates while it cleanses.</p><p>We remove excess oil and buildup without triggering rebound dryness.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_xQRVyJ": {
+          "type": "content",
+          "disabled": true,
+          "settings": {
+            "heading": "Is it safe for acne-prone skin?",
+            "content": "<p>Yes. It\u2019s non-comedogenic and designed to prevent sweat-driven breakouts by keeping pores clear after activity.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_edHrmi": {
+          "type": "content",
+          "settings": {
+            "heading": "Is this just for teens?",
+            "content": "<p>No. It\u2019s built for anyone who trains hard and sweats \u2014 youth athletes, college, pros, weekend warriors.</p><p>If you sweat, it\u2019s for you.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_MMdqcQ": {
+          "type": "content",
+          "settings": {
+            "heading": "Can I use this on my body too?",
+            "content": "<p>Yes. Safe for face, neck, chest, and back \u2014 anywhere sweat and friction cause irritation.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_MV4RBA": {
+          "type": "content",
+          "settings": {
+            "heading": "Does it contain alcohol?",
+            "content": "<p>No harsh alcohols.<br/><br/>No parabens.<br/><br/>No unnecessary fragrance.</p><p>Dermatology tested and hypoallergenic.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_DHTzWy": {
+          "type": "content",
+          "settings": {
+            "heading": "How often can I use it?",
+            "content": "<p>Daily. Even multiple times per day if needed.</p><p>The formula is designed for repeat sweat cycles.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        }
+      },
+      "block_order": [
+        "165592515344a810fb-0",
+        "content_GrH4dd",
+        "content_xQRVyJ",
+        "content_edHrmi",
+        "content_MMdqcQ",
+        "content_MV4RBA",
+        "content_DHTzWy"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "FAQs",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 50,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-overlay-1",
+        "color_background": "#fff4eb",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn",
+        "enable_color_fade": true,
+        "heading_font": "type__body type--base",
+        "style_border": "",
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": true,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "177196743364d08534": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_product_reviews_raKipJ": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_product_reviews_raKipJ"
+      ],
+      "settings": {
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": false,
+        "style_border": "border--b-width",
+        "enable_margin": true
+      }
+    }
+  },
+  "order": [
+    "1638995507af787164",
+    "liquid_Eg9DLr",
+    "tabs_pPJfTK",
+    "content_grid_iHEyff",
+    "content_grid_3hACbz",
+    "icon_grid_i3hgda",
+    "165592515341576314",
+    "177196743364d08534"
+  ]
+}

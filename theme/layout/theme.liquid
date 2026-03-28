@@ -1,71 +1,153 @@
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction | default: 'ltr' }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html
+  class="min-h-[100vh]"
+  lang="{{ request.locale.iso_code }}"
+  x-data="app()"
+  x-init="
+    updateCart(false);
+    handleSharedCart();
+    handleSharedDiscount();
+    initAnimationObserver();
+    initPopstate();
+    header_color = header_overlay_color;
+    header_border = header_overlay_border;
+  "
+>
+  <head>
+    {% comment %} Meta {% endcomment %}
+    {% render 'theme__meta' %}
 
-  <title>
-    {%- if page_title -%}
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    {%- else -%}
-      {{ shop.name }}
-    {%- endif -%}
-  </title>
+    {% comment %} Preload {% endcomment %}
+    {% unless settings.type_header_font.system? and settings.type_body_font.system? %}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {% endunless %}
 
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
-  {%- endif -%}
+    {% comment %} Assets {% endcomment %}
+    {% render 'theme__styles' %}
+    {% render 'assets' with 'styles.css', preload_stylesheet: true %}
+    {{ content_for_header }}
 
-  <link rel="canonical" href="{{ canonical_url }}">
+    {% comment %} Structured data {% endcomment %}
+    {% render 'theme__structured-data' %}
+  </head>
 
-  {%- if settings.favicon != blank -%}
-    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-  {%- endif -%}
+  <body
+    class="
+      animation-500--all min-h-[100vh] break-words
+      {{ template | handle }}
+    "
+    :class="
+      {
+        'overflow-hidden': !enable_body_scrolling
+      }
+    "
+    @scroll.window.throttle.100ms="
+      if(!Shopify.visualPreviewMode){
+        handleBodyScroll();
+      }
+    "
+  >
+    {% comment %} Skip to content link {% endcomment %}
+    <a
+      class="btn btn--plain btn--small fixed left-4 top-4 !z-[100] -translate-y-20 transform opacity-0 shadow-md focus:translate-y-0 focus:opacity-100"
+      href="#root"
+    >
+      {{ 'actions.skip_to_content' | t }}
+    </a>
 
-  {%- comment %} Open Graph / Social {%- endcomment -%}
-  <meta property="og:site_name" content="{{ shop.name }}">
-  <meta property="og:url" content="{{ canonical_url }}">
-  <meta property="og:title" content="{{ page_title | default: shop.name }}">
-  <meta property="og:type" content="website">
-  {%- if page_description -%}
-    <meta property="og:description" content="{{ page_description | escape }}">
-  {%- endif -%}
-  {%- if page_image -%}
-    <meta property="og:image" content="http:{{ page_image | image_url }}">
-    <meta property="og:image:secure_url" content="https:{{ page_image | image_url }}">
-  {%- endif -%}
-  <meta name="twitter:card" content="summary_large_image">
+    {% comment %} Header {% endcomment %}
+    <header
+      class="
+        animation-1000 z-50
+        {{ settings.header_position }}
+        {% if settings.header_blend %} mix-blend-difference {% endif %}
+        {% if settings.header_position == 'dynamic' %}sticky top-0 left-0 right-0{% endif %}
+        {% if settings.header_position == 'sticky' %}sticky top-0 left-0 right-0{% endif %}
+        {% unless request.design_mode %}
+          {% if settings.enable_animations %}
+            {% if settings.animate_header == 'slide' %}
+              opacity-0 -translate-y-4 js-animation
+            {% endif %}
+            {% if settings.animate_header == 'fade' %}
+              opacity-0 js-animation
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+      "
+      {% if settings.header_position == 'dynamic' %}
+        :style="
+          is_scrolled ?
+          'pointer-events: none;' :
+          'pointer-events: auto;'
+        "
+      {% endif %}
+      {% if settings.enable_animations %}
+        {% if settings.animate_header == 'slide' %}
+          data-delay="500"
+          data-replace="
+            {
+              'opacity-0' : 'opacity-100',
+              '-translate-y-4' : ''
+            }
+          "
+        {% endif %}
+        {% if settings.animate_header == 'fade' %}
+          data-delay="500"
+          data-replace="
+            {
+              'opacity-0' : 'opacity-100'
+            }
+          "
+        {% endif %}
+      {% endif %}
+      :class="
+        {
+          '!-z-10' : has_overlay
+        }
+      "
+      x-ref="header"
+      x-init="header_group_height = $refs.header.offsetHeight;"
+    >
+      <div
+        class="animation-500"
+        {% if settings.header_position == 'dynamic' %}
+          :style="
+            is_scrolled ?
+            'transform: translateY(-2rem); opacity: 0; pointer-events: none;' :
+            'transform: none; opacity: 1;'
+          "
+        {% endif %}
+      >
+        {% sections 'header-group' %}
+      </div>
+    </header>
 
-  {%- comment %} Google Fonts — pulled from theme settings {%- endcomment -%}
-  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {% comment %} Cart, menu and search {% endcomment %}
+    {% section 'theme__cart' %}
+    {% section 'theme__menu' %}
+    {% section 'theme__search' %}
 
-  {% style %}
-    {{ settings.font_heading | font_face: font_display: 'swap' }}
-    {{ settings.font_body | font_face: font_display: 'swap' }}
-  {% endstyle %}
+    {% comment %} Main Content {% endcomment %}
+    <main
+      id="root"
+      role="main"
+    >
+      {{ content_for_layout }}
+    </main>
 
-  {{ 'tokens.css' | asset_url | stylesheet_tag }}
-  {{ 'base.css' | asset_url | stylesheet_tag }}
+    {% comment %} Section groups {% endcomment %}
+    {% sections 'footer-group' %}
+    {% sections 'overlay-group' %}
 
-  {{ content_for_header }}
-</head>
+    {% comment %} Overlays {% endcomment %}
+    {% render 'theme__quick-overlays' %}
+    {% render 'theme__localization-overlay' %}
+    {% render 'theme__audio-overlay' %}
+    {% render 'theme__error-overlay' %}
+    {% render 'theme__discount-overlay' %}
 
-<body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix | handle }}{% endif %}">
-  <a class="skip-to-content" href="#main-content">{{ 'accessibility.skip_to_content' | t }}</a>
-
-  {% section 'announcement-bar' %}
-  {% section 'nav-sticky' %}
-
-  <main id="main-content" role="main" tabindex="-1">
-    {{ content_for_layout }}
-  </main>
-
-  {% section 'footer' %}
-
-  <script src="{{ 'theme.js' | asset_url }}" defer></script>
-</body>
+    {% comment %} Scripts {% endcomment %}
+    {% render 'assets' with 'main.js' %}
+    {% render 'theme__scripts' %}
+  </body>
 </html>
