@@ -131,6 +131,8 @@ export default function NewClientPage() {
   const [generatedConfig, setGeneratedConfig] = useState<Record<string, unknown> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [, setClientId] = useState<string | null>(null);
+  const [deploying, setDeploying] = useState(false);
+  const [deployResult, setDeployResult] = useState<{ preview_url: string; shop_name: string } | null>(null);
 
   const update = (field: keyof BrandBrief, value: string | string[]) => {
     setBrief((prev) => ({ ...prev, [field]: value }));
@@ -395,29 +397,77 @@ export default function NewClientPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setGeneratedConfig(null);
-                      setError(null);
-                    }}
-                    className="border border-surface-border px-6 py-3 font-mono text-sm uppercase tracking-wider text-muted transition-colors hover:border-white/30 hover:text-white"
-                  >
-                    Regenerate
-                  </button>
-                  <button
-                    type="button"
-                    disabled={!brief.store_url.trim() || !brief.api_key.trim()}
-                    className={`flex-1 border px-6 py-3 font-mono text-sm uppercase tracking-wider transition-colors ${
-                      brief.store_url.trim() && brief.api_key.trim()
-                        ? 'border-accent bg-accent text-black hover:bg-accent-dim'
-                        : 'cursor-not-allowed border-surface-border text-muted'
-                    }`}
-                  >
-                    Deploy to Store
-                  </button>
-                </div>
+                {deployResult ? (
+                  <div className="border border-accent/30 bg-accent/5 px-5 py-4">
+                    <p className="mb-3 font-mono text-sm text-accent">
+                      Deployed to {deployResult.shop_name}
+                    </p>
+                    <a
+                      href={deployResult.preview_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-accent underline transition-colors hover:text-white"
+                    >
+                      {deployResult.preview_url}
+                    </a>
+                  </div>
+                ) : (
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setGeneratedConfig(null);
+                        setError(null);
+                        setDeployResult(null);
+                      }}
+                      className="border border-surface-border px-6 py-3 font-mono text-sm uppercase tracking-wider text-muted transition-colors hover:border-white/30 hover:text-white"
+                    >
+                      Regenerate
+                    </button>
+                    <button
+                      type="button"
+                      disabled={!brief.store_url.trim() || !brief.api_key.trim() || deploying}
+                      onClick={async () => {
+                        setDeploying(true);
+                        setError(null);
+                        try {
+                          const res = await fetch('/api/deploy', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                              store_url: brief.store_url,
+                              api_key: brief.api_key,
+                              config: generatedConfig,
+                            }),
+                          });
+                          const data = await res.json();
+                          if (!res.ok) throw new Error(data.error || 'Deploy failed');
+                          setDeployResult({ preview_url: data.preview_url, shop_name: data.shop_name });
+                        } catch (err) {
+                          setError(err instanceof Error ? err.message : 'Deploy failed');
+                        } finally {
+                          setDeploying(false);
+                        }
+                      }}
+                      className={`flex-1 border px-6 py-3 font-mono text-sm uppercase tracking-wider transition-colors ${
+                        deploying
+                          ? 'cursor-wait border-surface-border text-muted'
+                          : brief.store_url.trim() && brief.api_key.trim()
+                            ? 'border-accent bg-accent text-black hover:bg-accent-dim'
+                            : 'cursor-not-allowed border-surface-border text-muted'
+                      }`}
+                    >
+                      {deploying ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <span className="inline-block h-3 w-3 animate-pulse border border-muted" />
+                          Deploying to store...
+                        </span>
+                      ) : (
+                        'Deploy to Store'
+                      )}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
