@@ -1,0 +1,340 @@
+{%- liquid
+  assign section_title = section.settings.section_title
+  assign bg_color = section.settings.background
+  assign card_bg = section.settings.card_background
+-%}
+
+<section
+  class="reviews-carousel"
+  id="section-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="reviews-carousel"
+  style="
+    --rc-bg: {{ bg_color }};
+    --rc-card-bg: {{ card_bg }};
+  "
+>
+  <div class="section-container">
+    {%- if section_title != blank -%}
+      <div class="reviews-carousel__header">
+        <h2 class="reviews-carousel__title">{{ section_title }}</h2>
+        <div class="reviews-carousel__arrows">
+          <button class="reviews-carousel__arrow reviews-carousel__arrow--prev" type="button" aria-label="Previous review" data-rc-prev>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="reviews-carousel__arrow reviews-carousel__arrow--next" type="button" aria-label="Next review" data-rc-next>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="reviews-carousel__track" data-rc-track>
+      {%- for block in section.blocks -%}
+        <div class="reviews-carousel__card" {{ block.shopify_attributes }}>
+          <div class="reviews-carousel__rating">
+            {%- render 'rating-stars', rating_value: 5, rating_count: nil, rating_product_id: block.id -%}
+          </div>
+
+          {%- if block.settings.review_text != blank -%}
+            <p class="reviews-carousel__text">"{{ block.settings.review_text }}"</p>
+          {%- endif -%}
+
+          <div class="reviews-carousel__reviewer">
+            {%- if settings.favicon != blank -%}
+              <img
+                class="reviews-carousel__avatar"
+                src="{{ settings.favicon | image_url: width: 64 }}"
+                alt="{{ shop.name }}"
+                width="32"
+                height="32"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="reviews-carousel__avatar reviews-carousel__avatar--placeholder">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              </div>
+            {%- endif -%}
+            <div class="reviews-carousel__reviewer-info">
+              {%- if block.settings.reviewer_name != blank -%}
+                <span class="reviews-carousel__name">{{ block.settings.reviewer_name }}</span>
+              {%- endif -%}
+              {%- if block.settings.reviewer_subtitle != blank -%}
+                <span class="reviews-carousel__subtitle">{{ block.settings.reviewer_subtitle }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-carousel {
+    background-color: var(--rc-bg);
+    padding-top: var(--section-gap-md);
+    padding-bottom: var(--section-gap-md);
+  }
+
+  /* Header */
+  .reviews-carousel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+  }
+
+  .reviews-carousel__title {
+    margin: 0;
+  }
+
+  /* Arrows */
+  .reviews-carousel__arrows {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .reviews-carousel__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .reviews-carousel__arrow:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+
+  /* Track — CSS scroll-snap */
+  .reviews-carousel__track {
+    display: flex;
+    gap: var(--space-5);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .reviews-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Card */
+  .reviews-carousel__card {
+    flex: 0 0 calc(83.33% - var(--space-5));
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background-color: var(--rc-card-bg);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Rating — hide count for testimonials */
+  .reviews-carousel__rating .rating-stars__count {
+    display: none;
+  }
+
+  /* Text */
+  .reviews-carousel__text {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text);
+    font-style: italic;
+    flex-grow: 1;
+  }
+
+  /* Reviewer */
+  .reviews-carousel__reviewer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: auto;
+  }
+
+  .reviews-carousel__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .reviews-carousel__avatar--placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-alt);
+    color: var(--color-text-muted);
+  }
+
+  .reviews-carousel__reviewer-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reviews-carousel__name {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+  }
+
+  .reviews-carousel__subtitle {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  /* Tablet — 2 visible */
+  @media (min-width: 768px) {
+    .reviews-carousel__card {
+      flex: 0 0 calc(50% - var(--space-5) / 2);
+    }
+  }
+
+  /* Desktop — 3 visible */
+  @media (min-width: 1200px) {
+    .reviews-carousel__card {
+      flex: 0 0 calc(33.333% - var(--space-5) * 2 / 3);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var section = document.getElementById('section-{{ section.id }}');
+    if (!section) return;
+
+    var track = section.querySelector('[data-rc-track]');
+    var prevBtn = section.querySelector('[data-rc-prev]');
+    var nextBtn = section.querySelector('[data-rc-next]');
+    if (!track) return;
+
+    function getCardWidth() {
+      var card = track.querySelector('.reviews-carousel__card');
+      if (!card) return 0;
+      var style = getComputedStyle(track);
+      var gap = parseFloat(style.gap) || 0;
+      return card.offsetWidth + gap;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        track.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        track.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Reviews Carousel",
+  "tag": "section",
+  "class": "section-reviews-carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "What Customers Are Saying"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color",
+      "default": "#F8F7F4"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review text",
+          "default": "This product completely changed my morning routine. The taste is incredible and I love knowing every ingredient is clean."
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer name",
+          "default": "Customer"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_subtitle",
+          "label": "Subtitle",
+          "info": "e.g. Verified Buyer, location"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Reviews Carousel",
+      "category": "Social proof",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "Best tasting functional beverage I've tried. Clean ingredients and you can actually feel the difference.",
+            "reviewer_name": "Sarah M.",
+            "reviewer_subtitle": "Verified Buyer"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "I was skeptical at first, but after a month I'm completely hooked. The subscription makes it so easy.",
+            "reviewer_name": "James R.",
+            "reviewer_subtitle": "Verified Buyer"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "Finally a brand that actually delivers on its promises. No artificial anything and it tastes amazing.",
+            "reviewer_name": "Emily K.",
+            "reviewer_subtitle": "Verified Buyer"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "My whole family loves this. Great knowing it's organic and sustainably sourced. Will keep ordering.",
+            "reviewer_name": "David L.",
+            "reviewer_subtitle": "Austin, TX"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
