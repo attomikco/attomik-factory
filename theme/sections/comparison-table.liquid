@@ -1,0 +1,344 @@
+{%- liquid
+  assign section_title = section.settings.section_title
+  assign brand_label = section.settings.brand_column_label
+  assign competitor_label = section.settings.competitor_column_label
+  assign bg_color = section.settings.background
+-%}
+
+{%- capture svg_check -%}
+<svg class="ct-icon ct-icon--check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17l-5-5"/></svg>
+{%- endcapture -%}
+
+{%- capture svg_x -%}
+<svg class="ct-icon ct-icon--x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+{%- endcapture -%}
+
+<section
+  class="comparison-table"
+  id="section-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="comparison-table"
+  style="--ct-bg: {{ bg_color }};"
+>
+  <div class="section-container">
+    {%- if section_title != blank -%}
+      <h2 class="comparison-table__title">{{ section_title }}</h2>
+    {%- endif -%}
+
+    <div class="ct-wrapper">
+      <table class="ct" role="table">
+        <thead>
+          <tr>
+            <th class="ct__head ct__head--attribute" scope="col">
+              <span class="visually-hidden">Attribute</span>
+            </th>
+            <th class="ct__head ct__head--brand" scope="col">{{ brand_label }}</th>
+            <th class="ct__head ct__head--competitor" scope="col">{{ competitor_label }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr class="ct__row" {{ block.shopify_attributes }}>
+              <td class="ct__cell ct__cell--attribute">{{ block.settings.attribute }}</td>
+              <td class="ct__cell ct__cell--brand">
+                {%- if block.settings.brand_value != blank -%}
+                  <span class="ct__text">{{ block.settings.brand_value }}</span>
+                {%- endif -%}
+                {%- if block.settings.brand_has_it -%}
+                  {{ svg_check }}
+                {%- else -%}
+                  {{ svg_x }}
+                {%- endif -%}
+              </td>
+              <td class="ct__cell ct__cell--competitor">
+                {%- if block.settings.competitor_value != blank -%}
+                  <span class="ct__text">{{ block.settings.competitor_value }}</span>
+                {%- endif -%}
+                {%- if block.settings.competitor_has_it -%}
+                  {{ svg_check }}
+                {%- else -%}
+                  {{ svg_x }}
+                {%- endif -%}
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison-table {
+    background-color: var(--ct-bg);
+    padding-top: var(--section-gap-md);
+    padding-bottom: var(--section-gap-md);
+  }
+
+  .comparison-table__title {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  /* Wrapper for horizontal scroll on tiny screens */
+  .ct-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ct {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  /* Head */
+  .ct__head {
+    padding: var(--space-4) var(--space-4);
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: bottom;
+  }
+
+  .ct__head--attribute {
+    width: 40%;
+  }
+
+  .ct__head--brand {
+    width: 30%;
+    color: var(--color-text-inverse);
+    background-color: var(--color-primary);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  .ct__head--competitor {
+    width: 30%;
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-alt);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  /* Cells */
+  .ct__cell {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    border-bottom: var(--border-width) solid var(--color-border);
+    vertical-align: middle;
+  }
+
+  .ct__cell--attribute {
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+  }
+
+  .ct__cell--brand {
+    text-align: center;
+    background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  }
+
+  .ct__cell--competitor {
+    text-align: center;
+    background-color: var(--color-bg-alt);
+  }
+
+  /* Last row — rounded bottom corners */
+  .ct__row:last-child .ct__cell--brand {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .ct__row:last-child .ct__cell--competitor {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .ct__row:last-child .ct__cell {
+    border-bottom: none;
+  }
+
+  /* Text value above icon */
+  .ct__text {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-1);
+  }
+
+  .ct__cell--brand .ct__text {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+  }
+
+  /* Icons */
+  .ct-icon {
+    display: inline-block;
+  }
+
+  .ct-icon--check {
+    color: var(--color-success);
+  }
+
+  .ct-icon--x {
+    color: var(--color-text-muted);
+  }
+
+  /* Mobile — condensed */
+  @media (max-width: 767px) {
+    .ct__head--attribute {
+      width: 45%;
+    }
+
+    .ct__head--brand,
+    .ct__head--competitor {
+      width: 27.5%;
+    }
+
+    .ct__head,
+    .ct__cell {
+      padding: var(--space-2) var(--space-2);
+      font-size: var(--text-xs);
+    }
+
+    .ct__text {
+      font-size: 0.625rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .ct__cell {
+      padding: var(--space-4) var(--space-5);
+      font-size: var(--text-base);
+    }
+
+    .ct__head {
+      padding: var(--space-5) var(--space-5);
+      font-size: var(--text-base);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "tag": "section",
+  "class": "section-comparison-table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "brand_column_label",
+      "label": "Brand column label",
+      "default": "Our Brand",
+      "info": "Your brand name — highlighted column."
+    },
+    {
+      "type": "text",
+      "id": "competitor_column_label",
+      "label": "Competitor column label",
+      "default": "Other Brands"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "attribute",
+          "label": "Attribute",
+          "default": "Feature"
+        },
+        {
+          "type": "checkbox",
+          "id": "brand_has_it",
+          "label": "Brand has it",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "brand_value",
+          "label": "Brand value (optional)",
+          "info": "Nuanced text instead of just a checkmark — e.g. 'Italy', '0g'."
+        },
+        {
+          "type": "checkbox",
+          "id": "competitor_has_it",
+          "label": "Competitor has it",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "competitor_value",
+          "label": "Competitor value (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Comparison Table",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "attribute": "Organic Certified",
+            "brand_has_it": true,
+            "competitor_has_it": false
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "attribute": "No Artificial Sweeteners",
+            "brand_has_it": true,
+            "competitor_has_it": false
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "attribute": "Third-Party Lab Tested",
+            "brand_has_it": true,
+            "competitor_has_it": false
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "attribute": "Sustainably Sourced",
+            "brand_has_it": true,
+            "competitor_has_it": true
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "attribute": "Sugar per Serving",
+            "brand_has_it": true,
+            "brand_value": "0g",
+            "competitor_has_it": false,
+            "competitor_value": "12g"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
