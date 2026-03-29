@@ -154,7 +154,7 @@
           {% for block in section.blocks %}
             {% unless block.type == 'stickyadd' %}
               {% liquid
-                if block.type == 'badge' or block.type == 'checklist'
+                if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards'
                   assign block_mobile_pos = 'right'
                 else
                   assign block_mobile_pos = block.settings.position
@@ -295,6 +295,9 @@
                   {% when 'bundle' %}
                     {% render 'product__bundle', block: block %}
 
+                  {% when 'variant_cards' %}
+                    {% render 'product__variant-cards', block: block %}
+
                   {% when 'badge' %}
                     {% render 'product-badge', block: block %}
 
@@ -325,7 +328,7 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_left_column_block = false %}
-              {% if block.type == 'badge' or block.type == 'checklist' %}
+              {% if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards' %}
                 {% assign render_left_column_block = false %}
               {% elsif block_position == 'left' %}
                 {% assign render_left_column_block = true %}
@@ -494,7 +497,7 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_right_column_block = false %}
-              {% if block.type == 'badge' or block.type == 'checklist' %}
+              {% if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards' %}
                 {% assign render_right_column_block = true %}
               {% elsif block_position == 'right' %}
                 {% assign render_right_column_block = true %}
@@ -635,6 +638,9 @@
 
                       {% when 'bundle' %}
                         {% render 'product__bundle', block: block %}
+
+                      {% when 'variant_cards' %}
+                        {% render 'product__variant-cards', block: block %}
 
                       {% when 'badge' %}
                         {% render 'product-badge', block: block %}
@@ -4999,6 +5005,66 @@
             }
           ],
           "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "variant_cards",
+      "name": "Variant Cards",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.headers.content.content"
+        },
+        {
+          "type": "text",
+          "id": "option_name",
+          "label": "Option name to render as cards",
+          "info": "Must match the product option name exactly, e.g. Size, Pack, Flavor",
+          "default": "Size"
+        },
+        {
+          "type": "select",
+          "id": "desktop_columns",
+          "label": "Desktop columns",
+          "options": [
+            { "value": "2", "label": "2" },
+            { "value": "3", "label": "3" },
+            { "value": "4", "label": "4" }
+          ],
+          "default": "4"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_per_unit",
+          "label": "Show per-unit price",
+          "info": "Requires per_unit_label in the attomik.variant_cards metafield",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.spacing.content"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "unit": "px",
+          "label": "t:general.settings.top_spacing.label",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "spacing_bottom",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "unit": "px",
+          "label": "t:general.settings.bottom_spacing.label",
+          "default": 10
         }
       ]
     },

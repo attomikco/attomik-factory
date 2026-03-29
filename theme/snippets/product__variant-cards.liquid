@@ -1,0 +1,227 @@
+<!-- snippets/product__variant-cards.liquid -->
+{% comment %}
+  Variant selector displayed as visual cards instead of pills.
+  Hooks into the theme's existing Alpine.js option system.
+
+  Accepts:
+  - block: {object} The block object with settings.
+
+  Usage:
+    {% render 'product__variant-cards', block: block %}
+{% endcomment %}
+
+{%- liquid
+  assign target_option = block.settings.option_name | downcase
+  assign card_option = nil
+  assign card_option_position = nil
+
+  for opt in product.options_with_values
+    assign opt_name_down = opt.name | downcase
+    if opt_name_down == target_option
+      assign card_option = opt
+      assign card_option_position = opt.position
+      break
+    endif
+  endfor
+
+  # Parse metafield config
+  assign vc_config_raw = product.metafields.attomik.variant_cards.value
+  assign has_config = false
+  if vc_config_raw != blank
+    assign has_config = true
+  endif
+-%}
+
+{% if card_option == nil %}
+  {% comment %} Option not found — render nothing {% endcomment %}
+{% else %}
+  <div
+    class="w-full px-4"
+    style="
+      padding-top:{{ block.settings.spacing_top }}px;
+      padding-bottom:{{ block.settings.spacing_bottom }}px;
+    "
+    {{ block.shopify_attributes }}
+  >
+    {% comment %} Option label {% endcomment %}
+    <div class="mb-3 flex justify-between">
+      <label class="type--small font-bold">
+        {{ card_option.name }}
+        {% for value in card_option.values %}
+          <span
+            class="font-normal"
+            :class="{
+              'inline': option{{ card_option_position }} == `{{ value | replace: ' ', '+' | base64_encode }}`,
+              'hidden': option{{ card_option_position }} != `{{ value | replace: ' ', '+' | base64_encode }}`
+            }"
+            x-cloak
+          >: {{ value -}}</span>
+        {% endfor %}
+      </label>
+    </div>
+
+    {% comment %} Card grid {% endcomment %}
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-{{ block.settings.desktop_columns | default: 4 }}">
+      {% for value in card_option.values %}
+        {%- liquid
+          # Find the variant that matches this option value to get pricing
+          assign card_variant = nil
+          for v in product.variants
+            for v_opt in v.options
+              if v_opt == value
+                assign card_variant = v
+                break
+              endif
+            endfor
+            if card_variant
+              break
+            endif
+          endfor
+
+          # Get metafield config for this value
+          assign val_config = nil
+          if has_config
+            assign val_handle = value | handleize
+            for cfg in vc_config_raw
+              assign cfg_handle = cfg.value | handleize
+              if cfg_handle == val_handle
+                assign val_config = cfg
+                break
+              endif
+              # Also match on the value key if present
+              if cfg.value == value
+                assign val_config = cfg
+                break
+              endif
+            endfor
+          endif
+
+          # Per-unit price calculation
+          assign show_per_unit = block.settings.show_per_unit
+          assign per_unit_label = ''
+          if val_config and val_config.per_unit_label != blank
+            assign per_unit_label = val_config.per_unit_label
+          endif
+
+          # Savings calculation
+          assign savings_label = ''
+          if val_config and val_config.savings_label != blank
+            assign savings_label = val_config.savings_label
+          endif
+
+          # Badge
+          assign badge_text = ''
+          assign badge_color = 'primary'
+          if val_config and val_config.badge != blank
+            assign badge_text = val_config.badge
+          endif
+          if val_config and val_config.badge_color != blank
+            assign badge_color = val_config.badge_color
+          endif
+
+          # Subtitle
+          assign subtitle = ''
+          if val_config and val_config.subtitle != blank
+            assign subtitle = val_config.subtitle
+          endif
+
+          # Emoji
+          assign card_emoji = ''
+          if val_config and val_config.emoji != blank
+            assign card_emoji = val_config.emoji
+          endif
+
+          # Free shipping
+          assign show_free_shipping = false
+          if val_config and val_config.show_free_shipping == true
+            assign show_free_shipping = true
+          endif
+
+          assign encoded_value = value | replace: ' ', '+' | base64_encode
+        -%}
+
+        <button
+          type="button"
+          class="relative flex flex-col items-center rounded-lg border-2 p-4 text-center transition-all duration-200"
+          :class="{
+            'border-current opacity-100': option{{ card_option_position }} == '{{ encoded_value }}',
+            'border-transparent opacity-70 hover:opacity-100': option{{ card_option_position }} != '{{ encoded_value }}'
+          }"
+          style="outline: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.12 }};"
+          :style="option{{ card_option_position }} == '{{ encoded_value }}'
+            ? 'border-color: {{ settings.color_background_primary }}; background: {{ settings.color_background_primary | color_modify: 'alpha', 0.06 }}; outline-color: {{ settings.color_background_primary }};'
+            : 'border-color: transparent;'"
+          data-option-value-id="{{ value.id }}"
+          data-option-position="{{ card_option_position }}"
+          data-variant-id="{% if card_variant %}{{ card_variant.id }}{% endif %}"
+          data-value="{{ encoded_value }}"
+          @click="
+            option{{ card_option_position }} = '{{ encoded_value }}';
+            {% if value.product_url %}
+              handleCombinedListing('{{ value.product_url }}', '{{ section.id }}');
+            {% else %}
+              handleProductFormChange(null, '{{ section.id }}', '{{ product.handle | handle }}', '{{ card_option_position }}', '{{ value.id }}');
+            {% endif %}
+          "
+          :disabled="product_loading"
+          title="{{ value }}"
+        >
+          {% comment %} Badge {% endcomment %}
+          {% if badge_text != blank %}
+            <span
+              class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-0.5 text-center"
+              style="
+                font-size: 10px;
+                font-weight: 800;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                {% if badge_color == 'secondary' %}
+                  background: {{ settings.color_background_secondary }};
+                  color: {{ settings.color_foreground_secondary | default: '#2D1A14' }};
+                {% else %}
+                  background: {{ settings.color_background_primary }};
+                  color: {{ settings.color_foreground_primary | default: '#ffffff' }};
+                {% endif %}
+              "
+            >
+              {{ badge_text }}
+            </span>
+          {% endif %}
+
+          {% comment %} Emoji {% endcomment %}
+          {% if card_emoji != blank %}
+            <span class="mb-1 text-2xl">{{ card_emoji }}</span>
+          {% endif %}
+
+          {% comment %} Option value heading {% endcomment %}
+          <span class="type__heading type__heading-4 mt-1">{{ value }}</span>
+
+          {% comment %} Subtitle {% endcomment %}
+          {% if subtitle != blank %}
+            <span class="type--smaller mt-0.5" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};">{{ subtitle }}</span>
+          {% endif %}
+
+          {% comment %} Price {% endcomment %}
+          {% if card_variant %}
+            <span class="type--small mt-2 font-bold">{{ card_variant.price | money }}</span>
+          {% endif %}
+
+          {% comment %} Per-unit price {% endcomment %}
+          {% if show_per_unit and per_unit_label != blank %}
+            <span class="type--smaller mt-0.5" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};">{{ per_unit_label }}</span>
+          {% endif %}
+
+          {% comment %} Savings {% endcomment %}
+          {% if savings_label != blank %}
+            <span class="type--smaller mt-1 font-bold" style="color: {{ settings.color_background_primary }};">{{ savings_label }}</span>
+          {% endif %}
+
+          {% comment %} Free shipping {% endcomment %}
+          {% if show_free_shipping %}
+            <span class="type--smaller mt-1 font-semibold" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.65 }};">🚚 Ships Free</span>
+          {% endif %}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
