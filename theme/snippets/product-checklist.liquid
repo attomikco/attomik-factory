@@ -3,47 +3,58 @@
 
   Usage:
     {% render 'product-checklist',
-      block_items: section.blocks,
-      color_scheme: 'color__bg-primary color__primary'
+      block: block,
+      color_scheme: block.settings.color_scheme
     %}
 
   Parameters:
-    block_items    — array of blocks (type "item" or "value_prop")
-    color_scheme   — theme color scheme class for accent elements
-    accent_color   — optional hex color override (legacy support)
-    text_color     — optional hex text color override (legacy support)
+    block          — the Shopify block object with settings (item_1..item_5, value_prop_tag, value_prop_text)
+    color_scheme   — theme color scheme class
 {% endcomment %}
 
-<ul
-  class="product-checklist {{ color_scheme }}"
-  {% if accent_color != blank or text_color != blank %}
-    style="
-      {%- if accent_color != blank -%}--pcl-accent: {{ accent_color }}; --pcl-accent-bg: {{ accent_color }}0f; --pcl-accent-border: {{ accent_color }}26;{%- endif -%}
-      {%- if text_color != blank -%}--pcl-text: {{ text_color }};{%- endif -%}
-    "
-  {% endif %}
->
-  {% for block in block_items %}
-    {% if block.type == 'value_prop' %}
-      <li class="product-checklist__val" {{ block.shopify_attributes }}>
-        <span class="product-checklist__tag">{{ block.settings.tag_label }}</span>
-        <span class="product-checklist__val-text">{{ block.settings.value_text }}</span>
-      </li>
-    {% elsif block.type == 'item' %}
-      <li class="product-checklist__item" {{ block.shopify_attributes }}>
+<div class="{{ color_scheme }} product-checklist" {{ block.shopify_attributes }} style="border: 1px solid red;">
+  <ul class="product-checklist__list">
+    {% if block.settings.item_1 != blank %}
+      <li class="product-checklist__item">
         <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
-        <span>{{ block.settings.text }}</span>
+        <span>{{ block.settings.item_1 }}</span>
       </li>
     {% endif %}
-  {% endfor %}
-</ul>
+    {% if block.settings.item_2 != blank %}
+      <li class="product-checklist__item">
+        <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+        <span>{{ block.settings.item_2 }}</span>
+      </li>
+    {% endif %}
+    {% if block.settings.item_3 != blank %}
+      <li class="product-checklist__item">
+        <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+        <span>{{ block.settings.item_3 }}</span>
+      </li>
+    {% endif %}
+    {% if block.settings.item_4 != blank %}
+      <li class="product-checklist__item">
+        <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+        <span>{{ block.settings.item_4 }}</span>
+      </li>
+    {% endif %}
+    {% if block.settings.item_5 != blank %}
+      <li class="product-checklist__item">
+        <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+        <span>{{ block.settings.item_5 }}</span>
+      </li>
+    {% endif %}
+    {% if block.settings.value_prop_text != blank %}
+      <li class="product-checklist__val">
+        <span class="product-checklist__tag">{{ block.settings.value_prop_tag | default: '★ Best Value' }}</span>
+        <span class="product-checklist__val-text">{{ block.settings.value_prop_text }}</span>
+      </li>
+    {% endif %}
+  </ul>
+</div>
 
 {% style %}
-  .product-checklist {
-    --pcl-accent: var(--color-primary, #000000);
-    --pcl-accent-bg: rgba(0, 0, 0, 0.06);
-    --pcl-accent-border: rgba(0, 0, 0, 0.15);
-    --pcl-text: var(--color-foreground, #1a1a1a);
+  .product-checklist__list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -58,15 +69,15 @@
     gap: 10px;
     font-size: calc(0.9375 * var(--font-body-scale) * 1rem);
     font-weight: var(--font-body-weight-bold);
-    color: var(--pcl-text);
+    color: var(--color-foreground);
   }
   .product-checklist__ck {
     width: 20px;
     height: 20px;
     min-width: 20px;
     border-radius: 50%;
-    background: var(--pcl-accent);
-    color: var(--color-primary-foreground, #ffffff);
+    background: var(--color-foreground);
+    color: var(--color-background);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -79,14 +90,14 @@
     gap: 10px;
     margin-top: 4px;
     padding: 8px 12px;
-    background: var(--pcl-accent-bg);
-    border: 1px solid var(--pcl-accent-border);
+    background: color-mix(in srgb, var(--color-foreground) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-foreground) 15%, transparent);
     border-radius: var(--inputs-radius, 6px);
     font-family: var(--font-body-family);
   }
   .product-checklist__tag {
-    background: var(--pcl-accent);
-    color: var(--color-primary-foreground, #ffffff);
+    background: var(--color-foreground);
+    color: var(--color-background);
     font-family: var(--font-body-family);
     font-size: calc(0.5625 * var(--font-body-scale) * 1rem);
     font-weight: var(--font-body-weight-bold);
@@ -99,7 +110,7 @@
   .product-checklist__val-text {
     font-size: calc(0.9375 * var(--font-body-scale) * 1rem);
     font-weight: var(--font-body-weight-bold);
-    color: var(--pcl-text);
+    color: var(--color-foreground);
   }
   @media (max-width: 768px) {
     .product-checklist__item {

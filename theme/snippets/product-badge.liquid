@@ -13,10 +13,9 @@
   Parameters:
     badge_text      — badge label (falls back to "Badge" if blank)
     badge_emoji     — optional emoji prefix
-    color_scheme    — theme color scheme class
+    color_scheme    — theme color scheme class (sets --color-background and --color-foreground)
     style           — "filled" | "outline" | "subtle" (default: subtle)
     text_transform  — "uppercase" | "capitalize" | "none" (default: uppercase)
-    badge_color     — optional hex color override (legacy)
 {% endcomment %}
 
 {% liquid
@@ -25,15 +24,7 @@
   assign badge_label = badge_text | default: 'Badge'
 %}
 
-<div
-  class="product-badge product-badge--{{ badge_style }} {{ color_scheme }}"
-  style="
-    text-transform: {{ badge_transform }};
-    {%- if badge_color != blank -%}
-      --pb-color: {{ badge_color }};
-    {%- endif -%}
-  "
->
+<div class="{{ color_scheme }} product-badge product-badge--{{ badge_style }}" style="text-transform: {{ badge_transform }};">
   {%- if badge_emoji != blank -%}
     <span class="product-badge__emoji">{{ badge_emoji }}</span>
   {%- endif -%}
@@ -53,26 +44,23 @@
     padding: 6px 14px;
     border-radius: var(--inputs-radius, 4px);
     white-space: nowrap;
-    color: currentColor;
+    color: var(--color-foreground);
   }
 
-  /* Filled: solid background, no border */
+  /* Filled: solid foreground background, background text */
   .product-badge--filled {
-    background: currentColor;
-    border: none;
-  }
-  .product-badge--filled .product-badge__text,
-  .product-badge--filled .product-badge__emoji {
-    color: var(--color-background, #ffffff);
+    background: var(--color-foreground);
+    color: var(--color-background);
+    border: 1.5px solid transparent;
   }
 
-  /* Outline: transparent background, solid border */
+  /* Outline: transparent background, foreground border */
   .product-badge--outline {
     background: transparent;
     border: 1.5px solid currentColor;
   }
 
-  /* Subtle: low opacity background, low opacity border */
+  /* Subtle: foreground at low opacity for bg and border */
   .product-badge--subtle {
     background: color-mix(in srgb, currentColor 6%, transparent);
     border: 1.5px solid color-mix(in srgb, currentColor 20%, transparent);

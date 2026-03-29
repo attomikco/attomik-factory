@@ -153,8 +153,14 @@
           {% endif %}
           {% for block in section.blocks %}
             {% unless block.type == 'stickyadd' %}
+              {% liquid
+                assign block_mobile_pos = block.settings.position
+                if block.type == 'badge' or block.type == 'checklist'
+                  assign block_mobile_pos = 'right'
+                endif
+              %}
               <div
-                class="block-{{ block.settings.position }} w-full md:hidden"
+                class="block-{{ block_mobile_pos }} w-full md:hidden"
                 :class="
                   {
                     {% if block.type == 'options' %}
@@ -298,30 +304,10 @@
                     %}
 
                   {% when 'checklist' %}
-                    {% liquid
-                      assign checklist_items = '' | split: ''
-                      for i in (1..5)
-                        assign field_name = 'item_' | append: i
-                        assign item_text = block.settings[field_name]
-                        if item_text != blank
-                          assign checklist_items = checklist_items | push: item_text
-                        endif
-                      endfor
+                    {% render 'product-checklist',
+                      block: block,
+                      color_scheme: block.settings.color_scheme
                     %}
-                    <ul class="product-checklist {{ block.settings.color_scheme }}">
-                      {% for item in checklist_items %}
-                        <li class="product-checklist__item">
-                          <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
-                          <span>{{ item }}</span>
-                        </li>
-                      {% endfor %}
-                      {% if block.settings.value_prop_text != blank %}
-                        <li class="product-checklist__val">
-                          <span class="product-checklist__tag">{{ block.settings.value_prop_tag }}</span>
-                          <span class="product-checklist__val-text">{{ block.settings.value_prop_text }}</span>
-                        </li>
-                      {% endif %}
-                    </ul>
 
                   {% when '@app' %}
                     <div class="p-4">{% render block %}</div>
@@ -347,7 +333,9 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_left_column_block = false %}
-              {% if block_position == 'left' %}
+              {% if block.type == 'badge' or block.type == 'checklist' %}
+                {% assign render_left_column_block = false %}
+              {% elsif block_position == 'left' %}
                 {% assign render_left_column_block = true %}
               {% elsif block.type == '@app' and settings.app_block_column == 'left_column' %}
                 {% assign render_left_column_block = true %}
@@ -497,30 +485,10 @@
                         %}
 
                       {% when 'checklist' %}
-                        {% liquid
-                          assign checklist_items = '' | split: ''
-                          for i in (1..5)
-                            assign field_name = 'item_' | append: i
-                            assign item_text = block.settings[field_name]
-                            if item_text != blank
-                              assign checklist_items = checklist_items | push: item_text
-                            endif
-                          endfor
+                        {% render 'product-checklist',
+                          block: block,
+                          color_scheme: block.settings.color_scheme
                         %}
-                        <ul class="product-checklist {{ block.settings.color_scheme }}">
-                          {% for item in checklist_items %}
-                            <li class="product-checklist__item">
-                              <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
-                              <span>{{ item }}</span>
-                            </li>
-                          {% endfor %}
-                          {% if block.settings.value_prop_text != blank %}
-                            <li class="product-checklist__val">
-                              <span class="product-checklist__tag">{{ block.settings.value_prop_tag }}</span>
-                              <span class="product-checklist__val-text">{{ block.settings.value_prop_text }}</span>
-                            </li>
-                          {% endif %}
-                        </ul>
 
                       {% when '@app' %}
                         {% if settings.app_block_column == 'left_column' %}
@@ -549,7 +517,9 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_right_column_block = false %}
-              {% if block_position == 'right' %}
+              {% if block.type == 'badge' or block.type == 'checklist' %}
+                {% assign render_right_column_block = true %}
+              {% elsif block_position == 'right' %}
                 {% assign render_right_column_block = true %}
               {% elsif block.type == '@app' and settings.app_block_column == 'right_column' %}
                 {% assign render_right_column_block = true %}
@@ -699,30 +669,10 @@
                         %}
 
                       {% when 'checklist' %}
-                        {% liquid
-                          assign checklist_items = '' | split: ''
-                          for i in (1..5)
-                            assign field_name = 'item_' | append: i
-                            assign item_text = block.settings[field_name]
-                            if item_text != blank
-                              assign checklist_items = checklist_items | push: item_text
-                            endif
-                          endfor
+                        {% render 'product-checklist',
+                          block: block,
+                          color_scheme: block.settings.color_scheme
                         %}
-                        <ul class="product-checklist {{ block.settings.color_scheme }}">
-                          {% for item in checklist_items %}
-                            <li class="product-checklist__item">
-                              <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
-                              <span>{{ item }}</span>
-                            </li>
-                          {% endfor %}
-                          {% if block.settings.value_prop_text != blank %}
-                            <li class="product-checklist__val">
-                              <span class="product-checklist__tag">{{ block.settings.value_prop_tag }}</span>
-                              <span class="product-checklist__val-text">{{ block.settings.value_prop_text }}</span>
-                            </li>
-                          {% endif %}
-                        </ul>
 
                       {% when '@app' %}
                         {% if settings.app_block_column == 'right_column' %}
@@ -5170,20 +5120,6 @@
           "label": "t:general.settings.bottom_spacing.label",
           "default": 10
         },
-        {
-          "type": "header",
-          "content": "t:general.headers.layout.content"
-        },
-        {
-          "type": "select",
-          "id": "position",
-          "label": "t:general.settings.position.label",
-          "options": [
-            { "value": "left", "label": "t:general.settings.position.options.left.label" },
-            { "value": "right", "label": "t:general.settings.position.options.right.label" }
-          ],
-          "default": "left"
-        }
       ]
     },
     {
@@ -5281,20 +5217,6 @@
           "unit": "px",
           "label": "t:general.settings.bottom_spacing.label",
           "default": 10
-        },
-        {
-          "type": "header",
-          "content": "t:general.headers.layout.content"
-        },
-        {
-          "type": "select",
-          "id": "position",
-          "label": "t:general.settings.position.label",
-          "options": [
-            { "value": "left", "label": "t:general.settings.position.options.left.label" },
-            { "value": "right", "label": "t:general.settings.position.options.right.label" }
-          ],
-          "default": "left"
         }
       ]
     },
