@@ -89,6 +89,19 @@
             "position": "right"
           }
         },
+        "perks_j9yce9": {
+          "type": "perks",
+          "settings": {
+            "label": "Subscriber Perks",
+            "perk_1": "Save 15% on every order",
+            "perk_2": "Free shipping every delivery",
+            "perk_3": "Cancel or pause anytime",
+            "perk_4": "Auto-delivered, never run out",
+            "perk_5": "Priority customer support",
+            "speed": 20,
+            "color_scheme": "color__bg-neutral color__text"
+          }
+        },
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d53": {
           "type": "add",
           "settings": {
@@ -184,6 +197,7 @@
         "62c29cd6-a0b5-4f8b-86c0-a48660869d22",
         "variant_cards_JhQkVx",
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d58",
+        "perks_j9yce9",
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d53",
         "123fd04c-91f3-4248-a65a-614e2f64fdeb",
         "accordion_gJ6baw",
