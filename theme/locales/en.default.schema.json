@@ -1475,6 +1475,17 @@
           "label": "Right"
         }
       },
+      "position": {
+        "label": "Position",
+        "options": {
+          "left": {
+            "label": "Left"
+          },
+          "right": {
+            "label": "Right"
+          }
+        }
+      },
       "y_alignment_mobile": {
         "label": "Mobile vertical alignment"
       },
