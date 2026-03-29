@@ -5166,109 +5166,55 @@
         },
         {
           "type": "header",
-          "content": "Header"
-        },
-        {
-          "type": "color",
-          "id": "header_bg",
-          "label": "Header background",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "header_text",
-          "label": "Header text color",
-          "default": "#ffffff"
-        },
-        {
-          "type": "range",
-          "id": "header_font_size",
-          "label": "Header font size",
-          "min": 8,
-          "max": 16,
-          "step": 1,
-          "unit": "px",
-          "default": 11
+          "content": "t:general.headers.color.content"
         },
         {
           "type": "select",
-          "id": "header_font_weight",
-          "label": "Header font weight",
+          "id": "color_scheme",
+          "label": "t:general.settings.color_scheme.label",
           "options": [
-            { "value": "400", "label": "Regular" },
-            { "value": "600", "label": "Semi-bold" },
-            { "value": "700", "label": "Bold" },
-            { "value": "800", "label": "Extra bold" }
+            {
+              "value": "color__bg-body color__text",
+              "label": "t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value": "color__bg-neutral color__text",
+              "label": "t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value": "color__bg-overlay-1 color__text",
+              "label": "t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value": "color__bg-overlay-2 color__text",
+              "label": "t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value": "color__bg-shade-1 color__text",
+              "label": "t:general.settings.color_scheme.shade_1.label"
+            },
+            {
+              "value": "color__bg-shade-2 color__text",
+              "label": "t:general.settings.color_scheme.shade_2.label"
+            },
+            {
+              "value": "color__bg-primary color__primary",
+              "label": "t:general.settings.color_scheme.primary.label"
+            },
+            {
+              "value": "color__bg-secondary color__secondary",
+              "label": "t:general.settings.color_scheme.secondary.label"
+            },
+            {
+              "value": "color__bg-tertiary color__tertiary",
+              "label": "t:general.settings.color_scheme.tertiary.label"
+            },
+            {
+              "value": "color__bg-transparent",
+              "label": "t:general.settings.color_scheme.transparent.label"
+            }
           ],
-          "default": "700"
-        },
-        {
-          "type": "header",
-          "content": "Marquee"
-        },
-        {
-          "type": "color",
-          "id": "marquee_bg",
-          "label": "Marquee background",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "marquee_text",
-          "label": "Marquee text color",
-          "default": "#ffffff"
-        },
-        {
-          "type": "range",
-          "id": "marquee_font_size",
-          "label": "Marquee font size",
-          "min": 10,
-          "max": 18,
-          "step": 1,
-          "unit": "px",
-          "default": 13
-        },
-        {
-          "type": "select",
-          "id": "marquee_font_weight",
-          "label": "Marquee font weight",
-          "options": [
-            { "value": "400", "label": "Regular" },
-            { "value": "500", "label": "Medium" },
-            { "value": "600", "label": "Semi-bold" },
-            { "value": "700", "label": "Bold" }
-          ],
-          "default": "500"
-        },
-        {
-          "type": "header",
-          "content": "Border"
-        },
-        {
-          "type": "color",
-          "id": "border_color",
-          "label": "Border color",
-          "default": "#000000"
-        },
-        {
-          "type": "range",
-          "id": "border_width",
-          "label": "Border width",
-          "min": 0,
-          "max": 4,
-          "step": 1,
-          "unit": "px",
-          "default": 1
-        },
-        {
-          "type": "range",
-          "id": "border_radius",
-          "label": "Border radius",
-          "min": 0,
-          "max": 24,
-          "step": 2,
-          "unit": "px",
-          "default": 10
+          "default": "color__bg-secondary color__secondary"
         }
       ]
     },
