@@ -1,0 +1,153 @@
+<!-- snippets/product-perks-marquee.liquid -->
+{% comment %}
+  Scrolling marquee of perks/benefits with configurable items.
+
+  Accepts:
+  - block: {object} The block object with settings.
+
+  Usage:
+    {% render 'product-perks-marquee', block: block %}
+{% endcomment %}
+
+{%- liquid
+  assign label = block.settings.label | default: 'Subscriber Perks'
+  assign speed = block.settings.speed | default: 20
+  assign items = '' | split: '|||'
+  if block.settings.perk_1 != blank
+    assign items = items | append: block.settings.perk_1 | append: '|||'
+  endif
+  if block.settings.perk_2 != blank
+    assign items = items | append: block.settings.perk_2 | append: '|||'
+  endif
+  if block.settings.perk_3 != blank
+    assign items = items | append: block.settings.perk_3 | append: '|||'
+  endif
+  if block.settings.perk_4 != blank
+    assign items = items | append: block.settings.perk_4 | append: '|||'
+  endif
+  if block.settings.perk_5 != blank
+    assign items = items | append: block.settings.perk_5 | append: '|||'
+  endif
+  assign items_array = items | split: '|||'
+-%}
+
+{% if items_array.size > 0 %}
+  <style>
+    .adp-sub-section-{{ section.id }} {
+      padding: 12px 0;
+    }
+    .adp-sub-wrap-{{ section.id }} {
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+      opacity: 1;
+      overflow: hidden;
+    }
+    .adp-sub-wrap-{{ section.id }} {
+      border-color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.1 }};
+    }
+    .adp-sub-header-{{ section.id }} {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-bottom: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.08 }};
+    }
+    .adp-sub-header-{{ section.id }} svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .adp-sub-title-{{ section.id }} {
+      font-family: var(--font-heading-family, sans-serif);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      line-height: 1;
+    }
+    .adp-sub-marquee-{{ section.id }} {
+      overflow: hidden;
+    }
+    .adp-sub-track-{{ section.id }} {
+      display: flex;
+      width: fit-content;
+      --marquee-speed: {{ speed }}s;
+      animation: adp-marquee-{{ section.id }} var(--marquee-speed) linear infinite;
+    }
+    .adp-sub-set-{{ section.id }} {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      padding-right: 16px;
+    }
+    .adp-sub-item-{{ section.id }} {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .adp-sub-item-{{ section.id }} svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .adp-sub-dot-{{ section.id }} {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.3;
+      flex-shrink: 0;
+    }
+    @keyframes adp-marquee-{{ section.id }} {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .adp-sub-track-{{ section.id }} {
+        animation-play-state: paused;
+      }
+    }
+  </style>
+
+  <div
+    class="adp-sub-section-{{ section.id }} w-full {{ block.settings.color_scheme }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="adp-sub-wrap-{{ section.id }}">
+      <div class="adp-sub-header-{{ section.id }}">
+        <svg viewBox="0 0 24 24"><path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"></path><path d="M17 12H3"></path><path d="M21 12l-4-4"></path><path d="M21 12l-4 4"></path></svg>
+        <span class="adp-sub-title-{{ section.id }}">{{ label }}</span>
+      </div>
+      <div class="adp-sub-marquee-{{ section.id }}">
+        <div class="adp-sub-track-{{ section.id }}">
+          {% for pass in (1..2) %}
+            <div class="adp-sub-set-{{ section.id }}">
+              {% for item in items_array %}
+                <div class="adp-sub-item-{{ section.id }}">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  {{ item }}
+                </div>
+                <div class="adp-sub-dot-{{ section.id }}"></div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

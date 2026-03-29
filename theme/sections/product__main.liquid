@@ -178,7 +178,7 @@
           {% for block in section.blocks %}
             {% unless block.type == 'stickyadd' %}
               {% liquid
-                if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards'
+                if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards' or block.type == 'perks'
                   assign block_mobile_pos = 'right'
                 else
                   assign block_mobile_pos = block.settings.position
@@ -322,6 +322,9 @@
                   {% when 'variant_cards' %}
                     {% render 'product__variant-cards', block: block %}
 
+                  {% when 'perks' %}
+                    {% render 'product-perks-marquee', block: block %}
+
                   {% when 'badge' %}
                     {% render 'product-badge', block: block %}
 
@@ -352,7 +355,7 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_left_column_block = false %}
-              {% if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards' %}
+              {% if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards' or block.type == 'perks' %}
                 {% assign render_left_column_block = false %}
               {% elsif block_position == 'left' %}
                 {% assign render_left_column_block = true %}
@@ -521,7 +524,7 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_right_column_block = false %}
-              {% if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards' %}
+              {% if block.type == 'badge' or block.type == 'checklist' or block.type == 'variant_cards' or block.type == 'perks' %}
                 {% assign render_right_column_block = true %}
               {% elsif block_position == 'right' %}
                 {% assign render_right_column_block = true %}
@@ -665,6 +668,9 @@
 
                       {% when 'variant_cards' %}
                         {% render 'product__variant-cards', block: block %}
+
+                      {% when 'perks' %}
+                        {% render 'product-perks-marquee', block: block %}
 
                       {% when 'badge' %}
                         {% render 'product-badge', block: block %}
@@ -5096,6 +5102,107 @@
           "unit": "px",
           "label": "t:general.settings.bottom_spacing.label",
           "default": 10
+        }
+      ]
+    },
+    {
+      "type": "perks",
+      "name": "Perks Marquee",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "t:general.headers.content.content"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Header label",
+          "default": "Subscriber Perks"
+        },
+        {
+          "type": "text",
+          "id": "perk_1",
+          "label": "Perk 1",
+          "default": "Save 15% on every order"
+        },
+        {
+          "type": "text",
+          "id": "perk_2",
+          "label": "Perk 2",
+          "default": "Free shipping every delivery"
+        },
+        {
+          "type": "text",
+          "id": "perk_3",
+          "label": "Perk 3",
+          "default": "Cancel or pause anytime"
+        },
+        {
+          "type": "text",
+          "id": "perk_4",
+          "label": "Perk 4",
+          "default": "Auto-delivered, never run out"
+        },
+        {
+          "type": "text",
+          "id": "perk_5",
+          "label": "Perk 5",
+          "default": "Priority customer support"
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.style.content"
+        },
+        {
+          "type": "range",
+          "id": "speed",
+          "min": 10,
+          "max": 40,
+          "step": 2,
+          "unit": "s",
+          "label": "Scroll speed",
+          "default": 20
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.color.content"
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "t:general.settings.color_scheme.label",
+          "options": [
+            {
+              "value": "color__bg-body color__text",
+              "label": "t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value": "color__bg-neutral color__text",
+              "label": "t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value": "color__bg-overlay-1 color__text",
+              "label": "t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value": "color__bg-overlay-2 color__text",
+              "label": "t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value": "color__bg-shade-1 color__text",
+              "label": "t:general.settings.color_scheme.shade_1.label"
+            },
+            {
+              "value": "color__bg-shade-2 color__text",
+              "label": "t:general.settings.color_scheme.shade_2.label"
+            },
+            {
+              "value": "color__bg-transparent",
+              "label": "t:general.settings.color_scheme.transparent.label"
+            }
+          ],
+          "default": "color__bg-shade-1 color__text"
         }
       ]
     },
