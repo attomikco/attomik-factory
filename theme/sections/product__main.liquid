@@ -154,7 +154,11 @@
           {% for block in section.blocks %}
             {% unless block.type == 'stickyadd' %}
               {% liquid
-                assign block_mobile_pos = block.settings.position
+                if block.type == 'badge' or block.type == 'checklist'
+                  assign block_mobile_pos = 'right'
+                else
+                  assign block_mobile_pos = block.settings.position
+                endif
               %}
               <div
                 class="block-{{ block_mobile_pos }} w-full md:hidden"
@@ -321,7 +325,9 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_left_column_block = false %}
-              {% if block_position == 'left' %}
+              {% if block.type == 'badge' or block.type == 'checklist' %}
+                {% assign render_left_column_block = false %}
+              {% elsif block_position == 'left' %}
                 {% assign render_left_column_block = true %}
               {% elsif block.type == '@app' and settings.app_block_column == 'left_column' %}
                 {% assign render_left_column_block = true %}
@@ -461,12 +467,6 @@
                       {% when 'bundle' %}
                         {% render 'product__bundle', block: block %}
 
-                      {% when 'badge' %}
-                        {% render 'product-badge', block: block %}
-
-                      {% when 'checklist' %}
-                        {% render 'product-checklist', block: block %}
-
                       {% when '@app' %}
                         {% if settings.app_block_column == 'left_column' %}
                           <div class="p-4">{% render block %}</div>
@@ -494,7 +494,9 @@
             {% for block in section.blocks %}
               {% assign block_position = block.settings.position | default: '' %}
               {% assign render_right_column_block = false %}
-              {% if block_position == 'right' %}
+              {% if block.type == 'badge' or block.type == 'checklist' %}
+                {% assign render_right_column_block = true %}
+              {% elsif block_position == 'right' %}
                 {% assign render_right_column_block = true %}
               {% elsif block.type == '@app' and settings.app_block_column == 'right_column' %}
                 {% assign render_right_column_block = true %}
@@ -5172,26 +5174,6 @@
           ],
           "default": ""
         },
-        {
-          "type": "header",
-          "content": "t:general.headers.layout.content"
-        },
-        {
-          "type": "select",
-          "id": "position",
-          "label": "t:general.settings.x_position.label",
-          "options": [
-            {
-              "value": "left",
-              "label": "t:general.settings.x_position.left.label"
-            },
-            {
-              "value": "right",
-              "label": "t:general.settings.x_position.right.label"
-            }
-          ],
-          "default": "right"
-        }
       ]
     },
     {
@@ -5276,100 +5258,10 @@
           "content": "t:general.headers.color.content"
         },
         {
-          "type": "select",
-          "id": "color_scheme",
-          "label": "t:general.settings.color_scheme.label",
-          "options": [
-            {
-              "value": "color__bg-body color__text",
-              "label": "t:general.settings.color_scheme.body.label"
-            },
-            {
-              "value": "color__bg-neutral color__text",
-              "label": "t:general.settings.color_scheme.neutral.label"
-            },
-            {
-              "value": "color__bg-overlay-1 color__text",
-              "label": "t:general.settings.color_scheme.accent_1.label"
-            },
-            {
-              "value": "color__bg-overlay-2 color__text",
-              "label": "t:general.settings.color_scheme.accent_2.label"
-            },
-            {
-              "value": "color__bg-overlay-3 color__text",
-              "label": "t:general.settings.color_scheme.accent_3.label"
-            },
-            {
-              "value": "color__bg-transparent",
-              "label": "t:general.settings.color_scheme.transparent.label"
-            }
-          ],
-          "default": "color__bg-transparent"
-        },
-        {
-          "type": "select",
-          "id": "color_border",
-          "label": "t:general.settings.color_border.label",
-          "options": [
-            {
-              "value": "color__border-divider-1",
-              "label": "t:general.settings.color_border.subtle.label"
-            },
-            {
-              "value": "color__border-selected-1",
-              "label": "t:general.settings.color_border.strong.label"
-            }
-          ],
-          "default": "color__border-divider-1"
-        },
-        {
-          "type": "header",
-          "content": "t:general.headers.style.content"
-        },
-        {
-          "type": "select",
-          "id": "style_border",
-          "label": "t:general.settings.border_position.label",
-          "options": [
-            {
-              "value": "",
-              "label": "t:general.settings.border_position.none.label"
-            },
-            {
-              "value": "border--t-width",
-              "label": "t:general.settings.border_position.top.label"
-            },
-            {
-              "value": "border--b-width",
-              "label": "t:general.settings.border_position.bottom.label"
-            },
-            {
-              "value": "border--b-width border--t-width",
-              "label": "t:general.settings.border_position.top_and_bottom.label"
-            }
-          ],
-          "default": ""
-        },
-        {
-          "type": "header",
-          "content": "t:general.headers.layout.content"
-        },
-        {
-          "type": "select",
-          "id": "position",
-          "label": "t:general.settings.x_position.label",
-          "options": [
-            {
-              "value": "left",
-              "label": "t:general.settings.x_position.left.label"
-            },
-            {
-              "value": "right",
-              "label": "t:general.settings.x_position.right.label"
-            }
-          ],
-          "default": "right"
+          "type": "color",
+          "id": "check_color",
+          "label": "Checkmark color",
+          "default": "#000000"
         }
       ]
     },
