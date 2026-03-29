@@ -30,6 +30,36 @@
   if vc_config_raw != blank
     assign has_config = true
   endif
+
+  # Free shipping threshold (convert dollars to cents)
+  assign fs_threshold_cents = 0
+  if block.settings.free_shipping_threshold != blank
+    assign fs_threshold_cents = block.settings.free_shipping_threshold | times: 100
+  endif
+
+  # Count option values and find the first variant price for savings calc
+  assign option_count = 0
+  assign first_variant_price = nil
+  if card_option
+    assign option_count = card_option.values | size
+
+    # Build array of variants matching each option value to find first variant price
+    for value in card_option.values
+      if forloop.first
+        for v in product.variants
+          for v_opt in v.options
+            if v_opt == value
+              assign first_variant_price = v.price
+              break
+            endif
+          endfor
+          if first_variant_price
+            break
+          endif
+        endfor
+      endif
+    endfor
+  endif
 -%}
 
 {% if card_option == nil %}
@@ -64,7 +94,7 @@
     <div class="grid grid-cols-2 gap-3 md:grid-cols-{{ block.settings.desktop_columns | default: 4 }}">
       {% for value in card_option.values %}
         {%- liquid
-          # Find the variant that matches this option value to get pricing
+          # Find the variant that matches this option value
           assign card_variant = nil
           for v in product.variants
             for v_opt in v.options
@@ -81,60 +111,94 @@
           # Get metafield config for this value
           assign val_config = nil
           if has_config
-            assign val_handle = value | handleize
             for cfg in vc_config_raw
-              assign cfg_handle = cfg.value | handleize
-              if cfg_handle == val_handle
-                assign val_config = cfg
-                break
-              endif
-              # Also match on the value key if present
               if cfg.value == value
                 assign val_config = cfg
                 break
               endif
             endfor
+            # Fallback: match by handleize
+            if val_config == nil
+              assign val_handle = value | handleize
+              for cfg in vc_config_raw
+                assign cfg_handle = cfg.value | handleize
+                if cfg_handle == val_handle
+                  assign val_config = cfg
+                  break
+                endif
+              endfor
+            endif
           endif
 
-          # Per-unit price calculation
-          assign show_per_unit = block.settings.show_per_unit
-          assign per_unit_label = ''
-          if val_config and val_config.per_unit_label != blank
-            assign per_unit_label = val_config.per_unit_label
-          endif
-
-          # Savings calculation
-          assign savings_label = ''
-          if val_config and val_config.savings_label != blank
-            assign savings_label = val_config.savings_label
-          endif
-
-          # Badge
+          # === BADGE ===
           assign badge_text = ''
           assign badge_color = 'primary'
           if val_config and val_config.badge != blank
+            # Metafield badge takes priority
             assign badge_text = val_config.badge
-          endif
-          if val_config and val_config.badge_color != blank
-            assign badge_color = val_config.badge_color
+            if val_config.badge_color != blank
+              assign badge_color = val_config.badge_color
+            endif
+          elsif option_count >= 3
+            # Auto-badge: last = Best Value, middle = Popular
+            if forloop.last
+              assign badge_text = 'Best Value'
+              assign badge_color = 'primary'
+            elsif forloop.index == 2
+              assign badge_text = 'Popular'
+              assign badge_color = 'secondary'
+            endif
+          elsif option_count == 2
+            if forloop.last
+              assign badge_text = 'Best Value'
+              assign badge_color = 'primary'
+            endif
           endif
 
-          # Subtitle
+          # === SUBTITLE ===
           assign subtitle = ''
           if val_config and val_config.subtitle != blank
             assign subtitle = val_config.subtitle
           endif
 
-          # Emoji
+          # === EMOJI ===
           assign card_emoji = ''
           if val_config and val_config.emoji != blank
             assign card_emoji = val_config.emoji
           endif
 
-          # Free shipping
+          # === PER-UNIT LABEL ===
+          assign per_unit_label = ''
+          if val_config and val_config.per_unit_label != blank
+            assign per_unit_label = val_config.per_unit_label
+          endif
+
+          # === SAVINGS (auto-calculate if no metafield) ===
+          assign savings_label = ''
+          if val_config and val_config.savings_label != blank
+            assign savings_label = val_config.savings_label
+          elsif card_variant and first_variant_price and forloop.first == false
+            # Auto-calculate: compare per-unit cost
+            # For multi-packs, the variant price divided by quantity vs single price
+            # Simple approach: if this variant is cheaper per dollar than first, show savings
+            if card_variant.price < first_variant_price
+              # Direct price comparison savings
+              assign price_diff = first_variant_price | minus: card_variant.price
+              assign savings_pct = price_diff | times: 100 | divided_by: first_variant_price
+              if savings_pct > 0
+                assign savings_label = 'SAVE ' | append: savings_pct | append: '%'
+              endif
+            endif
+          endif
+
+          # === FREE SHIPPING ===
           assign show_free_shipping = false
           if val_config and val_config.show_free_shipping == true
             assign show_free_shipping = true
+          elsif fs_threshold_cents > 0 and card_variant
+            if card_variant.price >= fs_threshold_cents
+              assign show_free_shipping = true
+            endif
           endif
 
           assign encoded_value = value | replace: ' ', '+' | base64_encode
@@ -142,21 +206,21 @@
 
         <button
           type="button"
-          class="relative flex flex-col items-center rounded-lg border-2 p-4 text-center transition-all duration-200"
-          :class="{
-            'border-current opacity-100': option{{ card_option_position }} == '{{ encoded_value }}',
-            'border-transparent opacity-70 hover:opacity-100': option{{ card_option_position }} != '{{ encoded_value }}'
-          }"
-          style="outline: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.12 }};"
-          :style="option{{ card_option_position }} == '{{ encoded_value }}'
-            ? 'border-color: {{ settings.color_background_primary }}; background: {{ settings.color_background_primary | color_modify: 'alpha', 0.06 }}; outline-color: {{ settings.color_background_primary }};'
-            : 'border-color: transparent;'"
+          class="relative flex cursor-pointer flex-col items-center text-center transition-all duration-200"
+          style="
+            padding: 16px 20px;
+            border-radius: var(--buttons-radius, 8px);
+            border: 1.5px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.12 }};
+          "
+          :style="option{{ card_option_position }} == `{{ encoded_value }}`
+            ? 'border-color: {{ settings.color_background_primary }}; background: {{ settings.color_background_primary | color_modify: 'alpha', 0.05 }};'
+            : ''"
           data-option-value-id="{{ value.id }}"
           data-option-position="{{ card_option_position }}"
           data-variant-id="{% if card_variant %}{{ card_variant.id }}{% endif %}"
           data-value="{{ encoded_value }}"
           @click="
-            option{{ card_option_position }} = '{{ encoded_value }}';
+            option{{ card_option_position }} = `{{ encoded_value }}`;
             {% if value.product_url %}
               handleCombinedListing('{{ value.product_url }}', '{{ section.id }}');
             {% else %}
@@ -169,7 +233,7 @@
           {% comment %} Badge {% endcomment %}
           {% if badge_text != blank %}
             <span
-              class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-0.5 text-center"
+              class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-0.5 text-center"
               style="
                 font-size: 10px;
                 font-weight: 800;
@@ -201,14 +265,14 @@
             <span class="type--smaller mt-0.5" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};">{{ subtitle }}</span>
           {% endif %}
 
-          {% comment %} Price {% endcomment %}
+          {% comment %} Price display {% endcomment %}
           {% if card_variant %}
-            <span class="type--small mt-2 font-bold">{{ card_variant.price | money }}</span>
-          {% endif %}
-
-          {% comment %} Per-unit price {% endcomment %}
-          {% if show_per_unit and per_unit_label != blank %}
-            <span class="type--smaller mt-0.5" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};">{{ per_unit_label }}</span>
+            {% if block.settings.show_per_unit and per_unit_label != blank %}
+              <span class="type--small mt-2 font-bold">{{ per_unit_label }}</span>
+              <span class="type--smaller mt-0.5" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};">{{ card_variant.price | money }} total</span>
+            {% else %}
+              <span class="type--small mt-2 font-bold">{{ card_variant.price | money }}</span>
+            {% endif %}
           {% endif %}
 
           {% comment %} Savings {% endcomment %}
@@ -218,7 +282,7 @@
 
           {% comment %} Free shipping {% endcomment %}
           {% if show_free_shipping %}
-            <span class="type--smaller mt-1 font-semibold" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.65 }};">🚚 Ships Free</span>
+            <span class="type--smaller mt-1" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.55 }};">🚚 Ships Free</span>
           {% endif %}
         </button>
       {% endfor %}

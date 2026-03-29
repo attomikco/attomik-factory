@@ -143,6 +143,30 @@
             {% endif %}
           "
         >
+          {% comment %} Check if variant_cards block exists — hide that option in the default options block {% endcomment %}
+          {% liquid
+            assign variant_cards_option_name = nil
+            for block in section.blocks
+              if block.type == 'variant_cards'
+                assign variant_cards_option_name = block.settings.option_name | downcase
+                break
+              endif
+            endfor
+          %}
+          {% if variant_cards_option_name %}
+            {% for opt in product.options_with_values %}
+              {%- assign opt_down = opt.name | downcase -%}
+              {% if opt_down == variant_cards_option_name %}
+                <style>
+                  #js-options-{{ section.id }}-{{ product.id }} > div:has(> div > label[for="{{ product.id }}-option_{{ opt.position }}"]),
+                  #js-options-{{ section.id }}-{{ product.id }} > div:has(> label[for="{{ product.id }}-option_{{ opt.position }}"]) {
+                    display: none !important;
+                  }
+                </style>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
           {% comment %} Mobile view: blocks in exact editor order {% endcomment %}
           {% if section.settings.media_gallery_position == 'left'
             or section.settings.media_gallery_position == 'right'
@@ -5041,6 +5065,13 @@
           "label": "Show per-unit price",
           "info": "Requires per_unit_label in the attomik.variant_cards metafield",
           "default": true
+        },
+        {
+          "type": "text",
+          "id": "free_shipping_threshold",
+          "label": "Free shipping threshold ($)",
+          "info": "Variants priced at or above this show 'Ships Free'. Leave blank to disable.",
+          "default": "50"
         },
         {
           "type": "header",
