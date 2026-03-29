@@ -1,75 +1,37 @@
+<!-- snippets/product-badge.liquid -->
 {% comment %}
-  Configurable product eyebrow badge.
+  Product eyebrow badge using the theme's native component__badge.
+
+  Accepts:
+  - block: {object} The block object with settings.
 
   Usage:
-    {% render 'product-badge',
-      badge_text: 'Third-Party Tested',
-      badge_emoji: '✨',
-      color_scheme: 'color__bg-primary color__primary',
-      style: 'subtle',
-      text_transform: 'uppercase'
-    %}
-
-  Parameters:
-    badge_text      — badge label (falls back to "Badge" if blank)
-    badge_emoji     — optional emoji prefix
-    color_scheme    — theme color scheme class (sets --color-background and --color-foreground)
-    style           — "filled" | "outline" | "subtle" (default: subtle)
-    text_transform  — "uppercase" | "capitalize" | "none" (default: uppercase)
+    {% render 'product-badge', block: block %}
 {% endcomment %}
 
 {% liquid
-  assign badge_style = style | default: 'subtle'
-  assign badge_transform = text_transform | default: 'uppercase'
-  assign badge_label = badge_text | default: 'Badge'
+  assign badge_label = block.settings.badge_text | default: 'Badge'
+  assign badge_icon = block.settings.icon | default: ''
 %}
 
-<div class="{{ color_scheme }} product-badge product-badge--{{ badge_style }}" style="text-transform: {{ badge_transform }};">
-  {%- if badge_emoji != blank -%}
-    <span class="product-badge__emoji">{{ badge_emoji }}</span>
-  {%- endif -%}
-  <span class="product-badge__text">{{ badge_label }}</span>
+<div
+  class="
+    w-full px-4
+    {{ block.settings.color_scheme }}
+    {{ block.settings.color_border }}
+    {{ block.settings.style_border }}
+  "
+  style="
+    padding-top:{{ block.settings.spacing_top }}px;
+    padding-bottom:{{ block.settings.spacing_bottom }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  {% render 'component__badge',
+    background: block.settings.badge_background,
+    text: block.settings.badge_text_color,
+    border: block.settings.badge_border_color,
+    icon: badge_icon,
+    content: badge_label
+  %}
 </div>
-
-{% style %}
-  .product-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    width: fit-content;
-    font-family: var(--font-body-family);
-    font-size: calc(0.7 * var(--font-body-scale) * 1rem);
-    font-weight: var(--font-body-weight-bold);
-    letter-spacing: var(--font-heading-letter-spacing);
-    padding: 6px 14px;
-    border-radius: var(--inputs-radius, 4px);
-    white-space: nowrap;
-    color: var(--color-foreground);
-  }
-
-  /* Filled: solid foreground background, background text */
-  .product-badge--filled {
-    background: var(--color-foreground);
-    color: var(--color-background);
-    border: 1.5px solid transparent;
-  }
-
-  /* Outline: transparent background, foreground border */
-  .product-badge--outline {
-    background: transparent;
-    border: 1.5px solid currentColor;
-  }
-
-  /* Subtle: foreground at low opacity for bg and border */
-  .product-badge--subtle {
-    background: color-mix(in srgb, currentColor 6%, transparent);
-    border: 1.5px solid color-mix(in srgb, currentColor 20%, transparent);
-  }
-
-  @media (max-width: 768px) {
-    .product-badge {
-      font-size: calc(0.625 * var(--font-body-scale) * 1rem);
-      padding: 6px 12px;
-    }
-  }
-{% endstyle %}
