@@ -381,6 +381,29 @@ export default function NewClientPage() {
                   </pre>
                 </div>
 
+                <button
+                  type="button"
+                  onClick={() => {
+                    const gc = generatedConfig as { theme_settings?: Record<string, unknown>; sections?: Record<string, unknown>; section_order?: string[] };
+                    const settingsData = {
+                      current: {
+                        ...(gc.theme_settings || {}),
+                        sections: gc.sections || {},
+                      },
+                    };
+                    const blob = new Blob([JSON.stringify(settingsData, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'settings_data.json';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                  }}
+                  className="mb-6 w-full border border-surface-border px-6 py-3 font-mono text-sm uppercase tracking-wider text-muted transition-colors hover:border-white/30 hover:text-white"
+                >
+                  Download settings_data.json
+                </button>
+
                 <div className="mb-6 border border-surface-border">
                   <div className="border-b border-surface-border px-5 py-3">
                     <span className="font-mono text-xs uppercase tracking-wider text-muted">Shopify Connection</span>
