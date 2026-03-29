@@ -1,0 +1,53 @@
+{% comment %}
+  Configurable product eyebrow badge.
+
+  Usage:
+    {% render 'product-badge', badge_text: 'Third-Party Tested', badge_color: '#D4266A', badge_emoji: '🇲🇽' %}
+
+  Parameters:
+    badge_text  — required, badge label
+    badge_color — hex color for text/border/bg tint (falls back to var(--color-primary))
+    badge_emoji — optional emoji prefix
+{% endcomment %}
+
+{% if badge_text != blank %}
+  <div
+    class="product-badge"
+    {% if badge_color != blank %}
+      style="--pb-color: {{ badge_color }}; --pb-border: {{ badge_color }}33; --pb-bg: {{ badge_color }}0a;"
+    {% endif %}
+  >
+    {%- if badge_emoji != blank -%}
+      <span class="product-badge__emoji">{{ badge_emoji }}</span>
+    {%- endif -%}
+    <span class="product-badge__text">{{ badge_text }}</span>
+  </div>
+
+  {% style %}
+    .product-badge {
+      --pb-color: var(--color-primary);
+      --pb-border: rgba(0, 0, 0, 0.2);
+      --pb-bg: rgba(0, 0, 0, 0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body-family);
+      font-size: calc(0.7 * var(--font-body-scale) * 1rem);
+      font-weight: var(--font-body-weight-bold);
+      letter-spacing: var(--font-heading-letter-spacing);
+      text-transform: uppercase;
+      color: var(--pb-color);
+      border: 1.5px solid var(--pb-border);
+      padding: 6px 14px;
+      border-radius: var(--inputs-radius, 4px);
+      background: var(--pb-bg);
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .product-badge {
+        font-size: calc(0.625 * var(--font-body-scale) * 1rem);
+        padding: 6px 12px;
+      }
+    }
+  {% endstyle %}
+{% endif %}

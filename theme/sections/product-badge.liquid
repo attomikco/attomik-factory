@@ -1,0 +1,48 @@
+{% if section.settings.enabled %}
+  {% render 'product-badge',
+    badge_text: section.settings.badge_text,
+    badge_color: section.settings.badge_color,
+    badge_emoji: section.settings.badge_emoji
+  %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product Badge",
+  "tag": "div",
+  "class": "section-product-badge",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Premium Quality"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge color",
+      "default": "#000000",
+      "info": "Used for text, border tint, and background tint."
+    },
+    {
+      "type": "text",
+      "id": "badge_emoji",
+      "label": "Emoji prefix (optional)",
+      "info": "Displayed before the text, e.g. 🇲🇽 or ✦"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Badge",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

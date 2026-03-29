@@ -1,0 +1,112 @@
+{% comment %}
+  Configurable product checklist with optional value prop highlight.
+
+  Usage:
+    {% render 'product-checklist',
+      block_items: section.blocks,
+      accent_color: section.settings.accent_color,
+      text_color: section.settings.text_color
+    %}
+
+  Parameters:
+    block_items   — array of blocks (type "item" or "value_prop")
+    accent_color  — hex color for checkmarks, borders, highlights (falls back to var(--color-primary))
+    text_color    — hex color for item text (falls back to var(--color-foreground))
+{% endcomment %}
+
+<ul
+  class="product-checklist"
+  {% if accent_color != blank or text_color != blank %}
+    style="
+      {%- if accent_color != blank -%}--pcl-accent: {{ accent_color }}; --pcl-accent-bg: {{ accent_color }}0f; --pcl-accent-border: {{ accent_color }}26;{%- endif -%}
+      {%- if text_color != blank -%}--pcl-text: {{ text_color }};{%- endif -%}
+    "
+  {% endif %}
+>
+  {% for block in block_items %}
+    {% if block.type == 'value_prop' %}
+      <li class="product-checklist__val" {{ block.shopify_attributes }}>
+        <span class="product-checklist__tag">{{ block.settings.tag_label }}</span>
+        <span class="product-checklist__val-text">{{ block.settings.value_text }}</span>
+      </li>
+    {% elsif block.type == 'item' %}
+      <li class="product-checklist__item" {{ block.shopify_attributes }}>
+        <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+        <span>{{ block.settings.text }}</span>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+{% style %}
+  .product-checklist {
+    --pcl-accent: var(--color-primary);
+    --pcl-accent-bg: rgba(0, 0, 0, 0.06);
+    --pcl-accent-border: rgba(0, 0, 0, 0.15);
+    --pcl-text: var(--color-foreground);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-body-family);
+  }
+  .product-checklist__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: calc(0.9375 * var(--font-body-scale) * 1rem);
+    font-weight: var(--font-body-weight-bold);
+    color: var(--pcl-text);
+  }
+  .product-checklist__ck {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    background: var(--pcl-accent);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(0.625 * var(--font-body-scale) * 1rem);
+    font-weight: var(--font-body-weight-bold);
+  }
+  .product-checklist__val {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+    padding: 8px 12px;
+    background: var(--pcl-accent-bg);
+    border: 1px solid var(--pcl-accent-border);
+    border-radius: var(--inputs-radius, 6px);
+    font-family: var(--font-body-family);
+  }
+  .product-checklist__tag {
+    background: var(--pcl-accent);
+    color: #ffffff;
+    font-family: var(--font-body-family);
+    font-size: calc(0.5625 * var(--font-body-scale) * 1rem);
+    font-weight: var(--font-body-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .product-checklist__val-text {
+    font-size: calc(0.9375 * var(--font-body-scale) * 1rem);
+    font-weight: var(--font-body-weight-bold);
+    color: var(--pcl-text);
+  }
+  @media (max-width: 768px) {
+    .product-checklist__item {
+      font-size: calc(0.875 * var(--font-body-scale) * 1rem);
+    }
+    .product-checklist__val-text {
+      font-size: calc(0.875 * var(--font-body-scale) * 1rem);
+    }
+  }
+{% endstyle %}
