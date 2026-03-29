@@ -291,8 +291,8 @@
                   {% when 'badge' %}
                     {% render 'product-badge',
                       badge_text: block.settings.badge_text,
-                      badge_color: block.settings.badge_color,
-                      badge_emoji: block.settings.badge_emoji
+                      badge_emoji: block.settings.badge_emoji,
+                      color_scheme: block.settings.color_scheme
                     %}
 
                   {% when 'checklist' %}
@@ -306,10 +306,7 @@
                         endif
                       endfor
                     %}
-                    <ul
-                      class="product-checklist"
-                      style="--cl-accent: {{ block.settings.accent_color }}; --cl-accent-bg: {{ block.settings.accent_color }}0f; --cl-accent-border: {{ block.settings.accent_color }}26; --cl-text: {{ block.settings.text_color }};"
-                    >
+                    <ul class="product-checklist {{ block.settings.color_scheme }}">
                       {% for item in checklist_items %}
                         <li class="product-checklist__item">
                           <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
@@ -491,8 +488,8 @@
                       {% when 'badge' %}
                         {% render 'product-badge',
                           badge_text: block.settings.badge_text,
-                          badge_color: block.settings.badge_color,
-                          badge_emoji: block.settings.badge_emoji
+                          badge_emoji: block.settings.badge_emoji,
+                          color_scheme: block.settings.color_scheme
                         %}
 
                       {% when 'checklist' %}
@@ -506,10 +503,7 @@
                             endif
                           endfor
                         %}
-                        <ul
-                          class="product-checklist"
-                          style="--cl-accent: {{ block.settings.accent_color }}; --cl-accent-bg: {{ block.settings.accent_color }}0f; --cl-accent-border: {{ block.settings.accent_color }}26; --cl-text: {{ block.settings.text_color }};"
-                        >
+                        <ul class="product-checklist {{ block.settings.color_scheme }}">
                           {% for item in checklist_items %}
                             <li class="product-checklist__item">
                               <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
@@ -694,8 +688,8 @@
                       {% when 'badge' %}
                         {% render 'product-badge',
                           badge_text: block.settings.badge_text,
-                          badge_color: block.settings.badge_color,
-                          badge_emoji: block.settings.badge_emoji
+                          badge_emoji: block.settings.badge_emoji,
+                          color_scheme: block.settings.color_scheme
                         %}
 
                       {% when 'checklist' %}
@@ -709,10 +703,7 @@
                             endif
                           endfor
                         %}
-                        <ul
-                          class="product-checklist"
-                          style="--cl-accent: {{ block.settings.accent_color }}; --cl-accent-bg: {{ block.settings.accent_color }}0f; --cl-accent-border: {{ block.settings.accent_color }}26; --cl-text: {{ block.settings.text_color }};"
-                        >
+                        <ul class="product-checklist {{ block.settings.color_scheme }}">
                           {% for item in checklist_items %}
                             <li class="product-checklist__item">
                               <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
@@ -5099,17 +5090,10 @@
           "default": "Your Badge Text Here"
         },
         {
-          "type": "color",
-          "id": "badge_color",
-          "label": "Badge color",
-          "default": "#000000",
-          "info": "Used for text, border tint, and background tint."
-        },
-        {
           "type": "text",
           "id": "badge_emoji",
           "label": "Emoji prefix (optional)",
-          "info": "Displayed before the text, e.g. 🇲🇽 or ✦"
+          "info": "Displayed before the text, e.g. ✨ or ✦"
         },
         {
           "type": "header",
@@ -5142,12 +5126,14 @@
         {
           "type": "select",
           "id": "color_scheme",
-          "label": "t:general.settings.color_scheme.label",
+          "label": "Color scheme",
           "options": [
-            { "value": "color__bg-body color__text", "label": "t:general.settings.color_scheme.body.label" },
-            { "value": "color__bg-transparent", "label": "t:general.settings.color_scheme.transparent.label" }
+            { "value": "color__bg-primary color__primary", "label": "Primary" },
+            { "value": "color__bg-secondary color__secondary", "label": "Secondary" },
+            { "value": "color__bg-tertiary color__tertiary", "label": "Tertiary" },
+            { "value": "color__bg-body color__text", "label": "Body" }
           ],
-          "default": "color__bg-transparent"
+          "default": "color__bg-primary color__primary"
         },
         {
           "type": "header",
@@ -5156,10 +5142,10 @@
         {
           "type": "select",
           "id": "position",
-          "label": "t:general.settings.position.label",
+          "label": "Position",
           "options": [
-            { "value": "left", "label": "t:general.settings.position.options.left.label" },
-            { "value": "right", "label": "t:general.settings.position.options.right.label" }
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
           ],
           "default": "left"
         }
@@ -5171,17 +5157,16 @@
       "limit": 1,
       "settings": [
         {
-          "type": "color",
-          "id": "accent_color",
-          "label": "Accent color",
-          "default": "#000000",
-          "info": "Used for checkmark circles, value prop tag, and highlight borders."
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text color",
-          "default": "#1a1a1a"
+          "type": "select",
+          "id": "color_scheme",
+          "label": "Color scheme",
+          "options": [
+            { "value": "color__bg-primary color__primary", "label": "Primary" },
+            { "value": "color__bg-secondary color__secondary", "label": "Secondary" },
+            { "value": "color__bg-tertiary color__tertiary", "label": "Tertiary" },
+            { "value": "color__bg-body color__text", "label": "Body" }
+          ],
+          "default": "color__bg-primary color__primary"
         },
         {
           "type": "header",
@@ -5257,29 +5242,15 @@
         },
         {
           "type": "header",
-          "content": "t:general.headers.color.content"
-        },
-        {
-          "type": "select",
-          "id": "color_scheme",
-          "label": "t:general.settings.color_scheme.label",
-          "options": [
-            { "value": "color__bg-body color__text", "label": "t:general.settings.color_scheme.body.label" },
-            { "value": "color__bg-transparent", "label": "t:general.settings.color_scheme.transparent.label" }
-          ],
-          "default": "color__bg-transparent"
-        },
-        {
-          "type": "header",
           "content": "t:general.headers.layout.content"
         },
         {
           "type": "select",
           "id": "position",
-          "label": "t:general.settings.position.label",
+          "label": "Position",
           "options": [
-            { "value": "left", "label": "t:general.settings.position.options.left.label" },
-            { "value": "right", "label": "t:general.settings.position.options.right.label" }
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
           ],
           "default": "left"
         }

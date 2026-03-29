@@ -1,8 +1,8 @@
 {% if section.settings.enabled %}
   {% render 'product-badge',
     badge_text: section.settings.badge_text,
-    badge_color: section.settings.badge_color,
-    badge_emoji: section.settings.badge_emoji
+    badge_emoji: section.settings.badge_emoji,
+    color_scheme: section.settings.color_scheme
   %}
 {% endif %}
 
@@ -25,17 +25,22 @@
       "default": "Premium Quality"
     },
     {
-      "type": "color",
-      "id": "badge_color",
-      "label": "Badge color",
-      "default": "#000000",
-      "info": "Used for text, border tint, and background tint."
-    },
-    {
       "type": "text",
       "id": "badge_emoji",
       "label": "Emoji prefix (optional)",
-      "info": "Displayed before the text, e.g. 🇲🇽 or ✦"
+      "info": "Displayed before the text, e.g. ✨ or ✦"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "color__bg-primary color__primary", "label": "Primary" },
+        { "value": "color__bg-secondary color__secondary", "label": "Secondary" },
+        { "value": "color__bg-tertiary color__tertiary", "label": "Tertiary" },
+        { "value": "color__bg-body color__text", "label": "Body" }
+      ],
+      "default": "color__bg-primary color__primary"
     }
   ],
   "presets": [

@@ -2,17 +2,18 @@
   Configurable product eyebrow badge.
 
   Usage:
-    {% render 'product-badge', badge_text: 'Third-Party Tested', badge_color: '#D4266A', badge_emoji: '🇲🇽' %}
+    {% render 'product-badge', badge_text: 'Third-Party Tested', badge_emoji: '✨', color_scheme: 'color__bg-primary color__primary' %}
 
   Parameters:
-    badge_text  — required, badge label
-    badge_color — hex color for text/border/bg tint (falls back to var(--color-primary))
-    badge_emoji — optional emoji prefix
+    badge_text    — required, badge label
+    badge_emoji   — optional emoji prefix
+    badge_color   — optional hex color override (legacy support)
+    color_scheme  — theme color scheme class (preferred)
 {% endcomment %}
 
 {% if badge_text != blank %}
   <div
-    class="product-badge"
+    class="product-badge {{ color_scheme }}"
     {% if badge_color != blank %}
       style="--pb-color: {{ badge_color }}; --pb-border: {{ badge_color }}33; --pb-bg: {{ badge_color }}0a;"
     {% endif %}
@@ -25,7 +26,7 @@
 
   {% style %}
     .product-badge {
-      --pb-color: var(--color-primary);
+      --pb-color: var(--color-foreground);
       --pb-border: rgba(0, 0, 0, 0.2);
       --pb-bg: rgba(0, 0, 0, 0.04);
       display: inline-flex;
@@ -42,6 +43,12 @@
       border-radius: var(--inputs-radius, 4px);
       background: var(--pb-bg);
       white-space: nowrap;
+    }
+    .product-badge.color__bg-primary {
+      --pb-color: var(--color-primary);
+      --pb-border: var(--color-primary);
+      --pb-bg: transparent;
+      border-opacity: 0.2;
     }
     @media (max-width: 768px) {
       .product-badge {

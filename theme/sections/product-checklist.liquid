@@ -1,7 +1,6 @@
 {% render 'product-checklist',
   block_items: section.blocks,
-  accent_color: section.settings.accent_color,
-  text_color: section.settings.text_color
+  color_scheme: section.settings.color_scheme
 %}
 
 {% schema %}
@@ -11,17 +10,16 @@
   "class": "section-product-checklist",
   "settings": [
     {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color",
-      "default": "#000000",
-      "info": "Used for checkmark circles, value prop tag, and highlight borders."
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#1a1a1a"
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "color__bg-primary color__primary", "label": "Primary" },
+        { "value": "color__bg-secondary color__secondary", "label": "Secondary" },
+        { "value": "color__bg-tertiary color__tertiary", "label": "Tertiary" },
+        { "value": "color__bg-body color__text", "label": "Body" }
+      ],
+      "default": "color__bg-primary color__primary"
     }
   ],
   "blocks": [

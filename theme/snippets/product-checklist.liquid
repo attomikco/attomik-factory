@@ -4,18 +4,18 @@
   Usage:
     {% render 'product-checklist',
       block_items: section.blocks,
-      accent_color: section.settings.accent_color,
-      text_color: section.settings.text_color
+      color_scheme: 'color__bg-primary color__primary'
     %}
 
   Parameters:
-    block_items   — array of blocks (type "item" or "value_prop")
-    accent_color  — hex color for checkmarks, borders, highlights (falls back to var(--color-primary))
-    text_color    — hex color for item text (falls back to var(--color-foreground))
+    block_items    — array of blocks (type "item" or "value_prop")
+    color_scheme   — theme color scheme class for accent elements
+    accent_color   — optional hex color override (legacy support)
+    text_color     — optional hex text color override (legacy support)
 {% endcomment %}
 
 <ul
-  class="product-checklist"
+  class="product-checklist {{ color_scheme }}"
   {% if accent_color != blank or text_color != blank %}
     style="
       {%- if accent_color != blank -%}--pcl-accent: {{ accent_color }}; --pcl-accent-bg: {{ accent_color }}0f; --pcl-accent-border: {{ accent_color }}26;{%- endif -%}
@@ -40,10 +40,10 @@
 
 {% style %}
   .product-checklist {
-    --pcl-accent: var(--color-primary);
+    --pcl-accent: var(--color-primary, #000000);
     --pcl-accent-bg: rgba(0, 0, 0, 0.06);
     --pcl-accent-border: rgba(0, 0, 0, 0.15);
-    --pcl-text: var(--color-foreground);
+    --pcl-text: var(--color-foreground, #1a1a1a);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -66,7 +66,7 @@
     min-width: 20px;
     border-radius: 50%;
     background: var(--pcl-accent);
-    color: #ffffff;
+    color: var(--color-primary-foreground, #ffffff);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -86,7 +86,7 @@
   }
   .product-checklist__tag {
     background: var(--pcl-accent);
-    color: #ffffff;
+    color: var(--color-primary-foreground, #ffffff);
     font-family: var(--font-body-family);
     font-size: calc(0.5625 * var(--font-body-scale) * 1rem);
     font-weight: var(--font-body-weight-bold);
