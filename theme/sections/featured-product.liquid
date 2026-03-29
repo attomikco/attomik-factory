@@ -316,7 +316,14 @@
               {% endif %}
 
               {% for block in section.blocks %}
-                {% if block.settings.position == "left" %}
+                {% assign block_position = block.settings.position | default: '' %}
+                {% assign render_left_column_block = false %}
+                {% if block_position == 'left' %}
+                  {% assign render_left_column_block = true %}
+                {% elsif block.type == '@app' and settings.app_block_column == 'left_column' %}
+                  {% assign render_left_column_block = true %}
+                {% endif %}
+                {% if render_left_column_block %}
                   {% unless block.type == 'stickyadd' %}
                     <div
                       :class="
@@ -481,7 +488,14 @@
               {% endif %}
 
               {% for block in section.blocks %}
-                {% if block.settings.position == 'right' %}
+                {% assign block_position = block.settings.position | default: '' %}
+                {% assign render_right_column_block = false %}
+                {% if block_position == 'right' %}
+                  {% assign render_right_column_block = true %}
+                {% elsif block.type == '@app' and settings.app_block_column == 'right_column' %}
+                  {% assign render_right_column_block = true %}
+                {% endif %}
+                {% if render_right_column_block %}
                   {% unless block.type == 'stickyadd' %}
                     <div
                       :class="

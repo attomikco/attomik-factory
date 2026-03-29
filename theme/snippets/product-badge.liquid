@@ -1,6 +1,6 @@
 <!-- snippets/product-badge.liquid -->
 {% comment %}
-  Product eyebrow badge using the theme's native component__badge.
+  Product eyebrow badge.
 
   Accepts:
   - block: {object} The block object with settings.
@@ -15,23 +15,24 @@
 %}
 
 <div
-  class="
-    w-full px-4
-    {{ block.settings.color_scheme }}
-    {{ block.settings.color_border }}
-    {{ block.settings.style_border }}
-  "
+  class="w-full px-4"
   style="
     padding-top:{{ block.settings.spacing_top }}px;
     padding-bottom:{{ block.settings.spacing_bottom }}px;
   "
   {{ block.shopify_attributes }}
 >
-  {% render 'component__badge',
-    background: block.settings.badge_background,
-    text: block.settings.badge_text_color,
-    border: block.settings.badge_border_color,
-    icon: badge_icon,
-    content: badge_label
-  %}
+  <div
+    class="border__element--radius border--width inline-flex items-center gap-2 px-2 py-1"
+    style="
+      background-color: {{ block.settings.badge_bg_color }};
+      color: {{ block.settings.badge_font_color }};
+      border-color: {{ block.settings.badge_bg_color }};
+    "
+  >
+    {% unless badge_icon == blank %}
+      {% render 'component__icon', icon: badge_icon, size: '14' %}
+    {% endunless %}
+    <span class="type--smaller flex items-center">{{ badge_label }}</span>
+  </div>
 </div>
