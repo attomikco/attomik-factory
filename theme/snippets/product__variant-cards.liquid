@@ -247,8 +247,10 @@
                 <span
                   class="ac-vc-price"
                   style="
+                    font-family: var(--font-body-family, sans-serif);
                     font-size: {{ block.settings.price_font_size }}px;
                     color: {{ block.settings.price_color }};
+                    opacity: {{ block.settings.price_opacity | divided_by: 100.0 }};
                   "
                 >{{ card_variant.price | money }}</span>
               {% endif %}
@@ -257,8 +259,10 @@
                 <span
                   class="ac-vc-perunit"
                   style="
+                    font-family: var(--font-body-family, sans-serif);
                     font-size: {{ block.settings.price_font_size }}px;
                     color: {{ block.settings.price_color }};
+                    opacity: {{ block.settings.price_opacity | divided_by: 100.0 }};
                   "
                 >{{ per_unit_label }}</span>
               {% endif %}
@@ -277,8 +281,10 @@
                 <span
                   class="ac-vc-shipping"
                   style="
+                    font-family: var(--font-body-family, sans-serif);
                     font-size: {{ block.settings.shipping_font_size }}px;
                     color: {{ block.settings.shipping_color }};
+                    opacity: {{ block.settings.shipping_opacity | divided_by: 100.0 }};
                   "
                 >🚚 Ships Free</span>
               {% endif %}

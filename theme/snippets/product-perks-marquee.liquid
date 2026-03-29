@@ -12,23 +12,23 @@
 {%- liquid
   assign label = block.settings.label | default: 'Subscriber Perks'
   assign speed = block.settings.speed | default: 20
-  assign items = '' | split: '|||'
+  assign items_str = ''
   if block.settings.perk_1 != blank
-    assign items = items | append: block.settings.perk_1 | append: '|||'
+    assign items_str = items_str | append: block.settings.perk_1 | append: '|||'
   endif
   if block.settings.perk_2 != blank
-    assign items = items | append: block.settings.perk_2 | append: '|||'
+    assign items_str = items_str | append: block.settings.perk_2 | append: '|||'
   endif
   if block.settings.perk_3 != blank
-    assign items = items | append: block.settings.perk_3 | append: '|||'
+    assign items_str = items_str | append: block.settings.perk_3 | append: '|||'
   endif
   if block.settings.perk_4 != blank
-    assign items = items | append: block.settings.perk_4 | append: '|||'
+    assign items_str = items_str | append: block.settings.perk_4 | append: '|||'
   endif
   if block.settings.perk_5 != blank
-    assign items = items | append: block.settings.perk_5 | append: '|||'
+    assign items_str = items_str | append: block.settings.perk_5 | append: '|||'
   endif
-  assign items_array = items | split: '|||'
+  assign items_array = items_str | split: '|||'
 -%}
 
 {% if items_array.size > 0 %}

@@ -5204,6 +5204,16 @@
           "default": "#666666"
         },
         {
+          "type": "range",
+          "id": "price_opacity",
+          "label": "Price opacity",
+          "min": 30,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 100
+        },
+        {
           "type": "header",
           "content": "Savings"
         },
@@ -5242,6 +5252,16 @@
           "id": "shipping_color",
           "label": "Shipping color",
           "default": "#666666"
+        },
+        {
+          "type": "range",
+          "id": "shipping_opacity",
+          "label": "Shipping opacity",
+          "min": 30,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 100
         },
         {
           "type": "header",
@@ -5481,13 +5501,145 @@
         },
         {
           "type": "text",
-          "id": "icon",
-          "label": "Icon name (optional)",
-          "info": "Use a theme icon name, e.g. check, star, heart"
+          "id": "badge_emoji",
+          "label": "Emoji prefix (optional)",
+          "info": "Displayed before the text, e.g. ✨ or ✦"
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.color.content"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg_color",
+          "label": "Badge background color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "badge_font_color",
+          "label": "Badge text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Typography"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Font size",
+          "min": 8,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font weight",
+          "options": [
+            { "value": "400", "label": "Regular" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semi-bold" },
+            { "value": "700", "label": "Bold" },
+            { "value": "800", "label": "Extra bold" }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "select",
+          "id": "text_transform",
+          "label": "Text style",
+          "options": [
+            { "value": "uppercase", "label": "Uppercase" },
+            { "value": "capitalize", "label": "Capitalize" },
+            { "value": "none", "label": "Normal" }
+          ],
+          "default": "uppercase"
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "label": "Letter spacing",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Background"
+        },
+        {
+          "type": "range",
+          "id": "bg_opacity",
+          "label": "Background opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 8
+        },
+        {
+          "type": "header",
+          "content": "Border"
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "label": "Border width",
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "unit": "px",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "border_opacity",
+          "label": "Border opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "label": "Border radius",
+          "min": 0,
+          "max": 20,
+          "step": 2,
+          "unit": "px",
+          "default": 4
         },
         {
           "type": "header",
           "content": "t:general.headers.spacing.content"
+        },
+        {
+          "type": "range",
+          "id": "padding_x",
+          "label": "Horizontal padding",
+          "min": 6,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "padding_y",
+          "label": "Vertical padding",
+          "min": 2,
+          "max": 16,
+          "step": 2,
+          "unit": "px",
+          "default": 6
         },
         {
           "type": "range",
@@ -5508,22 +5660,6 @@
           "unit": "px",
           "label": "t:general.settings.bottom_spacing.label",
           "default": 10
-        },
-        {
-          "type": "header",
-          "content": "t:general.headers.color.content"
-        },
-        {
-          "type": "color",
-          "id": "badge_bg_color",
-          "label": "Badge background color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "badge_font_color",
-          "label": "Badge text color",
-          "default": "#ffffff"
         }
       ]
     },
