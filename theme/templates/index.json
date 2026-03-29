@@ -6,7 +6,7 @@
         "8adfc70a-eb67-46a2-adf4-6f8358aaac51": {
           "type": "heading",
           "settings": {
-            "content": "Authentic Japanese Sake Experience",
+            "content": "Everything Happens Over Coffee",
             "font_size_mobile": 34,
             "font_size_desktop": 50
           }
@@ -14,13 +14,13 @@
         "template--15898491977911__de4cc432-8e1c-49bc-8935-1f94a9d9d797-content-1": {
           "type": "content",
           "settings": {
-            "content": "<p>Discover the refined elegance of traditional Japanese sake crafted with centuries-old techniques. Each sip delivers the pure essence of premium rice and pristine water.</p>"
+            "content": "<p>Simply great coffee that transforms ordinary moments into extraordinary ones. Ethically sourced, perfectly crafted, ready when you are.</p>"
           }
         },
         "buttons_tAAWWt": {
           "type": "buttons",
           "settings": {
-            "button_label": "Shop WESAKE",
+            "button_label": "Shop Now",
             "button_url": "",
             "color_button": "btn btn--secondary",
             "secondary_button_label": "",
@@ -65,7 +65,7 @@
         "heading_LPqGmG": {
           "type": "heading",
           "settings": {
-            "content": "Premium Grade"
+            "content": "Fair Trade Certified"
           }
         },
         "image_3YqJhd": {
@@ -78,7 +78,7 @@
         "heading_xVjwzg": {
           "type": "heading",
           "settings": {
-            "content": "Traditional Methods"
+            "content": "Slow Cold Brewed"
           }
         },
         "image_VET3xm": {
@@ -91,7 +91,7 @@
         "heading_B8MzC8": {
           "type": "heading",
           "settings": {
-            "content": "Junmai Ginjo"
+            "content": "Simply Great Coffee"
           }
         },
         "image_MFaLCd": {
@@ -138,8 +138,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-14",
-            "heading": "Premium Rice Selection",
-            "content": "<p>Sourced from Japan's finest rice growing regions, each grain is polished to perfection using traditional methods passed down through generations.</p>",
+            "heading": "Ethically Sourced Beans",
+            "content": "<p>Fair Trade certified beans sourced directly from farmers who share our commitment to quality and sustainability.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-body color__text",
             "color_border": "",
@@ -154,8 +154,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-14",
-            "heading": "Master Brewer Excellence",
-            "content": "<p>Our toji master brewers bring decades of expertise to every batch, ensuring consistent quality and authentic flavor profiles in each bottle.</p>",
+            "heading": "Slow Cold Brewing",
+            "content": "<p>Twenty-four hours of patient cold brewing creates a smooth, balanced flavor without the bitterness of traditional hot brewing.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-body color__text",
             "color_border": "",
@@ -170,8 +170,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-14",
-            "heading": "Pure Water Foundation",
-            "content": "<p>Crafted with pristine mountain spring water from protected Japanese watersheds, providing the clean foundation essential for premium sake.</p>",
+            "heading": "Simply Great Results",
+            "content": "<p>No artificial flavors, no unnecessary additives. Just two premium ingredients working together to deliver exceptional coffee.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-body color__text",
             "color_border": "",
@@ -188,8 +188,8 @@
         "e5b5ea4b-be8f-4673-a833-0ca548dff15c"
       ],
       "settings": {
-        "heading": "Crafted With Purpose",
-        "content": "<p>WESAKE represents the pinnacle of Japanese brewing artistry, where tradition meets modern sophistication. Every bottle embodies our commitment to authentic sake excellence.</p>",
+        "heading": "Crafted for Coffee Lovers",
+        "content": "<p>We believe exceptional coffee shouldn't be complicated. Every batch is ethically sourced and thoughtfully crafted for those who know great coffee when they taste it.</p>",
         "button_label": "Our Story",
         "button_url": "",
         "spacing_top": 100,
@@ -213,7 +213,7 @@
     "product_grid_RjMqHX": {
       "type": "product-grid",
       "settings": {
-        "collection": "sake",
+        "collection": "all-products",
         "products_count": 3,
         "heading": "",
         "content": "",
@@ -243,8 +243,8 @@
         "content_tbK8Y4": {
           "type": "content",
           "settings": {
-            "heading": "Elegantly Dry Profile",
-            "content": "<p>Experience the sophisticated balance of our Junmai Ginjo with its clean, crisp finish that complements both traditional and contemporary cuisine.</p>",
+            "heading": "Bold Without the Bite",
+            "content": "<p>Cold brewing extracts the rich, complex flavors while leaving harsh acids behind for a smooth finish every time.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -269,8 +269,8 @@
         "content_UDd3CH": {
           "type": "content",
           "settings": {
-            "heading": "Floral Aromatics",
-            "content": "<p>Soft cherry blossom notes emerge with delicate white peach and pear undertones, creating an inviting bouquet that enhances every sip.</p>",
+            "heading": "Ready When You Are",
+            "content": "<p>Pour over ice for instant refreshment or enjoy at room temperature. Great coffee that adapts to your schedule.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -328,7 +328,7 @@
         "testimonial_qW4RjP": {
           "type": "testimonial",
           "settings": {
-            "content": "The most authentic sake experience outside of Japan itself.",
+            "content": "The smoothest cold brew I've ever tasted",
             "name": "",
             "title": "",
             "logo": null,
@@ -339,7 +339,7 @@
         "testimonial_Net3Mq": {
           "type": "testimonial",
           "settings": {
-            "content": "WESAKE delivers restaurant-quality sake with remarkable consistency.",
+            "content": "Finally, coffee that doesn't compromise on ethics or flavor",
             "name": "",
             "title": "",
             "logo": null,
@@ -350,7 +350,7 @@
         "testimonial_nAKf8z": {
           "type": "testimonial",
           "settings": {
-            "content": "A sophisticated introduction to premium Japanese sake culture.",
+            "content": "This is how cold brew should taste",
             "name": "",
             "title": "",
             "logo": null,
@@ -361,7 +361,7 @@
         "testimonial_7XQnba": {
           "type": "testimonial",
           "settings": {
-            "content": "Exceptional clarity and depth of flavor in every bottle.",
+            "content": "Jolene Coffee has ruined me for all other cold brews",
             "name": "",
             "title": "",
             "logo": null,
@@ -372,7 +372,7 @@
         "testimonial_eCjygz": {
           "type": "testimonial",
           "settings": {
-            "content": "The perfect balance of tradition and accessibility.",
+            "content": "Simple ingredients, exceptional results",
             "name": "",
             "title": "",
             "logo": null,
@@ -412,8 +412,8 @@
         "content_Xiprzb": {
           "type": "content",
           "settings": {
-            "heading": "Light Body Expression",
-            "content": "<p>Our carefully controlled fermentation creates a light yet expressive body that showcases the pure essence of premium sake rice.</p>",
+            "heading": "Oat Milk Perfection",
+            "content": "<p>Creamy oat milk blends seamlessly with our cold brew for a dairy-free latte that rivals any coffee shop creation.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -438,8 +438,8 @@
         "content_MazXh6": {
           "type": "content",
           "settings": {
-            "heading": "Smooth Finish",
-            "content": "<p>Each sip concludes with a remarkably smooth finish that leaves a clean palate, inviting you to savor the next taste.</p>",
+            "heading": "Mix Pack Convenience",
+            "content": "<p>Switch between bold black cold brew and creamy oat milk latte depending on your mood. Variety without compromise.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -496,9 +496,9 @@
         "content_KRrNeM": {
           "type": "content",
           "settings": {
-            "heading": "Traditional Brewing Methods",
-            "content": "<p>Time-honored techniques refined over centuries ensure authentic flavor development and consistent quality in every batch of WESAKE.</p>",
-            "button_label": "Learn More",
+            "heading": "Cold Brew Excellence",
+            "content": "<p>Twenty-four hours of cold extraction creates a concentrate that delivers bold flavor without the acidity that ruins lesser coffees.</p>",
+            "button_label": "Try Black",
             "url": "",
             "show_image_as_background": false,
             "enable_autoplay": true,
@@ -573,9 +573,9 @@
         "content_tdT9JF": {
           "type": "content",
           "settings": {
-            "heading": "Temperature Versatility",
-            "content": "<p>Enjoy WESAKE chilled, at room temperature, or gently warmed to discover how temperature transforms the flavor experience.</p>",
-            "button_label": "Serving Guide",
+            "heading": "Oat Milk Innovation",
+            "content": "<p>Premium oat milk creates the perfect creamy texture while maintaining our commitment to clean, simple ingredients.</p>",
+            "button_label": "Try White",
             "url": "",
             "show_image_as_background": false,
             "enable_autoplay": true,
@@ -633,8 +633,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Premium Sake Rice",
-            "content": "<p>Specially cultivated rice varieties with optimal starch content, polished to remove impurities and concentrate the essential flavors.</p>",
+            "heading": "Cold Brew Coffee",
+            "content": "<p>Fair Trade certified beans slow-brewed for twenty-four hours to extract maximum flavor with minimal acidity.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -649,8 +649,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Mountain Spring Water",
-            "content": "<p>Pristine water from protected Japanese mountain sources provides the clean mineral profile essential for authentic sake character.</p>",
+            "heading": "Premium Oat Milk",
+            "content": "<p>Creamy, dairy-free oat milk that blends perfectly with our cold brew for a smooth, satisfying latte experience.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -665,8 +665,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Natural Koji Culture",
-            "content": "<p>Traditional koji fermentation starter cultivated using ancient methods to develop the complex flavors unique to premium sake.</p>",
+            "heading": "No Artificial Flavors",
+            "content": "<p>We let the quality of our ingredients speak for themselves. No shortcuts, no artificial enhancement needed.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -681,8 +681,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Pure Yeast Strains",
-            "content": "<p>Carefully selected yeast varieties that enhance the delicate floral notes while maintaining the clean, refined finish.</p>",
+            "heading": "Non-GMO Promise",
+            "content": "<p>Every ingredient is carefully selected and verified non-GMO because great coffee starts with great sourcing.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -701,7 +701,7 @@
       ],
       "name": "t:sections.icon_grid.name",
       "settings": {
-        "heading": "Pure Ingredients",
+        "heading": "Simple Ingredients, Complex Flavor",
         "content": "",
         "button_label": "",
         "button_url": "",
@@ -729,8 +729,8 @@
         "content_HcMQWf": {
           "type": "content",
           "settings": {
-            "label": "Rice Polish Ratio",
-            "tooltip": "Higher polish ratio indicates premium quality",
+            "label": "Fair Trade Certified",
+            "tooltip": "Direct trade relationships that ensure farmers receive fair compensation",
             "icon": "",
             "column_1_content": "",
             "column_1_icon": "check",
@@ -738,7 +738,7 @@
             "column_2_icon": "slash",
             "column_3_content": "",
             "column_3_icon": "",
-            "column_4_content": "Lower quality",
+            "column_4_content": "Sometimes",
             "column_4_icon": "slash",
             "color_scheme": "color__bg-transparent"
           }
@@ -746,8 +746,8 @@
         "content_qzG3qg": {
           "type": "content",
           "settings": {
-            "label": "Water Source",
-            "tooltip": "Mountain spring water provides superior mineral profile",
+            "label": "24-Hour Cold Brewing",
+            "tooltip": "Extended brewing time for smooth, less acidic flavor profile",
             "icon": "",
             "column_1_content": "",
             "column_1_icon": "check",
@@ -763,7 +763,7 @@
         "content_R6jMnh": {
           "type": "content",
           "settings": {
-            "label": "Brewing Method",
+            "label": "Two Simple Ingredients",
             "tooltip": "",
             "icon": "",
             "column_1_content": "",
@@ -772,7 +772,7 @@
             "column_2_icon": "slash",
             "column_3_content": "",
             "column_3_icon": "",
-            "column_4_content": "Mass production",
+            "column_4_content": "Added sugars & preservatives",
             "column_4_icon": "slash",
             "color_scheme": "color__bg-transparent"
           }
@@ -785,7 +785,7 @@
       ],
       "disabled": true,
       "settings": {
-        "table_headings": "WESAKE, Everyone Else",
+        "table_headings": "Jolene Coffee, Everyone Else",
         "heading": "",
         "content": "",
         "button_label": "",
@@ -813,8 +813,8 @@
         "content_7bQBtz": {
           "type": "content",
           "settings": {
-            "heading": "Never Run Empty",
-            "content": "<p>Join the WESAKE subscription and enjoy:<br>✓ 15% savings on every order<br>✓ Free shipping nationwide<br>✓ Flexible delivery schedule<br>✓ Skip or pause anytime</p>",
+            "heading": "Never Run Out of Great Coffee",
+            "content": "<p>Join thousands who've made Jolene Coffee their daily ritual:</p><p>✓ 15% off every order<br>✓ Free shipping always<br>✓ Skip or cancel anytime<br>✓ Fresh coffee delivered monthly</p>",
             "button_label": "Subscribe Now",
             "url": "",
             "image": null,
@@ -870,8 +870,8 @@
         "content_6EQNYk": {
           "type": "content",
           "settings": {
-            "heading": "Never Run Empty",
-            "content": "<p>Join the WESAKE subscription and enjoy:<br>✓ 15% savings on every order<br>✓ Free shipping nationwide<br>✓ Flexible delivery schedule<br>✓ Skip or pause anytime</p>",
+            "heading": "Never Run Out of Great Coffee",
+            "content": "<p>Join thousands who've made Jolene Coffee their daily ritual:</p><p>✓ 15% off every order<br>✓ Free shipping always<br>✓ Skip or cancel anytime<br>✓ Fresh coffee delivered monthly</p>",
             "button_label": "Subscribe Now",
             "url": "",
             "show_image_as_background": false,
@@ -953,8 +953,8 @@
         "content_KjJnfW": {
           "type": "content",
           "settings": {
-            "heading": "What makes WESAKE different from other sake brands?",
-            "content": "<p>WESAKE is crafted using traditional Japanese brewing methods with premium ingredients sourced directly from Japan. Our master brewers follow centuries-old techniques to create authentic Junmai Ginjo sake with exceptional purity and flavor complexity that mass-produced alternatives cannot match.</p>",
+            "heading": "What makes Jolene Coffee different from other cold brews?",
+            "content": "<p>We slow-brew our Fair Trade certified beans for twenty-four hours using only two premium ingredients. This process creates a smooth, balanced flavor without the harsh acidity found in rushed brewing methods. No artificial flavors, no unnecessary additives.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": true
@@ -963,8 +963,8 @@
         "content_Kqy98Q": {
           "type": "content",
           "settings": {
-            "heading": "How should I serve WESAKE for the best experience?",
-            "content": "<p>WESAKE is most enjoyable when served chilled between 45-50°F in traditional ochoko cups or wine glasses. You can also experiment with room temperature or gently warmed sake to discover different flavor profiles. Always store bottles upright in a cool, dark place.</p>",
+            "heading": "How should I serve Jolene Coffee?",
+            "content": "<p>Our Black Cold Brew is perfect over ice or at room temperature. The Oat Milk Latte is ready to drink straight from the bottle. Both can be enjoyed hot if you prefer - just warm gently without boiling to preserve the flavor.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -973,8 +973,8 @@
         "content_3jkmy8": {
           "type": "content",
           "settings": {
-            "heading": "What foods pair well with WESAKE Sakura Junmai Ginjo?",
-            "content": "<p>Our elegant, dry profile complements sushi, sashimi, grilled fish, and light poultry dishes beautifully. The floral notes also pair well with soft cheeses, fruit-based desserts, and even spicy cuisine where the clean finish provides a cooling contrast.</p>",
+            "heading": "Is Jolene Coffee organic and non-GMO?",
+            "content": "<p>Yes, all our ingredients are verified non-GMO and our coffee beans are Fair Trade certified. We source directly from farmers who share our commitment to sustainable, ethical growing practices.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -983,8 +983,8 @@
         "content_ngLB3x": {
           "type": "content",
           "settings": {
-            "heading": "Is WESAKE gluten-free and what is the alcohol content?",
-            "content": "<p>Yes, WESAKE is naturally gluten-free as it is made exclusively from rice, water, koji, and yeast with no wheat or barley ingredients. Our Junmai Ginjo has an alcohol content of 15.5% ABV, which is standard for premium sake.</p>",
+            "heading": "How long does Jolene Coffee stay fresh?",
+            "content": "<p>Unopened bottles stay fresh for up to 6 months when stored in a cool, dry place. Once opened, refrigerate and consume within 7 days for optimal flavor. The date on each bottle shows the peak freshness window.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -993,8 +993,8 @@
         "content_9WdCEU": {
           "type": "content",
           "settings": {
-            "heading": "How long does WESAKE stay fresh after opening?",
-            "content": "<p>Once opened, WESAKE maintains optimal flavor for 7-10 days when stored refrigerated with the cap tightly sealed. Unlike wine, sake does not improve with age, so we recommend enjoying it within this timeframe for the best taste experience.</p>",
+            "heading": "Do you offer subscriptions?",
+            "content": "<p>Absolutely. Subscribe and save 15% on every order with free shipping. You can modify, skip, or cancel your subscription anytime through your account. Most subscribers choose monthly delivery to never run out of great coffee.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -1003,8 +1003,8 @@
         "content_GDRarW": {
           "type": "content",
           "settings": {
-            "heading": "Do you ship nationwide and what are the delivery options?",
-            "content": "<p>We ship WESAKE to all states where alcohol delivery is legal, typically within 3-5 business days via our temperature-controlled shipping partners. Subscription members receive free shipping, while individual orders qualify for free shipping on orders over $75.</p>",
+            "heading": "Where do you ship and how much does it cost?",
+            "content": "<p>We ship nationwide with free shipping on orders over $35. Subscription orders always ship free. Orders typically arrive within 3-5 business days, and we'll send tracking information once your order ships.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -1021,7 +1021,7 @@
       ],
       "name": "t:sections.accordions.name",
       "settings": {
-        "heading": "Frequently Asked Questions",
+        "heading": "Questions About Jolene Coffee",
         "content": "",
         "button_label": "",
         "button_url": "",
@@ -1048,8 +1048,8 @@
         "content_bH8tpB": {
           "type": "content",
           "settings": {
-            "heading": "Honoring Tradition",
-            "content": "<p>WESAKE was born from a deep respect for Japanese brewing heritage and a desire to share authentic sake with discerning drinkers worldwide. Our founder spent years studying with master brewers in Japan to bring this time-honored craft to your table.</p>",
+            "heading": "Born from Coffee Obsession",
+            "content": "<p>Started by coffee lovers who got tired of compromise. We spent two years perfecting our cold brewing process because great coffee shouldn't be complicated, just exceptional.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -1131,9 +1131,9 @@
         "content_WfQxEw": {
           "type": "content",
           "settings": {
-            "heading": "Honoring Tradition",
-            "content": "<p>WESAKE was born from a deep respect for Japanese brewing heritage and a desire to share authentic sake with discerning drinkers worldwide. Our founder spent years studying with master brewers in Japan to bring this time-honored craft to your table.</p>",
-            "button_label": "Our Journey",
+            "heading": "Born from Coffee Obsession",
+            "content": "<p>Started by coffee lovers who got tired of choosing between convenience and quality. We spent two years perfecting our cold brewing process because we believe great coffee shouldn't be complicated, just exceptional.</p>",
+            "button_label": "Our Story",
             "url": "",
             "show_image_as_background": false,
             "enable_autoplay": true,
@@ -1188,24 +1188,24 @@
         "testimonial_GdxFz9": {
           "type": "testimonial",
           "settings": {
-            "content": "<p>Finally found a sake that rivals what I had in Tokyo. The Sakura Junmai Ginjo has become my go-to for dinner parties and quiet evenings alike.</p>",
-            "title": "<p>Michael R., Executive Chef</p>",
+            "content": "<p>I've been drinking cold brew for years but nothing compares to Jolene. The Black is my morning ritual now - smooth, bold, never bitter. Finally found my perfect coffee.</p>",
+            "title": "<p>Marcus T., Strategy Director</p>",
             "avatar": null
           }
         },
         "testimonial_4m7Eq8": {
           "type": "testimonial",
           "settings": {
-            "content": "<p>As someone new to sake, WESAKE was the perfect introduction. The floral notes are subtle and the finish is incredibly smooth. I'm officially converted.</p>",
-            "title": "<p>Jennifer L., Wine Enthusiast</p>",
+            "content": "<p>The Oat Milk Latte tastes like it came from my favorite coffee shop. I keep a case in my fridge and it's become my afternoon pick-me-up. Creamy perfection.</p>",
+            "title": "<p>Sarah K., Yoga Instructor</p>",
             "avatar": null
           }
         },
         "testimonial_wUztfP": {
           "type": "testimonial",
           "settings": {
-            "content": "<p>The quality is exceptional and the subscription service makes it easy to always have a bottle on hand. My friends are always impressed when I serve this.</p>",
-            "title": "<p>David K., Entrepreneur</p>",
+            "content": "<p>Mix Pack is genius. Black when I need that bold hit, White when I want something smooth and creamy. Both are incredible. This coffee has ruined me for everything else.</p>",
+            "title": "<p>David R., Entrepreneur</p>",
             "avatar": null
           }
         }
@@ -1217,7 +1217,7 @@
       ],
       "name": "t:sections.testimonial_grid.name",
       "settings": {
-        "heading": "What Our Customers Say",
+        "heading": "What Coffee Lovers Say",
         "content": "",
         "button_label": "",
         "button_url": "",
@@ -1245,7 +1245,7 @@
         "heading_wGWGqw": {
           "type": "heading",
           "settings": {
-            "content": "Discover Authentic Japanese Excellence",
+            "content": "Ready for Simply Great Coffee",
             "font_size_mobile": 34,
             "font_size_desktop": 50
           }
@@ -1253,7 +1253,7 @@
         "content_PiQ9yB": {
           "type": "content",
           "settings": {
-            "content": "<p>Experience the refined sophistication of traditional sake crafted with modern precision. Every bottle of WESAKE delivers the authentic taste of Japan to your table.</p>"
+            "content": "<p>Join thousands who've discovered what happens when coffee is done right. Fair Trade. Slow-brewed. Simply exceptional.</p>"
           }
         },
         "buttons_7z4C9R": {
@@ -1304,8 +1304,8 @@
         "content_iXr89U": {
           "type": "content",
           "settings": {
-            "heading": "Premium Sake Selection",
-            "content": "<p>Explore our carefully curated collection of authentic Japanese sake, each bottle representing the pinnacle of traditional brewing excellence.</p>",
+            "heading": "Find Your Flavor",
+            "content": "<p>Whether you prefer bold black cold brew or creamy oat milk lattes, we've crafted the perfect coffee experience for every preference.</p>",
             "button_label": "Shop All",
             "url": "",
             "show_image_as_background": false,
@@ -1330,9 +1330,9 @@
       ],
       "name": "t:sections.product_slider.name",
       "settings": {
-        "collection": "sake",
+        "collection": "all-products",
         "products_count": 7,
-        "heading": "The WESAKE Collection",
+        "heading": "Choose Your Perfect Coffee",
         "content": "",
         "button_label": "",
         "button_url": "",
