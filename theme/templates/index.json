@@ -1,106 +1,1385 @@
 {
   "sections": {
-    "banner_hero": {
+    "de4cc432-8e1c-49bc-8935-1f94a9d9d797": {
       "type": "banner",
+      "blocks": {
+        "8adfc70a-eb67-46a2-adf4-6f8358aaac51": {
+          "type": "heading",
+          "settings": {
+            "content": "Authentic Japanese Sake Experience",
+            "font_size_mobile": 34,
+            "font_size_desktop": 50
+          }
+        },
+        "template--15898491977911__de4cc432-8e1c-49bc-8935-1f94a9d9d797-content-1": {
+          "type": "content",
+          "settings": {
+            "content": "<p>Discover the refined elegance of traditional Japanese sake crafted with centuries-old techniques. Each sip delivers the pure essence of premium rice and pristine water.</p>"
+          }
+        },
+        "buttons_tAAWWt": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Shop WESAKE",
+            "button_url": "",
+            "color_button": "btn btn--secondary",
+            "secondary_button_label": "",
+            "secondary_button_url": "",
+            "secondary_color_button": "btn btn--plain",
+            "floating_button_label": "",
+            "floating_button_url": "",
+            "floating_color_button": "btn"
+          }
+        }
+      },
+      "block_order": [
+        "8adfc70a-eb67-46a2-adf4-6f8358aaac51",
+        "template--15898491977911__de4cc432-8e1c-49bc-8935-1f94a9d9d797-content-1",
+        "buttons_tAAWWt"
+      ],
       "settings": {
+        "url": "",
+        "image_background_desktop": null,
+        "image_background_mobile": null,
+        "show_image": true,
+        "show_video_background_mobile": false,
+        "layout_y_spacing": "image",
+        "color_scheme": "color__bg-body color__text",
+        "color_text": "color__light",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": true,
+        "enable_background_overlay": false,
+        "style_border": "",
+        "layout_y_alignment": "items-center",
+        "layout_x_alignment": "justify-center text-center",
+        "enable_header_overlap": false,
+        "enable_margin": true,
+        "enable_border_margin": false,
+        "enable_max_width": false,
+        "visibility": ""
+      }
+    },
+    "marquee_BqJJTc": {
+      "type": "marquee",
+      "blocks": {
+        "heading_LPqGmG": {
+          "type": "heading",
+          "settings": {
+            "content": "Premium Grade"
+          }
+        },
+        "image_3YqJhd": {
+          "type": "image",
+          "settings": {
+            "image": null,
+            "image_height": 44
+          }
+        },
+        "heading_xVjwzg": {
+          "type": "heading",
+          "settings": {
+            "content": "Traditional Methods"
+          }
+        },
+        "image_VET3xm": {
+          "type": "image",
+          "settings": {
+            "image": null,
+            "image_height": 44
+          }
+        },
+        "heading_B8MzC8": {
+          "type": "heading",
+          "settings": {
+            "content": "Junmai Ginjo"
+          }
+        },
+        "image_MFaLCd": {
+          "type": "image",
+          "settings": {
+            "image": null,
+            "image_height": 44
+          }
+        }
+      },
+      "block_order": [
+        "heading_LPqGmG",
+        "image_3YqJhd",
+        "heading_xVjwzg",
+        "image_VET3xm",
+        "heading_B8MzC8",
+        "image_MFaLCd"
+      ],
+      "custom_css": [
+        "li h3 {font-size: 2.2em;}"
+      ],
+      "name": "t:sections.marquee.name",
+      "settings": {
+        "spacing_top": 0,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-secondary",
+        "color_background": "#ffffff",
+        "color_text": "color__light",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": false,
+        "enable_fade": false,
+        "style_border": "border--b-width",
+        "enable_margin": false,
+        "use_reverse_animation": false,
+        "animation_speed": 150,
+        "visibility": ""
+      }
+    },
+    "d508d7f2-ab32-4de7-b0f5-07c0fc755b51": {
+      "type": "icon-grid",
+      "blocks": {
+        "template--16628482343091__d508d7f2-ab32-4de7-b0f5-07c0fc755b51-icon-1": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-14",
+            "heading": "Premium Rice Selection",
+            "content": "<p>Sourced from Japan's finest rice growing regions, each grain is polished to perfection using traditional methods passed down through generations.</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "alignment": "flex-row",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "54152c4b-4fca-46e6-802e-ef313f236c4e": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-14",
+            "heading": "Master Brewer Excellence",
+            "content": "<p>Our toji master brewers bring decades of expertise to every batch, ensuring consistent quality and authentic flavor profiles in each bottle.</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "alignment": "flex-row",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "e5b5ea4b-be8f-4673-a833-0ca548dff15c": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-14",
+            "heading": "Pure Water Foundation",
+            "content": "<p>Crafted with pristine mountain spring water from protected Japanese watersheds, providing the clean foundation essential for premium sake.</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "alignment": "flex-row",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "template--16628482343091__d508d7f2-ab32-4de7-b0f5-07c0fc755b51-icon-1",
+        "54152c4b-4fca-46e6-802e-ef313f236c4e",
+        "e5b5ea4b-be8f-4673-a833-0ca548dff15c"
+      ],
+      "settings": {
+        "heading": "Crafted With Purpose",
+        "content": "<p>WESAKE represents the pinnacle of Japanese brewing artistry, where tradition meets modern sophistication. Every bottle embodies our commitment to authentic sake excellence.</p>",
+        "button_label": "Our Story",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#e9e3d8",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "text-center justify-center flex-col items-center",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "product_grid_RjMqHX": {
+      "type": "product-grid",
+      "settings": {
+        "collection": "sake",
+        "products_count": 3,
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 0,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#e9e3d8",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "text-center justify-center flex-col items-center",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "content_grid_kXU8Qz": {
+      "type": "content-grid",
+      "blocks": {
+        "content_tbK8Y4": {
+          "type": "content",
+          "settings": {
+            "heading": "Elegantly Dry Profile",
+            "content": "<p>Experience the sophisticated balance of our Junmai Ginjo with its clean, crisp finish that complements both traditional and contemporary cuisine.</p>",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_UDd3CH": {
+          "type": "content",
+          "settings": {
+            "heading": "Floral Aromatics",
+            "content": "<p>Soft cherry blossom notes emerge with delicate white peach and pear undertones, creating an inviting bouquet that enhances every sip.</p>",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_tbK8Y4",
+        "content_UDd3CH"
+      ],
+      "disabled": true,
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 50,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 2,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "testimonial_slider_hTJXnt": {
+      "type": "testimonial-slider",
+      "blocks": {
+        "testimonial_qW4RjP": {
+          "type": "testimonial",
+          "settings": {
+            "content": "The most authentic sake experience outside of Japan itself.",
+            "name": "",
+            "title": "",
+            "logo": null,
+            "logo_height": 80,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_Net3Mq": {
+          "type": "testimonial",
+          "settings": {
+            "content": "WESAKE delivers restaurant-quality sake with remarkable consistency.",
+            "name": "",
+            "title": "",
+            "logo": null,
+            "logo_height": 80,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_nAKf8z": {
+          "type": "testimonial",
+          "settings": {
+            "content": "A sophisticated introduction to premium Japanese sake culture.",
+            "name": "",
+            "title": "",
+            "logo": null,
+            "logo_height": 80,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_7XQnba": {
+          "type": "testimonial",
+          "settings": {
+            "content": "Exceptional clarity and depth of flavor in every bottle.",
+            "name": "",
+            "title": "",
+            "logo": null,
+            "logo_height": 80,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        },
+        "testimonial_eCjygz": {
+          "type": "testimonial",
+          "settings": {
+            "content": "The perfect balance of tradition and accessibility.",
+            "name": "",
+            "title": "",
+            "logo": null,
+            "logo_height": 60,
+            "layout_x_alignment": "text-center justify-center items-center"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_qW4RjP",
+        "testimonial_Net3Mq",
+        "testimonial_nAKf8z",
+        "testimonial_7XQnba",
+        "testimonial_eCjygz"
+      ],
+      "name": "t:sections.testimonial_slider.name",
+      "settings": {
+        "announcement_delay": 0,
+        "spacing_top": 100,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_y_alignment": "items-center",
+        "layout_x_alignment": "justify-center",
+        "layout_column_width": 100,
+        "enable_margin": true,
+        "visibility": ""
+      }
+    },
+    "content_grid_3GJfUT": {
+      "type": "content-grid",
+      "blocks": {
+        "content_Xiprzb": {
+          "type": "content",
+          "settings": {
+            "heading": "Light Body Expression",
+            "content": "<p>Our carefully controlled fermentation creates a light yet expressive body that showcases the pure essence of premium sake rice.</p>",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--tertiary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_MazXh6": {
+          "type": "content",
+          "settings": {
+            "heading": "Smooth Finish",
+            "content": "<p>Each sip concludes with a remarkably smooth finish that leaves a clean palate, inviting you to savor the next taste.</p>",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-secondary color__secondary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_Xiprzb",
+        "content_MazXh6"
+      ],
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 50,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 4,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "md:hidden"
+      }
+    },
+    "content_grid_zkMhzF": {
+      "type": "content-grid",
+      "blocks": {
+        "content_KRrNeM": {
+          "type": "content",
+          "settings": {
+            "heading": "Traditional Brewing Methods",
+            "content": "<p>Time-honored techniques refined over centuries ensure authentic flavor development and consistent quality in every batch of WESAKE.</p>",
+            "button_label": "Learn More",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 400,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--tertiary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_nbkPaz": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": true,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 400,
+            "enable_padding": false,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--secondary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_dtrDnp": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": true,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 400,
+            "enable_padding": false,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--secondary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_tdT9JF": {
+          "type": "content",
+          "settings": {
+            "heading": "Temperature Versatility",
+            "content": "<p>Enjoy WESAKE chilled, at room temperature, or gently warmed to discover how temperature transforms the flavor experience.</p>",
+            "button_label": "Serving Guide",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 400,
+            "enable_padding": true,
+            "color_scheme": "color__bg-secondary color__secondary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--tertiary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_KRrNeM",
+        "content_nbkPaz",
+        "content_dtrDnp",
+        "content_tdT9JF"
+      ],
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 150,
+        "color_scheme": "color__bg-body",
+        "color_background": "#e9e3d8",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "hidden md:block"
+      }
+    },
+    "icon_grid_pAWkqU": {
+      "type": "icon-grid",
+      "blocks": {
+        "icon_x4TXnw": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-32",
+            "heading": "Premium Sake Rice",
+            "content": "<p>Specially cultivated rice varieties with optimal starch content, polished to remove impurities and concentrate the essential flavors.</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_c4fYX6": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-32",
+            "heading": "Mountain Spring Water",
+            "content": "<p>Pristine water from protected Japanese mountain sources provides the clean mineral profile essential for authentic sake character.</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_YwWaLw": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-32",
+            "heading": "Natural Koji Culture",
+            "content": "<p>Traditional koji fermentation starter cultivated using ancient methods to develop the complex flavors unique to premium sake.</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "alignment": "flex-col",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "icon_a8tFjJ": {
+          "type": "icon",
+          "settings": {
+            "icon": null,
+            "icon_height": "h-32",
+            "heading": "Pure Yeast Strains",
+            "content": "<p>Carefully selected yeast varieties that enhance the delicate floral notes while maintaining the clean, refined finish.</p>",
+            "enable_padding": true,
+            "color_scheme": "color__bg-transparent",
+            "color_border": "",
+            "alignment": "flex-row",
+            "x_alignment": "text-center justify-center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "icon_x4TXnw",
+        "icon_c4fYX6",
+        "icon_YwWaLw",
+        "icon_a8tFjJ"
+      ],
+      "name": "t:sections.icon_grid.name",
+      "settings": {
+        "heading": "Pure Ingredients",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-primary",
+        "color_background": "#ffffff",
+        "color_text": "color__light",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 2,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "text-center justify-center flex-col items-center",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "table_68DHki": {
+      "type": "table",
+      "blocks": {
+        "content_HcMQWf": {
+          "type": "content",
+          "settings": {
+            "label": "Rice Polish Ratio",
+            "tooltip": "Higher polish ratio indicates premium quality",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "check",
+            "column_2_content": "",
+            "column_2_icon": "slash",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "Lower quality",
+            "column_4_icon": "slash",
+            "color_scheme": "color__bg-transparent"
+          }
+        },
+        "content_qzG3qg": {
+          "type": "content",
+          "settings": {
+            "label": "Water Source",
+            "tooltip": "Mountain spring water provides superior mineral profile",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "check",
+            "column_2_content": "",
+            "column_2_icon": "slash",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "",
+            "column_4_icon": "slash",
+            "color_scheme": "color__bg-transparent"
+          }
+        },
+        "content_R6jMnh": {
+          "type": "content",
+          "settings": {
+            "label": "Brewing Method",
+            "tooltip": "",
+            "icon": "",
+            "column_1_content": "",
+            "column_1_icon": "check",
+            "column_2_content": "",
+            "column_2_icon": "slash",
+            "column_3_content": "",
+            "column_3_icon": "",
+            "column_4_content": "Mass production",
+            "column_4_icon": "slash",
+            "color_scheme": "color__bg-transparent"
+          }
+        }
+      },
+      "block_order": [
+        "content_HcMQWf",
+        "content_qzG3qg",
+        "content_R6jMnh"
+      ],
+      "disabled": true,
+      "settings": {
+        "table_headings": "WESAKE, Everyone Else",
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "style_column_border": "1",
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "content_grid_wGT9Va": {
+      "type": "content-grid",
+      "blocks": {
+        "content_7bQBtz": {
+          "type": "content",
+          "settings": {
+            "heading": "Never Run Empty",
+            "content": "<p>Join the WESAKE subscription and enjoy:<br>✓ 15% savings on every order<br>✓ Free shipping nationwide<br>✓ Flexible delivery schedule<br>✓ Skip or pause anytime</p>",
+            "button_label": "Subscribe Now",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--tertiary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_7bQBtz"
+      ],
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 4,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "md:hidden"
+      }
+    },
+    "content_grid_DwtYHh": {
+      "type": "content-grid",
+      "blocks": {
+        "content_6EQNYk": {
+          "type": "content",
+          "settings": {
+            "heading": "Never Run Empty",
+            "content": "<p>Join the WESAKE subscription and enjoy:<br>✓ 15% savings on every order<br>✓ Free shipping nationwide<br>✓ Flexible delivery schedule<br>✓ Skip or pause anytime</p>",
+            "button_label": "Subscribe Now",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--tertiary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        },
+        "content_qyc4mg": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": true,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 400,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        }
+      },
+      "block_order": [
+        "content_6EQNYk",
+        "content_qyc4mg"
+      ],
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 150,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 4,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "hidden md:block"
+      }
+    },
+    "accordions_LrLbTK": {
+      "type": "accordions",
+      "blocks": {
+        "content_KjJnfW": {
+          "type": "content",
+          "settings": {
+            "heading": "What makes WESAKE different from other sake brands?",
+            "content": "<p>WESAKE is crafted using traditional Japanese brewing methods with premium ingredients sourced directly from Japan. Our master brewers follow centuries-old techniques to create authentic Junmai Ginjo sake with exceptional purity and flavor complexity that mass-produced alternatives cannot match.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": true
+          }
+        },
+        "content_Kqy98Q": {
+          "type": "content",
+          "settings": {
+            "heading": "How should I serve WESAKE for the best experience?",
+            "content": "<p>WESAKE is most enjoyable when served chilled between 45-50°F in traditional ochoko cups or wine glasses. You can also experiment with room temperature or gently warmed sake to discover different flavor profiles. Always store bottles upright in a cool, dark place.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_3jkmy8": {
+          "type": "content",
+          "settings": {
+            "heading": "What foods pair well with WESAKE Sakura Junmai Ginjo?",
+            "content": "<p>Our elegant, dry profile complements sushi, sashimi, grilled fish, and light poultry dishes beautifully. The floral notes also pair well with soft cheeses, fruit-based desserts, and even spicy cuisine where the clean finish provides a cooling contrast.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_ngLB3x": {
+          "type": "content",
+          "settings": {
+            "heading": "Is WESAKE gluten-free and what is the alcohol content?",
+            "content": "<p>Yes, WESAKE is naturally gluten-free as it is made exclusively from rice, water, koji, and yeast with no wheat or barley ingredients. Our Junmai Ginjo has an alcohol content of 15.5% ABV, which is standard for premium sake.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_9WdCEU": {
+          "type": "content",
+          "settings": {
+            "heading": "How long does WESAKE stay fresh after opening?",
+            "content": "<p>Once opened, WESAKE maintains optimal flavor for 7-10 days when stored refrigerated with the cap tightly sealed. Unlike wine, sake does not improve with age, so we recommend enjoying it within this timeframe for the best taste experience.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        },
+        "content_GDRarW": {
+          "type": "content",
+          "settings": {
+            "heading": "Do you ship nationwide and what are the delivery options?",
+            "content": "<p>We ship WESAKE to all states where alcohol delivery is legal, typically within 3-5 business days via our temperature-controlled shipping partners. Subscription members receive free shipping, while individual orders qualify for free shipping on orders over $75.</p>",
+            "icon": "",
+            "color_scheme": "btn",
+            "enable_open": false
+          }
+        }
+      },
+      "block_order": [
+        "content_KjJnfW",
+        "content_Kqy98Q",
+        "content_3jkmy8",
+        "content_ngLB3x",
+        "content_9WdCEU",
+        "content_GDRarW"
+      ],
+      "name": "t:sections.accordions.name",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "heading_font": "type__body type--base",
+        "style_border": "",
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": true,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "content_grid_fAJFeY": {
+      "type": "content-grid",
+      "blocks": {
+        "content_bH8tpB": {
+          "type": "content",
+          "settings": {
+            "heading": "Honoring Tradition",
+            "content": "<p>WESAKE was born from a deep respect for Japanese brewing heritage and a desire to share authentic sake with discerning drinkers worldwide. Our founder spent years studying with master brewers in Japan to bring this time-honored craft to your table.</p>",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-primary color__primary",
+            "color_border": "",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "center",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_bH8tpB"
+      ],
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 0,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 4,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "md:hidden"
+      }
+    },
+    "content_grid_tMrLNn": {
+      "type": "content-grid",
+      "blocks": {
+        "content_hmFDRM": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "url": "",
+            "image": null,
+            "show_image_as_background": true,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 500,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--outline",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-end",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-1"
+          }
+        },
+        "content_WfQxEw": {
+          "type": "content",
+          "settings": {
+            "heading": "Honoring Tradition",
+            "content": "<p>WESAKE was born from a deep respect for Japanese brewing heritage and a desire to share authentic sake with discerning drinkers worldwide. Our founder spent years studying with master brewers in Japan to bring this time-honored craft to your table.</p>",
+            "button_label": "Our Journey",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-secondary color__secondary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--tertiary",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md:col-span-2"
+          }
+        }
+      },
+      "block_order": [
+        "content_hmFDRM",
+        "content_WfQxEw"
+      ],
+      "name": "t:sections.content_grid.name",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "hidden md:block"
+      }
+    },
+    "testimonial_grid_ppc7zf": {
+      "type": "testimonial-grid",
+      "blocks": {
+        "testimonial_GdxFz9": {
+          "type": "testimonial",
+          "settings": {
+            "content": "<p>Finally found a sake that rivals what I had in Tokyo. The Sakura Junmai Ginjo has become my go-to for dinner parties and quiet evenings alike.</p>",
+            "title": "<p>Michael R., Executive Chef</p>",
+            "avatar": null
+          }
+        },
+        "testimonial_4m7Eq8": {
+          "type": "testimonial",
+          "settings": {
+            "content": "<p>As someone new to sake, WESAKE was the perfect introduction. The floral notes are subtle and the finish is incredibly smooth. I'm officially converted.</p>",
+            "title": "<p>Jennifer L., Wine Enthusiast</p>",
+            "avatar": null
+          }
+        },
+        "testimonial_wUztfP": {
+          "type": "testimonial",
+          "settings": {
+            "content": "<p>The quality is exceptional and the subscription service makes it easy to always have a bottle on hand. My friends are always impressed when I serve this.</p>",
+            "title": "<p>David K., Entrepreneur</p>",
+            "avatar": null
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_GdxFz9",
+        "testimonial_4m7Eq8",
+        "testimonial_wUztfP"
+      ],
+      "name": "t:sections.testimonial_grid.name",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 0,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": true,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
+    },
+    "banner_j6wcjX": {
+      "type": "banner",
+      "blocks": {
+        "heading_wGWGqw": {
+          "type": "heading",
+          "settings": {
+            "content": "Discover Authentic Japanese Excellence",
+            "font_size_mobile": 34,
+            "font_size_desktop": 50
+          }
+        },
+        "content_PiQ9yB": {
+          "type": "content",
+          "settings": {
+            "content": "<p>Experience the refined sophistication of traditional sake crafted with modern precision. Every bottle of WESAKE delivers the authentic taste of Japan to your table.</p>"
+          }
+        },
+        "buttons_7z4C9R": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_url": "",
+            "color_button": "btn",
+            "secondary_button_label": "",
+            "secondary_button_url": "",
+            "secondary_color_button": "btn btn--neutral",
+            "floating_button_label": "",
+            "floating_button_url": "",
+            "floating_color_button": "btn"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wGWGqw",
+        "content_PiQ9yB",
+        "buttons_7z4C9R"
+      ],
+      "name": "t:sections.banner.name",
+      "settings": {
+        "url": "",
+        "image_background_desktop": null,
+        "show_image": true,
+        "show_video_background_mobile": true,
         "layout_y_spacing": "banner--h-xl",
         "color_scheme": "color__bg-overlay-1 color__text",
         "color_text": "color__light",
+        "color_border": "color__border-divider-1",
         "enable_gradient": true,
-        "layout_y_alignment": "items-end",
+        "enable_background_overlay": false,
+        "style_border": "border--b-width",
+        "layout_y_alignment": "items-center",
         "layout_x_alignment": "justify-center text-center",
+        "enable_header_overlap": false,
         "enable_margin": true,
-        "enable_max_width": true
-      },
+        "enable_border_margin": false,
+        "enable_max_width": true,
+        "visibility": ""
+      }
+    },
+    "product_slider_AQDing": {
+      "type": "product-slider",
       "blocks": {
-        "heading_1": { "type": "heading", "settings": { "content": "Everything happens over coffee", "font_size_mobile": 34, "font_size_desktop": 50 } },
-        "content_1": { "type": "content", "settings": { "content": "<p>Premium coffee crafted with pure water and exceptional beans. Where conversations, connections, and life's best moments unfold.</p>" } },
-        "buttons_1": { "type": "buttons", "settings": { "button_label": "Shop Premium Coffee", "button_url": "", "color_button": "btn", "secondary_button_label": "Our Story", "secondary_button_url": "", "secondary_color_button": "btn btn--plain" } }
+        "content_iXr89U": {
+          "type": "content",
+          "settings": {
+            "heading": "Premium Sake Selection",
+            "content": "<p>Explore our carefully curated collection of authentic Japanese sake, each bottle representing the pinnacle of traditional brewing excellence.</p>",
+            "button_label": "Shop All",
+            "url": "",
+            "show_image_as_background": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_minimum_height": 250,
+            "enable_padding": true,
+            "color_scheme": "color__bg-secondary color__secondary",
+            "color_border": "outline--width color__outline-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn--small btn--plain",
+            "enable_gradient": false,
+            "text_position": "below",
+            "layout_y_alignment": "justify-center",
+            "layout_x_alignment": "left"
+          }
+        }
       },
-      "block_order": ["heading_1", "content_1", "buttons_1"]
-    },
-    "marquee_ticker": {
-      "type": "marquee",
-      "settings": { "spacing_top": 0, "spacing_bottom": 0, "color_scheme": "color__bg-primary", "color_text": "color__light", "enable_fade": false, "enable_margin": false, "animation_speed": 150 },
-      "blocks": {
-        "item_1": { "type": "heading", "settings": { "content": "Pure Water Brewing" } },
-        "divider_1": { "type": "heading", "settings": { "content": "✦" } },
-        "item_2": { "type": "heading", "settings": { "content": "Single-Origin Beans" } },
-        "divider_2": { "type": "heading", "settings": { "content": "✦" } },
-        "item_3": { "type": "heading", "settings": { "content": "Small-Batch Roasted" } },
-        "divider_3": { "type": "heading", "settings": { "content": "✦" } },
-        "item_4": { "type": "heading", "settings": { "content": "Premium Craft Coffee" } },
-        "divider_4": { "type": "heading", "settings": { "content": "✦" } }
-      },
-      "block_order": ["item_1", "divider_1", "item_2", "divider_2", "item_3", "divider_3", "item_4", "divider_4"]
-    },
-    "text_intro": {
-      "type": "text",
-      "settings": { "heading": "The Art of Perfect Coffee", "content": "<p>At Jolene Coffee, we believe that exceptional coffee starts with two fundamental elements: pristine water and meticulously sourced beans. Our commitment to quality drives us to seek out the world's finest single-origin coffee, roasted in small batches to preserve the unique character of each harvest.</p>", "spacing_top": 100, "spacing_bottom": 0, "color_scheme": "color__bg-body", "style_text_alignment": "text-center", "layout_x_alignment": "justify-center", "layout_column_width": 80, "enable_margin": true }
-    },
-    "icon_grid_pillars": {
-      "type": "icon-grid",
-      "settings": { "heading": "", "spacing_top": 60, "spacing_bottom": 60, "color_scheme": "color__bg-body", "layout_row_desktop": 3, "layout_row_mobile": 1, "enable_margin": true },
-      "blocks": {
-        "pillar_1": { "type": "icon", "settings": { "heading": "Pure Water Foundation", "content": "<p>We use specially filtered water that enhances the natural flavors of our premium beans, creating a clean, crisp taste profile.</p>", "enable_padding": true, "color_scheme": "color__bg-body color__text", "x_alignment": "text-center justify-center", "layout_col_span": "col-span-1 md:col-span-1" } },
-        "pillar_2": { "type": "icon", "settings": { "heading": "Single-Origin Excellence", "content": "<p>Every bean is sourced directly from premier growing regions, ensuring traceability, sustainability, and the purest expression of terroir.</p>", "enable_padding": true, "color_scheme": "color__bg-body color__text", "x_alignment": "text-center justify-center", "layout_col_span": "col-span-1 md:col-span-1" } },
-        "pillar_3": { "type": "icon", "settings": { "heading": "Artisan Roasting", "content": "<p>Our master roasters carefully develop each batch to unlock complex flavor notes while maintaining the integrity of the original bean.</p>", "enable_padding": true, "color_scheme": "color__bg-body color__text", "x_alignment": "text-center justify-center", "layout_col_span": "col-span-1 md:col-span-1" } }
-      },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3"]
-    },
-    "product_grid_featured": {
-      "type": "product-grid",
-      "settings": { "products_count": 4, "heading": "Signature Collection", "content": "<p>Discover our carefully curated selection of premium single-origin coffees.</p>", "button_label": "Shop All Coffee", "spacing_top": 100, "spacing_bottom": 100, "color_scheme": "color__bg-body", "layout_row_desktop": 4, "layout_row_mobile": 1, "layout_x_alignment": "text-center justify-center flex-col items-center", "enable_margin": true }
-    },
-    "image_text_story": {
-      "type": "image-text",
-      "settings": { "spacing_top": 100, "spacing_bottom": 100, "color_scheme": "color__bg-body", "layout_column_width": 50, "enable_margin": true, "enable_swapped_columns": false },
-      "blocks": {
-        "story_content": { "type": "content", "settings": { "heading": "Where Every Great Conversation Begins", "content": "<p>Jolene Coffee was born from a simple observation: life's most meaningful moments happen over a cup of coffee. Whether sealing a deal, catching up with an old friend, or finding clarity in solitude — coffee is the catalyst.</p><p>Founded by enthusiasts who refused to compromise on quality, we set out to create not just exceptional coffee, but an experience that elevates every interaction.</p>", "button_label": "Our Process", "url": "", "enable_padding": true, "color_scheme": "color__bg-body color__text", "color_button": "btn--small btn--outline", "text_position": "below", "layout_y_alignment": "justify-center", "layout_x_alignment": "left" } }
-      },
-      "block_order": ["story_content"]
-    },
-    "table_comparison": {
-      "type": "table",
-      "settings": { "table_headings": "Jolene Coffee, Everyone Else", "heading": "Why Discerning Coffee Lovers Choose Jolene", "content": "<p>Experience the difference that pure water and premium sourcing make.</p>", "spacing_top": 50, "spacing_bottom": 100, "color_scheme": "color__bg-body", "style_column_border": "1", "layout_x_alignment": "text-center justify-center flex-col items-center", "enable_margin": true },
-      "blocks": {
-        "row_1": { "type": "content", "settings": { "label": "Water Quality", "column_1_content": "Specially filtered pure water", "column_2_content": "Standard tap water", "color_scheme": "color__bg-transparent" } },
-        "row_2": { "type": "content", "settings": { "label": "Bean Sourcing", "column_1_content": "Direct single-origin partnerships", "column_2_content": "Bulk commodity blends", "color_scheme": "color__bg-transparent" } },
-        "row_3": { "type": "content", "settings": { "label": "Roasting Method", "column_1_content": "Small-batch artisan roasting", "column_2_content": "Industrial mass production", "color_scheme": "color__bg-transparent" } },
-        "row_4": { "type": "content", "settings": { "label": "Flavor Profile", "column_1_content": "Complex, clean, distinctive", "column_2_content": "Generic, bitter, flat", "color_scheme": "color__bg-transparent" } }
-      },
-      "block_order": ["row_1", "row_2", "row_3", "row_4"]
-    },
-    "testimonial_slider_reviews": {
-      "type": "testimonial-slider",
-      "settings": { "announcement_delay": 4, "spacing_top": 100, "spacing_bottom": 0, "color_scheme": "color__bg-body", "layout_x_alignment": "justify-center", "layout_column_width": 80, "enable_margin": true },
-      "blocks": {
-        "review_1": { "type": "testimonial", "settings": { "content": "Finally found a coffee that doesn't leave me reaching for sugar. The water quality difference is real — you can taste the purity in every sip.", "name": "<p>Marcus T., Strategy Director</p>", "layout_x_alignment": "text-center justify-center items-center" } },
-        "review_2": { "type": "testimonial", "settings": { "content": "Been drinking La Colombe for years, but Jolene's single-origin Ethiopian completely changed my morning routine. This is what premium coffee should taste like.", "name": "<p>David R., Entrepreneur</p>", "layout_x_alignment": "text-center justify-center items-center" } },
-        "review_3": { "type": "testimonial", "settings": { "content": "My business meetings at home just got an upgrade. Clients actually ask about the coffee now — it's become a conversation starter.", "name": "<p>James K., Consultant</p>", "layout_x_alignment": "text-center justify-center items-center" } }
-      },
-      "block_order": ["review_1", "review_2", "review_3"]
-    },
-    "newsletter_capture": {
-      "type": "newsletter",
-      "settings": { "spacing_top": 100, "spacing_bottom": 100, "color_scheme": "color__bg-primary", "color_text": "color__light", "color_button": "btn btn--neutral", "layout_y_alignment": "items-center", "layout_x_alignment": "justify-center", "enable_margin": false },
-      "blocks": {
-        "newsletter_1": { "type": "newsletter", "settings": { "heading": "Join the Jolene Coffee Community", "content": "<p>Get exclusive access to limited-edition single-origin releases, brewing tips, and member-only discounts.</p>", "button_label": "Subscribe", "disclaimer": "<p>No spam. Unsubscribe anytime.</p>", "success": "<p>Welcome to the community!</p>", "layout_x_alignment": "text-center justify-center items-center" } }
-      },
-      "block_order": ["newsletter_1"]
-    },
-    "accordions_faq": {
-      "type": "accordions",
-      "settings": { "heading": "Frequently Asked Questions", "spacing_top": 100, "spacing_bottom": 100, "color_scheme": "color__bg-body", "enable_margin": true, "enable_split": true, "enable_split_heading": true },
-      "blocks": {
-        "faq_1": { "type": "content", "settings": { "heading": "What makes Jolene different from other premium brands?", "content": "<p>Our unique advantage lies in our pure water brewing foundation combined with direct single-origin sourcing. Water makes up 98% of your cup — we've perfected both elements.</p>" } },
-        "faq_2": { "type": "content", "settings": { "heading": "How do you source your beans?", "content": "<p>We work directly with farmers in Ethiopia, Colombia, and Guatemala. Direct-trade ensures fair compensation and access to the highest quality beans with full traceability.</p>" } },
-        "faq_3": { "type": "content", "settings": { "heading": "What's your roasting process?", "content": "<p>Small-batch artisan roasting, to order within 48 hours of shipping. Each roast is carefully monitored to highlight the bean's natural characteristics.</p>" } },
-        "faq_4": { "type": "content", "settings": { "heading": "How should I brew Jolene for best results?", "content": "<p>Use filtered water at 195-205°F, ratio of 1:15 to 1:17. Grind just before brewing. Whether pour-over, French press, or espresso — quality water unlocks full flavor potential.</p>" } },
-        "faq_5": { "type": "content", "settings": { "heading": "Do you offer subscriptions?", "content": "<p>Yes — monthly, bi-weekly, or weekly. Subscribers get early access to limited-edition releases and exclusive member pricing.</p>" } }
-      },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"]
+      "block_order": [
+        "content_iXr89U"
+      ],
+      "name": "t:sections.product_slider.name",
+      "settings": {
+        "collection": "sake",
+        "products_count": 7,
+        "heading": "The WESAKE Collection",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 100,
+        "spacing_bottom": 50,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "card_width_mobile": 10,
+        "card_width_desktop": 4,
+        "layout_x_alignment": "text-center justify-center flex-col items-center",
+        "layout_arrow_alignment": "justify-center",
+        "layout_arrow_placement": "top",
+        "enable_margin": true,
+        "enable_scroll_margin": false,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": "",
+        "auto_scroll_delay": 0,
+        "enable_arrows": true,
+        "enable_indicators": false,
+        "enable_scrollbar": false
+      }
     }
   },
-  "order": ["banner_hero", "marquee_ticker", "text_intro", "icon_grid_pillars", "product_grid_featured", "image_text_story", "table_comparison", "testimonial_slider_reviews", "newsletter_capture", "accordions_faq"]
+  "order": [
+    "de4cc432-8e1c-49bc-8935-1f94a9d9d797",
+    "marquee_BqJJTc",
+    "d508d7f2-ab32-4de7-b0f5-07c0fc755b51",
+    "product_grid_RjMqHX",
+    "content_grid_kXU8Qz",
+    "testimonial_slider_hTJXnt",
+    "content_grid_3GJfUT",
+    "content_grid_zkMhzF",
+    "icon_grid_pAWkqU",
+    "table_68DHki",
+    "content_grid_wGT9Va",
+    "content_grid_DwtYHh",
+    "accordions_LrLbTK",
+    "content_grid_fAJFeY",
+    "content_grid_tMrLNn",
+    "testimonial_grid_ppc7zf",
+    "banner_j6wcjX",
+    "product_slider_AQDing"
+  ]
 }
