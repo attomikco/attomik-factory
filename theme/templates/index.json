@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "de4cc432-8e1c-49bc-8935-1f94a9d9d797": {
@@ -39,8 +48,6 @@
       ],
       "settings": {
         "url": "",
-        "image_background_desktop": null,
-        "image_background_mobile": null,
         "show_image": true,
         "show_video_background_mobile": false,
         "layout_y_spacing": "image",
@@ -71,7 +78,6 @@
         "image_3YqJhd": {
           "type": "image",
           "settings": {
-            "image": null,
             "image_height": 44
           }
         },
@@ -84,7 +90,6 @@
         "image_VET3xm": {
           "type": "image",
           "settings": {
-            "image": null,
             "image_height": 44
           }
         },
@@ -97,7 +102,6 @@
         "image_MFaLCd": {
           "type": "image",
           "settings": {
-            "image": null,
             "image_height": 44
           }
         }
@@ -136,7 +140,6 @@
         "template--16628482343091__d508d7f2-ab32-4de7-b0f5-07c0fc755b51-icon-1": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-14",
             "heading": "Ethically Sourced Beans",
             "content": "<p>Fair Trade certified beans sourced directly from farmers who share our commitment to quality and sustainability.</p>",
@@ -152,7 +155,6 @@
         "54152c4b-4fca-46e6-802e-ef313f236c4e": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-14",
             "heading": "Slow Cold Brewing",
             "content": "<p>Twenty-four hours of patient cold brewing creates a smooth, balanced flavor without the bitterness of traditional hot brewing.</p>",
@@ -168,7 +170,6 @@
         "e5b5ea4b-be8f-4673-a833-0ca548dff15c": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-14",
             "heading": "Simply Great Results",
             "content": "<p>No artificial flavors, no unnecessary additives. Just two premium ingredients working together to deliver exceptional coffee.</p>",
@@ -247,7 +248,6 @@
             "content": "<p>Cold brewing extracts the rich, complex flavors while leaving harsh acids behind for a smooth finish every time.</p>",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -273,7 +273,6 @@
             "content": "<p>Pour over ice for instant refreshment or enjoy at room temperature. Great coffee that adapts to your schedule.</p>",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -331,7 +330,6 @@
             "content": "The smoothest cold brew I've ever tasted",
             "name": "",
             "title": "",
-            "logo": null,
             "logo_height": 80,
             "layout_x_alignment": "text-center justify-center items-center"
           }
@@ -342,7 +340,6 @@
             "content": "Finally, coffee that doesn't compromise on ethics or flavor",
             "name": "",
             "title": "",
-            "logo": null,
             "logo_height": 80,
             "layout_x_alignment": "text-center justify-center items-center"
           }
@@ -353,7 +350,6 @@
             "content": "This is how cold brew should taste",
             "name": "",
             "title": "",
-            "logo": null,
             "logo_height": 80,
             "layout_x_alignment": "text-center justify-center items-center"
           }
@@ -364,7 +360,6 @@
             "content": "Jolene Coffee has ruined me for all other cold brews",
             "name": "",
             "title": "",
-            "logo": null,
             "logo_height": 80,
             "layout_x_alignment": "text-center justify-center items-center"
           }
@@ -375,7 +370,6 @@
             "content": "Simple ingredients, exceptional results",
             "name": "",
             "title": "",
-            "logo": null,
             "logo_height": 60,
             "layout_x_alignment": "text-center justify-center items-center"
           }
@@ -416,7 +410,6 @@
             "content": "<p>Creamy oat milk blends seamlessly with our cold brew for a dairy-free latte that rivals any coffee shop creation.</p>",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -442,7 +435,6 @@
             "content": "<p>Switch between bold black cold brew and creamy oat milk latte depending on your mood. Variety without compromise.</p>",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -525,7 +517,6 @@
             "content": "",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": true,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -551,7 +542,6 @@
             "content": "",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": true,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -631,7 +621,6 @@
         "icon_x4TXnw": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-32",
             "heading": "Cold Brew Coffee",
             "content": "<p>Fair Trade certified beans slow-brewed for twenty-four hours to extract maximum flavor with minimal acidity.</p>",
@@ -647,7 +636,6 @@
         "icon_c4fYX6": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-32",
             "heading": "Premium Oat Milk",
             "content": "<p>Creamy, dairy-free oat milk that blends perfectly with our cold brew for a smooth, satisfying latte experience.</p>",
@@ -663,7 +651,6 @@
         "icon_YwWaLw": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-32",
             "heading": "No Artificial Flavors",
             "content": "<p>We let the quality of our ingredients speak for themselves. No shortcuts, no artificial enhancement needed.</p>",
@@ -679,7 +666,6 @@
         "icon_a8tFjJ": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-32",
             "heading": "Non-GMO Promise",
             "content": "<p>Every ingredient is carefully selected and verified non-GMO because great coffee starts with great sourcing.</p>",
@@ -817,7 +803,6 @@
             "content": "<p>Join thousands who've made Jolene Coffee their daily ritual:</p><p>✓ 15% off every order<br>✓ Free shipping always<br>✓ Skip or cancel anytime<br>✓ Fresh coffee delivered monthly</p>",
             "button_label": "Subscribe Now",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -899,7 +884,6 @@
             "content": "",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": true,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -1052,7 +1036,6 @@
             "content": "<p>Started by coffee lovers who got tired of compromise. We spent two years perfecting our cold brewing process because great coffee shouldn't be complicated, just exceptional.</p>",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -1109,7 +1092,6 @@
             "content": "",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": true,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -1189,24 +1171,21 @@
           "type": "testimonial",
           "settings": {
             "content": "<p>I've been drinking cold brew for years but nothing compares to Jolene. The Black is my morning ritual now - smooth, bold, never bitter. Finally found my perfect coffee.</p>",
-            "title": "<p>Marcus T., Strategy Director</p>",
-            "avatar": null
+            "title": "<p>Marcus T., Strategy Director</p>"
           }
         },
         "testimonial_4m7Eq8": {
           "type": "testimonial",
           "settings": {
             "content": "<p>The Oat Milk Latte tastes like it came from my favorite coffee shop. I keep a case in my fridge and it's become my afternoon pick-me-up. Creamy perfection.</p>",
-            "title": "<p>Sarah K., Yoga Instructor</p>",
-            "avatar": null
+            "title": "<p>Sarah K., Yoga Instructor</p>"
           }
         },
         "testimonial_wUztfP": {
           "type": "testimonial",
           "settings": {
             "content": "<p>Mix Pack is genius. Black when I need that bold hit, White when I want something smooth and creamy. Both are incredible. This coffee has ruined me for everything else.</p>",
-            "title": "<p>David R., Entrepreneur</p>",
-            "avatar": null
+            "title": "<p>David R., Entrepreneur</p>"
           }
         }
       },
@@ -1279,7 +1258,6 @@
       "name": "t:sections.banner.name",
       "settings": {
         "url": "",
-        "image_background_desktop": null,
         "show_image": true,
         "show_video_background_mobile": true,
         "layout_y_spacing": "banner--h-xl",

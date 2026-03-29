@@ -790,5 +790,65 @@
     "type": "url",
     "section": "product_slider",
     "instructions": "Shopify internal URL (shopify://collections/... or shopify://pages/...) or empty string"
+  },
+  {
+    "key": "pdp_badge_text",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write the product page eyebrow badge label (e.g. \"Hecho en M\u00e9xico \u00b7 Real Fruit Agua Fresca\"). Short, punchy, highlights origin or key claim."
+  },
+  {
+    "key": "pdp_badge_emoji",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Single emoji prefix for the badge (e.g. \ud83c\uddf2\ud83c\uddfd, \u2726, \ud83c\udf3f). Match the brand identity. Leave empty if not applicable."
+  },
+  {
+    "key": "pdp_badge_color",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Hex color for the badge, matching the brand primary color (e.g. \"#D4266A\")."
+  },
+  {
+    "key": "pdp_checklist_item_1",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write product benefit bullet 1. Specific ingredient or quality claim. Start with action or ingredient."
+  },
+  {
+    "key": "pdp_checklist_item_2",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write product benefit bullet 2. Different from item 1. Highlight a unique feature."
+  },
+  {
+    "key": "pdp_checklist_item_3",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write product benefit bullet 3. Cover a different value prop (e.g. format, variety, dietary claim)."
+  },
+  {
+    "key": "pdp_checklist_item_4",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write product benefit bullet 4. Focus on value or quantity (e.g. \"50 servings per bag\")."
+  },
+  {
+    "key": "pdp_checklist_item_5",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write product benefit bullet 5. Convenience or ease of use (e.g. \"Just add water\")."
+  },
+  {
+    "key": "pdp_value_prop_tag",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write the value prop tag label (e.g. \"\u2605 Best Value\", \"\u2605 Most Popular\", \"\u2605 Fan Favorite\")."
+  },
+  {
+    "key": "pdp_value_prop_text",
+    "type": "text",
+    "section": "pdp",
+    "instructions": "Write the value prop description highlighting the best deal (e.g. \"1kg bag \u2014 100 glasses, only 27\u00a2 each\")."
   }
 ]

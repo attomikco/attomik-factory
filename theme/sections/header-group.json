@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header group",
@@ -55,8 +64,6 @@
         "e2236372-4821-4844-b930-d328b46f901a"
       ],
       "settings": {
-        "logo_default": null,
-        "logo_overlay": null,
         "logo_desktop_height": 30,
         "logo_mobile_height": 25,
         "bar_layout_desktop": "left",

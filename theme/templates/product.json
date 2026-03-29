@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "1638995507af787164": {
@@ -32,13 +41,6 @@
             "enable_sku": false
           }
         },
-        "klaviyo_reviews_average_rating_Ww9hgC": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/average-rating/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "disabled": true,
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
         "liquid_GjLPeC": {
           "type": "liquid",
           "settings": {
@@ -55,7 +57,7 @@
           "type": "text",
           "disabled": true,
           "settings": {
-            "content": "<p>High-performance hydrators and calming actives built to protect and repair skin under heat, sweat, and friction.<br/><br/>\u2713 Reduces post-training irritation<br/>\u2713 Strengthens skin barrier<br/>\u2713 Controls oil without over-drying<br/>\u2713 Built for active lifestyles</p><p></p>",
+            "content": "<p>High-performance hydrators and calming actives built to protect and repair skin under heat, sweat, and friction.<br/><br/>✓ Reduces post-training irritation<br/>✓ Strengthens skin barrier<br/>✓ Controls oil without over-drying<br/>✓ Built for active lifestyles</p><p></p>",
             "spacing_top": 0,
             "spacing_bottom": 30,
             "color_scheme": "color__bg-transparent",
@@ -165,7 +167,7 @@
           "type": "accordion",
           "settings": {
             "title": "Shipping Information",
-            "content": "<p>We offer free shipping on all orders over $50.</p><p>For orders under $50, standard ground shipping is a flat rate of $4.99 to anywhere in the U.S.</p><p>Standard ground delivery times typically range from 3\u20137 business days.</p>",
+            "content": "<p>We offer free shipping on all orders over $50.</p><p>For orders under $50, standard ground shipping is a flat rate of $4.99 to anywhere in the U.S.</p><p>Standard ground delivery times typically range from 3–7 business days.</p>",
             "icon": "",
             "spacing_top": 10,
             "spacing_bottom": 10,
@@ -207,7 +209,6 @@
       "block_order": [
         "liquid_L9kTGq",
         "853ae7f0-85c9-45dc-8326-6e4044bcf5e5",
-        "klaviyo_reviews_average_rating_Ww9hgC",
         "liquid_GjLPeC",
         "2b5d0315-b88c-44b6-b63c-d68fbe584a4c",
         "62c29cd6-a0b5-4f8b-86c0-a48660869d22",
@@ -328,10 +329,9 @@
           "type": "content",
           "settings": {
             "heading": "Engineered to Restore",
-            "content": "<p>Calms irritation, removes sweat buildup, and reinforces your skin barrier \u2014 all in one step.</p>",
+            "content": "<p>Calms irritation, removes sweat buildup, and reinforces your skin barrier — all in one step.</p>",
             "button_label": "",
             "url": "shopify://collections/all",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -354,10 +354,9 @@
           "type": "content",
           "settings": {
             "heading": "",
-            "content": "<p>Removes sweat, oil, and grime while restoring hydration \u2014 before irritation sets in.</p>",
+            "content": "<p>Removes sweat, oil, and grime while restoring hydration — before irritation sets in.</p>",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -416,7 +415,6 @@
             "content": "",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": false,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -439,7 +437,7 @@
           "type": "content",
           "settings": {
             "heading": "Engineered to Restore",
-            "content": "<p>Calms irritation, removes sweat buildup, and reinforces your skin barrier \u2014 all in one step.</p>",
+            "content": "<p>Calms irritation, removes sweat buildup, and reinforces your skin barrier — all in one step.</p>",
             "button_label": "",
             "url": "",
             "show_image_as_background": false,
@@ -464,7 +462,7 @@
           "type": "content",
           "settings": {
             "heading": "",
-            "content": "<p>Removes sweat, oil, and grime while restoring hydration \u2014 before irritation sets in.</p>",
+            "content": "<p>Removes sweat, oil, and grime while restoring hydration — before irritation sets in.</p>",
             "button_label": "",
             "url": "",
             "show_image_as_background": false,
@@ -492,7 +490,6 @@
             "content": "",
             "button_label": "",
             "url": "",
-            "image": null,
             "show_image_as_background": true,
             "enable_autoplay": true,
             "enable_mute_toggle": true,
@@ -548,7 +545,6 @@
         "icon_yA8KDn": {
           "type": "icon",
           "settings": {
-            "icon": null,
             "icon_height": "h-8",
             "heading": "",
             "content": "<p>Derm Tested</p>",
@@ -697,7 +693,7 @@
           "disabled": true,
           "settings": {
             "heading": "Is it safe for acne-prone skin?",
-            "content": "<p>Yes. It\u2019s non-comedogenic and designed to prevent sweat-driven breakouts by keeping pores clear after activity.</p>",
+            "content": "<p>Yes. It’s non-comedogenic and designed to prevent sweat-driven breakouts by keeping pores clear after activity.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -707,7 +703,7 @@
           "type": "content",
           "settings": {
             "heading": "Is this just for teens?",
-            "content": "<p>No. It\u2019s built for anyone who trains hard and sweats \u2014 youth athletes, college, pros, weekend warriors.</p><p>If you sweat, it\u2019s for you.</p>",
+            "content": "<p>No. It’s built for anyone who trains hard and sweats — youth athletes, college, pros, weekend warriors.</p><p>If you sweat, it’s for you.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -717,7 +713,7 @@
           "type": "content",
           "settings": {
             "heading": "Can I use this on my body too?",
-            "content": "<p>Yes. Safe for face, neck, chest, and back \u2014 anywhere sweat and friction cause irritation.</p>",
+            "content": "<p>Yes. Safe for face, neck, chest, and back — anywhere sweat and friction cause irritation.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -778,15 +774,6 @@
     },
     "177196743364d08534": {
       "type": "apps",
-      "blocks": {
-        "klaviyo_reviews_product_reviews_raKipJ": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "klaviyo_reviews_product_reviews_raKipJ"
-      ],
       "settings": {
         "spacing_top": 100,
         "spacing_bottom": 100,
