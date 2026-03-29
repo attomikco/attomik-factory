@@ -99,7 +99,17 @@
             "perk_4": "Auto-delivered, never run out",
             "perk_5": "Priority customer support",
             "speed": 20,
-            "color_scheme": "color__bg-neutral color__text"
+            "header_bg": "#ffc600",
+            "header_text": "#ffffff",
+            "header_font_size": 15,
+            "header_font_weight": "800",
+            "marquee_bg": "#ffffff",
+            "marquee_text": "#1a1a1a",
+            "marquee_font_size": 15,
+            "marquee_font_weight": "500",
+            "border_color": "#1a1a1a",
+            "border_width": 1,
+            "border_radius": 10
           }
         },
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d53": {
