@@ -32,115 +32,25 @@
 -%}
 
 {% if items_array.size > 0 %}
-  <style>
-    .adp-sub-section-{{ section.id }} {
-      padding: 12px 0;
-    }
-    .adp-sub-container-{{ section.id }} {
-      margin: 0 16px;
-      border-radius: var(--border-radius-md, 10px);
-      border: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.12 }};
-      overflow: hidden;
-    }
-    .adp-sub-header-{{ section.id }} {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-bottom: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.1 }};
-    }
-    .adp-sub-header-{{ section.id }} svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex-shrink: 0;
-    }
-    .adp-sub-title-{{ section.id }} {
-      font-family: var(--font-heading-family, sans-serif);
-      font-size: calc(0.6875 * var(--font-body-scale, 1) * 1rem);
-      font-weight: var(--font-heading-weight, 700);
-      letter-spacing: var(--font-heading-letter-spacing, 0.06em);
-      text-transform: var(--font-heading-text-transform, uppercase);
-      line-height: 1;
-    }
-    .adp-sub-marquee-{{ section.id }} {
-      overflow: hidden;
-    }
-    .adp-sub-track-{{ section.id }} {
-      display: flex;
-      width: fit-content;
-      --marquee-speed: {{ speed }}s;
-      animation: adp-marquee-{{ section.id }} var(--marquee-speed) linear infinite;
-    }
-    .adp-sub-set-{{ section.id }} {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 8px 0;
-      padding-right: 16px;
-    }
-    .adp-sub-item-{{ section.id }} {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-body-family, sans-serif);
-      font-size: calc(0.8125 * var(--font-body-scale, 1) * 1rem);
-      font-weight: var(--font-body-weight, 400);
-      white-space: nowrap;
-    }
-    .adp-sub-item-{{ section.id }} svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex-shrink: 0;
-    }
-    .adp-sub-dot-{{ section.id }} {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: currentColor;
-      opacity: 0.3;
-      flex-shrink: 0;
-    }
-    @keyframes adp-marquee-{{ section.id }} {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .adp-sub-track-{{ section.id }} {
-        animation-play-state: paused;
-      }
-    }
-  </style>
-
   <div
-    class="adp-sub-section-{{ section.id }} w-full {{ block.settings.color_scheme }}"
+    class="w-full"
     {{ block.shopify_attributes }}
   >
-    <div class="adp-sub-container-{{ section.id }}">
-      <div class="adp-sub-header-{{ section.id }}">
-        <svg viewBox="0 0 24 24"><path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"></path><path d="M17 12H3"></path><path d="M21 12l-4-4"></path><path d="M21 12l-4 4"></path></svg>
-        <span class="adp-sub-title-{{ section.id }}">{{ label }}</span>
+    <div class="ac-perks {{ block.settings.color_scheme }}" style="--ac-marquee-speed: {{ speed }}s;">
+      <div class="ac-perks__header">
+        <svg class="ac-perks__icon" viewBox="0 0 24 24"><path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"></path><path d="M17 12H3"></path><path d="M21 12l-4-4"></path><path d="M21 12l-4 4"></path></svg>
+        <span class="ac-perks__label">{{ label }}</span>
       </div>
-      <div class="adp-sub-marquee-{{ section.id }}">
-        <div class="adp-sub-track-{{ section.id }}">
+      <div class="ac-perks__marquee">
+        <div class="ac-perks__track">
           {% for pass in (1..2) %}
-            <div class="adp-sub-set-{{ section.id }}">
+            <div class="ac-perks__set">
               {% for item in items_array %}
-                <div class="adp-sub-item-{{ section.id }}">
+                <div class="ac-perks__item">
                   <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   {{ item }}
                 </div>
-                <div class="adp-sub-dot-{{ section.id }}"></div>
+                <div class="ac-perks__dot"></div>
               {% endfor %}
             </div>
           {% endfor %}

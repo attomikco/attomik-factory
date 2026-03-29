@@ -25,6 +25,7 @@
     {% comment %} Assets {% endcomment %}
     {% render 'theme__styles' %}
     {% render 'assets' with 'styles.css', preload_stylesheet: true %}
+    {{ 'attomik-custom.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
 
     {% comment %} Structured data {% endcomment %}

@@ -23,16 +23,18 @@
   {{ block.shopify_attributes }}
 >
   <div
-    class="border__element--radius border--width inline-flex items-center gap-2 px-2 py-1"
+    class="ac-badge ac-badge--filled"
     style="
-      background-color: {{ block.settings.badge_bg_color }};
-      color: {{ block.settings.badge_font_color }};
+      --ac-badge-bg: {{ block.settings.badge_bg_color }};
+      --ac-badge-color: {{ block.settings.badge_font_color }};
       border-color: {{ block.settings.badge_bg_color }};
     "
   >
     {% unless badge_icon == blank %}
-      {% render 'component__icon', icon: badge_icon, size: '14' %}
+      <span class="ac-badge__emoji">
+        {% render 'component__icon', icon: badge_icon, size: '14' %}
+      </span>
     {% endunless %}
-    <span class="type--smaller flex items-center">{{ badge_label }}</span>
+    <span class="ac-badge__text">{{ badge_label }}</span>
   </div>
 </div>

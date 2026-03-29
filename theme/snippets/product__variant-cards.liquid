@@ -50,106 +50,10 @@
 {% else %}
 
   <style>
-    .vc-grid-{{ section.id }} {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding-top: 16px;
-    }
     @media (min-width: 769px) {
-      .vc-grid-{{ section.id }} {
-        grid-template-columns: repeat({{ block.settings.desktop_columns | default: 4 }}, 1fr);
+      .ac-vc-grid--{{ section.id }} {
+        grid-template-columns: repeat({{ block.settings.desktop_columns | default: 4 }}, 1fr) !important;
       }
-    }
-    .vc-card-{{ section.id }} {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px 16px 16px;
-      border: 1.5px solid rgba(0, 0, 0, 0.12);
-      border-radius: 10px;
-      background: #fff;
-      cursor: pointer;
-      transition: border-color 0.2s ease, background-color 0.2s ease;
-    }
-    .vc-card-{{ section.id }}:hover {
-      border-color: {{ settings.color_background_primary | color_modify: 'alpha', 0.5 }};
-    }
-    .vc-card-{{ section.id }}.vc-selected-{{ section.id }} {
-      border: 2px solid {{ settings.color_background_primary }};
-      background-color: {{ settings.color_background_primary | color_modify: 'alpha', 0.06 }};
-    }
-    .vc-card-{{ section.id }}.vc-unavailable-{{ section.id }} {
-      opacity: 0.5;
-      cursor: default;
-    }
-    .vc-card-{{ section.id }}.vc-unavailable-{{ section.id }}:hover {
-      border-color: rgba(0, 0, 0, 0.12);
-    }
-    .vc-card-inner-{{ section.id }} {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 4px;
-      width: 100%;
-    }
-    .vc-badge-{{ section.id }} {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-      line-height: 1.3;
-      z-index: 1;
-    }
-    .vc-badge-primary-{{ section.id }} {
-      background: {{ settings.color_background_primary }};
-      color: {{ settings.color_foreground_primary | default: '#ffffff' }};
-    }
-    .vc-badge-secondary-{{ section.id }} {
-      background: {{ settings.color_background_secondary }};
-      color: {{ settings.color_foreground_secondary | default: '#ffffff' }};
-    }
-    .vc-name-{{ section.id }} {
-      font-family: var(--font-heading-family, sans-serif);
-      font-size: 18px;
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-    .vc-price-{{ section.id }} {
-      font-size: 14px;
-      color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};
-    }
-    .vc-perunit-{{ section.id }} {
-      font-size: 12px;
-      color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};
-    }
-    .vc-savings-{{ section.id }} {
-      font-size: 12px;
-      font-weight: 700;
-      color: {{ settings.color_background_primary }};
-    }
-    .vc-shipping-{{ section.id }} {
-      font-size: 12px;
-      color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};
-    }
-    .vc-soldout-{{ section.id }} {
-      font-size: 12px;
-      font-weight: 700;
-      color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.5 }};
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
   </style>
 
@@ -179,7 +83,7 @@
     </div>
 
     {% comment %} Card grid {% endcomment %}
-    <div class="vc-grid-{{ section.id }}">
+    <div class="ac-vc-grid ac-vc-grid--{{ section.id }}">
       {% for value in card_option.values %}
         {%- liquid
           # Find the variant that matches this option value
@@ -196,7 +100,7 @@
             endif
           endfor
 
-          # Check availability — a value is unavailable if no variant with this option is available
+          # Check availability
           assign option_available = false
           for v in product.variants
             if v.available
@@ -235,19 +139,19 @@
 
           # === BADGE ===
           assign badge_text = ''
-          assign badge_color = 'primary'
+          assign badge_class = 'ac-vc-badge--best'
           if val_config and val_config.badge != blank
             assign badge_text = val_config.badge
-            if val_config.badge_color != blank
-              assign badge_color = val_config.badge_color
+            if val_config.badge_color == 'secondary'
+              assign badge_class = 'ac-vc-badge--popular'
             endif
           elsif option_available and forloop.first == false
             if forloop.last
               assign badge_text = 'Best Value'
-              assign badge_color = 'primary'
+              assign badge_class = 'ac-vc-badge--best'
             else
               assign badge_text = 'Popular'
-              assign badge_color = 'secondary'
+              assign badge_class = 'ac-vc-badge--popular'
             endif
           endif
 
@@ -258,7 +162,6 @@
           endif
 
           # === SAVINGS (auto-calculate vs first variant) ===
-          assign savings_pct = 0
           assign savings_label = ''
           if val_config and val_config.savings_label != blank
             assign savings_label = val_config.savings_label
@@ -287,8 +190,8 @@
 
         <button
           type="button"
-          class="vc-card-{{ section.id }}{% unless option_available %} vc-unavailable-{{ section.id }}{% endunless %}"
-          :class="{ 'vc-selected-{{ section.id }}': option{{ card_option_position }} == `{{ encoded_value }}` }"
+          class="ac-vc-card{% unless option_available %} ac-vc-card--unavailable{% endunless %}"
+          :class="{ 'ac-vc-card--selected': option{{ card_option_position }} == `{{ encoded_value }}` }"
           data-option-value-id="{{ value.id }}"
           data-option-position="{{ card_option_position }}"
           data-variant-id="{% if card_variant %}{{ card_variant.id }}{% endif %}"
@@ -306,33 +209,31 @@
         >
 
           {% if badge_text != blank %}
-            <span class="vc-badge-{{ section.id }} vc-badge-{{ badge_color }}-{{ section.id }}">{{ badge_text }}</span>
+            <span class="ac-vc-badge {{ badge_class }}">{{ badge_text }}</span>
           {% endif %}
 
-          <div class="vc-card-inner-{{ section.id }}">
-
-            <span class="vc-name-{{ section.id }}">{{ value }}</span>
+          <div class="ac-vc-card__inner">
+            <span class="ac-vc-name">{{ value }}</span>
 
             {% if option_available %}
               {% if card_variant %}
-                <span class="vc-price-{{ section.id }}">{{ card_variant.price | money }}</span>
+                <span class="ac-vc-price">{{ card_variant.price | money }}</span>
               {% endif %}
 
               {% if block.settings.show_per_unit and per_unit_label != blank %}
-                <span class="vc-perunit-{{ section.id }}">{{ per_unit_label }}</span>
+                <span class="ac-vc-perunit">{{ per_unit_label }}</span>
               {% endif %}
 
               {% if savings_label != blank %}
-                <span class="vc-savings-{{ section.id }}">{{ savings_label }}</span>
+                <span class="ac-vc-savings">{{ savings_label }}</span>
               {% endif %}
 
               {% if show_free_shipping %}
-                <span class="vc-shipping-{{ section.id }}">🚚 Ships Free</span>
+                <span class="ac-vc-shipping">🚚 Ships Free</span>
               {% endif %}
             {% else %}
-              <span class="vc-soldout-{{ section.id }}">Sold Out</span>
+              <span class="ac-vc-soldout">Sold Out</span>
             {% endif %}
-
           </div>
         </button>
       {% endfor %}
