@@ -36,26 +36,23 @@
     .adp-sub-section-{{ section.id }} {
       padding: 12px 0;
     }
-    .adp-sub-wrap-{{ section.id }} {
-      border-top: 1px solid currentColor;
-      border-bottom: 1px solid currentColor;
-      opacity: 1;
+    .adp-sub-container-{{ section.id }} {
+      margin: 0 16px;
+      border-radius: var(--border-radius-md, 10px);
+      border: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.12 }};
       overflow: hidden;
-    }
-    .adp-sub-wrap-{{ section.id }} {
-      border-color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.1 }};
     }
     .adp-sub-header-{{ section.id }} {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 8px;
-      padding: 10px 16px;
-      border-bottom: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.08 }};
+      padding: 8px 14px;
+      border-bottom: 1px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.1 }};
     }
     .adp-sub-header-{{ section.id }} svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       stroke: currentColor;
       fill: none;
       stroke-width: 2;
@@ -65,10 +62,10 @@
     }
     .adp-sub-title-{{ section.id }} {
       font-family: var(--font-heading-family, sans-serif);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+      font-size: calc(0.6875 * var(--font-body-scale, 1) * 1rem);
+      font-weight: var(--font-heading-weight, 700);
+      letter-spacing: var(--font-heading-letter-spacing, 0.06em);
+      text-transform: var(--font-heading-text-transform, uppercase);
       line-height: 1;
     }
     .adp-sub-marquee-{{ section.id }} {
@@ -84,15 +81,16 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 10px 0;
+      padding: 8px 0;
       padding-right: 16px;
     }
     .adp-sub-item-{{ section.id }} {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
+      font-family: var(--font-body-family, sans-serif);
+      font-size: calc(0.8125 * var(--font-body-scale, 1) * 1rem);
+      font-weight: var(--font-body-weight, 400);
       white-space: nowrap;
     }
     .adp-sub-item-{{ section.id }} svg {
@@ -128,7 +126,7 @@
     class="adp-sub-section-{{ section.id }} w-full {{ block.settings.color_scheme }}"
     {{ block.shopify_attributes }}
   >
-    <div class="adp-sub-wrap-{{ section.id }}">
+    <div class="adp-sub-container-{{ section.id }}">
       <div class="adp-sub-header-{{ section.id }}">
         <svg viewBox="0 0 24 24"><path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"></path><path d="M17 12H3"></path><path d="M21 12l-4-4"></path><path d="M21 12l-4 4"></path></svg>
         <span class="adp-sub-title-{{ section.id }}">{{ label }}</span>
