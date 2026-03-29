@@ -30,7 +30,7 @@
         "86febd87-0857-43dd-ace4-2774b4713659": {
           "type": "button",
           "settings": {
-            "button_label": "",
+            "button_label": "Shop Now",
             "button_url": "",
             "color_button": "btn--smaller btn--outline-alt"
           }
@@ -64,8 +64,9 @@
         "e2236372-4821-4844-b930-d328b46f901a"
       ],
       "settings": {
-        "logo_desktop_height": 30,
-        "logo_mobile_height": 25,
+        "logo_default": "shopify://shop_images/White_no_background.png",
+        "logo_desktop_height": 50,
+        "logo_mobile_height": 40,
         "bar_layout_desktop": "left",
         "bar_default_color_scheme": "color__bg-primary color__primary",
         "bar_overlay_color_scheme": "color__bg-primary color__primary",

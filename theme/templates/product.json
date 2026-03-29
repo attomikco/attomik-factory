@@ -17,14 +17,10 @@
           "settings": {
             "badge_text": "Your Badge Text Here",
             "icon": "check",
-            "badge_background": "secondary",
-            "badge_text_color": "secondary",
-            "badge_border_color": "body",
             "spacing_top": 0,
             "spacing_bottom": 10,
-            "color_scheme": "color__bg-transparent",
-            "color_border": "color__border-divider-1",
-            "style_border": ""
+            "badge_bg_color": "#000000",
+            "badge_font_color": "#ffffff"
           }
         },
         "853ae7f0-85c9-45dc-8326-6e4044bcf5e5": {
