@@ -43,7 +43,6 @@
   if card_option
     assign option_count = card_option.values | size
 
-    # Build array of variants matching each option value to find first variant price
     for value in card_option.values
       if forloop.first
         for v in product.variants
@@ -91,7 +90,26 @@
     </div>
 
     {% comment %} Card grid {% endcomment %}
-    <div class="grid grid-cols-2 gap-3 md:grid-cols-{{ block.settings.desktop_columns | default: 4 }}">
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding-top: 16px;
+      "
+      class="vc-grid-{{ section.id }}"
+    >
+      <style>
+        @media (min-width: 769px) {
+          .vc-grid-{{ section.id }} {
+            grid-template-columns: repeat({{ block.settings.desktop_columns | default: 4 }}, 1fr) !important;
+          }
+        }
+        .vc-grid-{{ section.id }} > button:hover {
+          border-color: {{ settings.color_background_primary | color_modify: 'alpha', 0.5 }} !important;
+        }
+      </style>
+
       {% for value in card_option.values %}
         {%- liquid
           # Find the variant that matches this option value
@@ -117,7 +135,6 @@
                 break
               endif
             endfor
-            # Fallback: match by handleize
             if val_config == nil
               assign val_handle = value | handleize
               for cfg in vc_config_raw
@@ -134,13 +151,11 @@
           assign badge_text = ''
           assign badge_color = 'primary'
           if val_config and val_config.badge != blank
-            # Metafield badge takes priority
             assign badge_text = val_config.badge
             if val_config.badge_color != blank
               assign badge_color = val_config.badge_color
             endif
           elsif option_count >= 3
-            # Auto-badge: last = Best Value, middle = Popular
             if forloop.last
               assign badge_text = 'Best Value'
               assign badge_color = 'primary'
@@ -155,18 +170,6 @@
             endif
           endif
 
-          # === SUBTITLE ===
-          assign subtitle = ''
-          if val_config and val_config.subtitle != blank
-            assign subtitle = val_config.subtitle
-          endif
-
-          # === EMOJI ===
-          assign card_emoji = ''
-          if val_config and val_config.emoji != blank
-            assign card_emoji = val_config.emoji
-          endif
-
           # === PER-UNIT LABEL ===
           assign per_unit_label = ''
           if val_config and val_config.per_unit_label != blank
@@ -178,11 +181,7 @@
           if val_config and val_config.savings_label != blank
             assign savings_label = val_config.savings_label
           elsif card_variant and first_variant_price and forloop.first == false
-            # Auto-calculate: compare per-unit cost
-            # For multi-packs, the variant price divided by quantity vs single price
-            # Simple approach: if this variant is cheaper per dollar than first, show savings
             if card_variant.price < first_variant_price
-              # Direct price comparison savings
               assign price_diff = first_variant_price | minus: card_variant.price
               assign savings_pct = price_diff | times: 100 | divided_by: first_variant_price
               if savings_pct > 0
@@ -206,14 +205,22 @@
 
         <button
           type="button"
-          class="relative flex cursor-pointer flex-col items-center text-center transition-all duration-200"
           style="
-            padding: 16px 20px;
-            border-radius: var(--buttons-radius, 8px);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 16px;
             border: 1.5px solid {{ settings.color_foreground_body | color_modify: 'alpha', 0.12 }};
+            border-radius: 10px;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
           "
           :style="option{{ card_option_position }} == `{{ encoded_value }}`
-            ? 'border-color: {{ settings.color_background_primary }}; background: {{ settings.color_background_primary | color_modify: 'alpha', 0.05 }};'
+            ? 'border-color: {{ settings.color_background_primary }}; background: {{ settings.color_background_primary | color_modify: 'alpha', 0.04 }};'
             : ''"
           data-option-value-id="{{ value.id }}"
           data-option-position="{{ card_option_position }}"
@@ -230,60 +237,89 @@
           :disabled="product_loading"
           title="{{ value }}"
         >
-          {% comment %} Badge {% endcomment %}
+
+          {%- comment -%} Badge {%- endcomment -%}
           {% if badge_text != blank %}
             <span
-              class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-0.5 text-center"
               style="
-                font-size: 10px;
+                position: absolute;
+                top: -12px;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                font-size: 9px;
                 font-weight: 800;
-                letter-spacing: 0.5px;
+                letter-spacing: 1px;
                 text-transform: uppercase;
+                padding: 3px 10px;
+                border-radius: 20px;
                 {% if badge_color == 'secondary' %}
                   background: {{ settings.color_background_secondary }};
-                  color: {{ settings.color_foreground_secondary | default: '#2D1A14' }};
+                  color: {{ settings.color_foreground_secondary | default: '#ffffff' }};
                 {% else %}
                   background: {{ settings.color_background_primary }};
                   color: {{ settings.color_foreground_primary | default: '#ffffff' }};
                 {% endif %}
               "
-            >
-              {{ badge_text }}
-            </span>
+            >{{ badge_text }}</span>
           {% endif %}
 
-          {% comment %} Emoji {% endcomment %}
-          {% if card_emoji != blank %}
-            <span class="mb-1 text-2xl">{{ card_emoji }}</span>
-          {% endif %}
+          {%- comment -%} Option value {%- endcomment -%}
+          <span
+            style="
+              font-family: var(--font-heading-family, sans-serif);
+              font-size: 18px;
+              font-weight: 800;
+              text-transform: uppercase;
+              line-height: 1.2;
+            "
+          >{{ value }}</span>
 
-          {% comment %} Option value heading {% endcomment %}
-          <span class="type__heading type__heading-4 mt-1">{{ value }}</span>
-
-          {% comment %} Subtitle {% endcomment %}
-          {% if subtitle != blank %}
-            <span class="type--smaller mt-0.5" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};">{{ subtitle }}</span>
-          {% endif %}
-
-          {% comment %} Price display {% endcomment %}
+          {%- comment -%} Total price {%- endcomment -%}
           {% if card_variant %}
-            {% if block.settings.show_per_unit and per_unit_label != blank %}
-              <span class="type--small mt-2 font-bold">{{ per_unit_label }}</span>
-              <span class="type--smaller mt-0.5" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};">{{ card_variant.price | money }} total</span>
-            {% else %}
-              <span class="type--small mt-2 font-bold">{{ card_variant.price | money }}</span>
-            {% endif %}
+            <span
+              style="
+                font-size: 14px;
+                color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};
+                margin-top: 4px;
+              "
+            >{{ card_variant.price | money }}</span>
           {% endif %}
 
-          {% comment %} Savings {% endcomment %}
+          {%- comment -%} Per-unit price {%- endcomment -%}
+          {% if block.settings.show_per_unit and per_unit_label != blank %}
+            <span
+              style="
+                font-size: 12px;
+                color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};
+                margin-top: 2px;
+              "
+            >{{ per_unit_label }}</span>
+          {% endif %}
+
+          {%- comment -%} Savings {%- endcomment -%}
           {% if savings_label != blank %}
-            <span class="type--smaller mt-1 font-bold" style="color: {{ settings.color_background_primary }};">{{ savings_label }}</span>
+            <span
+              style="
+                font-size: 12px;
+                font-weight: 700;
+                color: {{ settings.color_background_primary }};
+                margin-top: 2px;
+              "
+            >{{ savings_label }}</span>
           {% endif %}
 
-          {% comment %} Free shipping {% endcomment %}
+          {%- comment -%} Free shipping {%- endcomment -%}
           {% if show_free_shipping %}
-            <span class="type--smaller mt-1" style="color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.55 }};">🚚 Ships Free</span>
+            <span
+              style="
+                font-size: 12px;
+                color: {{ settings.color_foreground_body | color_modify: 'alpha', 0.6 }};
+                margin-top: 4px;
+              "
+            >🚚 Ships Free</span>
           {% endif %}
+
         </button>
       {% endfor %}
     </div>
