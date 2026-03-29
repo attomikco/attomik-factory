@@ -288,6 +288,42 @@
                   {% when 'bundle' %}
                     {% render 'product__bundle', block: block %}
 
+                  {% when 'badge' %}
+                    {% render 'product-badge',
+                      badge_text: block.settings.badge_text,
+                      badge_color: block.settings.badge_color,
+                      badge_emoji: block.settings.badge_emoji
+                    %}
+
+                  {% when 'checklist' %}
+                    {% liquid
+                      assign checklist_items = '' | split: ''
+                      for i in (1..5)
+                        assign field_name = 'item_' | append: i
+                        assign item_text = block.settings[field_name]
+                        if item_text != blank
+                          assign checklist_items = checklist_items | push: item_text
+                        endif
+                      endfor
+                    %}
+                    <ul
+                      class="product-checklist"
+                      style="--cl-accent: {{ block.settings.accent_color }}; --cl-accent-bg: {{ block.settings.accent_color }}0f; --cl-accent-border: {{ block.settings.accent_color }}26; --cl-text: {{ block.settings.text_color }};"
+                    >
+                      {% for item in checklist_items %}
+                        <li class="product-checklist__item">
+                          <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+                          <span>{{ item }}</span>
+                        </li>
+                      {% endfor %}
+                      {% if block.settings.value_prop_text != blank %}
+                        <li class="product-checklist__val">
+                          <span class="product-checklist__tag">{{ block.settings.value_prop_tag }}</span>
+                          <span class="product-checklist__val-text">{{ block.settings.value_prop_text }}</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+
                   {% when '@app' %}
                     <div class="p-4">{% render block %}</div>
                 {% endcase %}
@@ -451,6 +487,42 @@
 
                       {% when 'bundle' %}
                         {% render 'product__bundle', block: block %}
+
+                      {% when 'badge' %}
+                        {% render 'product-badge',
+                          badge_text: block.settings.badge_text,
+                          badge_color: block.settings.badge_color,
+                          badge_emoji: block.settings.badge_emoji
+                        %}
+
+                      {% when 'checklist' %}
+                        {% liquid
+                          assign checklist_items = '' | split: ''
+                          for i in (1..5)
+                            assign field_name = 'item_' | append: i
+                            assign item_text = block.settings[field_name]
+                            if item_text != blank
+                              assign checklist_items = checklist_items | push: item_text
+                            endif
+                          endfor
+                        %}
+                        <ul
+                          class="product-checklist"
+                          style="--cl-accent: {{ block.settings.accent_color }}; --cl-accent-bg: {{ block.settings.accent_color }}0f; --cl-accent-border: {{ block.settings.accent_color }}26; --cl-text: {{ block.settings.text_color }};"
+                        >
+                          {% for item in checklist_items %}
+                            <li class="product-checklist__item">
+                              <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+                              <span>{{ item }}</span>
+                            </li>
+                          {% endfor %}
+                          {% if block.settings.value_prop_text != blank %}
+                            <li class="product-checklist__val">
+                              <span class="product-checklist__tag">{{ block.settings.value_prop_tag }}</span>
+                              <span class="product-checklist__val-text">{{ block.settings.value_prop_text }}</span>
+                            </li>
+                          {% endif %}
+                        </ul>
 
                       {% when '@app' %}
                         {% if settings.app_block_column == 'left_column' %}
@@ -618,6 +690,42 @@
 
                       {% when 'bundle' %}
                         {% render 'product__bundle', block: block %}
+
+                      {% when 'badge' %}
+                        {% render 'product-badge',
+                          badge_text: block.settings.badge_text,
+                          badge_color: block.settings.badge_color,
+                          badge_emoji: block.settings.badge_emoji
+                        %}
+
+                      {% when 'checklist' %}
+                        {% liquid
+                          assign checklist_items = '' | split: ''
+                          for i in (1..5)
+                            assign field_name = 'item_' | append: i
+                            assign item_text = block.settings[field_name]
+                            if item_text != blank
+                              assign checklist_items = checklist_items | push: item_text
+                            endif
+                          endfor
+                        %}
+                        <ul
+                          class="product-checklist"
+                          style="--cl-accent: {{ block.settings.accent_color }}; --cl-accent-bg: {{ block.settings.accent_color }}0f; --cl-accent-border: {{ block.settings.accent_color }}26; --cl-text: {{ block.settings.text_color }};"
+                        >
+                          {% for item in checklist_items %}
+                            <li class="product-checklist__item">
+                              <span class="product-checklist__ck" aria-hidden="true">&#10003;</span>
+                              <span>{{ item }}</span>
+                            </li>
+                          {% endfor %}
+                          {% if block.settings.value_prop_text != blank %}
+                            <li class="product-checklist__val">
+                              <span class="product-checklist__tag">{{ block.settings.value_prop_tag }}</span>
+                              <span class="product-checklist__val-text">{{ block.settings.value_prop_text }}</span>
+                            </li>
+                          {% endif %}
+                        </ul>
 
                       {% when '@app' %}
                         {% if settings.app_block_column == 'right_column' %}
@@ -4976,6 +5084,204 @@
             }
           ],
           "default": "right"
+        }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Product Badge",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text",
+          "default": "Your Badge Text Here"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Badge color",
+          "default": "#000000",
+          "info": "Used for text, border tint, and background tint."
+        },
+        {
+          "type": "text",
+          "id": "badge_emoji",
+          "label": "Emoji prefix (optional)",
+          "info": "Displayed before the text, e.g. 🇲🇽 or ✦"
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.spacing.content"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "unit": "px",
+          "label": "t:general.settings.top_spacing.label",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "spacing_bottom",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "unit": "px",
+          "label": "t:general.settings.bottom_spacing.label",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.color.content"
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "t:general.settings.color_scheme.label",
+          "options": [
+            { "value": "color__bg-body color__text", "label": "t:general.settings.color_scheme.body.label" },
+            { "value": "color__bg-transparent", "label": "t:general.settings.color_scheme.transparent.label" }
+          ],
+          "default": "color__bg-transparent"
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.layout.content"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "t:general.settings.position.label",
+          "options": [
+            { "value": "left", "label": "t:general.settings.position.options.left.label" },
+            { "value": "right", "label": "t:general.settings.position.options.right.label" }
+          ],
+          "default": "left"
+        }
+      ]
+    },
+    {
+      "type": "checklist",
+      "name": "Product Checklist",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Accent color",
+          "default": "#000000",
+          "info": "Used for checkmark circles, value prop tag, and highlight borders."
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#1a1a1a"
+        },
+        {
+          "type": "header",
+          "content": "Checklist items"
+        },
+        {
+          "type": "text",
+          "id": "item_1",
+          "label": "Item 1",
+          "default": "Made with real, whole ingredients"
+        },
+        {
+          "type": "text",
+          "id": "item_2",
+          "label": "Item 2",
+          "default": "No artificial colors or flavors"
+        },
+        {
+          "type": "text",
+          "id": "item_3",
+          "label": "Item 3",
+          "default": "Third-party tested for purity"
+        },
+        {
+          "type": "text",
+          "id": "item_4",
+          "label": "Item 4"
+        },
+        {
+          "type": "text",
+          "id": "item_5",
+          "label": "Item 5"
+        },
+        {
+          "type": "header",
+          "content": "Value prop highlight"
+        },
+        {
+          "type": "text",
+          "id": "value_prop_tag",
+          "label": "Tag label",
+          "default": "★ Best Value",
+          "info": "Leave blank to hide the value prop row."
+        },
+        {
+          "type": "text",
+          "id": "value_prop_text",
+          "label": "Value text"
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.spacing.content"
+        },
+        {
+          "type": "range",
+          "id": "spacing_top",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "unit": "px",
+          "label": "t:general.settings.top_spacing.label",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "spacing_bottom",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "unit": "px",
+          "label": "t:general.settings.bottom_spacing.label",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.color.content"
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label": "t:general.settings.color_scheme.label",
+          "options": [
+            { "value": "color__bg-body color__text", "label": "t:general.settings.color_scheme.body.label" },
+            { "value": "color__bg-transparent", "label": "t:general.settings.color_scheme.transparent.label" }
+          ],
+          "default": "color__bg-transparent"
+        },
+        {
+          "type": "header",
+          "content": "t:general.headers.layout.content"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "t:general.settings.position.label",
+          "options": [
+            { "value": "left", "label": "t:general.settings.position.options.left.label" },
+            { "value": "right", "label": "t:general.settings.position.options.right.label" }
+          ],
+          "default": "left"
         }
       ]
     },
