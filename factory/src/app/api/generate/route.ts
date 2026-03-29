@@ -380,7 +380,7 @@ ${variableBlock}`;
 
   const message = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
-    max_tokens: 8192,
+    max_tokens: 16384,
     system: systemPrompt,
     messages: [{ role: 'user', content: userMessage }],
   });
@@ -390,11 +390,47 @@ ${variableBlock}`;
     throw new Error('No response from variable generation');
   }
 
+  // Log if output was truncated (stop_reason !== 'end_turn')
+  if (message.stop_reason !== 'end_turn') {
+    console.warn('[Step 2] WARNING: Output truncated! stop_reason:', message.stop_reason);
+  }
+
   let json = textBlock.text.trim();
   if (json.startsWith('```')) json = json.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
 
+  // Attempt to repair truncated JSON — if it doesn't end with }, try closing it
+  if (!json.endsWith('}')) {
+    console.warn('[Step 2] JSON appears truncated, attempting repair...');
+    // Find the last complete key-value pair and close the object
+    const lastQuote = json.lastIndexOf('"');
+    const lastComma = json.lastIndexOf(',');
+    const cutPoint = Math.max(lastQuote, lastComma);
+    if (cutPoint > 0) {
+      // Trim back to last complete value (after a comma or closing quote)
+      let repaired = json.substring(0, lastComma > 0 ? lastComma : cutPoint);
+      // Ensure we end cleanly
+      if (!repaired.endsWith('}') && !repaired.endsWith('"')) {
+        repaired = repaired.substring(0, repaired.lastIndexOf('"') + 1);
+      }
+      repaired += '}';
+      json = repaired;
+    }
+  }
+
   const values = JSON.parse(json) as Record<string, string>;
-  console.log('[Step 2] Generated', Object.keys(values).length, 'variable values');
+  console.log('[Step 2] Generated', Object.keys(values).length, 'of', generatableVars.length, 'variable values');
+
+  // Diagnostic: check about page variable coverage
+  const aboutKeys = ['about_hero_heading', 'about_founder_name', 'about_mission_heading'];
+  for (const key of aboutKeys) {
+    console.log(`[Step 2] ${key}:`, values[key] ? `"${String(values[key]).substring(0, 60)}..."` : 'MISSING');
+  }
+
+  // Warn if significant number of variables are missing
+  const missingVars = generatableVars.filter(v => !(v.key in values));
+  if (missingVars.length > 0) {
+    console.warn(`[Step 2] Missing ${missingVars.length} variables:`, missingVars.map(v => v.key).join(', '));
+  }
 
   return values;
 }
@@ -445,6 +481,7 @@ function applyValuesToTemplate(
 interface MergedTemplates {
   index: Record<string, unknown>;
   product: Record<string, unknown>;
+  about: Record<string, unknown>;
 }
 
 async function mergeTemplates(
@@ -472,8 +509,13 @@ async function mergeTemplates(
   const pdpStr = applyValuesToTemplate(JSON.stringify(basePdp), values);
   const pdpResult = JSON.parse(pdpStr);
 
-  console.log('[Step 3] Template merge complete (index + product)');
-  return { index: indexResult, product: pdpResult };
+  // Merge About template (page.about.json)
+  const baseAbout = await loadJSON<Record<string, unknown>>('templates/base-about.json');
+  const aboutStr = applyValuesToTemplate(JSON.stringify(baseAbout), values);
+  const aboutResult = JSON.parse(aboutStr);
+
+  console.log('[Step 3] Template merge complete (index + product + about)');
+  return { index: indexResult, product: pdpResult, about: aboutResult };
 }
 
 // ---------------------------------------------------------------------------
@@ -530,7 +572,7 @@ export async function POST(request: NextRequest) {
     // -----------------------------------------------------------------------
     // Step 3 — Template Merge (index + product)
     // -----------------------------------------------------------------------
-    const { index: indexJson, product: productJson } = await mergeTemplates(generatedValues);
+    const { index: indexJson, product: productJson, about: aboutJson } = await mergeTemplates(generatedValues);
 
     // -----------------------------------------------------------------------
     // Step 4 — Assemble: merge base-settings + color variants
@@ -554,6 +596,7 @@ export async function POST(request: NextRequest) {
       color_variants: mergedVariants,
       index_json: indexJson,
       product_json: productJson,
+      about_json: aboutJson,
       brand_data: scraped || {
         name: brief.brand_name,
         colors: [primaryColor, secondaryColor],

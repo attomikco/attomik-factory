@@ -1,22 +1,13 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "current": {
-    "color_background_body": "#faf0e3",
+    "color_background_body": "#ffffff",
     "color_foreground_body": "#1a1a1a",
     "color_foreground_body_alt": "#ffffff",
-    "color_background_primary": "#1a1a1a",
-    "color_foreground_primary": "#ffffff",
-    "color_background_secondary": "#ffc600",
-    "color_foreground_secondary": "#1a1a1a",
-    "color_background_tertiary": "#f3dfbf",
+    "color_background_primary": "#ffc600",
+    "color_foreground_primary": "#1a1a1a",
+    "color_background_secondary": "#1d1d1e",
+    "color_foreground_secondary": "#ffffff",
+    "color_background_tertiary": "#fff9e6",
     "color_foreground_tertiary": "#1a1a1a",
     "border_button_radius": 20,
     "border_input_radius": 10,
@@ -27,75 +18,9 @@
     "type_font_body": "inter_n4",
     "type_font_heading": "inter_n7",
     "type_font_nav": "inter_n6",
-    "type_heading_capitilization": "uppercase",
-    "type_nav_capitilization": "uppercase",
-    "type_button_capitilization": "uppercase",
+    "type_heading_capitilization": "none",
     "header_position": "sticky",
-    "x_alignment": "flex justify-center",
-    "x_margin": "window",
-    "gap_size": 10,
-    "animate_header": "none",
-    "product_card_color_scheme": "color__bg-shade-2 color__text",
-    "product_card_badge_scheme": "primary",
-    "product_card_ratio": "aspect-[1/1] aspect-w-1 aspect-h-1",
-    "product_card_crop": "cover",
-    "product_card_border_style": "image",
-    "product_card_alignment": "center",
-    "product_card_title_font": "type__heading type--big",
-    "product_card_savings_badge": "none",
-    "product_card_enable_review_badge": true,
-    "collection_card_color_scheme": "color__bg-shade-2 after:color__bg-shade-2 color__text",
-    "collection_card_color_border": "",
-    "variant_selection": "buttons",
-    "plan_selection": "dropdowns",
-    "sections": {
-      "theme__cart": {
-        "type": "theme__cart",
-        "settings": {
-          "top_color_scheme": "color__bg-body color__text",
-          "top_color_border": "color__border-divider-1",
-          "main_color_scheme_first": "color__bg-body color__text",
-          "main_color_scheme_second": "color__bg-body color__text",
-          "main_color_border": "color__border-divider-1",
-          "main_enable_cart_note": true,
-          "main_enable_cart_share": false,
-          "main_enable_cart_sku": false,
-          "bottom_color_scheme": "color__bg-body color__text",
-          "bottom_color_border": "color__border-divider-1",
-          "bottom_color_button": "btn",
-          "cart_button_behavior": "checkout",
-          "bottom_disclaimer": "",
-          "show_continue_shopping_button": false,
-          "show_button_prices": true,
-          "show_cart_subtotals": true
-        }
-      },
-      "theme__menu": {
-        "type": "theme__menu",
-        "settings": {
-          "top_color_scheme": "color__bg-body color__text",
-          "top_color_border": "color__border-divider-1",
-          "main_color_scheme": "color__bg-body color__text",
-          "main_color_border": "color__border-divider-1",
-          "main_font": "type__body",
-          "show_search": true,
-          "show_chevrons": true,
-          "bottom_color_scheme": "color__bg-overlay-1 color__text",
-          "bottom_color_border": "color__border-divider-1"
-        }
-      },
-      "theme__search": {
-        "type": "theme__search",
-        "settings": {
-          "search_links": "",
-          "top_color_scheme": "color__bg-body color__text",
-          "top_color_border": "color__border-divider-1",
-          "main_color_scheme": "color__bg-body color__text",
-          "main_color_border": "color__border-divider-1",
-          "enable_second_column": false
-        }
-      }
-    },
-    "content_for_index": []
+    "x_alignment": "",
+    "animate_header": "none"
   }
 }

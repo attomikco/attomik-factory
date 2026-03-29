@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "1638995507af787164": {
@@ -15,12 +6,23 @@
         "badge_cGMpPb": {
           "type": "badge",
           "settings": {
-            "badge_text": "Your Badge Text Here",
+            "badge_text": "Fair Trade Certified",
+            "badge_emoji": "✦",
             "icon": "check",
             "spacing_top": 10,
             "spacing_bottom": 10,
-            "badge_bg_color": "#f3dfbf",
-            "badge_font_color": "#1a1a1a"
+            "badge_bg_color": "#ffc600",
+            "badge_font_color": "#1a1a1a",
+            "bg_opacity": 100,
+            "border_opacity": 100,
+            "border_width": 0,
+            "border_radius": 6,
+            "padding_x": 12,
+            "padding_y": 6,
+            "font_size": 13,
+            "font_weight": "700",
+            "text_transform": "uppercase",
+            "letter_spacing": 1
           }
         },
         "853ae7f0-85c9-45dc-8326-6e4044bcf5e5": {
@@ -43,13 +45,13 @@
         "checklist_QUhJj4": {
           "type": "checklist",
           "settings": {
-            "item_1": "Made with real, whole ingredients",
-            "item_2": "No artificial colors or flavors",
-            "item_3": "Third-party tested for purity",
-            "item_4": "",
-            "item_5": "",
+            "item_1": "Fair Trade certified beans only",
+            "item_2": "Slow-brewed for 12+ hours",
+            "item_3": "Non-GMO and gluten-free",
+            "item_4": "No artificial flavors or additives",
+            "item_5": "Concentrated for perfect strength",
             "value_prop_tag": "★ Best Value",
-            "value_prop_text": "",
+            "value_prop_text": "Mix Pack — 2 bottles, multiple servings each",
             "spacing_top": 10,
             "spacing_bottom": 10,
             "check_color": "#ffc600"
@@ -70,12 +72,14 @@
         "variant_cards_JhQkVx": {
           "type": "variant_cards",
           "settings": {
-            "option_name": "Size",
+            "option_name": "Pack",
             "desktop_columns": "3",
             "show_per_unit": true,
             "free_shipping_threshold": "50",
             "spacing_top": 10,
-            "spacing_bottom": 10
+            "spacing_bottom": 10,
+            "popular_badge_bg": "#1d1d1e",
+            "best_badge_bg": "#ffc600"
           }
         },
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d58": {
@@ -95,11 +99,11 @@
             "label": "Subscriber Perks",
             "perk_1": "Save 15% on every order",
             "perk_2": "Free shipping every delivery",
-            "perk_3": "Cancel or pause anytime",
-            "perk_4": "Auto-delivered, never run out",
-            "perk_5": "Priority customer support",
+            "perk_3": "Skip or cancel anytime",
+            "perk_4": "Early access to new blends",
+            "perk_5": "Monthly brewing tips",
             "speed": 20,
-            "header_bg": "#ffc600",
+            "header_bg": "#1d1d1e",
             "header_text": "#ffffff",
             "header_font_size": 15,
             "header_font_weight": "800",

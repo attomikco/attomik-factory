@@ -1102,5 +1102,113 @@
     "type": "richtext",
     "section": "footer",
     "instructions": "Legal disclaimer text for the footer in <p> tags. Important for functional beverages, supplements, or health-adjacent products. Include FDA disclaimer if applicable, or general copyright notice."
+  },
+  {
+    "key": "about_hero_heading",
+    "type": "text",
+    "section": "about",
+    "instructions": "Write the About page headline (e.g. 'Our Story', 'How It Started'). 2-4 words, editorial not corporate."
+  },
+  {
+    "key": "about_hero_subhead",
+    "type": "richtext",
+    "section": "about",
+    "instructions": "Write a one-paragraph brand origin summary in <p> tags. 2-3 sentences covering what the brand is, where it came from, and why it exists. Specific and human, not corporate boilerplate."
+  },
+  {
+    "key": "about_founding_year",
+    "type": "text",
+    "section": "about",
+    "instructions": "Year the brand was founded (e.g. '2021'). Infer from brand data or use a plausible recent year if unknown."
+  },
+  {
+    "key": "about_founder_name",
+    "type": "text",
+    "section": "about",
+    "instructions": "Founder full name. Use the actual founder name if available from brand data, otherwise leave as 'Our Founders'."
+  },
+  {
+    "key": "about_founder_title",
+    "type": "text",
+    "section": "about",
+    "instructions": "Founder title (e.g. 'Co-Founder & CEO', 'Founder'). Keep it simple and authentic."
+  },
+  {
+    "key": "about_founder_story",
+    "type": "richtext",
+    "section": "about",
+    "instructions": "Write a 2-3 paragraph founder narrative in <p> tags. Paragraph 1: the personal problem or moment that sparked the idea. Paragraph 2: the journey from idea to product — specific details about sourcing, formulation, or process. Paragraph 3: where the brand is now and what drives it forward. Must feel personal and specific, not templated."
+  },
+  {
+    "key": "about_mission_heading",
+    "type": "text",
+    "section": "about",
+    "instructions": "Mission section heading. 2-4 words (e.g. 'What We Stand For', 'Our Mission'). Editorial tone."
+  },
+  {
+    "key": "about_mission_body",
+    "type": "richtext",
+    "section": "about",
+    "instructions": "Write the brand mission statement in <p> tags. One clear sentence that captures the brand's purpose. Follow with 1-2 sentences expanding on how the brand delivers on that mission. No jargon, no buzzwords."
+  },
+  {
+    "key": "about_value_1_heading",
+    "type": "text",
+    "section": "about",
+    "instructions": "First brand value heading. 2-3 words, noun-based (e.g. 'Radical Transparency', 'Clean Sourcing'). Must be distinct from values 2 and 3."
+  },
+  {
+    "key": "about_value_1_body",
+    "type": "richtext",
+    "section": "about",
+    "instructions": "First brand value description in <p> tags. 1-2 sentences explaining what this value means in practice — give a concrete example, not an abstract claim."
+  },
+  {
+    "key": "about_value_2_heading",
+    "type": "text",
+    "section": "about",
+    "instructions": "Second brand value heading. 2-3 words, distinct from values 1 and 3. Cover a different dimension (if value 1 is about ingredients, value 2 should be about people or process)."
+  },
+  {
+    "key": "about_value_2_body",
+    "type": "richtext",
+    "section": "about",
+    "instructions": "Second brand value description in <p> tags. 1-2 sentences with a concrete example. Must not overlap with value 1."
+  },
+  {
+    "key": "about_value_3_heading",
+    "type": "text",
+    "section": "about",
+    "instructions": "Third brand value heading. 2-3 words, distinct from values 1 and 2. Cover the remaining dimension (e.g. community, sustainability, innovation)."
+  },
+  {
+    "key": "about_value_3_body",
+    "type": "richtext",
+    "section": "about",
+    "instructions": "Third brand value description in <p> tags. 1-2 sentences with a concrete example. Must not overlap with values 1 or 2."
+  },
+  {
+    "key": "about_cta_heading",
+    "type": "text",
+    "section": "about",
+    "instructions": "End-of-page CTA heading. 4-7 words, drives action or aspiration (e.g. 'Ready to Taste the Difference'). No period."
+  },
+  {
+    "key": "about_cta_body",
+    "type": "richtext",
+    "section": "about",
+    "instructions": "CTA supporting copy in <p> tags. 1-2 sentences reinforcing the brand promise and inviting the reader to act."
+  },
+  {
+    "key": "about_cta_label",
+    "type": "text",
+    "section": "about",
+    "instructions": "CTA button label. 2-3 words (e.g. 'Shop Now', 'Try It', 'Get Started')."
+  },
+  {
+    "key": "about_cta_url",
+    "type": "url",
+    "section": "about",
+    "instructions": "Shopify internal URL for the CTA button (e.g. 'shopify://collections/all') or empty string."
   }
 ]
