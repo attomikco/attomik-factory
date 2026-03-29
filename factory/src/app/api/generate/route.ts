@@ -228,6 +228,8 @@ function mapColorVariants(variants: Record<string, Record<string, string>>): Col
 // Step 2 — Variable Generation
 // ---------------------------------------------------------------------------
 
+const GENERATABLE_TYPES = new Set(['text', 'richtext', 'color', 'collection']);
+
 async function generateVariableValues(
   brief: BrandBrief,
   anthropic: Anthropic,
@@ -237,12 +239,12 @@ async function generateVariableValues(
   const designRules = await loadFile('prompts/design-rules.md');
   const variableMap = await loadJSON<VariableEntry[]>('templates/variable-map.json');
 
-  // Build variable instructions grouped by section
-  const textAndCollectionVars = variableMap.filter(v => v.type === 'text' || v.type === 'collection');
+  // Build variable instructions grouped by section — include all generatable types
+  const generatableVars = variableMap.filter(v => GENERATABLE_TYPES.has(v.type));
 
   let variableBlock = '';
   let currentSection = '';
-  for (const v of textAndCollectionVars) {
+  for (const v of generatableVars) {
     if (v.section !== currentSection) {
       currentSection = v.section;
       variableBlock += `\n### ${v.section}\n`;
@@ -259,6 +261,22 @@ async function generateVariableValues(
       .join('\n');
   }
 
+  // Infer variant option name from product data
+  let variantOptionHint = 'Not detected — default to "Size"';
+  if (scraped?.products && scraped.products.length > 0) {
+    const titles = scraped.products.map(p => p.title.toLowerCase()).join(' ');
+    if (/\d+\s*(oz|ml|g|kg|lb|pack|ct|count)/i.test(titles)) {
+      variantOptionHint = 'Likely "Size" (weight/volume variants detected)';
+    } else if (/pack|bundle|set/i.test(titles)) {
+      variantOptionHint = 'Likely "Pack" (bundle variants detected)';
+    } else if (scraped.products.length > 2) {
+      const uniqueWords = new Set(scraped.products.map(p => p.title.split(/\s+/)[0]));
+      if (uniqueWords.size < scraped.products.length) {
+        variantOptionHint = 'Likely "Flavor" (flavor variants detected)';
+      }
+    }
+  }
+
   const systemPrompt = `${designRules}
 
 ---
@@ -272,9 +290,77 @@ BRAND BRIEF:
 - Key differentiators: ${brief.differentiators || 'Not specified'}
 - Competitors: ${brief.competitors || 'Not specified'}
 - Products: ${productList}
+- Variant option hint: ${variantOptionHint}
 - Primary color: ${brief.primary_color || 'Not specified'}
 - Secondary color: ${brief.secondary_color || 'Not specified'}
 - Fonts detected: ${scraped?.fonts?.join(', ') || 'Not specified'}
+
+---
+
+ADDITIONAL GENERATION RULES:
+
+NAVIGATION:
+- Nav links should follow CPG brand conventions: Shop, Our Story, Subscribe, Find Us (or Locator), FAQ
+- URLs should use standard Shopify paths: /collections/all, /pages/about, /pages/faq, /pages/store-locator
+- Keep labels to 1–2 words maximum
+
+ANNOUNCEMENT BAR:
+- Always lead with a shipping offer or discount: "Free Shipping On Orders Over $X" or "Subscribe & Save X%"
+- Keep it under 60 characters total
+- Wrap in <p> tags since it is a richtext field
+
+FOOTER:
+- footer_tagline: brand one-liner — distilled version of the hero subhead, under 10 words
+- footer_col_1_heading: "Shop" — link group for product collections
+- footer_col_1_links: richtext with product/collection links (All Products, Best Sellers, Bundles, Subscribe)
+- footer_col_2_heading: "Company" — link group for brand pages
+- footer_col_2_links: richtext with brand links (About, Our Story, Press, Sustainability)
+- footer_col_3_heading: "Support" — link group for help pages
+- footer_col_3_links: richtext with support links (FAQ, Contact, Shipping & Returns, Terms)
+- Social URLs (footer_instagram_url, footer_tiktok_url, footer_facebook_url): always return "" — client fills these in
+- footer_legal_text: generate an appropriate legal disclaimer based on product category:
+  - Beverage with alcohol/THC: include age verification and regulatory disclaimer
+  - Supplement: include FDA "not intended to diagnose, treat, cure, or prevent any disease" disclaimer
+  - Food: include allergen processing facility note
+  - General CPG: standard copyright notice with brand name and year
+- footer_newsletter_heading: action-oriented, includes specific benefit
+- footer_newsletter_content: richtext in <p> tags, mentions exact subscriber perks
+
+PDP BADGE BLOCK:
+- pdp_badge_text: short, specific, origin or certification claim — never generic like "Premium Quality"
+- pdp_badge_emoji: single emoji that reinforces the claim (🇲🇽 for origin, 🌿 for natural, 🔬 for clinical)
+- pdp_badge_bg_color: use the brand primary color
+- pdp_badge_font_color: must contrast against bg_color — use #ffffff on dark, #1a1a1a on light
+
+PDP CHECKLIST BLOCK:
+- Generate exactly 5 items — each a specific product benefit, not a generic marketing claim
+- Start each with a differentiator: ingredient name, certification, or measurable claim
+- Item 5 should be quantity/value proof (e.g. "50 servings per bag", "100 glasses per kit")
+- pdp_checklist_value_tag: "★ Best Value" or similar with star prefix
+- pdp_checklist_value_text: include specific math — quantity, unit count, and per-unit cost
+- pdp_checklist_check_color: brand primary color hex
+
+PDP PERKS MARQUEE:
+- Subscription-focused benefits only
+- Item 1: save percentage (e.g. "Save 15% on every order")
+- Item 2: free shipping (e.g. "Free shipping every delivery")
+- Item 3: flexibility (e.g. "Cancel or pause anytime")
+- Items 4–5: convenience or priority perks
+- pdp_perks_header_bg: brand primary or accent color
+- pdp_perks_header_text: contrasting text color
+- pdp_perks_marquee_bg: "#ffffff" or very light tint
+- pdp_perks_marquee_text: "#1a1a1a" or brand body text color
+
+PDP VARIANT CARDS:
+- pdp_variant_option_name: infer from scraped product data (use variant option hint above) — "Size", "Pack", or "Flavor"
+- pdp_free_shipping_threshold: set to "50" unless product prices suggest a different threshold
+- pdp_popular_badge_bg: secondary or accent brand color
+- pdp_best_badge_bg: primary brand color
+
+COLOR VARIABLES:
+- All color type variables must be valid 7-character hex codes (e.g. "#D4266A")
+- Foreground/text colors must pass WCAG AA contrast (4.5:1) against their paired background
+- Badge and perks colors should derive from the brand's primary and secondary palette
 
 ---
 
@@ -284,11 +370,13 @@ Generate values for every variable below. Return ONLY a valid JSON object where 
 For image variables: return null
 For url variables: return ""
 For collection variables: infer the most likely Shopify collection handle from the brand category (e.g. "all-products", "shop", "coffee", "skincare")
+For color variables: return a valid hex color string (e.g. "#D4266A")
+For richtext variables: return valid HTML (e.g. "<p>Free Shipping On Orders Over $50</p>")
 
 VARIABLES:
 ${variableBlock}`;
 
-  const userMessage = `Generate the complete JSON object now with all ${textAndCollectionVars.length} text/collection variables filled in. Use "${brief.brand_name}" as the brand name in all copy. For table_headings use "${brief.brand_name}, Everyone Else".`;
+  const userMessage = `Generate the complete JSON object now with all ${generatableVars.length} variables filled in. Use "${brief.brand_name}" as the brand name in all copy. For table_headings use "${brief.brand_name}, Everyone Else". All social URL variables must be empty strings.`;
 
   const message = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
@@ -315,24 +403,10 @@ ${variableBlock}`;
 // Step 3 — Template Merge
 // ---------------------------------------------------------------------------
 
-async function mergeTemplate(
+function applyValuesToTemplate(
+  templateStr: string,
   values: Record<string, string>,
-): Promise<Record<string, unknown>> {
-  console.log('[Step 3] Merging values into base template');
-
-  const variableMap = await loadJSON<VariableEntry[]>('templates/variable-map.json');
-  const baseTemplate = await loadJSON<Record<string, unknown>>('templates/base-template.json');
-
-  // Set image vars to null, url vars to empty string (overrides any Claude output)
-  const imageVars = variableMap.filter(v => v.type === 'image');
-  const urlVars = variableMap.filter(v => v.type === 'url');
-  for (const v of imageVars) values[v.key] = '__NULL__';
-  for (const v of urlVars) {
-    if (!values[v.key]) values[v.key] = '';
-  }
-
-  let templateStr = JSON.stringify(baseTemplate);
-
+): string {
   for (const [key, value] of Object.entries(values)) {
     const placeholder = `{{${key}}}`;
     if (!templateStr.includes(placeholder)) continue;
@@ -356,7 +430,6 @@ async function mergeTemplate(
   const remaining = templateStr.match(/\{\{[^}]+\}\}/g);
   if (remaining) {
     console.warn('[Step 3] Unreplaced variables:', remaining.length, remaining.slice(0, 5));
-    // Replace remaining with null for images, empty string for text
     for (const match of remaining) {
       const withQuotes = `"${match}"`;
       if (templateStr.includes(withQuotes)) {
@@ -366,9 +439,41 @@ async function mergeTemplate(
     }
   }
 
-  const result = JSON.parse(templateStr);
-  console.log('[Step 3] Template merge complete');
-  return result;
+  return templateStr;
+}
+
+interface MergedTemplates {
+  index: Record<string, unknown>;
+  product: Record<string, unknown>;
+}
+
+async function mergeTemplates(
+  values: Record<string, string>,
+): Promise<MergedTemplates> {
+  console.log('[Step 3] Merging values into base templates');
+
+  const variableMap = await loadJSON<VariableEntry[]>('templates/variable-map.json');
+
+  // Set image vars to null, url vars to empty string (overrides any Claude output)
+  const imageVars = variableMap.filter(v => v.type === 'image');
+  const urlVars = variableMap.filter(v => v.type === 'url');
+  for (const v of imageVars) values[v.key] = '__NULL__';
+  for (const v of urlVars) {
+    if (!values[v.key]) values[v.key] = '';
+  }
+
+  // Merge homepage template (index.json)
+  const baseTemplate = await loadJSON<Record<string, unknown>>('templates/base-template.json');
+  const indexStr = applyValuesToTemplate(JSON.stringify(baseTemplate), values);
+  const indexResult = JSON.parse(indexStr);
+
+  // Merge PDP template (product.json)
+  const basePdp = await loadJSON<Record<string, unknown>>('templates/base-pdp.json');
+  const pdpStr = applyValuesToTemplate(JSON.stringify(basePdp), values);
+  const pdpResult = JSON.parse(pdpStr);
+
+  console.log('[Step 3] Template merge complete (index + product)');
+  return { index: indexResult, product: pdpResult };
 }
 
 // ---------------------------------------------------------------------------
@@ -423,9 +528,9 @@ export async function POST(request: NextRequest) {
     const generatedValues = await generateVariableValues(brief, anthropic);
 
     // -----------------------------------------------------------------------
-    // Step 3 — Template Merge
+    // Step 3 — Template Merge (index + product)
     // -----------------------------------------------------------------------
-    const indexJson = await mergeTemplate(generatedValues);
+    const { index: indexJson, product: productJson } = await mergeTemplates(generatedValues);
 
     // -----------------------------------------------------------------------
     // Step 4 — Assemble: merge base-settings + color variants
@@ -448,6 +553,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       color_variants: mergedVariants,
       index_json: indexJson,
+      product_json: productJson,
       brand_data: scraped || {
         name: brief.brand_name,
         colors: [primaryColor, secondaryColor],
