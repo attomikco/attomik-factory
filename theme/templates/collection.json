@@ -127,11 +127,40 @@
         "enable_arrows": true,
         "enable_scrollbar": false
       }
+    },
+    "article_grid_ncTx4n": {
+      "type": "article-grid",
+      "name": "t:sections.article_grid.name",
+      "settings": {
+        "blog": "",
+        "items_count": 0,
+        "heading": "",
+        "content": "",
+        "button_label": "",
+        "button_url": "",
+        "spacing_top": 0,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-body",
+        "color_background": "#ffffff",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "enable_color_fade": false,
+        "style_border": "",
+        "layout_row_desktop": 3,
+        "layout_row_mobile": 1,
+        "layout_x_alignment": "justify-between",
+        "enable_margin": true,
+        "enable_split": false,
+        "enable_split_heading": false,
+        "visibility": ""
+      }
     }
   },
   "order": [
     "banner",
     "grid",
-    "recent"
+    "recent",
+    "article_grid_ncTx4n"
   ]
 }

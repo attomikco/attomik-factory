@@ -70,8 +70,8 @@
         "moast_carousel_UDqLxp"
       ],
       "settings": {
-        "spacing_top": 100,
-        "spacing_bottom": 100,
+        "spacing_top": 0,
+        "spacing_bottom": 0,
         "color_scheme": "color__bg-body",
         "color_background": "#ffffff",
         "color_text": "",
