@@ -9,14 +9,14 @@
  */
 {
   "current": {
-    "color_background_body": "#ffffff",
+    "color_background_body": "#faf0e3",
     "color_foreground_body": "#1a1a1a",
     "color_foreground_body_alt": "#ffffff",
-    "color_background_primary": "#ffc600",
-    "color_foreground_primary": "#1a1a1a",
-    "color_background_secondary": "#1d1d1e",
-    "color_foreground_secondary": "#ffffff",
-    "color_background_tertiary": "#fff9e6",
+    "color_background_primary": "#1a1a1a",
+    "color_foreground_primary": "#ffffff",
+    "color_background_secondary": "#ffc600",
+    "color_foreground_secondary": "#1a1a1a",
+    "color_background_tertiary": "#f3dfbf",
     "color_foreground_tertiary": "#1a1a1a",
     "border_button_radius": 20,
     "border_input_radius": 10,

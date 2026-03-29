@@ -17,15 +17,14 @@
           "settings": {
             "badge_text": "Your Badge Text Here",
             "icon": "check",
-            "badge_background": "primary",
-            "badge_text_color": "primary",
-            "badge_border_color": "secondary",
+            "badge_background": "secondary",
+            "badge_text_color": "secondary",
+            "badge_border_color": "body",
             "spacing_top": 0,
             "spacing_bottom": 10,
             "color_scheme": "color__bg-transparent",
             "color_border": "color__border-divider-1",
-            "style_border": "",
-            "position": "right"
+            "style_border": ""
           }
         },
         "853ae7f0-85c9-45dc-8326-6e4044bcf5e5": {
@@ -43,6 +42,21 @@
             "enable_type": false,
             "enable_vendor": false,
             "enable_sku": false
+          }
+        },
+        "checklist_QUhJj4": {
+          "type": "checklist",
+          "settings": {
+            "item_1": "Made with real, whole ingredients",
+            "item_2": "No artificial colors or flavors",
+            "item_3": "Third-party tested for purity",
+            "item_4": "",
+            "item_5": "",
+            "value_prop_tag": "★ Best Value",
+            "value_prop_text": "",
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "check_color": "#ffc600"
           }
         },
         "62c29cd6-a0b5-4f8b-86c0-a48660869d22": {
@@ -159,6 +173,7 @@
       "block_order": [
         "badge_cGMpPb",
         "853ae7f0-85c9-45dc-8326-6e4044bcf5e5",
+        "checklist_QUhJj4",
         "62c29cd6-a0b5-4f8b-86c0-a48660869d22",
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d58",
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d53",
