@@ -1,0 +1,1346 @@
+{% comment %}
+  =====================================================
+  PRODUCT STORY — Reusable CPG product page section
+  Full-width storytelling layout with nostalgia/story,
+  how-it-works steps, reviews, value comparison, FAQ,
+  and final CTA. All content configurable via schema.
+  =====================================================
+{% endcomment %}
+
+{%- liquid
+  assign col_handle = section.settings.collection_handle
+  assign story_block = nil
+  assign value_block = nil
+  assign cta_block = nil
+  assign step_blocks = '' | split: ','
+  assign review_blocks = '' | split: ','
+  assign faq_blocks = '' | split: ','
+
+  for block in section.blocks
+    case block.type
+      when 'story'
+        assign story_block = block
+      when 'step'
+        assign step_blocks = step_blocks | concat: block
+      when 'review'
+        assign review_blocks = review_blocks | concat: block
+      when 'value_comparison'
+        assign value_block = block
+      when 'faq'
+        assign faq_blocks = faq_blocks | concat: block
+      when 'cta'
+        assign cta_block = block
+    endcase
+  endfor
+-%}
+
+<style>
+  /* ==========================================
+     PRODUCT STORY — FULL WIDTH BREAKOUT
+     Escapes the narrow product-info column
+  ========================================== */
+  .afg-wrap-{{ section.id }} {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+  }
+
+  .afg-wrap-{{ section.id }} * { box-sizing: border-box; }
+
+  .afg-wrap-{{ section.id }} {
+    --c-primary: {{ settings.color_background_primary | default: '#D4266A' }};
+    --c-primary-hover: {{ settings.color_background_primary | default: '#D4266A' | color_darken: 10 }};
+    --c-primary-fg: {{ settings.color_foreground_primary | default: '#FFFFFF' }};
+    --c-secondary: {{ settings.color_background_secondary | default: '#F3A61C' }};
+    --c-secondary-fg: {{ settings.color_foreground_secondary | default: '#2D1A14' }};
+    --c-body: {{ settings.color_background_body | default: '#FFF8F6' }};
+    --c-text: {{ settings.color_foreground_body | default: '#2D1A14' }};
+    --c-muted: {{ settings.color_foreground_body | default: '#6B5A54' | color_modify: 'alpha', 0.7 }};
+    --c-alt: {{ settings.color_background_tertiary | default: '#FFF0EB' }};
+    --c-card: #ffffff;
+    --c-border: {{ settings.color_foreground_body | default: '#2D1A14' | color_modify: 'alpha', 0.08 }};
+    --c-star: {{ settings.color_background_secondary | default: '#F3A61C' }};
+    --c-green: #5A8A3C;
+    font-family: var(--font-body-family, 'Montserrat', sans-serif);
+    font-size: 17px;
+    color: var(--c-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .afg-wrap-{{ section.id }} img { max-width: 100%; display: block; }
+  .afg-wrap-{{ section.id }} a { text-decoration: none; color: inherit; }
+
+  .afg-wrap-{{ section.id }} h2,
+  .afg-wrap-{{ section.id }} h3,
+  .afg-wrap-{{ section.id }} h4 {
+    font-family: var(--font-heading-family, 'Montserrat', sans-serif);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.15;
+  }
+
+  /* ---------- SECTION SYSTEM ---------- */
+  .afg-sec-{{ section.id }} { padding: 64px 24px; }
+  .afg-sec--body-{{ section.id }} { background: var(--c-body); }
+  .afg-sec--alt-{{ section.id }} { background: var(--c-alt); }
+  .afg-sec--pink-{{ section.id }} { background: var(--c-primary); color: var(--c-primary-fg); }
+  .afg-center-{{ section.id }} { max-width: 1060px; margin: 0 auto; }
+
+  .afg-sec-title-{{ section.id }} {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .afg-sec-sub-{{ section.id }} {
+    text-align: center;
+    font-size: 16px;
+    color: var(--c-muted);
+    margin-bottom: 40px;
+    text-transform: none;
+  }
+
+  .afg-sec--pink-{{ section.id }} .afg-sec-sub-{{ section.id }} { color: rgba(255,255,255,0.85); }
+
+  .afg-divider-{{ section.id }} {
+    width: 48px; height: 3px;
+    background: var(--c-primary);
+    margin: 0 auto 24px;
+    border-radius: 2px;
+  }
+
+  .afg-sec--pink-{{ section.id }} .afg-divider-{{ section.id }} { background: var(--c-secondary); }
+
+  /* ---------- NOSTALGIA ---------- */
+  .afg-nost-{{ section.id }} {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .afg-nost-{{ section.id }} h2 {
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+
+  .afg-nost-{{ section.id }} h2 .hl { color: var(--c-primary); }
+
+  .afg-nost-{{ section.id }} p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--c-muted);
+    margin-bottom: 16px;
+    text-transform: none;
+  }
+
+  .afg-quote-{{ section.id }} {
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--c-text);
+    margin: 28px auto;
+    padding: 24px 28px;
+    border-left: 4px solid var(--c-primary);
+    background: {{ settings.color_background_primary | default: '#D4266A' | color_modify: 'alpha', 0.03 }};
+    border-radius: 0 10px 10px 0;
+    max-width: 520px;
+    text-align: left;
+    line-height: 1.55;
+    text-transform: none;
+  }
+
+  /* ---------- REVIEWS ---------- */
+  .afg-rev-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .afg-rev-{{ section.id }} {
+    background: var(--c-card);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .afg-rev-{{ section.id }}:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(45,26,20,0.06);
+  }
+
+  .afg-rev-stars-{{ section.id }} { color: var(--c-star); font-size: 18px; letter-spacing: 2px; margin-bottom: 12px; }
+
+  .afg-rev-{{ section.id }} p {
+    font-size: 16px;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 14px;
+    text-transform: none;
+  }
+
+  .afg-rev-auth-{{ section.id }} {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--c-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .afg-rev-auth-{{ section.id }}::before { content: ''; width: 16px; height: 2px; background: var(--c-primary); }
+
+  .afg-vbadge-{{ section.id }} {
+    font-size: 10px;
+    color: var(--c-green);
+    font-weight: 700;
+    background: rgba(90,138,60,0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ---------- VALUE ---------- */
+  .afg-val-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .afg-val-card-{{ section.id }} { text-align: center; padding: 28px 20px; border-radius: 12px; }
+
+  .afg-val-card--dim-{{ section.id }} {
+    background: {{ settings.color_foreground_body | default: '#2D1A14' | color_modify: 'alpha', 0.03 }};
+    border: 1px solid var(--c-border);
+    opacity: 0.6;
+  }
+
+  .afg-val-card--hl-{{ section.id }} {
+    background: {{ settings.color_background_primary | default: '#D4266A' | color_modify: 'alpha', 0.04 }};
+    border: 2px solid var(--c-primary);
+    position: relative;
+  }
+
+  .afg-val-card--hl-{{ section.id }}::after {
+    content: '\2605  BEST VALUE';
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--c-primary);
+    color: var(--c-primary-fg);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .afg-val-card-{{ section.id }} h3 { font-size: 16px; color: var(--c-muted); margin-bottom: 4px; font-weight: 600; }
+  .afg-val-price-{{ section.id }} { font-size: 44px; font-weight: 900; color: var(--c-primary); line-height: 1; }
+  .afg-val-unit-{{ section.id }} { font-size: 14px; color: var(--c-muted); margin-top: 4px; text-transform: none; }
+  .afg-val-detail-{{ section.id }} { font-size: 14px; color: var(--c-muted); margin-top: 6px; opacity: 0.7; text-transform: none; }
+  .afg-val-vs-{{ section.id }} { font-size: 16px; font-weight: 800; color: var(--c-primary); opacity: 0.4; text-transform: uppercase; }
+
+  /* ---------- FAQ ---------- */
+  .afg-faq-list-{{ section.id }} { max-width: 700px; margin: 0 auto; }
+  .afg-faq-item-{{ section.id }} { border-bottom: 1px solid var(--c-border); }
+
+  .afg-faq-q-{{ section.id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--c-text);
+    user-select: none;
+    gap: 16px;
+    text-transform: none;
+  }
+
+  .afg-faq-q-{{ section.id }}::after {
+    content: '+';
+    font-size: 24px;
+    color: var(--c-primary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    font-weight: 300;
+  }
+
+  .afg-faq-item-{{ section.id }}.open .afg-faq-q-{{ section.id }}::after { transform: rotate(45deg); }
+  .afg-faq-a-{{ section.id }} { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .afg-faq-item-{{ section.id }}.open .afg-faq-a-{{ section.id }} { max-height: 300px; padding-bottom: 20px; }
+  .afg-faq-a-{{ section.id }} p { font-size: 16px; line-height: 1.65; color: var(--c-muted); text-transform: none; }
+
+  /* ---------- BUTTONS ---------- */
+  .afg-btn-primary-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-primary);
+    color: var(--c-primary-fg);
+    font-family: var(--font-heading-family, 'Montserrat', sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 16px {{ settings.color_background_primary | default: '#D4266A' | color_modify: 'alpha', 0.2 }};
+    text-align: center;
+  }
+
+  .afg-btn-primary-{{ section.id }}:hover {
+    background: var(--c-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px {{ settings.color_background_primary | default: '#D4266A' | color_modify: 'alpha', 0.3 }};
+  }
+
+  .afg-btn-secondary-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-secondary);
+    color: var(--c-secondary-fg);
+    font-family: var(--font-heading-family, 'Montserrat', sans-serif);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 16px {{ settings.color_background_secondary | default: '#F3A61C' | color_modify: 'alpha', 0.2 }};
+    text-align: center;
+  }
+
+  .afg-btn-secondary-{{ section.id }}:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px {{ settings.color_background_secondary | default: '#F3A61C' | color_modify: 'alpha', 0.3 }};
+  }
+
+  .afg-btn-ghost-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.95);
+    color: var(--c-primary);
+    font-family: var(--font-heading-family, 'Montserrat', sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .afg-btn-ghost-{{ section.id }}:hover { transform: translateY(-1px); }
+
+  .afg-btn-outline-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--c-primary);
+    font-family: var(--font-heading-family, 'Montserrat', sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border: 1.5px solid var(--c-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  .afg-btn-outline-{{ section.id }}:hover { opacity: 1; transform: translateY(-1px); }
+
+  /* ---------- FINAL CTA ---------- */
+  .afg-final-{{ section.id }} {
+    text-align: center;
+    background: var(--c-primary);
+    padding: 72px 24px;
+    color: #fff;
+  }
+
+  .afg-final-inner-{{ section.id }} { max-width: 600px; margin: 0 auto; }
+
+  .afg-final-{{ section.id }} h2 {
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .afg-final-{{ section.id }} h2 .hl { color: var(--c-secondary); }
+
+  .afg-final-{{ section.id }} p {
+    font-size: 17px;
+    color: #fff;
+    margin-bottom: 28px;
+    line-height: 1.6;
+    text-transform: none;
+  }
+
+  .afg-guar-row-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .afg-guar-{{ section.id }} {
+    font-size: 13px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .afg-guar-{{ section.id }}::before { content: '\2713'; color: #fff; font-weight: 700; }
+
+  /* ---------- ATC FEEDBACK ---------- */
+  .afg-atc-msg-{{ section.id }} {
+    display: none;
+    background: var(--c-green);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .afg-atc-msg-{{ section.id }}.show { display: block; }
+
+  /* ---------- STEPS ---------- */
+  .afg-steps-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat({{ step_blocks.size | at_most: 4 }}, 1fr);
+    gap: 24px;
+  }
+
+  .afg-step-{{ section.id }} {
+    background: var(--c-card);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .afg-step-{{ section.id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(45,26,20,0.06);
+  }
+
+  .afg-step-num-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    background: var(--c-primary);
+    color: var(--c-primary-fg);
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 50%;
+    margin-bottom: 14px;
+  }
+
+  .afg-step-icon-{{ section.id }} { font-size: 32px; margin-bottom: 8px; }
+  .afg-step-{{ section.id }} h3 { font-size: 18px; font-weight: 700; color: var(--c-text); margin-bottom: 8px; }
+  .afg-step-{{ section.id }} p { font-size: 15px; line-height: 1.6; color: var(--c-muted); text-transform: none; }
+
+  .afg-recipe-note-{{ section.id }} {
+    text-align: center;
+    font-size: 14px;
+    color: var(--c-muted);
+    margin-top: 24px;
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  /* ---------- ANIMATIONS ---------- */
+  .afg-anim-{{ section.id }} { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .afg-anim-{{ section.id }}.in { opacity: 1; transform: translateY(0); }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 768px) {
+    .afg-sec-{{ section.id }} { padding: 48px 20px; }
+    .afg-steps-{{ section.id }} { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+    .afg-rev-grid-{{ section.id }} { grid-template-columns: 1fr; }
+    .afg-val-grid-{{ section.id }} { grid-template-columns: 1fr; gap: 12px; }
+    .afg-val-vs-{{ section.id }} { display: none; }
+    .afg-final-{{ section.id }} { padding: 56px 20px; }
+    .afg-guar-row-{{ section.id }} { gap: 14px; }
+  }
+</style>
+
+<div class="afg-wrap-{{ section.id }}">
+
+  {% comment %} ===== NOSTALGIA / STORY ===== {% endcomment %}
+  {% if section.settings.show_nostalgia and story_block %}
+    <section class="afg-sec-{{ section.id }} afg-sec--body-{{ section.id }}" {{ story_block.shopify_attributes }}>
+      <div class="afg-center-{{ section.id }}">
+        <div class="afg-divider-{{ section.id }}"></div>
+        {% if section.settings.section_title != blank %}
+          <p class="afg-sec-sub-{{ section.id }}" style="margin-bottom:16px;">{{ section.settings.section_title }}</p>
+        {% endif %}
+        <div class="afg-nost-{{ section.id }} afg-anim-{{ section.id }}">
+          {% if story_block.settings.heading != blank %}
+            <h2>
+              {%- liquid
+                assign hl_word = story_block.settings.highlighted_word
+                if hl_word != blank
+                  assign heading_parts = story_block.settings.heading | split: hl_word
+                  echo heading_parts[0]
+                  echo '<span class="hl">'
+                  echo hl_word
+                  echo '</span>'
+                  if heading_parts.size > 1
+                    echo heading_parts[1]
+                  endif
+                else
+                  echo story_block.settings.heading
+                endif
+              -%}
+            </h2>
+          {% endif %}
+
+          {% if story_block.settings.body_1 != blank %}
+            <p>{{ story_block.settings.body_1 }}</p>
+          {% endif %}
+
+          {% if story_block.settings.quote != blank %}
+            <div class="afg-quote-{{ section.id }}">{{ story_block.settings.quote }}</div>
+          {% endif %}
+
+          {% if story_block.settings.body_2 != blank %}
+            <p>{{ story_block.settings.body_2 }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ===== HOW IT WORKS ===== {% endcomment %}
+  {% if section.settings.show_how_it_works and step_blocks.size > 0 %}
+    <section class="afg-sec-{{ section.id }} afg-sec--alt-{{ section.id }}">
+      <div class="afg-center-{{ section.id }}">
+        <h2 class="afg-sec-title-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.steps_heading | default: 'How It Works' }}</h2>
+        {% if section.settings.steps_subheading != blank %}
+          <p class="afg-sec-sub-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.steps_subheading }}</p>
+        {% endif %}
+        <div class="afg-steps-{{ section.id }}">
+          {% for block in step_blocks %}
+            <div class="afg-step-{{ section.id }} afg-anim-{{ section.id }}" {{ block.shopify_attributes }}>
+              {% if block.settings.icon != blank %}
+                <div class="afg-step-icon-{{ section.id }}">{{ block.settings.icon }}</div>
+              {% endif %}
+              <div class="afg-step-num-{{ section.id }}">{{ block.settings.number | default: forloop.index }}</div>
+              {% if block.settings.heading != blank %}
+                <h3>{{ block.settings.heading }}</h3>
+              {% endif %}
+              {% if block.settings.description != blank %}
+                <p>{{ block.settings.description }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if section.settings.steps_footnote != blank %}
+          <p class="afg-recipe-note-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.steps_footnote }}</p>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ===== REVIEWS ===== {% endcomment %}
+  {% if section.settings.show_reviews and review_blocks.size > 0 %}
+    <section class="afg-sec-{{ section.id }} afg-sec--alt-{{ section.id }}">
+      <div class="afg-center-{{ section.id }}">
+        <h2 class="afg-sec-title-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.reviews_heading | default: 'What Our Customers Say' }}</h2>
+        {% if section.settings.reviews_subheading != blank %}
+          <p class="afg-sec-sub-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.reviews_subheading }}</p>
+        {% endif %}
+        <div class="afg-rev-grid-{{ section.id }}">
+          {% for block in review_blocks %}
+            <div class="afg-rev-{{ section.id }} afg-anim-{{ section.id }}" {{ block.shopify_attributes }}>
+              <div class="afg-rev-stars-{{ section.id }}">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              {% if block.settings.content != blank %}
+                <p>"{{ block.settings.content }}"</p>
+              {% endif %}
+              {% if block.settings.author != blank %}
+                <div class="afg-rev-auth-{{ section.id }}">
+                  {{ block.settings.author }}
+                  {% if block.settings.verified %}
+                    <span class="afg-vbadge-{{ section.id }}">&#10003; Verified</span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ===== VALUE COMPARISON ===== {% endcomment %}
+  {% if section.settings.show_value and value_block %}
+    <section class="afg-sec-{{ section.id }} afg-sec--body-{{ section.id }}" {{ value_block.shopify_attributes }}>
+      <div class="afg-center-{{ section.id }}">
+        <h2 class="afg-sec-title-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.value_heading | default: 'The Best Value for Your Family' }}</h2>
+        {% if section.settings.value_subheading != blank %}
+          <p class="afg-sec-sub-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.value_subheading }}</p>
+        {% endif %}
+        <div class="afg-val-grid-{{ section.id }} afg-anim-{{ section.id }}">
+          <div class="afg-val-card-{{ section.id }} afg-val-card--dim-{{ section.id }}">
+            <h3>{{ value_block.settings.competitor_label | default: 'Restaurant' }}</h3>
+            <div class="afg-val-price-{{ section.id }}">{{ value_block.settings.competitor_price | default: '$5+' }}</div>
+            {% if value_block.settings.competitor_unit != blank %}
+              <div class="afg-val-unit-{{ section.id }}">{{ value_block.settings.competitor_unit }}</div>
+            {% endif %}
+          </div>
+          <div class="afg-val-vs-{{ section.id }}">VS</div>
+          <div class="afg-val-card-{{ section.id }} afg-val-card--hl-{{ section.id }}">
+            <h3>{{ value_block.settings.brand_label | default: 'Our Brand' }}</h3>
+            <div class="afg-val-price-{{ section.id }}">{{ value_block.settings.brand_price | default: '27¢' }}</div>
+            {% if value_block.settings.brand_unit != blank %}
+              <div class="afg-val-unit-{{ section.id }}">{{ value_block.settings.brand_unit }}</div>
+            {% endif %}
+            {% if value_block.settings.brand_detail != blank %}
+              <div class="afg-val-detail-{{ section.id }}">{{ value_block.settings.brand_detail }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ===== FAQ ===== {% endcomment %}
+  {% if section.settings.show_faq and faq_blocks.size > 0 %}
+    <section class="afg-sec-{{ section.id }} afg-sec--alt-{{ section.id }}">
+      <div class="afg-center-{{ section.id }}">
+        <h2 class="afg-sec-title-{{ section.id }} afg-anim-{{ section.id }}">{{ section.settings.faq_heading | default: 'Your Questions, Answered' }}</h2>
+        <div style="margin-bottom:32px;"></div>
+        <div class="afg-faq-list-{{ section.id }}">
+          {% for block in faq_blocks %}
+            <div class="afg-faq-item-{{ section.id }}{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
+              <div class="afg-faq-q-{{ section.id }}">{{ block.settings.question }}</div>
+              <div class="afg-faq-a-{{ section.id }}">
+                <p>{{ block.settings.answer }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% comment %} ===== FINAL CTA ===== {% endcomment %}
+  {% if section.settings.show_final_cta and cta_block %}
+    <section class="afg-final-{{ section.id }}" {{ cta_block.shopify_attributes }}>
+      <div class="afg-final-inner-{{ section.id }} afg-anim-{{ section.id }}">
+        {% if cta_block.settings.heading != blank %}
+          <h2>
+            {%- liquid
+              assign hl_word = cta_block.settings.highlighted_word
+              if hl_word != blank
+                assign heading_parts = cta_block.settings.heading | split: hl_word
+                echo heading_parts[0]
+                echo '<span class="hl">'
+                echo hl_word
+                echo '</span>'
+                if heading_parts.size > 1
+                  echo heading_parts[1]
+                endif
+              else
+                echo cta_block.settings.heading
+              endif
+            -%}
+          </h2>
+        {% endif %}
+
+        {% if cta_block.settings.body != blank %}
+          <p>{{ cta_block.settings.body }}</p>
+        {% endif %}
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+          {% if cta_block.settings.primary_label != blank %}
+            <button
+              class="afg-btn-secondary-{{ section.id }} afg-atc-{{ section.id }}"
+              data-vid="{{ cta_block.settings.primary_variant_id }}"
+              style="font-size:17px; padding:18px 44px;"
+            >
+              {{ cta_block.settings.primary_label }}
+            </button>
+          {% endif %}
+          {% if cta_block.settings.secondary_label != blank %}
+            <button
+              class="afg-btn-ghost-{{ section.id }} afg-atc-{{ section.id }}"
+              data-vid="{{ cta_block.settings.secondary_variant_id }}"
+            >
+              {{ cta_block.settings.secondary_label }}
+            </button>
+          {% endif %}
+          <div class="afg-atc-msg-{{ section.id }}" id="afg-msg-final-{{ section.id }}">&#10003; Added to cart!</div>
+        </div>
+
+        {% if cta_block.settings.guarantee_1 != blank or cta_block.settings.guarantee_2 != blank or cta_block.settings.guarantee_3 != blank or cta_block.settings.guarantee_4 != blank %}
+          <div class="afg-guar-row-{{ section.id }}">
+            {% if cta_block.settings.guarantee_1 != blank %}
+              <span class="afg-guar-{{ section.id }}">{{ cta_block.settings.guarantee_1 }}</span>
+            {% endif %}
+            {% if cta_block.settings.guarantee_2 != blank %}
+              <span class="afg-guar-{{ section.id }}">{{ cta_block.settings.guarantee_2 }}</span>
+            {% endif %}
+            {% if cta_block.settings.guarantee_3 != blank %}
+              <span class="afg-guar-{{ section.id }}">{{ cta_block.settings.guarantee_3 }}</span>
+            {% endif %}
+            {% if cta_block.settings.guarantee_4 != blank %}
+              <span class="afg-guar-{{ section.id }}">{{ cta_block.settings.guarantee_4 }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+
+</div>
+
+<script>
+  (function() {
+    var sid = '{{ section.id }}';
+
+    // FAQ Accordion
+    document.querySelectorAll('.afg-faq-q-' + sid).forEach(function(q) {
+      q.addEventListener('click', function() {
+        var item = q.parentElement;
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.afg-faq-item-' + sid).forEach(function(i) { i.classList.remove('open'); });
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Scroll Animations
+    if ('IntersectionObserver' in window) {
+      var afgObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.afg-anim-' + sid).forEach(function(el) { afgObs.observe(el); });
+    } else {
+      document.querySelectorAll('.afg-anim-' + sid).forEach(function(el) { el.classList.add('in'); });
+    }
+
+    // Add to Cart — Shopify AJAX
+    document.querySelectorAll('.afg-atc-' + sid).forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var vid = btn.getAttribute('data-vid');
+        if (!vid) return;
+
+        var origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Adding...';
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: [{ id: parseInt(vid), quantity: 1 }] })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var wrap = btn.closest('.afg-sec-' + sid) || btn.closest('.afg-final-' + sid);
+          if (wrap) {
+            var msg = wrap.querySelector('.afg-atc-msg-' + sid);
+            if (msg) { msg.classList.add('show'); setTimeout(function() { msg.classList.remove('show'); }, 3000); }
+          }
+
+          btn.textContent = '\u2713 Added!';
+          setTimeout(function() { btn.disabled = false; btn.textContent = origText; }, 2000);
+
+          fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+            document.querySelectorAll('.cart-count, [data-cart-count], .cart-count-bubble span').forEach(function(el) { el.textContent = cart.item_count; });
+          });
+        })
+        .catch(function() {
+          btn.textContent = 'Error \u2014 Try Again';
+          setTimeout(function() { btn.disabled = false; btn.textContent = origText; }, 2000);
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Story",
+  "tag": "section",
+  "class": "product-story-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Eyebrow title (optional)",
+      "info": "Small text above the story heading"
+    },
+    {
+      "type": "text",
+      "id": "collection_handle",
+      "label": "Collection handle",
+      "info": "Used for add-to-cart buttons (e.g. agua-fresca-hibiscus-guava)"
+    },
+    {
+      "type": "header",
+      "content": "Section visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_nostalgia",
+      "label": "Show story section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_how_it_works",
+      "label": "Show steps section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show reviews section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_value",
+      "label": "Show value comparison section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_faq",
+      "label": "Show FAQ section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_final_cta",
+      "label": "Show final CTA section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Steps section"
+    },
+    {
+      "type": "text",
+      "id": "steps_heading",
+      "label": "Steps heading",
+      "default": "Refreshing Agua Fresca in 3 Simple Steps"
+    },
+    {
+      "type": "text",
+      "id": "steps_subheading",
+      "label": "Steps subheading",
+      "default": "Ready in seconds — just add water and enjoy"
+    },
+    {
+      "type": "text",
+      "id": "steps_footnote",
+      "label": "Steps footnote",
+      "default": "1 scoop = 1 tbsp · Use warm water for easier dissolving · Add ice after mixing"
+    },
+    {
+      "type": "header",
+      "content": "Reviews section"
+    },
+    {
+      "type": "text",
+      "id": "reviews_heading",
+      "label": "Reviews heading",
+      "default": "What Our Family Says"
+    },
+    {
+      "type": "text",
+      "id": "reviews_subheading",
+      "label": "Reviews subheading",
+      "default": "Real reviews from people who love the real taste"
+    },
+    {
+      "type": "header",
+      "content": "Value comparison section"
+    },
+    {
+      "type": "text",
+      "id": "value_heading",
+      "label": "Value heading",
+      "default": "The Best Value for Your Family"
+    },
+    {
+      "type": "text",
+      "id": "value_subheading",
+      "label": "Value subheading",
+      "default": "Up to 100 glasses of real agua fresca — for less than a single restaurant drink"
+    },
+    {
+      "type": "header",
+      "content": "FAQ section"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "Your Questions, Answered"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Remember the Taste of Real Agua Fresca on a Hot Day?"
+        },
+        {
+          "type": "text",
+          "id": "highlighted_word",
+          "label": "Highlighted word",
+          "info": "This word in the heading gets colored in the primary color",
+          "default": "Real Agua Fresca"
+        },
+        {
+          "type": "textarea",
+          "id": "body_1",
+          "label": "Body paragraph 1",
+          "default": "That vibrant, fruity agua de guayaba from the street vendor or your abuelita's kitchen. Made with real fruit, served ice-cold, impossibly refreshing. The kind of drink that made every summer afternoon feel like a celebration."
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "I haven't found anything like this in the U.S. — the real guava pieces and hibiscus flavor remind me of visiting my family in Mexico. My kids love it too."
+        },
+        {
+          "type": "textarea",
+          "id": "body_2",
+          "label": "Body paragraph 2",
+          "default": "We captured that exact flavor — real dehydrated guava as the very first ingredient, bright hibiscus flowers, and nutrient-rich chia seeds — so you can enjoy an authentic agua fresca in seconds, anywhere."
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji icon",
+          "default": "🥄"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Step number",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Scoop & Add Water"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Add 1 scoop (1 tbsp) to 8 oz of warm water for a cup, or 4 scoops to 1 liter. Measuring scoop included."
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Review text",
+          "default": "This is the closest thing to authentic agua de guayaba I've found outside of Mexico. You can actually see the real fruit pieces and the hibiscus gives it such a beautiful color and flavor."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Ana R."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified buyer",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "value_comparison",
+      "name": "Value comparison",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Competitor"
+        },
+        {
+          "type": "text",
+          "id": "competitor_label",
+          "label": "Competitor label",
+          "default": "Restaurant Agua Fresca"
+        },
+        {
+          "type": "text",
+          "id": "competitor_price",
+          "label": "Competitor price",
+          "default": "$5+"
+        },
+        {
+          "type": "text",
+          "id": "competitor_unit",
+          "label": "Competitor unit text",
+          "default": "per glass"
+        },
+        {
+          "type": "header",
+          "content": "Your brand"
+        },
+        {
+          "type": "text",
+          "id": "brand_label",
+          "label": "Brand label",
+          "default": "La Monjita Guava Hibiscus"
+        },
+        {
+          "type": "text",
+          "id": "brand_price",
+          "label": "Brand price",
+          "default": "27¢"
+        },
+        {
+          "type": "text",
+          "id": "brand_unit",
+          "label": "Brand unit text",
+          "default": "per glass (1kg pack)"
+        },
+        {
+          "type": "text",
+          "id": "brand_detail",
+          "label": "Brand detail",
+          "default": "100 glasses · Real guava & chia"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What makes this agua fresca different from other drink mixes?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Unlike other agua fresca mixes, La Monjita uses real dehydrated guava as the very first ingredient. You'll see actual fruit pieces and chia seeds in every glass."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "Final CTA",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Real Agua Fresca, Ready in Seconds"
+        },
+        {
+          "type": "text",
+          "id": "highlighted_word",
+          "label": "Highlighted word",
+          "info": "This word in the heading gets colored in the secondary color",
+          "default": "Ready in Seconds"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body text",
+          "default": "Made with real guava, hibiscus flower, and chia seeds. 150 glasses in the 3-Pack with free shipping — authentic refreshment your whole family will love."
+        },
+        {
+          "type": "header",
+          "content": "Primary button"
+        },
+        {
+          "type": "text",
+          "id": "primary_label",
+          "label": "Primary button label",
+          "default": "Get the 3-Pack — $51.99 Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "primary_variant_id",
+          "label": "Primary variant ID",
+          "info": "Shopify variant ID for the add-to-cart action"
+        },
+        {
+          "type": "header",
+          "content": "Secondary button"
+        },
+        {
+          "type": "text",
+          "id": "secondary_label",
+          "label": "Secondary button label",
+          "default": "Or Add 1 Pack — $17.99"
+        },
+        {
+          "type": "text",
+          "id": "secondary_variant_id",
+          "label": "Secondary variant ID",
+          "info": "Shopify variant ID for the add-to-cart action"
+        },
+        {
+          "type": "header",
+          "content": "Guarantee badges"
+        },
+        {
+          "type": "text",
+          "id": "guarantee_1",
+          "label": "Guarantee 1",
+          "default": "Hecho en México"
+        },
+        {
+          "type": "text",
+          "id": "guarantee_2",
+          "label": "Guarantee 2",
+          "default": "Real Fruit First"
+        },
+        {
+          "type": "text",
+          "id": "guarantee_3",
+          "label": "Guarantee 3",
+          "default": "Free Shipping on 3-Pack"
+        },
+        {
+          "type": "text",
+          "id": "guarantee_4",
+          "label": "Guarantee 4",
+          "default": "Secure Checkout"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Story",
+      "settings": {
+        "show_nostalgia": true,
+        "show_how_it_works": true,
+        "show_reviews": true,
+        "show_value": true,
+        "show_faq": true,
+        "show_final_cta": true,
+        "steps_heading": "Refreshing Agua Fresca in 3 Simple Steps",
+        "steps_subheading": "Ready in seconds — just add water and enjoy",
+        "steps_footnote": "1 scoop = 1 tbsp · Use warm water for easier dissolving · Add ice after mixing",
+        "reviews_heading": "What Our Family Says",
+        "reviews_subheading": "Real reviews from people who love the real taste",
+        "value_heading": "The Best Value for Your Family",
+        "value_subheading": "Up to 100 glasses of real agua fresca — for less than a single restaurant drink",
+        "faq_heading": "Your Questions, Answered"
+      },
+      "blocks": [
+        {
+          "type": "story",
+          "settings": {
+            "heading": "Remember the Taste of Real Agua Fresca on a Hot Day?",
+            "highlighted_word": "Real Agua Fresca",
+            "body_1": "That vibrant, fruity agua de guayaba from the street vendor or your abuelita's kitchen. Made with real fruit, served ice-cold, impossibly refreshing. The kind of drink that made every summer afternoon feel like a celebration.",
+            "quote": "I haven't found anything like this in the U.S. — the real guava pieces and hibiscus flavor remind me of visiting my family in Mexico. My kids love it too.",
+            "body_2": "We captured that exact flavor — real dehydrated guava as the very first ingredient, bright hibiscus flowers, and nutrient-rich chia seeds — so you can enjoy an authentic agua fresca in seconds, anywhere."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🥄",
+            "number": "1",
+            "heading": "Scoop & Add Water",
+            "description": "Add 1 scoop (1 tbsp) to 8 oz of warm water for a cup, or 4 scoops to 1 liter. Measuring scoop included."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🥢",
+            "number": "2",
+            "heading": "Stir to Dissolve",
+            "description": "Stir well until fully dissolved. Warm water makes it easier — the guava bits and chia seeds blend right in."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "🧊",
+            "number": "3",
+            "heading": "Add Ice & Enjoy",
+            "description": "Add ice after mixing for maximum refreshment. Filter the chia seeds and fruit bits if you prefer a smooth drink."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "content": "This is the closest thing to authentic agua de guayaba I've found outside of Mexico. You can actually see the real fruit pieces and the hibiscus gives it such a beautiful color and flavor.",
+            "author": "Ana R.",
+            "verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "content": "I love that it's not overly sweet like other drink mixes. The chia seeds are such a nice touch and it tastes so natural. My whole family drinks it every day now.",
+            "author": "Carmen V.",
+            "verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "content": "Made a liter for a weekend cookout and it was gone in minutes. Everyone kept asking where I got it. The guava and hibiscus combo is so refreshing — way better than soda.",
+            "author": "Daniel M.",
+            "verified": true
+          }
+        },
+        {
+          "type": "value_comparison",
+          "settings": {
+            "competitor_label": "Restaurant Agua Fresca",
+            "competitor_price": "$5+",
+            "competitor_unit": "per glass",
+            "brand_label": "La Monjita Guava Hibiscus",
+            "brand_price": "27¢",
+            "brand_unit": "per glass (1kg pack)",
+            "brand_detail": "100 glasses · Real guava & chia"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What makes this agua fresca different from other drink mixes?",
+            "answer": "Unlike other agua fresca mixes, La Monjita uses real dehydrated guava as the very first ingredient. You'll see actual fruit pieces and chia seeds in every glass. It's lightly sweetened with just 6g of sugar per serving — no artificial sweeteners — for an authentic, balanced flavor you can feel good about."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How many servings does each size make?",
+            "answer": "The 500g pack makes approximately 50 glasses at just 33¢ per glass. The 1kg pack makes approximately 100 glasses at just 27¢ per glass — the best value for families. The 3-Pack ships free and saves you even more."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What about the chia seeds and fruit pieces?",
+            "answer": "The real chia seeds and dehydrated guava bits are part of what makes this agua fresca special — they add natural texture and nutrition. If you prefer a smoother drink, you can simply strain them out after mixing."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "Standard ground delivery takes 3–7 business days anywhere in the U.S. Orders over $50 (like the 3-Pack) ship free! Orders under $50 have a flat rate of $4.99."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What are the full ingredients?",
+            "answer": "Made with real hibiscus flowers, dehydrated guava, chia seeds, dehydrated sugar for balanced sweetness, citric acid for a refreshing zing, plant-based stevia for gentle sweetness, natural flavors, and plant-based gums to keep the drink smooth and perfectly blended. No artificial sweeteners."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use cold water instead of warm?",
+            "answer": "Warm water helps the mix dissolve faster and more evenly. We recommend dissolving in warm water first, then adding ice for the most refreshing experience. Cold water works too — just stir a bit longer!"
+          }
+        },
+        {
+          "type": "cta",
+          "settings": {
+            "heading": "Real Agua Fresca, Ready in Seconds",
+            "highlighted_word": "Ready in Seconds",
+            "body": "Made with real guava, hibiscus flower, and chia seeds. 150 glasses in the 3-Pack with free shipping — authentic refreshment your whole family will love.",
+            "primary_label": "Get the 3-Pack — $51.99 Free Shipping",
+            "secondary_label": "Or Add 1 Pack — $17.99",
+            "guarantee_1": "Hecho en México",
+            "guarantee_2": "Real Fruit First",
+            "guarantee_3": "Free Shipping on 3-Pack",
+            "guarantee_4": "Secure Checkout"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
