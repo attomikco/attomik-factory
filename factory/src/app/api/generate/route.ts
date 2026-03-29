@@ -428,12 +428,25 @@ export async function POST(request: NextRequest) {
     const indexJson = await mergeTemplate(generatedValues);
 
     // -----------------------------------------------------------------------
-    // Step 4 — Assemble and Return
+    // Step 4 — Assemble: merge base-settings + color variants
     // -----------------------------------------------------------------------
+    const baseSettings = await loadJSON<Record<string, unknown>>('templates/base-settings.json');
+    // Remove the _comment field — not a Shopify setting
+    delete baseSettings._comment;
+
+    // Each color variant gets base-settings as foundation, then color tokens on top
+    const mergedVariants = colorVariants.map(variant => ({
+      name: variant.name,
+      theme_settings: {
+        ...baseSettings,
+        ...variant.theme_settings,
+      } as Record<string, string>,
+    }));
+
     console.log('[Step 4] Assembly complete for:', brief.brand_name);
 
     return NextResponse.json({
-      color_variants: colorVariants,
+      color_variants: mergedVariants,
       index_json: indexJson,
       brand_data: scraped || {
         name: brief.brand_name,

@@ -244,17 +244,9 @@ export default function NewClientPage() {
 
   function buildSettingsData() {
     const variant = colorVariants[selectedVariant];
+    // theme_settings already contains base-settings + color tokens merged by the API
     return {
-      current: {
-        ...(variant?.theme_settings || {}),
-        type_font_heading: 'inter_n7',
-        type_font_body: 'inter_n4',
-        type_font_nav: 'inter_n6',
-        type_heading_capitilization: 'none',
-        border_element_radius: 0,
-        border_button_radius: 0,
-        border_input_radius: 0,
-      },
+      current: variant?.theme_settings || {},
     };
   }
 
