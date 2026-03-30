@@ -84,7 +84,7 @@
         "template--15898491977911__de4cc432-8e1c-49bc-8935-1f94a9d9d797-content-1": {
           "type": "content",
           "settings": {
-            "content": "<p>Discover the perfect balance of bold flavor and smooth finish with our expertly crafted cold brew blends. Fair trade sourced, ethically made, and designed for those moments that matter most.</p>"
+            "content": "<p>From morning rituals to afternoon breaks, the best moments deserve exceptional coffee. Jolene Coffee brings you ethically sourced, perfectly crafted cold brew that elevates every sip.</p>"
           }
         },
         "buttons_tAAWWt": {
@@ -148,7 +148,7 @@
         "heading_xVjwzg": {
           "type": "heading",
           "settings": {
-            "content": "Cold Brew Excellence"
+            "content": "Slow Brewed Excellence"
           }
         },
         "image_VET3xm": {
@@ -161,7 +161,7 @@
         "heading_B8MzC8": {
           "type": "heading",
           "settings": {
-            "content": "Ethically Sourced"
+            "content": "Non-GMO Promise"
           }
         },
         "image_MFaLCd": {
@@ -208,8 +208,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-14",
-            "heading": "Slow Brew Perfection",
-            "content": "<p>Our cold brew is steeped for hours, not minutes, extracting maximum flavor while maintaining the smooth, low-acid profile that makes every cup exceptional.</p>",
+            "heading": "Ethical Sourcing Foundation",
+            "content": "<p>We partner directly with Fair Trade certified farms, ensuring every bean supports sustainable farming practices and fair wages for growers.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-body color__text",
             "color_border": "",
@@ -224,8 +224,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-14",
-            "heading": "Fair Trade Foundation",
-            "content": "<p>We source only from certified fair trade farms, ensuring every bean supports sustainable farming practices and fair wages for coffee growers worldwide.</p>",
+            "heading": "Slow Brewed Perfection",
+            "content": "<p>Our cold brew process takes time—18 hours of patient extraction creates a smooth, balanced flavor that's never bitter or harsh.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-body color__text",
             "color_border": "",
@@ -240,8 +240,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-14",
-            "heading": "Premium Ingredients",
-            "content": "<p>Just two simple ingredients in our Black Cold Brew, or the perfect blend of cold brew and creamy oat milk in our Latte—nothing artificial, nothing unnecessary.</p>",
+            "heading": "Clean Ingredient Promise",
+            "content": "<p>Just coffee, water, and oat milk where needed. No artificial flavors, no preservatives, no compromise on what goes into your cup.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-body color__text",
             "color_border": "",
@@ -258,8 +258,8 @@
         "e5b5ea4b-be8f-4673-a833-0ca548dff15c"
       ],
       "settings": {
-        "heading": "Crafted for Coffee Purists",
-        "content": "<p>At Jolene Coffee, we believe exceptional coffee starts with exceptional sourcing. Every batch is slow-brewed to perfection, creating the smooth, balanced taste that makes every sip memorable.</p>",
+        "heading": "Crafted for Every Moment",
+        "content": "<p>At Jolene Coffee, we believe great coffee shouldn't compromise on ethics or taste. Every batch is slow-brewed with care and sourced with purpose.</p>",
         "button_label": "Our Story",
         "button_url": "",
         "spacing_top": 100,
@@ -283,7 +283,7 @@
     "product_grid_RjMqHX": {
       "type": "product-grid",
       "settings": {
-        "collection": "coffee",
+        "collection": "all-products",
         "products_count": 3,
         "heading": "",
         "content": "",
@@ -313,8 +313,8 @@
         "content_tbK8Y4": {
           "type": "content",
           "settings": {
-            "heading": "Bold Black Cold Brew",
-            "content": "<p>Pure, concentrated coffee flavor with a naturally smooth finish. Two ingredients, endless possibilities for your perfect cup.</p>",
+            "heading": "Smooth Cold Brew Foundation",
+            "content": "<p>18-hour slow extraction creates a naturally sweet, never bitter base that showcases the true character of our ethically sourced beans.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -339,8 +339,8 @@
         "content_UDd3CH": {
           "type": "content",
           "settings": {
-            "heading": "Creamy Oat Milk Latte",
-            "content": "<p>The perfect marriage of our signature cold brew with rich, creamy oat milk. Dairy-free indulgence without compromise.</p>",
+            "heading": "Ready When You Are",
+            "content": "<p>Pre-made and perfectly balanced, Jolene Coffee fits seamlessly into your morning rush or afternoon recharge without any prep time.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -398,7 +398,7 @@
         "testimonial_qW4RjP": {
           "type": "testimonial",
           "settings": {
-            "content": "The smoothest cold brew I've ever tasted—finally, coffee that doesn't need sugar",
+            "content": "The smoothest cold brew I've tasted—finally, coffee that doesn't need added sugar.",
             "name": "",
             "title": "",
             "logo": null,
@@ -409,7 +409,7 @@
         "testimonial_Net3Mq": {
           "type": "testimonial",
           "settings": {
-            "content": "Jolene's oat milk latte tastes like it came from my favorite café",
+            "content": "Jolene Coffee proves that ethical sourcing and exceptional taste can go hand in hand.",
             "name": "",
             "title": "",
             "logo": null,
@@ -420,7 +420,7 @@
         "testimonial_nAKf8z": {
           "type": "testimonial",
           "settings": {
-            "content": "Fair trade coffee that actually delivers on flavor—this is my new morning ritual",
+            "content": "This oat milk latte has become my non-negotiable part of morning routine.",
             "name": "",
             "title": "",
             "logo": null,
@@ -431,7 +431,7 @@
         "testimonial_7XQnba": {
           "type": "testimonial",
           "settings": {
-            "content": "Clean ingredients, incredible taste. This is what premium coffee should be",
+            "content": "Clean ingredients, bold flavor—exactly what the coffee world needed.",
             "name": "",
             "title": "",
             "logo": null,
@@ -442,7 +442,7 @@
         "testimonial_eCjygz": {
           "type": "testimonial",
           "settings": {
-            "content": "The Black Cold Brew concentrate makes perfect iced coffee every single time",
+            "content": "From first sip to last, Jolene Coffee delivers consistent excellence.",
             "name": "",
             "title": "",
             "logo": null,
@@ -482,8 +482,8 @@
         "content_Xiprzb": {
           "type": "content",
           "settings": {
-            "heading": "Concentrate Perfection",
-            "content": "<p>Our concentrated formula means you control the strength. Mix with water, milk, or enjoy straight—your coffee, your way.</p>",
+            "heading": "Fair Trade Partnership",
+            "content": "<p>Every bean comes from certified Fair Trade farms where growers receive fair wages and sustainable farming practices protect the land for future harvests.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -508,8 +508,8 @@
         "content_MazXh6": {
           "type": "content",
           "settings": {
-            "heading": "Sustainable Sourcing",
-            "content": "<p>Every bean supports sustainable farming practices and fair wages. Great coffee that makes a positive impact on farming communities.</p>",
+            "heading": "Oat Milk Perfection",
+            "content": "<p>Our White blend combines smooth cold brew with creamy oat milk for a dairy-free experience that's naturally sweet and perfectly balanced.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -566,8 +566,8 @@
         "content_KRrNeM": {
           "type": "content",
           "settings": {
-            "heading": "Artisan Cold Brew Process",
-            "content": "<p>We slow-steep our beans for optimal extraction, creating a naturally smooth, low-acid coffee that highlights the complex flavors of our fair trade beans.</p>",
+            "heading": "Ethically Sourced Excellence",
+            "content": "<p>We work directly with Fair Trade certified farms to source beans that support sustainable farming and fair wages. Every cup creates positive impact from farm to table.</p>",
             "button_label": "Learn More",
             "url": "",
             "show_image_as_background": false,
@@ -643,8 +643,8 @@
         "content_tdT9JF": {
           "type": "content",
           "settings": {
-            "heading": "Clean Label Promise",
-            "content": "<p>No artificial flavors, no unnecessary additives. Just premium coffee and, in our Oat Milk Latte, creamy plant-based goodness that complements rather than masks the coffee's natural character.</p>",
+            "heading": "Cold Brew Mastery",
+            "content": "<p>Our 18-hour slow brewing process extracts maximum flavor while eliminating bitterness. The result is a smooth, naturally sweet coffee that needs no added sugar.</p>",
             "button_label": "Shop Coffee",
             "url": "",
             "show_image_as_background": false,
@@ -703,8 +703,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Fair Trade Beans",
-            "content": "<p>Ethically sourced from certified farms that prioritize sustainable practices and fair wages for coffee growers.</p>",
+            "heading": "Fair Trade Coffee",
+            "content": "<p>Ethically sourced beans from certified Fair Trade farms deliver rich, complex flavors while supporting sustainable farming practices.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -719,8 +719,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Cold Brew Method",
-            "content": "<p>Slow-steeped extraction process that creates naturally smooth, low-acid coffee with rich, complex flavor profiles.</p>",
+            "heading": "Filtered Water",
+            "content": "<p>Pure, filtered water ensures clean extraction and allows the true character of our premium coffee beans to shine through.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -735,8 +735,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Oat Milk Blend",
-            "content": "<p>Creamy, dairy-free oat milk perfectly balanced with our cold brew for a naturally sweet, indulgent coffee experience.</p>",
+            "heading": "Organic Oat Milk",
+            "content": "<p>Creamy, naturally sweet oat milk creates the perfect dairy-free base for our White blend without artificial thickeners or stabilizers.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -751,8 +751,8 @@
           "settings": {
             "icon": null,
             "icon_height": "h-32",
-            "heading": "Non-GMO Certified",
-            "content": "<p>All ingredients are verified non-GMO, ensuring you get clean, pure coffee without genetic modification or artificial enhancement.</p>",
+            "heading": "18-Hour Process",
+            "content": "<p>Our patient cold brewing method extracts maximum flavor and natural sweetness while eliminating the harsh acids that cause bitterness.</p>",
             "enable_padding": true,
             "color_scheme": "color__bg-transparent",
             "color_border": "",
@@ -771,7 +771,7 @@
       ],
       "name": "t:sections.icon_grid.name",
       "settings": {
-        "heading": "What Makes Jolene Different",
+        "heading": "Pure Ingredients, Bold Flavor",
         "content": "",
         "button_label": "",
         "button_url": "",
@@ -800,7 +800,7 @@
           "type": "content",
           "settings": {
             "label": "Fair Trade Certified",
-            "tooltip": "Ensures ethical sourcing and fair wages for farmers",
+            "tooltip": "All beans sourced from certified Fair Trade farms",
             "icon": "",
             "column_1_content": "",
             "column_1_icon": "check",
@@ -808,7 +808,7 @@
             "column_2_icon": "slash",
             "column_3_content": "",
             "column_3_icon": "",
-            "column_4_content": "Often not specified",
+            "column_4_content": "Not Guaranteed",
             "column_4_icon": "slash",
             "color_scheme": "color__bg-transparent"
           }
@@ -816,8 +816,8 @@
         "content_qzG3qg": {
           "type": "content",
           "settings": {
-            "label": "Slow-Brewed Process",
-            "tooltip": "Extended steeping time for smoother, less acidic coffee",
+            "label": "18-Hour Cold Brew Process",
+            "tooltip": "Patient extraction for smooth, never bitter flavor",
             "icon": "",
             "column_1_content": "",
             "column_1_icon": "check",
@@ -833,7 +833,7 @@
         "content_R6jMnh": {
           "type": "content",
           "settings": {
-            "label": "Clean Ingredients",
+            "label": "No Artificial Ingredients",
             "tooltip": "",
             "icon": "",
             "column_1_content": "",
@@ -842,7 +842,7 @@
             "column_2_icon": "slash",
             "column_3_content": "",
             "column_3_icon": "",
-            "column_4_content": "Often contains artificial flavors",
+            "column_4_content": "Often Contains Additives",
             "column_4_icon": "slash",
             "color_scheme": "color__bg-transparent"
           }
@@ -883,8 +883,8 @@
         "content_7bQBtz": {
           "type": "content",
           "settings": {
-            "heading": "Never Run Out",
-            "content": "<p>☑ Save 15% on every delivery<br>☑ Free shipping always<br>☑ Skip or cancel anytime<br>☑ First access to new blends</p>",
+            "heading": "Never Run Out Again",
+            "content": "<p>Subscribe and save 15% on every order with free shipping. ✓ Cancel anytime ✓ Flexible delivery ✓ Member pricing ✓ Priority support</p>",
             "button_label": "Subscribe",
             "url": "",
             "image": null,
@@ -940,9 +940,9 @@
         "content_6EQNYk": {
           "type": "content",
           "settings": {
-            "heading": "Join the Jolene Coffee Club",
-            "content": "<p>☑ Save 15% on every delivery<br>☑ Free shipping on all orders<br>☑ Skip, pause, or cancel anytime<br>☑ Early access to limited releases<br>☑ Brewing tips and coffee education</p>",
-            "button_label": "Subscribe Now",
+            "heading": "Subscribe & Save",
+            "content": "<p>Get Jolene Coffee delivered automatically and save 15% on every order. ✓ Free shipping every delivery ✓ Cancel or pause anytime ✓ Flexible scheduling ✓ Member-only pricing</p>",
+            "button_label": "Start Subscription",
             "url": "",
             "show_image_as_background": false,
             "enable_autoplay": true,
@@ -1024,7 +1024,7 @@
           "type": "content",
           "settings": {
             "heading": "What makes Jolene Coffee different from other cold brews?",
-            "content": "<p>Our slow-brew process takes hours, not minutes, extracting maximum flavor while maintaining smoothness. We use only fair trade, non-GMO certified beans and keep our ingredient list clean—just coffee and water for our Black, or the addition of creamy oat milk for our Latte.</p>",
+            "content": "<p>We use an 18-hour slow brewing process with Fair Trade certified beans, creating a naturally sweet, never bitter coffee. Our commitment to ethical sourcing and clean ingredients—just coffee, water, and oat milk—sets us apart from mass-produced alternatives.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": true
@@ -1033,8 +1033,8 @@
         "content_Kqy98Q": {
           "type": "content",
           "settings": {
-            "heading": "How do I prepare the cold brew concentrate?",
-            "content": "<p>Mix one part Jolene Black Cold Brew with one part water for traditional strength, or adjust to your taste preference. You can also mix with milk, oat milk, or enjoy it straight over ice. Our Oat Milk Latte is ready to drink straight from the bottle.</p>",
+            "heading": "How should I store and serve Jolene Coffee?",
+            "content": "<p>Keep refrigerated and shake well before serving. Our cold brew is best served chilled over ice and consumed within 7 days of opening. No preparation needed—it's ready to drink straight from the bottle.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -1043,8 +1043,8 @@
         "content_3jkmy8": {
           "type": "content",
           "settings": {
-            "heading": "Are your products organic and ethically sourced?",
-            "content": "<p>All our coffee is Fair Trade Certified and Non-GMO verified. While not certified organic, our sourcing partners follow sustainable farming practices that prioritize environmental stewardship and fair wages for coffee farmers.</p>",
+            "heading": "Is the oat milk latte suitable for people with dietary restrictions?",
+            "content": "<p>Yes, our White blend is dairy-free, gluten-free, and made with Non-GMO ingredients. The organic oat milk provides natural creaminess without artificial additives, making it suitable for most dietary preferences.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -1053,8 +1053,8 @@
         "content_ngLB3x": {
           "type": "content",
           "settings": {
-            "heading": "How long does opened cold brew last?",
-            "content": "<p>Once opened, consume within 7-10 days for best flavor and quality. Store in the refrigerator and shake before each use. Our cold brew maintains its smooth taste throughout this period when properly stored.</p>",
+            "heading": "Where do you source your coffee beans?",
+            "content": "<p>All our beans come from Fair Trade certified farms that meet strict standards for sustainable farming and fair wages. We work directly with growers to ensure quality while supporting farming communities.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -1063,8 +1063,8 @@
         "content_9WdCEU": {
           "type": "content",
           "settings": {
-            "heading": "Do you offer subscription or bulk ordering?",
-            "content": "<p>Yes! Subscribe and save 15% on every delivery with free shipping. You can adjust frequency, skip deliveries, or cancel anytime. We also offer mix packs and bulk options for offices or events.</p>",
+            "heading": "Can I cancel or modify my subscription anytime?",
+            "content": "<p>Absolutely. You can cancel, pause, or modify your subscription schedule through your account dashboard anytime. No commitments, no fees—just flexible delivery that works with your coffee consumption.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -1073,8 +1073,8 @@
         "content_GDRarW": {
           "type": "content",
           "settings": {
-            "heading": "Is the Oat Milk Latte suitable for dietary restrictions?",
-            "content": "<p>Our Oat Milk Latte is dairy-free, gluten-free, and Non-GMO. It's perfect for those avoiding dairy or following plant-based diets, while still delivering the creamy, indulgent coffee experience you're craving.</p>",
+            "heading": "Do you offer shipping nationwide?",
+            "content": "<p>Yes, we ship to all 50 states with free shipping on orders over $50. Subscription orders always ship free. We use insulated packaging to maintain freshness during transit.</p>",
             "icon": "",
             "color_scheme": "btn",
             "enable_open": false
@@ -1091,7 +1091,7 @@
       ],
       "name": "t:sections.accordions.name",
       "settings": {
-        "heading": "Questions? We Have Answers",
+        "heading": "Your Questions Answered",
         "content": "",
         "button_label": "",
         "button_url": "",
@@ -1118,8 +1118,8 @@
         "content_bH8tpB": {
           "type": "content",
           "settings": {
-            "heading": "Born from Coffee Obsession",
-            "content": "<p>What started as a quest for the perfect home cold brew became Jolene Coffee. After years of experimenting with brewing methods and sourcing, we discovered that great coffee doesn't need to be complicated—it just needs to be done right.</p>",
+            "heading": "Born from Real Need",
+            "content": "<p>Jolene Coffee started when our founder couldn't find ethically sourced cold brew that actually tasted great. After months of perfecting the 18-hour brewing process, we created coffee worth sharing.</p>",
             "button_label": "",
             "url": "",
             "image": null,
@@ -1201,8 +1201,8 @@
         "content_WfQxEw": {
           "type": "content",
           "settings": {
-            "heading": "The Search for Perfect Coffee",
-            "content": "<p>Jolene Coffee began with a simple frustration: why was it so hard to find cold brew that tasted as good at home as it did at the best coffee shops? After countless experiments with brewing times, bean origins, and ratios, we perfected our slow-brew method that extracts maximum flavor while maintaining the smooth, balanced taste that makes every sip memorable.</p>",
+            "heading": "Coffee with Purpose",
+            "content": "<p>What began as a personal quest for better coffee became a mission to prove that ethical sourcing and exceptional taste aren't mutually exclusive. Every bottle represents our commitment to farmers, flavor, and the moments that matter most.</p>",
             "button_label": "Our Story",
             "url": "",
             "show_image_as_background": false,
@@ -1258,23 +1258,23 @@
         "testimonial_GdxFz9": {
           "type": "testimonial",
           "settings": {
-            "content": "<p>I've tried every cold brew brand, but Jolene's Black is in a league of its own. Smooth, bold, never bitter—and I love that it's concentrated so I can make it exactly how I like it.</p>",
-            "title": "<p>Marcus T., Strategy Director</p>",
+            "content": "<p>This is hands down the smoothest cold brew I've ever tasted. The Black is my morning ritual now—never bitter, always satisfying. Finally found my perfect coffee.</p>",
+            "title": "<p>Marcus T., Creative Director</p>",
             "avatar": null
           }
         },
         "testimonial_4m7Eq8": {
           "type": "testimonial",
           "settings": {
-            "content": "<p>The Oat Milk Latte tastes like it came straight from my favorite café. Creamy, perfectly balanced, and I feel good knowing it's ethically sourced. My morning routine is complete.</p>",
-            "title": "<p>Elena R., Yoga Instructor</p>",
+            "content": "<p>The Oat Milk Latte is incredible. As someone who's dairy-free, I've tried everything and this actually tastes like a treat, not a compromise. Subscribe and never looked back.</p>",
+            "title": "<p>Elena R., Wellness Coach</p>",
             "avatar": null
           }
         },
         "testimonial_wUztfP": {
           "type": "testimonial",
           "settings": {
-            "content": "<p>Finally, a coffee brand that delivers on both taste and values. The fair trade certification matters to me, and the fact that it tastes incredible is just the perfect bonus.</p>",
+            "content": "<p>Love that I can feel good about what I'm drinking. Fair Trade sourcing matters to me, and the Mix Pack lets me switch between Black and White depending on my mood.</p>",
             "title": "<p>David K., Entrepreneur</p>",
             "avatar": null
           }
@@ -1315,7 +1315,7 @@
         "heading_wGWGqw": {
           "type": "heading",
           "settings": {
-            "content": "Your Perfect Coffee Moment Awaits",
+            "content": "Ready for Better Coffee",
             "font_size_mobile": 34,
             "font_size_desktop": 50
           }
@@ -1323,7 +1323,7 @@
         "content_PiQ9yB": {
           "type": "content",
           "settings": {
-            "content": "<p>Join thousands who've discovered what happens when you combine ethically sourced beans, patient brewing, and uncompromising quality. Every cup tells the story of exceptional coffee.</p>"
+            "content": "<p>Join thousands who've made the switch to ethically sourced, perfectly crafted cold brew. Your morning routine deserves this upgrade.</p>"
           }
         },
         "buttons_7z4C9R": {
@@ -1374,8 +1374,8 @@
         "content_iXr89U": {
           "type": "content",
           "settings": {
-            "heading": "Perfect for Every Moment",
-            "content": "<p>Whether you prefer the bold intensity of our Black Cold Brew or the creamy indulgence of our Oat Milk Latte, Jolene Coffee delivers the exceptional taste you deserve.</p>",
+            "heading": "Find Your Perfect Match",
+            "content": "<p>Whether you prefer the bold simplicity of Black or the creamy comfort of White, Jolene Coffee has the perfect blend for your daily ritual.</p>",
             "button_label": "Shop All",
             "url": "",
             "show_image_as_background": false,
@@ -1400,7 +1400,7 @@
       ],
       "name": "t:sections.product_slider.name",
       "settings": {
-        "collection": "coffee",
+        "collection": "all-products",
         "products_count": 7,
         "heading": "Complete Your Coffee Experience",
         "content": "",
@@ -1460,7 +1460,7 @@
         "type": "text",
         "settings": {
           "heading": "",
-          "content": "<p>© 2024 Jolene Coffee. All rights reserved. These statements have not been evaluated by the FDA.</p>",
+          "content": "<p>© 2024 Jolene Coffee. All rights reserved. Please enjoy responsibly.</p>",
           "button_label": "",
           "button_url": "",
           "spacing_top": 100,
@@ -1487,16 +1487,16 @@
             "disabled": true,
             "settings": {
               "heading": "Join the Coffee Club",
-              "content": "<p>Get brewing tips, early access to new blends, and exclusive member pricing delivered to your inbox.</p>",
+              "content": "<p>Get early access to new blends, brewing tips, and member-only pricing delivered to your inbox.</p>",
               "button": "Subscribe",
-              "disclaimer": "<p>You can unsubscribe at any time.</p>",
+              "disclaimer": "<p>We respect your privacy. Unsubscribe anytime.</p>",
               "success": "<p>Success! You've been subscribed.</p>"
             }
           },
           "content_block": {
             "type": "content",
             "settings": {
-              "heading": "Everything happens over coffee",
+              "heading": "Everything Happens Over Coffee",
               "content": "",
               "button_label": "",
               "button_url": "",
