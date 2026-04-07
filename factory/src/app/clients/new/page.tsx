@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { colors, font, fontWeight, fontSize, spacing, radius, transition, styles, letterSpacing } from '@/lib/design-tokens';
 
 const CATEGORIES = ['Beverage', 'Skincare', 'Food', 'Supplement', 'Other'] as const;
 const VIBES = ['Premium', 'Playful', 'Clinical', 'Earthy', 'Bold', 'Minimal', 'Luxe', 'Raw'] as const;
@@ -59,25 +60,60 @@ const INITIAL: BrandBrief = {
   secondary_color: '#2c2c2c', notes: '', scraped_brand: null,
 };
 
+// ── Style helpers ───────────────────────────────────────────────────────────
+
+const labelStyle: React.CSSProperties = {
+  ...styles.label,
+  display: 'block',
+  marginBottom: spacing[1],
+};
+
+const inputStyle: React.CSSProperties = {
+  ...styles.input,
+};
+
 // ── Utility components ──────────────────────────────────────────────────────
 
 function Steps({ current }: { current: number }) {
   const labels = ['Scan', 'Brief', 'Results'];
   return (
-    <div className="flex items-center gap-2">
+    <div style={{ display: 'flex', alignItems: 'center', gap: spacing[2] }}>
       {labels.map((label, i) => {
         const n = i + 1;
+        const isActive = n === current;
+        const isDone = n < current;
         return (
-          <div key={n} className="flex items-center gap-2">
-            <div className={`flex h-7 w-7 items-center justify-center font-mono text-xs ${
-              n === current ? 'border border-accent text-accent'
-              : n < current ? 'border border-white/30 text-white/30'
-              : 'border border-surface-border text-muted'
-            }`}>{n}</div>
-            <span className={`font-mono text-xs uppercase tracking-wider ${
-              n === current ? 'text-accent' : 'text-muted'
-            }`}>{label}</span>
-            {n < 3 && <div className="mx-2 h-px w-8 bg-surface-border" />}
+          <div key={n} style={{ display: 'flex', alignItems: 'center', gap: spacing[2] }}>
+            <div
+              style={{
+                width: 28,
+                height: 28,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontFamily: font.mono,
+                fontSize: fontSize.xs,
+                border: `1px solid ${isActive ? colors.accent : isDone ? colors.borderStrong : colors.border}`,
+                color: isActive ? colors.accent : isDone ? colors.borderStrong : colors.muted,
+                borderRadius: radius.xs,
+              }}
+            >
+              {n}
+            </div>
+            <span
+              style={{
+                fontFamily: font.mono,
+                fontSize: fontSize.xs,
+                textTransform: 'uppercase',
+                letterSpacing: letterSpacing.wider,
+                color: isActive ? colors.accent : colors.muted,
+              }}
+            >
+              {label}
+            </span>
+            {n < 3 && (
+              <div style={{ width: 32, height: 1, background: colors.border, margin: `0 ${spacing[2]}px` }} />
+            )}
           </div>
         );
       })}
@@ -88,7 +124,7 @@ function Steps({ current }: { current: number }) {
 function Field({ label, htmlFor, children }: { label: string; htmlFor?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="mb-1 block font-mono text-[11px] uppercase tracking-wider text-muted">{label}</label>
+      <label htmlFor={htmlFor} style={labelStyle}>{label}</label>
       {children}
     </div>
   );
@@ -96,15 +132,27 @@ function Field({ label, htmlFor, children }: { label: string; htmlFor?: string; 
 
 function TextInput({ id, value, onChange, placeholder }: { id: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
   return (
-    <input id={id} type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-      className="w-full border border-surface-border bg-surface-raised px-3 py-2 font-mono text-sm text-white placeholder:text-muted/40 focus:border-accent focus:outline-none" />
+    <input
+      id={id}
+      type="text"
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder}
+      style={inputStyle}
+    />
   );
 }
 
 function TextArea({ id, value, onChange, placeholder, rows = 3 }: { id: string; value: string; onChange: (v: string) => void; placeholder?: string; rows?: number }) {
   return (
-    <textarea id={id} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-      className="w-full resize-none border border-surface-border bg-surface-raised px-3 py-2 font-mono text-sm text-white placeholder:text-muted/40 focus:border-accent focus:outline-none" />
+    <textarea
+      id={id}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder}
+      rows={rows}
+      style={{ ...inputStyle, resize: 'none' as const }}
+    />
   );
 }
 
@@ -126,7 +174,7 @@ export default function NewClientPage() {
   const [scanUrl, setScanUrl] = useState('');
   const [scanning, setScanning] = useState(false);
   const [generating, setGenerating] = useState(false);
-  const [genStep, setGenStep] = useState(0); // 0=idle, 1=colors, 2=copy, 3=config
+  const [genStep, setGenStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const [loadingMsg, setLoadingMsg] = useState(0);
@@ -142,7 +190,6 @@ export default function NewClientPage() {
 
   const scraped = brief.scraped_brand;
 
-  // Elapsed timer — ticks every second while generating
   useEffect(() => {
     if (!generating) return;
     genStartRef.current = Date.now();
@@ -153,7 +200,6 @@ export default function NewClientPage() {
     return () => clearInterval(id);
   }, [generating]);
 
-  // Loading message cycling — rotates every 8s while on step 2
   useEffect(() => {
     if (genStep !== 2) { setLoadingMsg(0); return; }
     setLoadingMsg(0);
@@ -204,9 +250,7 @@ export default function NewClientPage() {
     setError(null);
     setGenStep(1);
     try {
-      // Step 1 → 2 after ~5s (color API is fast)
       const step1Timer = setTimeout(() => setGenStep(2), 5000);
-      // Step 2 → 3 after ~30s (main Claude call)
       const step2Timer = setTimeout(() => setGenStep(prev => (prev < 3 ? 3 : prev)), 30000);
 
       const res = await fetch('/api/generate', {
@@ -236,7 +280,7 @@ export default function NewClientPage() {
     }
   };
 
-  // ── Extract preview data from index_json ─────────────────────────────────
+  // ── Extract preview data ────────────────────────────────────────────────
 
   function extractPreview() {
     if (!indexJson) return null;
@@ -284,8 +328,6 @@ export default function NewClientPage() {
     return { heroHeadline, heroSub, tickerItems, pillarHeadlines, faqQ, faqA };
   }
 
-  // ── Extract PDP preview data from product_json ──────────────────────────
-
   function extractPdpPreview() {
     if (!productJson) return null;
     const sections = (productJson as { sections?: Record<string, Record<string, unknown>> }).sections || {};
@@ -327,11 +369,8 @@ export default function NewClientPage() {
     return { badgeText, badgeEmoji, checklistItems, valueTag, valueText, perksItems, perksLabel };
   }
 
-  // ── Build settings_data.json ─────────────────────────────────────────────
-
   function buildSettingsData() {
     const variant = colorVariants[selectedVariant];
-    // theme_settings already contains base-settings + color tokens merged by the API
     return {
       current: variant?.theme_settings || {},
     };
@@ -340,41 +379,68 @@ export default function NewClientPage() {
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-surface">
-      <header className="border-b border-surface-border px-8 py-5">
-        <div className="mx-auto flex max-w-5xl items-center justify-between">
-          <Link href="/" className="font-heading text-sm font-bold tracking-tight text-muted transition-colors hover:text-white">
+    <div style={{ minHeight: '100vh', background: colors.cream }}>
+      <header
+        style={{
+          background: colors.paper,
+          borderBottom: `1px solid ${colors.border}`,
+          padding: `${spacing[5]}px ${spacing[8]}px`,
+        }}
+      >
+        <div style={{ maxWidth: 1000, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Link
+            href="/"
+            style={{
+              fontFamily: font.heading,
+              fontSize: fontSize.sm,
+              fontWeight: fontWeight.bold,
+              letterSpacing: letterSpacing.wide,
+              textTransform: 'uppercase',
+              color: colors.muted,
+              textDecoration: 'none',
+              transition: `color ${transition.fast}`,
+            }}
+          >
             &larr; ATTOMIK FACTORY
           </Link>
           <Steps current={step} />
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-8 py-10">
+      <main style={{ maxWidth: 1000, margin: '0 auto', padding: `${spacing[10]}px ${spacing[8]}px` }}>
 
         {/* ─── STEP 1: SCAN ────────────────────────────────────────────── */}
         {step === 1 && (
-          <div className="mx-auto max-w-2xl">
-            <h2 className="mb-1 font-heading text-2xl font-bold text-white">Scan Brand</h2>
-            <p className="mb-10 font-mono text-xs text-muted">Paste a brand URL to auto-extract colors, fonts, products, and identity.</p>
+          <div style={{ maxWidth: 640, margin: '0 auto' }}>
+            <h2 style={{ fontFamily: font.heading, fontWeight: fontWeight.heading, fontSize: fontSize['5xl'], color: colors.ink, textTransform: 'uppercase', letterSpacing: letterSpacing.tight, marginBottom: spacing[1] }}>
+              Scan Brand
+            </h2>
+            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[10] }}>
+              Paste a brand URL to auto-extract colors, fonts, products, and identity.
+            </p>
 
-            <div className="mb-4 flex gap-2">
+            <div style={{ display: 'flex', gap: spacing[2], marginBottom: spacing[4] }}>
               <input
                 type="text"
                 value={scanUrl}
                 onChange={e => setScanUrl(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleScan()}
                 placeholder="https://drinkafterdream.com"
-                className="flex-1 border border-surface-border bg-surface-raised px-4 py-3 font-mono text-sm text-white placeholder:text-muted/40 focus:border-accent focus:outline-none"
+                style={{ ...inputStyle, flex: 1 }}
+                onFocus={e => { e.currentTarget.style.borderColor = colors.accent; }}
+                onBlur={e => { e.currentTarget.style.borderColor = colors.border; }}
               />
               <button
                 type="button"
                 onClick={handleScan}
                 disabled={scanning || !scanUrl.trim()}
-                className={`border px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
-                  scanning ? 'cursor-wait border-surface-border text-muted'
-                  : 'border-accent bg-accent text-black hover:bg-accent-dim'
-                }`}
+                style={{
+                  ...styles.btnPrimary,
+                  fontSize: fontSize.xs,
+                  padding: `10px ${spacing[6]}px`,
+                  opacity: scanning || !scanUrl.trim() ? 0.4 : 1,
+                  cursor: scanning || !scanUrl.trim() ? 'not-allowed' : 'pointer',
+                }}
               >
                 {scanning ? 'Scanning...' : 'Scan Brand'}
               </button>
@@ -383,47 +449,65 @@ export default function NewClientPage() {
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="mb-10 font-mono text-xs text-muted underline transition-colors hover:text-white"
+              style={{
+                background: 'none',
+                border: 'none',
+                fontFamily: font.mono,
+                fontSize: fontSize.xs,
+                color: colors.muted,
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                marginBottom: spacing[10],
+              }}
             >
               Enter manually instead
             </button>
 
             {scanning && (
-              <div className="flex items-center gap-3 py-12">
-                <div className="h-3 w-3 animate-pulse border border-accent" />
-                <span className="font-mono text-sm text-muted">Scanning brand...</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: spacing[3], padding: `${spacing[12]}px 0` }}>
+                <div className="spinner spinner-sm" />
+                <span style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>Scanning brand...</span>
               </div>
             )}
 
             {error && !scanning && (
-              <div className="mb-6 border border-red-500/30 bg-red-500/5 px-4 py-3 font-mono text-xs text-red-400">{error}</div>
+              <div style={{
+                border: `1px solid ${colors.dangerSoft}`,
+                background: 'rgba(185,28,28,0.08)',
+                padding: `${spacing[3]}px ${spacing[4]}px`,
+                fontFamily: font.mono,
+                fontSize: fontSize.xs,
+                color: colors.dangerSoft,
+                borderRadius: radius.sm,
+                marginBottom: spacing[6],
+              }}>
+                {error}
+              </div>
             )}
 
             {scraped && !scanning && (
-              <div className="border border-surface-border">
-                <div className="flex items-center gap-3 border-b border-surface-border px-5 py-3">
-                  <span className="font-mono text-xs text-accent">Brand detected</span>
+              <div style={{ border: `1px solid ${colors.border}`, borderRadius: radius.xl, overflow: 'hidden' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: spacing[3], borderBottom: `1px solid ${colors.border}`, padding: `${spacing[3]}px ${spacing[5]}px` }}>
+                  <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.accent }}>Brand detected</span>
                   {scraped.platform && (
-                    <span className="border border-accent/30 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent">{scraped.platform}</span>
+                    <span className="badge badge-black" style={{ fontSize: fontSize['2xs'] }}>{scraped.platform}</span>
                   )}
                 </div>
 
-                <div className="p-5">
-                  {/* Brand name — editable */}
+                <div style={{ padding: spacing[5] }}>
                   <input
                     type="text"
                     value={brief.brand_name}
                     onChange={e => update('brand_name', e.target.value)}
-                    className="mb-5 w-full border-0 bg-transparent font-heading text-2xl font-bold text-white focus:outline-none"
+                    style={{ width: '100%', border: 'none', background: 'transparent', fontFamily: font.heading, fontSize: fontSize['5xl'], fontWeight: fontWeight.heading, color: colors.ink, outline: 'none', textTransform: 'uppercase', marginBottom: spacing[5] }}
                   />
 
-                  {/* Colors */}
-                  <div className="mb-5">
-                    <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-muted">Colors</span>
-                    <div className="flex gap-2">
+                  <div style={{ marginBottom: spacing[5] }}>
+                    <span style={labelStyle}>Colors</span>
+                    <div style={{ display: 'flex', gap: spacing[2] }}>
                       {[brief.primary_color, brief.secondary_color, ...(scraped.colors.slice(2, 5))].filter(Boolean).map((color, i) => (
-                        <label key={i} className="group relative cursor-pointer">
-                          <div className="h-10 w-10 border border-surface-border transition-all group-hover:border-white/40" style={{ backgroundColor: color }} />
+                        <label key={i} style={{ position: 'relative', cursor: 'pointer' }}>
+                          <div style={{ width: 40, height: 40, backgroundColor: color, border: `1px solid ${colors.border}`, borderRadius: radius.xs }} />
                           <input
                             type="color"
                             value={color}
@@ -431,49 +515,46 @@ export default function NewClientPage() {
                               if (i === 0) update('primary_color', e.target.value);
                               else if (i === 1) update('secondary_color', e.target.value);
                             }}
-                            className="absolute inset-0 cursor-pointer opacity-0"
+                            style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer' }}
                           />
-                          <span className="mt-1 block text-center font-mono text-[9px] text-muted">{color}</span>
+                          <span style={{ display: 'block', marginTop: 4, textAlign: 'center', fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.muted }}>{color}</span>
                         </label>
                       ))}
                     </div>
                   </div>
 
-                  {/* Fonts */}
                   {scraped.fonts.length > 0 && (
-                    <div className="mb-5">
-                      <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-muted">Fonts</span>
-                      <div className="flex flex-wrap gap-1">
+                    <div style={{ marginBottom: spacing[5] }}>
+                      <span style={labelStyle}>Fonts</span>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: spacing[1] }}>
                         {scraped.fonts.map(f => (
-                          <span key={f} className="border border-surface-border px-2 py-1 font-mono text-xs text-white/70">{f}</span>
+                          <span key={f} style={{ border: `1px solid ${colors.border}`, padding: `${spacing[1]}px ${spacing[2]}px`, fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText, borderRadius: radius.xs }}>{f}</span>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* Product images */}
                   {scraped.images.length > 0 && (
-                    <div className="mb-5">
-                      <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-muted">Images</span>
-                      <div className="flex gap-2">
+                    <div style={{ marginBottom: spacing[5] }}>
+                      <span style={labelStyle}>Images</span>
+                      <div style={{ display: 'flex', gap: spacing[2] }}>
                         {scraped.images.slice(0, 4).map((img, i) => (
-                          <div key={i} className="h-20 w-20 overflow-hidden border border-surface-border">
-                            <img src={img.url} alt={img.tag} className="h-full w-full object-cover" />
+                          <div key={i} style={{ width: 80, height: 80, overflow: 'hidden', border: `1px solid ${colors.border}`, borderRadius: radius.sm }}>
+                            <img src={img.url} alt={img.tag} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* Products */}
                   {scraped.products.length > 0 && (
                     <div>
-                      <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-muted">Products ({scraped.products.length})</span>
-                      <div className="flex flex-col gap-1">
+                      <span style={labelStyle}>Products ({scraped.products.length})</span>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[1] }}>
                         {scraped.products.slice(0, 6).map(p => (
-                          <div key={p.title} className="flex items-center gap-3">
-                            {p.image && <div className="h-8 w-8 shrink-0 overflow-hidden border border-surface-border"><img src={p.image} alt="" className="h-full w-full object-cover" /></div>}
-                            <span className="font-mono text-xs text-white/80">{p.title}</span>
+                          <div key={p.title} style={{ display: 'flex', alignItems: 'center', gap: spacing[3] }}>
+                            {p.image && <div style={{ width: 32, height: 32, flexShrink: 0, overflow: 'hidden', border: `1px solid ${colors.border}`, borderRadius: radius.xs }}><img src={p.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>}
+                            <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText }}>{p.title}</span>
                           </div>
                         ))}
                       </div>
@@ -481,12 +562,11 @@ export default function NewClientPage() {
                   )}
                 </div>
 
-                {/* Continue button */}
-                <div className="border-t border-surface-border px-5 py-4">
+                <div style={{ borderTop: `1px solid ${colors.border}`, padding: `${spacing[4]}px ${spacing[5]}px` }}>
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="w-full border border-accent bg-accent py-3 font-mono text-sm font-bold uppercase tracking-wider text-black transition-colors hover:bg-accent-dim"
+                    style={{ ...styles.btnPrimary, width: '100%', padding: `${spacing[3]}px 0` }}
                   >
                     Continue to Brief
                   </button>
@@ -498,11 +578,15 @@ export default function NewClientPage() {
 
         {/* ─── STEP 2: BRIEF ───────────────────────────────────────────── */}
         {step === 2 && (
-          <div className="mx-auto max-w-2xl">
-            <h2 className="mb-1 font-heading text-2xl font-bold text-white">Brand Brief</h2>
-            <p className="mb-10 font-mono text-xs text-muted">Fill in the details. The more specific, the better the output.</p>
+          <div style={{ maxWidth: 640, margin: '0 auto' }}>
+            <h2 style={{ fontFamily: font.heading, fontWeight: fontWeight.heading, fontSize: fontSize['5xl'], color: colors.ink, textTransform: 'uppercase', letterSpacing: letterSpacing.tight, marginBottom: spacing[1] }}>
+              Brand Brief
+            </h2>
+            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[10] }}>
+              Fill in the details. The more specific, the better the output.
+            </p>
 
-            <div className="flex flex-col gap-6">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[6] }}>
               <Field label="Brand Name *" htmlFor="brand_name">
                 <TextInput id="brand_name" value={brief.brand_name} onChange={v => update('brand_name', v)} placeholder="Afterdream" />
               </Field>
@@ -512,8 +596,14 @@ export default function NewClientPage() {
               </Field>
 
               <Field label="Category *" htmlFor="category">
-                <select id="category" value={brief.category} onChange={e => update('category', e.target.value)}
-                  className="w-full border border-surface-border bg-surface-raised px-3 py-2 font-mono text-sm text-white focus:border-accent focus:outline-none">
+                <select
+                  id="category"
+                  value={brief.category}
+                  onChange={e => update('category', e.target.value)}
+                  style={inputStyle}
+                  onFocus={e => { e.currentTarget.style.borderColor = colors.accent; }}
+                  onBlur={e => { e.currentTarget.style.borderColor = colors.border; }}
+                >
                   <option value="">Select category</option>
                   {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -524,22 +614,38 @@ export default function NewClientPage() {
               </Field>
 
               <Field label="Brand Vibe">
-                <div className="flex flex-wrap gap-2">
-                  {VIBES.map(vibe => (
-                    <button key={vibe} type="button"
-                      onClick={() => {
-                        const vibes = brief.brand_vibe.includes(vibe)
-                          ? brief.brand_vibe.filter(v => v !== vibe)
-                          : [...brief.brand_vibe, vibe];
-                        update('brand_vibe', vibes);
-                      }}
-                      className={`border px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors ${
-                        brief.brand_vibe.includes(vibe)
-                          ? 'border-accent bg-accent/10 text-accent'
-                          : 'border-surface-border text-muted hover:border-white/30 hover:text-white/60'
-                      }`}
-                    >{vibe}</button>
-                  ))}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: spacing[2] }}>
+                  {VIBES.map(vibe => {
+                    const selected = brief.brand_vibe.includes(vibe);
+                    return (
+                      <button
+                        key={vibe}
+                        type="button"
+                        onClick={() => {
+                          const vibes = selected
+                            ? brief.brand_vibe.filter(v => v !== vibe)
+                            : [...brief.brand_vibe, vibe];
+                          update('brand_vibe', vibes);
+                        }}
+                        style={{
+                          border: `1px solid ${selected ? colors.accent : colors.border}`,
+                          background: selected ? colors.accent : 'transparent',
+                          color: selected ? colors.ink : colors.muted,
+                          padding: `6px ${spacing[3]}px`,
+                          fontFamily: font.mono,
+                          fontSize: fontSize.xs,
+                          textTransform: 'uppercase',
+                          letterSpacing: letterSpacing.wider,
+                          cursor: 'pointer',
+                          borderRadius: radius.xs,
+                          transition: `all ${transition.fast}`,
+                          fontWeight: selected ? fontWeight.semibold : fontWeight.normal,
+                        }}
+                      >
+                        {vibe}
+                      </button>
+                    );
+                  })}
                 </div>
               </Field>
 
@@ -557,78 +663,96 @@ export default function NewClientPage() {
             </div>
 
             {error && (
-              <div className="mt-6 border border-red-500/30 bg-red-500/5 px-4 py-3 font-mono text-xs text-red-400">{error}</div>
+              <div style={{
+                marginTop: spacing[6],
+                border: `1px solid ${colors.dangerSoft}`,
+                background: 'rgba(185,28,28,0.08)',
+                padding: `${spacing[3]}px ${spacing[4]}px`,
+                fontFamily: font.mono,
+                fontSize: fontSize.xs,
+                color: colors.dangerSoft,
+                borderRadius: radius.sm,
+              }}>
+                {error}
+              </div>
             )}
 
             {/* Generate button */}
-            <button
-              type="button"
-              onClick={handleGenerate}
-              disabled={generating || !brief.brand_name.trim() || !brief.one_liner.trim() || !brief.category || !brief.target_audience.trim()}
-              className={`mt-8 w-full border py-4 font-mono text-sm font-bold uppercase tracking-wider transition-colors ${
-                generating ? 'cursor-wait border-surface-border text-muted'
-                : !brief.brand_name.trim() || !brief.one_liner.trim() || !brief.category || !brief.target_audience.trim()
-                  ? 'cursor-not-allowed border-surface-border text-muted'
-                  : 'border-accent bg-accent text-black hover:bg-accent-dim'
-              }`}
-            >
-              {generating ? (
-                <span className="flex items-center justify-center gap-3">
-                  <span className="inline-block h-3 w-3 animate-pulse border border-muted" />
-                  Generating store...
-                </span>
-              ) : 'Generate Store'}
-            </button>
+            {(() => {
+              const disabled = generating || !brief.brand_name.trim() || !brief.one_liner.trim() || !brief.category || !brief.target_audience.trim();
+              return (
+                <button
+                  type="button"
+                  onClick={handleGenerate}
+                  disabled={disabled}
+                  style={{
+                    ...styles.btnPrimary,
+                    width: '100%',
+                    marginTop: spacing[8],
+                    padding: `${spacing[4]}px 0`,
+                    opacity: disabled ? 0.4 : 1,
+                    cursor: disabled ? 'not-allowed' : 'pointer',
+                  }}
+                >
+                  {generating ? (
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: spacing[3] }}>
+                      <span className="spinner spinner-sm" style={{ borderColor: colors.border, borderTopColor: colors.ink }} />
+                      Generating store...
+                    </span>
+                  ) : 'Generate Store'}
+                </button>
+              );
+            })()}
 
             {/* Generation steps */}
             {generating && (
-              <div className="mt-6">
-                <div className="flex flex-col gap-2">
+              <div style={{ marginTop: spacing[6] }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[2] }}>
                   {['Analyzing brand colors...', 'Generating store copy...', 'Building homepage config...'].map((label, i) => (
-                    <div key={i} className="flex items-center gap-2">
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: spacing[2] }}>
                       {genStep > i + 1 ? (
-                        <span className="font-mono text-xs text-accent">&#10003;</span>
+                        <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.accent }}>&#10003;</span>
                       ) : genStep === i + 1 ? (
-                        <span className="inline-block h-3 w-3 animate-[spin_1s_linear_infinite] rounded-full border-2 border-accent border-t-transparent" />
+                        <div className="spinner spinner-sm" />
                       ) : (
-                        <span className="inline-block h-2.5 w-2.5 border border-surface-border" />
+                        <span style={{ display: 'inline-block', width: 10, height: 10, border: `1px solid ${colors.border}`, borderRadius: 2 }} />
                       )}
-                      <span className={`font-mono text-xs ${genStep > i + 1 ? 'text-accent' : genStep === i + 1 ? 'text-white' : 'text-muted'}`}>
+                      <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: genStep > i + 1 ? colors.accent : genStep === i + 1 ? colors.paper : colors.muted }}>
                         {label}
                       </span>
                     </div>
                   ))}
                 </div>
 
-                {/* Loading messages — cycle while step 2 is active */}
                 {genStep === 2 && (
-                  <p className="mt-3 font-mono text-[11px] text-muted/60">
+                  <p style={{ marginTop: spacing[3], fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>
                     {['Writing hero headlines...', 'Crafting product descriptions...', 'Building FAQ responses...', 'Generating review copy...', 'Assembling section order...'][loadingMsg % 5]}
                   </p>
                 )}
 
-                {/* Elapsed timer */}
-                <div className="mt-4 flex items-baseline gap-3">
-                  <span className="font-mono text-lg tabular-nums text-white/70">
+                <div style={{ marginTop: spacing[4], display: 'flex', alignItems: 'baseline', gap: spacing[3] }}>
+                  <span style={{ fontFamily: font.mono, fontSize: fontSize.lg, fontVariantNumeric: 'tabular-nums', color: colors.grayText }}>
                     {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, '0')}
                   </span>
-                  <span className="font-mono text-[11px] text-muted">
+                  <span style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>
                     Generation typically takes 30–60 seconds
                   </span>
                 </div>
 
-                {/* Timeout warning */}
                 {elapsed > 90 && (
-                  <p className="mt-2 font-mono text-xs text-yellow-400/80">
+                  <p style={{ marginTop: spacing[2], fontFamily: font.mono, fontSize: fontSize.xs, color: '#eab308' }}>
                     This is taking longer than usual… still working
                   </p>
                 )}
               </div>
             )}
 
-            {/* Back */}
-            <div className="mt-6 flex justify-between">
-              <button type="button" onClick={() => setStep(1)} className="font-mono text-xs text-muted transition-colors hover:text-white">
+            <div style={{ marginTop: spacing[6], display: 'flex', justifyContent: 'space-between' }}>
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                style={{ ...styles.btnGhost, border: 'none', fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, background: 'none', cursor: 'pointer' }}
+              >
                 &larr; Back to scan
               </button>
             </div>
@@ -638,26 +762,38 @@ export default function NewClientPage() {
         {/* ─── STEP 3: RESULTS ─────────────────────────────────────────── */}
         {step === 3 && indexJson && (
           <div>
-            <div className="mb-8 flex items-center justify-between">
-              <h2 className="font-heading text-2xl font-bold text-white">{brief.brand_name} Store</h2>
-              <div className="flex gap-4">
-                <button type="button" onClick={() => { setStep(2); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); setError(null); }}
-                  className="font-mono text-xs text-muted transition-colors hover:text-accent">Regenerate</button>
-                <button type="button" onClick={() => { setStep(1); setBrief(INITIAL); setScanUrl(''); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); }}
-                  className="font-mono text-xs text-muted transition-colors hover:text-white">Start Over</button>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing[8] }}>
+              <h2 style={{ fontFamily: font.heading, fontWeight: fontWeight.heading, fontSize: fontSize['5xl'], color: colors.ink, textTransform: 'uppercase', letterSpacing: letterSpacing.tight }}>
+                {brief.brand_name} Store
+              </h2>
+              <div style={{ display: 'flex', gap: spacing[4] }}>
+                <button
+                  type="button"
+                  onClick={() => { setStep(2); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); setError(null); }}
+                  style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
+                >
+                  Regenerate
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setStep(1); setBrief(INITIAL); setScanUrl(''); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); }}
+                  style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
+                >
+                  Start Over
+                </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing[6] }}>
 
               {/* LEFT: Color Themes */}
-              <div className="border border-surface-border">
-                <div className="border-b border-surface-border px-5 py-3">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-muted">Color Themes</span>
+              <div style={{ background: colors.cream, border: `1px solid ${colors.border}`, borderRadius: radius.xl, overflow: 'hidden' }}>
+                <div style={{ borderBottom: `1px solid ${colors.border}`, padding: `${spacing[3]}px ${spacing[5]}px` }}>
+                  <span style={labelStyle}>Color Themes</span>
                 </div>
 
                 {/* Variant selector row */}
-                <div className="flex flex-wrap gap-2 border-b border-surface-border px-5 py-3">
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: spacing[2], borderBottom: `1px solid ${colors.border}`, padding: `${spacing[3]}px ${spacing[5]}px` }}>
                   {colorVariants.map((variant, i) => {
                     const ts = variant.theme_settings;
                     const swatches = [ts.color_background_body, ts.color_background_primary, ts.color_background_secondary, ts.color_background_tertiary];
@@ -666,14 +802,20 @@ export default function NewClientPage() {
                         key={variant.name}
                         type="button"
                         onClick={() => setSelectedVariant(i)}
-                        className={`border p-2 text-left transition-colors ${
-                          i === selectedVariant ? 'border-accent' : 'border-surface-border hover:border-white/20'
-                        }`}
+                        style={{
+                          border: `1px solid ${i === selectedVariant ? colors.accent : colors.border}`,
+                          background: 'transparent',
+                          padding: spacing[2],
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          borderRadius: radius.sm,
+                          transition: `border-color ${transition.fast}`,
+                        }}
                       >
-                        <span className="mb-1 block font-mono text-[9px] uppercase tracking-wider text-muted">{variant.name.replace('_', ' ')}</span>
-                        <div className="flex gap-0.5">
+                        <span style={{ display: 'block', marginBottom: 4, fontFamily: font.mono, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>{variant.name.replace('_', ' ')}</span>
+                        <div style={{ display: 'flex', gap: 2 }}>
                           {swatches.map((color, j) => (
-                            <div key={j} className="h-4 w-4 border border-white/10" style={{ backgroundColor: color || '#000' }} />
+                            <div key={j} style={{ width: 16, height: 16, backgroundColor: color || colors.ink, border: `1px solid ${colors.border}`, borderRadius: 2 }} />
                           ))}
                         </div>
                       </button>
@@ -701,7 +843,20 @@ export default function NewClientPage() {
                       setColorVariants(prev => [...prev, custom]);
                       setSelectedVariant(colorVariants.length);
                     }}
-                    className="flex items-center justify-center border border-dashed border-surface-border px-3 py-2 font-mono text-[10px] text-muted transition-colors hover:border-accent hover:text-accent"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: `1px dashed ${colors.border}`,
+                      background: 'transparent',
+                      padding: `${spacing[2]}px ${spacing[3]}px`,
+                      fontFamily: font.mono,
+                      fontSize: fontSize['2xs'],
+                      color: colors.muted,
+                      cursor: 'pointer',
+                      borderRadius: radius.sm,
+                      transition: `all ${transition.fast}`,
+                    }}
                   >
                     + Custom
                   </button>
@@ -709,9 +864,9 @@ export default function NewClientPage() {
 
                 {/* Color pickers for selected variant */}
                 {colorVariants[selectedVariant] && (
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 p-5">
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: `${spacing[2]}px ${spacing[4]}px`, padding: spacing[5] }}>
                     {COLOR_TOKENS.map(({ key, label }) => (
-                      <label key={key} className="flex items-center gap-2">
+                      <label key={key} style={{ display: 'flex', alignItems: 'center', gap: spacing[2], cursor: 'pointer' }}>
                         <input
                           type="color"
                           value={colorVariants[selectedVariant].theme_settings[key] || '#000000'}
@@ -722,10 +877,10 @@ export default function NewClientPage() {
                                 : v
                             ));
                           }}
-                          className="h-6 w-6 cursor-pointer border border-white/10 bg-transparent"
+                          style={{ width: 24, height: 24, cursor: 'pointer', border: `1px solid ${colors.border}`, background: 'transparent', borderRadius: 2, padding: 0 }}
                         />
-                        <span className="font-mono text-[10px] text-white/70">{label}</span>
-                        <span className="ml-auto font-mono text-[9px] text-muted">{colorVariants[selectedVariant].theme_settings[key] || ''}</span>
+                        <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.grayText }}>{label}</span>
+                        <span style={{ marginLeft: 'auto', fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.muted }}>{colorVariants[selectedVariant].theme_settings[key] || ''}</span>
                       </label>
                     ))}
                   </div>
@@ -733,61 +888,72 @@ export default function NewClientPage() {
               </div>
 
               {/* RIGHT: Copy Preview */}
-              <div className="border border-surface-border">
-                <div className="flex items-center border-b border-surface-border">
-                  <button
-                    type="button"
-                    onClick={() => setPreviewTab('homepage')}
-                    className={`px-5 py-3 font-mono text-[11px] uppercase tracking-wider transition-colors ${
-                      previewTab === 'homepage' ? 'border-b-2 border-accent text-accent' : 'text-muted hover:text-white/60'
-                    }`}
-                  >Homepage</button>
-                  <button
-                    type="button"
-                    onClick={() => setPreviewTab('pdp')}
-                    className={`px-5 py-3 font-mono text-[11px] uppercase tracking-wider transition-colors ${
-                      previewTab === 'pdp' ? 'border-b-2 border-accent text-accent' : 'text-muted hover:text-white/60'
-                    }`}
-                  >Product Page</button>
+              <div style={{ background: colors.paper, border: `1px solid ${colors.border}`, borderRadius: radius.xl, overflow: 'hidden' }}>
+                <div style={{ display: 'flex', alignItems: 'center', borderBottom: `1px solid ${colors.border}` }}>
+                  {(['homepage', 'pdp'] as const).map((tab) => (
+                    <button
+                      key={tab}
+                      type="button"
+                      onClick={() => setPreviewTab(tab)}
+                      style={{
+                        padding: `${spacing[3]}px ${spacing[5]}px`,
+                        fontFamily: font.mono,
+                        fontSize: fontSize.sm,
+                        textTransform: 'uppercase',
+                        letterSpacing: letterSpacing.wider,
+                        color: previewTab === tab ? colors.ink : colors.muted,
+                        borderBottom: previewTab === tab ? `2px solid ${colors.accent}` : '2px solid transparent',
+                        background: 'none',
+                        border: 'none',
+                        borderBottomStyle: 'solid',
+                        borderBottomWidth: 2,
+                        borderBottomColor: previewTab === tab ? colors.accent : 'transparent',
+                        cursor: 'pointer',
+                        transition: `all ${transition.fast}`,
+                      }}
+                    >
+                      {tab === 'homepage' ? 'Homepage' : 'Product Page'}
+                    </button>
+                  ))}
                 </div>
-                <div className="p-5">
+                <div style={{ padding: spacing[5] }}>
                   {previewTab === 'homepage' && (() => {
                     const preview = extractPreview();
-                    if (!preview) return <span className="font-mono text-xs text-muted">No preview available</span>;
+                    if (!preview) return <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>No preview available</span>;
                     return (
-                      <div className="flex flex-col gap-4">
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[4] }}>
                         {preview.heroHeadline && (
                           <div>
-                            <span className="mb-1 block font-mono text-[9px] uppercase text-muted">Hero</span>
-                            <p className="font-heading text-xl font-bold text-white">{preview.heroHeadline}</p>
-                            {preview.heroSub && <p className="mt-1 font-mono text-xs text-muted">{preview.heroSub}</p>}
+                            <span style={{ ...labelStyle, color: colors.muted }}>Hero</span>
+                            <p style={{ fontFamily: font.heading, fontSize: fontSize['2xl'], fontWeight: fontWeight.heading, color: colors.ink, textTransform: 'uppercase' }}>{preview.heroHeadline}</p>
+                            {preview.heroSub && <p style={{ marginTop: 4, fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>{preview.heroSub}</p>}
                           </div>
                         )}
                         {preview.tickerItems.length > 0 && (
                           <div>
-                            <span className="mb-1 block font-mono text-[9px] uppercase text-muted">Ticker</span>
-                            <div className="flex flex-wrap gap-1">
+                            <span style={{ ...labelStyle, color: colors.muted }}>Ticker</span>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                               {preview.tickerItems.map((item, i) => (
-                                <span key={i} className="border border-surface-border px-2 py-0.5 font-mono text-[10px] text-white/70">{item}</span>
+                                <span key={i} style={{ border: `1px solid ${colors.border}`, padding: `2px ${spacing[2]}px`, fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.grayText, borderRadius: radius.xs }}>{item}</span>
                               ))}
                             </div>
                           </div>
                         )}
                         {preview.pillarHeadlines.length > 0 && (
                           <div>
-                            <span className="mb-1 block font-mono text-[9px] uppercase text-muted">Pillars</span>
-                            <div className="flex gap-3">
+                            <span style={{ ...labelStyle, color: colors.muted }}>Pillars</span>
+                            <div style={{ display: 'flex', gap: spacing[3] }}>
                               {preview.pillarHeadlines.slice(0, 3).map((h, i) => (
-                                <span key={i} className="font-mono text-xs text-white/80">{h}</span>
+                                <span key={i} style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText }}>{h}</span>
                               ))}
                             </div>
                           </div>
                         )}
                         {preview.faqQ && (
                           <div>
-                            <span className="mb-1 block font-mono text-[9px] uppercase text-muted">FAQ</span>
-                            <p className="font-mono text-xs font-bold text-white">{preview.faqQ}</p>
-                            <p className="mt-1 font-mono text-[11px] text-muted">{preview.faqA}</p>
+                            <span style={{ ...labelStyle, color: colors.muted }}>FAQ</span>
+                            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: colors.ink }}>{preview.faqQ}</p>
+                            <p style={{ marginTop: 4, fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>{preview.faqA}</p>
                           </div>
                         )}
                       </div>
@@ -795,43 +961,43 @@ export default function NewClientPage() {
                   })()}
                   {previewTab === 'pdp' && (() => {
                     const pdp = extractPdpPreview();
-                    if (!pdp) return <span className="font-mono text-xs text-muted">No PDP preview available</span>;
+                    if (!pdp) return <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>No PDP preview available</span>;
                     return (
-                      <div className="flex flex-col gap-4">
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[4] }}>
                         {pdp.badgeText && (
                           <div>
-                            <span className="mb-1 block font-mono text-[9px] uppercase text-muted">Badge</span>
-                            <p className="font-mono text-sm text-white">
-                              {pdp.badgeEmoji && <span className="mr-1">{pdp.badgeEmoji}</span>}
+                            <span style={{ ...labelStyle, color: colors.muted }}>Badge</span>
+                            <p style={{ fontFamily: font.mono, fontSize: fontSize.body, color: colors.ink }}>
+                              {pdp.badgeEmoji && <span style={{ marginRight: 4 }}>{pdp.badgeEmoji}</span>}
                               {pdp.badgeText}
                             </p>
                           </div>
                         )}
                         {pdp.checklistItems.length > 0 && (
                           <div>
-                            <span className="mb-1 block font-mono text-[9px] uppercase text-muted">Checklist</span>
-                            <div className="flex flex-col gap-1">
+                            <span style={{ ...labelStyle, color: colors.muted }}>Checklist</span>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[1] }}>
                               {pdp.checklistItems.map((item, i) => (
-                                <div key={i} className="flex items-center gap-2">
-                                  <span className="text-accent">&#10003;</span>
-                                  <span className="font-mono text-xs text-white/80">{item}</span>
+                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: spacing[2] }}>
+                                  <span style={{ color: colors.accent }}>&#10003;</span>
+                                  <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText }}>{item}</span>
                                 </div>
                               ))}
                             </div>
                             {pdp.valueTag && (
-                              <div className="mt-2 border border-surface-border px-3 py-2">
-                                <span className="font-mono text-[10px] font-bold text-accent">{pdp.valueTag}</span>
-                                {pdp.valueText && <span className="ml-2 font-mono text-[10px] text-muted">{pdp.valueText}</span>}
+                              <div style={{ marginTop: spacing[2], border: `1px solid ${colors.border}`, padding: `${spacing[2]}px ${spacing[3]}px`, borderRadius: radius.sm }}>
+                                <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], fontWeight: fontWeight.bold, color: colors.accent }}>{pdp.valueTag}</span>
+                                {pdp.valueText && <span style={{ marginLeft: spacing[2], fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.muted }}>{pdp.valueText}</span>}
                               </div>
                             )}
                           </div>
                         )}
                         {pdp.perksItems.length > 0 && (
                           <div>
-                            <span className="mb-1 block font-mono text-[9px] uppercase text-muted">{pdp.perksLabel || 'Perks'}</span>
-                            <div className="flex flex-wrap gap-1">
+                            <span style={{ ...labelStyle, color: colors.muted }}>{pdp.perksLabel || 'Perks'}</span>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                               {pdp.perksItems.map((perk, i) => (
-                                <span key={i} className="border border-surface-border px-2 py-0.5 font-mono text-[10px] text-white/70">{perk}</span>
+                                <span key={i} style={{ border: `1px solid ${colors.border}`, padding: `2px ${spacing[2]}px`, fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.grayText, borderRadius: radius.xs }}>{perk}</span>
                               ))}
                             </div>
                           </div>
@@ -844,31 +1010,27 @@ export default function NewClientPage() {
             </div>
 
             {/* Download buttons */}
-            <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-              <button type="button" onClick={() => download(indexJson, 'index.json')}
-                className="border border-accent bg-accent py-3 font-mono text-sm font-bold uppercase tracking-wider text-black transition-colors hover:bg-accent-dim">
+            <div style={{ marginTop: spacing[6], display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: spacing[3] }}>
+              <button type="button" onClick={() => download(indexJson, 'index.json')} style={styles.btnPrimary}>
                 Download index.json
               </button>
-              <button type="button" onClick={() => download(buildSettingsData(), 'settings_data.json')}
-                className="border border-surface-border py-3 font-mono text-sm uppercase tracking-wider text-muted transition-colors hover:border-white/30 hover:text-white">
+              <button type="button" onClick={() => download(buildSettingsData(), 'settings_data.json')} style={styles.btnDark}>
                 Download settings_data.json
               </button>
-              <button type="button" onClick={() => productJson && download(productJson, 'product.json')}
+              <button
+                type="button"
+                onClick={() => productJson && download(productJson, 'product.json')}
                 disabled={!productJson}
-                className={`border py-3 font-mono text-sm uppercase tracking-wider transition-colors ${
-                  productJson
-                    ? 'border-surface-border text-muted hover:border-white/30 hover:text-white'
-                    : 'cursor-not-allowed border-surface-border/50 text-muted/30'
-                }`}>
+                style={{ ...styles.btnDark, opacity: productJson ? 1 : 0.3, cursor: productJson ? 'pointer' : 'not-allowed' }}
+              >
                 Download product.json
               </button>
-              <button type="button" onClick={() => aboutJson && download(aboutJson, 'page.about.json')}
+              <button
+                type="button"
+                onClick={() => aboutJson && download(aboutJson, 'page.about.json')}
                 disabled={!aboutJson}
-                className={`border py-3 font-mono text-sm uppercase tracking-wider transition-colors ${
-                  aboutJson
-                    ? 'border-surface-border text-muted hover:border-white/30 hover:text-white'
-                    : 'cursor-not-allowed border-surface-border/50 text-muted/30'
-                }`}>
+                style={{ ...styles.btnDark, opacity: aboutJson ? 1 : 0.3, cursor: aboutJson ? 'pointer' : 'not-allowed' }}
+              >
                 Download about.json
               </button>
             </div>

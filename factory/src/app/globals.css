@@ -2,14 +2,136 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
+/* ================================================================
+   ATTOMIK DESIGN SYSTEM — v2.0
+   ================================================================ */
+
+/* ── DESIGN TOKENS ─────────────────────────────────────────────── */
+:root {
+  /* Core */
+  --ink:            #000000;
+  --paper:          #ffffff;
+  --cream:          #f2f2f2;
+  --cream-dark:     #e8e8e8;
+
+  /* Accent — neon green */
+  --accent:         #00ff97;
+  --accent-hover:   #00e085;
+  --accent-dark:    #00cc78;
+  --accent-light:   #e6fff5;
+  --accent-mid:     rgba(0,255,151,0.12);
+
+  /* Semantic */
+  --success:        #00cc78;
+  --success-light:  #e6fff5;
+  --danger:         #b91c1c;
+  --danger-light:   #fee2e2;
+  --warning:        #856404;
+  --warning-light:  #fff3cd;
+  --info:           #1d4ed8;
+  --info-light:     #dbeafe;
+
+  /* Text */
+  --muted:          #555555;
+  --subtle:         #777777;
+  --disabled:       #bbbbbb;
+
+  /* Borders */
+  --border:         #e0e0e0;
+  --border-strong:  #c4c4c4;
+
+  /* Dark UI */
+  --dark-bg:        #111111;
+  --dark-card:      #1a1a1a;
+  --dark-card-alt:  #2a2a2a;
+
+  /* Fonts */
+  --font-sans:      var(--font-barlow), 'Barlow', sans-serif;
+  --font-mono:      var(--font-dm-mono), 'DM Mono', monospace;
+
+  /* Spacing (4px grid) */
+  --sp-1:  4px;  --sp-2:  8px;  --sp-3:  12px; --sp-4:  16px;
+  --sp-5:  20px; --sp-6:  24px; --sp-7:  28px; --sp-8:  32px;
+  --sp-10: 40px; --sp-12: 48px; --sp-16: 64px; --sp-20: 80px;
+
+  /* Border radius */
+  --r-xs:   4px; --r-sm:   6px;  --r-md:  8px;  --r-lg:  10px;
+  --r-xl:  12px; --r-2xl: 14px;  --r-3xl: 16px; --r-4xl: 20px;
+  --r-5xl: 24px; --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-xs:     0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md:     0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:     0 8px 32px rgba(0,0,0,0.12);
+  --shadow-card:   0 2px 16px rgba(0,0,0,0.05);
+  --shadow-accent: 0 4px 20px rgba(0,255,151,0.25);
+  --shadow-accent-btn: 0 2px 12px rgba(0,255,151,0.30);
+
+  /* Transitions */
+  --t-fast:    0.1s ease;
+  --t-base:    0.15s ease;
+  --t-normal:  0.2s ease;
 }
 
-body {
-  font-family: var(--font-dm-mono), monospace;
+/* ── RESET ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-sans); }
+img { display: block; max-width: 100%; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
 }
 
+/* ── TYPOGRAPHY ────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-syne), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
+
+/* ── SPINNER ───────────────────────────────────────────────────── */
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+.spinner-sm { width: 14px; height: 14px; border-width: 1.5px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── BADGES ────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  line-height: 1.4; white-space: nowrap;
+}
+.badge-green   { background: var(--accent-light);   color: #007a48; }
+.badge-yellow  { background: var(--warning-light);  color: var(--warning); }
+.badge-black   { background: var(--ink);            color: var(--accent); }
+.badge-gray    { background: rgba(255,255,255,0.08); color: var(--subtle); }

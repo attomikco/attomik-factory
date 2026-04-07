@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Syne, DM_Mono } from "next/font/google";
+import { Barlow, DM_Mono } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const barlow = Barlow({
   subsets: ["latin"],
-  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-barlow",
   display: "swap",
 });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${syne.variable} ${dmMono.variable} bg-surface text-white antialiased`}>
+      <body className={`${barlow.variable} ${dmMono.variable} antialiased`}>
         {children}
       </body>
     </html>
