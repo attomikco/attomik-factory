@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "1638995507af787164": {
@@ -7,22 +16,11 @@
           "type": "badge",
           "settings": {
             "badge_text": "Fair Trade Certified · Slow Brewed",
-            "badge_emoji": "✦",
             "icon": "check",
             "spacing_top": 10,
             "spacing_bottom": 10,
-            "badge_bg_color": "#ffc600",
-            "badge_font_color": "#1d1d1e",
-            "bg_opacity": 100,
-            "border_opacity": 100,
-            "border_width": 0,
-            "border_radius": 6,
-            "padding_x": 12,
-            "padding_y": 6,
-            "font_size": 13,
-            "font_weight": "700",
-            "text_transform": "uppercase",
-            "letter_spacing": 1
+            "badge_bg_color": "#1d1d1e",
+            "badge_font_color": "#1d1d1e"
           }
         },
         "853ae7f0-85c9-45dc-8326-6e4044bcf5e5": {
@@ -78,8 +76,27 @@
             "free_shipping_threshold": "50",
             "spacing_top": 10,
             "spacing_bottom": 10,
+            "card_bg": "#ffffff",
+            "card_border_color": "#e0e0e0",
+            "card_border_width": 1,
+            "card_border_radius": 12,
+            "card_selected_border": "#000000",
+            "card_selected_bg": "#f5f5f5",
+            "name_font_size": 16,
+            "name_font_weight": "700",
+            "name_color": "#000000",
+            "price_font_size": 13,
+            "price_color": "#666666",
+            "savings_font_size": 11,
+            "savings_color": "#000000",
+            "shipping_font_size": 11,
+            "shipping_color": "#666666",
             "popular_badge_bg": "#1d1d1e",
-            "best_badge_bg": "#ffc600"
+            "popular_badge_text": "#000000",
+            "badge_font_size": 9,
+            "badge_border_radius": 20,
+            "best_badge_bg": "#ffc600",
+            "best_badge_text": "#ffffff"
           }
         },
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d58": {
@@ -111,7 +128,7 @@
             "marquee_text": "#1a1a1a",
             "marquee_font_size": 15,
             "marquee_font_weight": "500",
-            "border_color": "#1a1a1a",
+            "border_color": "#f3dfbf",
             "border_width": 1,
             "border_radius": 10
           }
