@@ -60,9 +60,23 @@
     {% endif %}
 
     {% if block.settings.value_prop_text != blank %}
-      <li class="ac-checklist__value-prop color__bg-shade-1">
+      <li
+        class="ac-checklist__value-prop"
+        style="
+          background: {{ block.settings.value_bg | default: '#f5f5f5' }};
+          color: {{ block.settings.value_text_color | default: '#1a1a1a' }};
+          border: {{ block.settings.value_border_width | default: 1 }}px solid {{ block.settings.value_border_color | default: '#e0e0e0' }};
+          border-radius: {{ block.settings.value_border_radius | default: 8 }}px;
+        "
+      >
         {% unless block.settings.value_prop_tag == blank %}
-          <span class="ac-checklist__value-tag color__bg-body color__text">{{ block.settings.value_prop_tag }}</span>
+          <span
+            class="ac-checklist__value-tag"
+            style="
+              background: {{ block.settings.value_tag_bg | default: '#000000' }};
+              color: {{ block.settings.value_tag_text | default: '#ffffff' }};
+            "
+          >{{ block.settings.value_prop_tag }}</span>
         {% endunless %}
         <span class="ac-checklist__value-text">{{ block.settings.value_prop_text }}</span>
       </li>
