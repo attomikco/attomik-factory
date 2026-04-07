@@ -70,7 +70,7 @@
         "variant_cards_JhQkVx": {
           "type": "variant_cards",
           "settings": {
-            "option_name": "Pack",
+            "option_name": "",
             "desktop_columns": "3",
             "show_per_unit": true,
             "free_shipping_threshold": "50",

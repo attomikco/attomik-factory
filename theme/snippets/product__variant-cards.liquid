@@ -15,14 +15,21 @@
   assign card_option = nil
   assign card_option_position = nil
 
-  for opt in product.options_with_values
-    assign opt_name_down = opt.name | downcase
-    if opt_name_down == target_option
-      assign card_option = opt
-      assign card_option_position = opt.position
-      break
-    endif
-  endfor
+  if target_option != blank
+    for opt in product.options_with_values
+      assign opt_name_down = opt.name | downcase
+      if opt_name_down == target_option
+        assign card_option = opt
+        assign card_option_position = opt.position
+        break
+      endif
+    endfor
+  endif
+
+  if card_option == nil and product.options_with_values.size > 0
+    assign card_option = product.options_with_values.first
+    assign card_option_position = card_option.position
+  endif
 
   # Parse metafield config
   assign vc_config_raw = product.metafields.attomik.variant_cards.value

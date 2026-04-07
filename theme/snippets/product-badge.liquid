@@ -28,9 +28,9 @@
       align-items: center;
       gap: 6px;
       width: fit-content;
-      font-family: var(--font-body-family, sans-serif);
+      font-family: var(--type__font-heading-family, var(--type__font-body-family, sans-serif));
       font-size: {{ block.settings.font_size }}px;
-      font-weight: {{ block.settings.font_weight }};
+      font-weight: {{ block.settings.font_weight }} !important;
       text-transform: {{ block.settings.text_transform }};
       letter-spacing: {{ block.settings.letter_spacing }}px;
       color: {{ block.settings.badge_font_color }};
