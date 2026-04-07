@@ -266,6 +266,13 @@
                     {% render 'product__upsell', block: block %}
 
                   {% when 'options' %}
+                    {% assign has_variant_cards = false %}
+                    {% for b in section.blocks %}
+                      {% if b.type == 'variant_cards' %}
+                        {% assign has_variant_cards = true %}
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
                     <div
                       class="
                         options-{{ section.id }}
@@ -274,6 +281,7 @@
                         {{ block.settings.style_border }}
                       "
                       style="
+                        {% if has_variant_cards %}position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;{% endif %}
                         padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
                         padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
                       "
@@ -444,6 +452,13 @@
                         {% render 'product__upsell', block: block %}
 
                       {% when 'options' %}
+                        {% assign has_variant_cards = false %}
+                        {% for b in section.blocks %}
+                          {% if b.type == 'variant_cards' %}
+                            {% assign has_variant_cards = true %}
+                            {% break %}
+                          {% endif %}
+                        {% endfor %}
                         <div
                           class="
                             options-{{ section.id }}
@@ -452,6 +467,7 @@
                             {{ block.settings.style_border }}
                           "
                           style="
+                            {% if has_variant_cards %}position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;{% endif %}
                             padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
                             padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
                           "
@@ -613,6 +629,13 @@
                         {% render 'product__upsell', block: block %}
 
                       {% when 'options' %}
+                        {% assign has_variant_cards = false %}
+                        {% for b in section.blocks %}
+                          {% if b.type == 'variant_cards' %}
+                            {% assign has_variant_cards = true %}
+                            {% break %}
+                          {% endif %}
+                        {% endfor %}
                         <div
                           class="
                             options-{{ section.id }}
@@ -621,6 +644,7 @@
                             {{ block.settings.style_border }}
                           "
                           style="
+                            {% if has_variant_cards %}position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;{% endif %}
                             padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
                             padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
                           "
@@ -5051,8 +5075,8 @@
           "type": "text",
           "id": "option_name",
           "label": "Option name to render as cards",
-          "info": "Leave blank to use the first option. Or enter a specific option name, e.g. Size, Pack, Flavor",
-          "default": ""
+          "info": "Must match the product option name exactly, e.g. Size, Pack, Flavor",
+          "default": "Size"
         },
         {
           "type": "select",
