@@ -10,8 +10,17 @@
 {% endcomment %}
 
 {%- liquid
-  assign bg_opacity = block.settings.bg_opacity | divided_by: 100.0
-  assign border_opacity = block.settings.border_opacity | divided_by: 100.0
+  assign badge_font_size = block.settings.font_size | default: 12
+  assign badge_font_weight = block.settings.font_weight | default: '700'
+  assign badge_text_transform = block.settings.text_transform | default: 'uppercase'
+  assign badge_letter_spacing = block.settings.letter_spacing | default: 1
+  assign badge_padding_x = block.settings.padding_x | default: 14
+  assign badge_padding_y = block.settings.padding_y | default: 6
+  assign badge_border_width = block.settings.border_width | default: 1
+  assign badge_border_radius = block.settings.border_radius | default: 20
+  assign bg_opacity = block.settings.bg_opacity | default: 100 | divided_by: 100.0
+  assign border_opacity = block.settings.border_opacity | default: 100 | divided_by: 100.0
+  assign badge_border_color = block.settings.border_color | default: block.settings.badge_bg_color
 -%}
 
 <div
@@ -29,15 +38,15 @@
       gap: 6px;
       width: fit-content;
       font-family: var(--type__font-heading-family, var(--type__font-body-family, sans-serif));
-      font-size: {{ block.settings.font_size }}px;
-      font-weight: {{ block.settings.font_weight }} !important;
-      text-transform: {{ block.settings.text_transform }};
-      letter-spacing: {{ block.settings.letter_spacing }}px;
-      color: {{ block.settings.badge_font_color }};
-      background-color: {{ block.settings.badge_bg_color | color_modify: 'alpha', bg_opacity }};
-      border: {{ block.settings.border_width }}px solid {{ block.settings.border_color | default: block.settings.badge_bg_color | color_modify: 'alpha', border_opacity }};
-      border-radius: {{ block.settings.border_radius }}px;
-      padding: {{ block.settings.padding_y }}px {{ block.settings.padding_x }}px;
+      font-size: {{ badge_font_size }}px;
+      font-weight: {{ badge_font_weight }} !important;
+      text-transform: {{ badge_text_transform }};
+      letter-spacing: {{ badge_letter_spacing }}px;
+      color: {{ block.settings.badge_font_color | default: '#ffffff' }};
+      background-color: {{ block.settings.badge_bg_color | default: '#000000' | color_modify: 'alpha', bg_opacity }};
+      border: {{ badge_border_width }}px solid {{ badge_border_color | color_modify: 'alpha', border_opacity }};
+      border-radius: {{ badge_border_radius }}px;
+      padding: {{ badge_padding_y }}px {{ badge_padding_x }}px;
     "
   >
     {% if block.settings.badge_emoji != blank %}
