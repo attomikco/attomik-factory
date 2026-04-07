@@ -35,7 +35,7 @@
       letter-spacing: {{ block.settings.letter_spacing }}px;
       color: {{ block.settings.badge_font_color }};
       background-color: {{ block.settings.badge_bg_color | color_modify: 'alpha', bg_opacity }};
-      border: {{ block.settings.border_width }}px solid {{ block.settings.badge_bg_color | color_modify: 'alpha', border_opacity }};
+      border: {{ block.settings.border_width }}px solid {{ block.settings.border_color | default: block.settings.badge_bg_color | color_modify: 'alpha', border_opacity }};
       border-radius: {{ block.settings.border_radius }}px;
       padding: {{ block.settings.padding_y }}px {{ block.settings.padding_x }}px;
     "
