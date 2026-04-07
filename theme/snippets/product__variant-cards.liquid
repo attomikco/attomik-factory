@@ -256,7 +256,7 @@
                   style="
                     font-size: {{ block.settings.price_font_size }}px;
                     color: {{ block.settings.price_color }};
-                    opacity: {{ block.settings.price_opacity | default: 100 | divided_by: 100.0 }};
+
                     font-family: var(--font-body-family, sans-serif);
                   "
                 >{{ card_variant.price | money }}</div>
@@ -268,7 +268,7 @@
                   style="
                     font-size: {{ block.settings.price_font_size }}px;
                     color: {{ block.settings.price_color }};
-                    opacity: {{ block.settings.price_opacity | default: 100 | divided_by: 100.0 }};
+
                     font-family: var(--font-body-family, sans-serif);
                   "
                 >{{ per_unit_label }}</div>
@@ -291,7 +291,7 @@
                   style="
                     font-size: {{ block.settings.shipping_font_size }}px;
                     color: {{ block.settings.shipping_color }};
-                    opacity: {{ block.settings.shipping_opacity | default: 100 | divided_by: 100.0 }};
+
                     font-family: var(--font-body-family, sans-serif);
                   "
                 >🚚 Ships Free</div>
