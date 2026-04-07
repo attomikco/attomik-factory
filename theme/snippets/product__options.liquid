@@ -65,7 +65,18 @@
 
     {% for product_option in product.options_with_values %}
       {% assign downcase_option_name = product_option.name | downcase %}
-      <div class="flex w-full flex-col gap-2">
+      {% assign hide_for_variant_cards = false %}
+      {% for b in section.blocks %}
+        {% if b.type == 'variant_cards' %}
+          {% assign vc_target = b.settings.option_name | downcase %}
+          {% if vc_target == blank and forloop.parentloop.first %}
+            {% assign hide_for_variant_cards = true %}
+          {% elsif vc_target == downcase_option_name %}
+            {% assign hide_for_variant_cards = true %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      <div class="flex w-full flex-col gap-2" {% if hide_for_variant_cards %}style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;"{% endif %}>
         {% comment %} Option label {% endcomment %}
         <div class="flex justify-between">
           {% comment %} Label {% endcomment %}
