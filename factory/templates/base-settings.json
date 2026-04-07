@@ -9,6 +9,8 @@
   "color_foreground_secondary": "#ffffff",
   "color_background_tertiary": "#f5f5f5",
   "color_foreground_tertiary": "#1a1a1a",
+  "color_bar": "#ffffff",
+  "color_background_overlay": "linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2) 100%)",
   "border_button_radius": 20,
   "border_input_radius": 10,
   "border_element_radius": 20,

@@ -83,6 +83,8 @@ const NEUTRAL_LIGHT: Record<string, string> = {
   color_foreground_secondary: '#ffffff',
   color_background_tertiary: '#f5f5f5',
   color_foreground_tertiary: '#1a1a1a',
+  color_bar: '#ffffff',
+  color_background_overlay: 'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2) 100%)',
 };
 
 async function generateColorVariants(
@@ -219,6 +221,8 @@ function mapColorVariants(variants: Record<string, Record<string, string>>): Col
         color_foreground_secondary: v.secondaryForeground || '#ffffff',
         color_background_tertiary: v.tertiaryBackground || '#f5f5f5',
         color_foreground_tertiary: v.tertiaryForeground || '#1a1a1a',
+        color_bar: v.mobileBar || v.body || '#ffffff',
+        color_background_overlay: v.overlayBackground || 'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2) 100%)',
       },
     };
   });

@@ -22,6 +22,19 @@ interface ColorVariant {
   theme_settings: Record<string, string>;
 }
 
+const COLOR_TOKENS = [
+  { key: 'color_background_body', label: 'Body' },
+  { key: 'color_foreground_body', label: 'Text' },
+  { key: 'color_foreground_body_alt', label: 'Alt Text' },
+  { key: 'color_background_primary', label: 'Primary BG' },
+  { key: 'color_foreground_primary', label: 'Primary FG' },
+  { key: 'color_background_secondary', label: 'Secondary BG' },
+  { key: 'color_foreground_secondary', label: 'Secondary FG' },
+  { key: 'color_background_tertiary', label: 'Tertiary BG' },
+  { key: 'color_foreground_tertiary', label: 'Tertiary FG' },
+  { key: 'color_bar', label: 'Mobile Bar' },
+] as const;
+
 interface BrandBrief {
   brand_name: string;
   one_liner: string;
@@ -642,32 +655,81 @@ export default function NewClientPage() {
                 <div className="border-b border-surface-border px-5 py-3">
                   <span className="font-mono text-[11px] uppercase tracking-wider text-muted">Color Themes</span>
                 </div>
-                <div className="grid grid-cols-2 gap-3 p-5">
+
+                {/* Variant selector row */}
+                <div className="flex flex-wrap gap-2 border-b border-surface-border px-5 py-3">
                   {colorVariants.map((variant, i) => {
                     const ts = variant.theme_settings;
-                    const swatches = [ts.color_background_body, ts.color_background_primary, ts.color_background_secondary, ts.color_background_tertiary, ts.color_foreground_body];
+                    const swatches = [ts.color_background_body, ts.color_background_primary, ts.color_background_secondary, ts.color_background_tertiary];
                     return (
                       <button
                         key={variant.name}
                         type="button"
                         onClick={() => setSelectedVariant(i)}
-                        className={`border p-3 text-left transition-colors ${
+                        className={`border p-2 text-left transition-colors ${
                           i === selectedVariant ? 'border-accent' : 'border-surface-border hover:border-white/20'
                         }`}
                       >
-                        <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-muted">{variant.name.replace('_', ' ')}</span>
-                        <div className="flex gap-1">
+                        <span className="mb-1 block font-mono text-[9px] uppercase tracking-wider text-muted">{variant.name.replace('_', ' ')}</span>
+                        <div className="flex gap-0.5">
                           {swatches.map((color, j) => (
-                            <div key={j} className="h-6 w-6 border border-white/10" style={{ backgroundColor: color || '#000' }} />
+                            <div key={j} className="h-4 w-4 border border-white/10" style={{ backgroundColor: color || '#000' }} />
                           ))}
                         </div>
-                        {i === selectedVariant && (
-                          <span className="mt-2 block font-mono text-[9px] text-accent">Selected</span>
-                        )}
                       </button>
                     );
                   })}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const custom: ColorVariant = {
+                        name: `custom_${colorVariants.length}`,
+                        theme_settings: {
+                          color_background_body: '#ffffff',
+                          color_foreground_body: '#1a1a1a',
+                          color_foreground_body_alt: '#ffffff',
+                          color_background_primary: '#000000',
+                          color_foreground_primary: '#ffffff',
+                          color_background_secondary: '#2c2c2c',
+                          color_foreground_secondary: '#ffffff',
+                          color_background_tertiary: '#f5f5f5',
+                          color_foreground_tertiary: '#1a1a1a',
+                          color_bar: '#ffffff',
+                          color_background_overlay: 'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2) 100%)',
+                        },
+                      };
+                      setColorVariants(prev => [...prev, custom]);
+                      setSelectedVariant(colorVariants.length);
+                    }}
+                    className="flex items-center justify-center border border-dashed border-surface-border px-3 py-2 font-mono text-[10px] text-muted transition-colors hover:border-accent hover:text-accent"
+                  >
+                    + Custom
+                  </button>
                 </div>
+
+                {/* Color pickers for selected variant */}
+                {colorVariants[selectedVariant] && (
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 p-5">
+                    {COLOR_TOKENS.map(({ key, label }) => (
+                      <label key={key} className="flex items-center gap-2">
+                        <input
+                          type="color"
+                          value={colorVariants[selectedVariant].theme_settings[key] || '#000000'}
+                          onChange={(e) => {
+                            setColorVariants(prev => prev.map((v, i) =>
+                              i === selectedVariant
+                                ? { ...v, theme_settings: { ...v.theme_settings, [key]: e.target.value } }
+                                : v
+                            ));
+                          }}
+                          className="h-6 w-6 cursor-pointer border border-white/10 bg-transparent"
+                        />
+                        <span className="font-mono text-[10px] text-white/70">{label}</span>
+                        <span className="ml-auto font-mono text-[9px] text-muted">{colorVariants[selectedVariant].theme_settings[key] || ''}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* RIGHT: Copy Preview */}
