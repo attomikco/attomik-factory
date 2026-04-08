@@ -97,8 +97,31 @@
       assign variant_count = card_option.values | size
       assign popular_index = variant_count | minus: 1 | divided_by: 2
       assign last_index = variant_count | minus: 1
+
+      assign popular_value = card_option.values[popular_index]
+      assign popular_encoded = popular_value | replace: ' ', '+' | base64_encode
+
+      assign popular_variant = nil
+      for v in product.variants
+        assign v_opt_encoded = v.options[option_index] | replace: ' ', '+' | base64_encode
+        if v_opt_encoded == popular_encoded
+          assign popular_variant = v
+          break
+        endif
+      endfor
     -%}
-    <div class="ac-vc-grid ac-vc-grid--{{ section.id }}" style="align-items:stretch;">
+    <div
+      class="ac-vc-grid ac-vc-grid--{{ section.id }}"
+      style="align-items:stretch;"
+      {% if popular_variant and variant_count > 2 %}
+        x-init="
+          $nextTick(() => {
+            option{{ card_option_position }} = `{{ popular_encoded }}`;
+            handleProductFormChange(null, '{{ section.id }}', '{{ product.handle | handle }}', '{{ card_option_position }}', '{{ popular_value.id }}');
+          });
+        "
+      {% endif %}
+    >
       {% for value in card_option.values %}
         {%- liquid
           assign value_encoded = value | replace: ' ', '+' | base64_encode
