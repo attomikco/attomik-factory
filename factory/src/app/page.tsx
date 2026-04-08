@@ -57,7 +57,7 @@ function AddStoreModal({ onClose, onAdded }: { onClose: () => void; onAdded: () 
           <div>
             <label style={{ ...styles.label, display: 'block', marginBottom: spacing[1] }}>Alias</label>
             <input value={alias} onChange={e => setAlias(e.target.value)} placeholder="jolene" style={styles.input} />
-            <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.subtle, marginTop: 2, display: 'block' }}>Short name used in CLI commands</span>
+            <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.subtle, marginTop: 2, display: 'block' }}>Short name used in CLI commands</span>
           </div>
           <div>
             <label style={{ ...styles.label, display: 'block', marginBottom: spacing[1] }}>Shopify Store URL</label>
@@ -68,7 +68,7 @@ function AddStoreModal({ onClose, onAdded }: { onClose: () => void; onAdded: () 
             <input value={brandName} onChange={e => setBrandName(e.target.value)} placeholder="Jolene Coffee Spice" style={styles.input} />
           </div>
         </div>
-        {error && <p style={{ marginTop: spacing[3], fontFamily: font.mono, fontSize: fontSize.xs, color: colors.danger }}>{error}</p>}
+        {error && <p style={{ marginTop: spacing[3], fontFamily: font.heading, fontSize: fontSize.xs, color: colors.danger }}>{error}</p>}
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: spacing[3], marginTop: spacing[6] }}>
           <button onClick={onClose} style={styles.btnGhost}>Cancel</button>
           <button onClick={handleSave} disabled={saving || !alias || !storeUrl || !brandName} style={{ ...styles.btnPrimary, opacity: saving || !alias || !storeUrl || !brandName ? 0.4 : 1 }}>
@@ -109,7 +109,7 @@ function OutputModal({ title, output, success, onClose }: { title: string; outpu
         </div>
         <pre style={{
           flex: 1, overflow: 'auto', background: colors.ink, color: colors.accent, borderRadius: radius.md,
-          padding: spacing[4], fontFamily: font.mono, fontSize: fontSize.xs, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word',
+          padding: spacing[4], fontFamily: font.heading, fontSize: fontSize.xs, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word',
         }}>
           {output || (success ? 'Completed successfully.' : 'No output.')}
         </pre>
@@ -200,11 +200,11 @@ function StoreCard({ store, onResult }: { store: StoreEntry; onResult: (t: strin
               {store.brand_name}
             </h3>
           )}
-          <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, marginTop: 2 }}>
+          <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, marginTop: 2 }}>
             {store.store_url}
           </p>
         </div>
-        <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.subtle, background: colors.cream, padding: '2px 8px', borderRadius: radius.xs }}>
+        <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.subtle, background: colors.cream, padding: '2px 8px', borderRadius: radius.xs }}>
           {store.alias}
         </span>
       </div>
@@ -258,25 +258,25 @@ function StoreCard({ store, onResult }: { store: StoreEntry; onResult: (t: strin
         {store.client_id && (
           <>
             <Link href={`/stores/${store.client_id}`}
-              style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.accent, textDecoration: 'none', fontWeight: fontWeight.bold }}
+              style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.accent, textDecoration: 'none', fontWeight: fontWeight.bold }}
             >Manage</Link>
             <span style={{ color: colors.border }}>·</span>
           </>
         )}
         <a href={`https://${store.store_url}/admin`} target="_blank" rel="noopener noreferrer"
-          style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, textDecoration: 'none' }}
+          style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, textDecoration: 'none' }}
           onMouseEnter={e => { e.currentTarget.style.color = colors.accent; }}
           onMouseLeave={e => { e.currentTarget.style.color = colors.muted; }}
         >Shopify Admin</a>
         <span style={{ color: colors.border }}>·</span>
         <a href={`https://${store.store_url}/admin/themes`} target="_blank" rel="noopener noreferrer"
-          style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, textDecoration: 'none' }}
+          style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, textDecoration: 'none' }}
           onMouseEnter={e => { e.currentTarget.style.color = colors.accent; }}
           onMouseLeave={e => { e.currentTarget.style.color = colors.muted; }}
         >Theme Editor</a>
         <span style={{ color: colors.border }}>·</span>
         <a href={`https://${store.store_url}`} target="_blank" rel="noopener noreferrer"
-          style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, textDecoration: 'none' }}
+          style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, textDecoration: 'none' }}
           onMouseEnter={e => { e.currentTarget.style.color = colors.accent; }}
           onMouseLeave={e => { e.currentTarget.style.color = colors.muted; }}
         >Live Store</a>
@@ -327,7 +327,7 @@ function WorkflowGuide() {
       <h3 style={{ fontFamily: font.heading, fontSize: fontSize['2xl'], fontWeight: fontWeight.extrabold, color: colors.ink, textTransform: 'uppercase', letterSpacing: letterSpacing.tight, marginBottom: spacing[2] }}>
         How It Works
       </h3>
-      <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[5], lineHeight: 1.6 }}>
+      <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[5], lineHeight: 1.6 }}>
         Customize content in the Shopify builder (images, copy, settings). Make code changes here (sections, snippets, logic). Use these actions to sync between the two.
       </p>
 
@@ -336,7 +336,7 @@ function WorkflowGuide() {
           <div key={step.title} style={{ display: 'flex', gap: spacing[3], alignItems: 'flex-start' }}>
             <span style={{
               flexShrink: 0, padding: '2px 8px', borderRadius: radius.pill,
-              fontSize: fontSize['2xs'], fontWeight: fontWeight.bold, fontFamily: font.mono,
+              fontSize: fontSize['2xs'], fontWeight: fontWeight.bold, fontFamily: font.heading,
               textTransform: 'uppercase', letterSpacing: letterSpacing.wide,
               background: step.tagColor, color: step.tagTextColor,
               marginTop: 2,
@@ -345,7 +345,7 @@ function WorkflowGuide() {
             </span>
             <div>
               <span style={{ fontFamily: font.heading, fontSize: fontSize.body, fontWeight: fontWeight.bold, color: colors.ink }}>{step.title}</span>
-              <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, lineHeight: 1.5, marginTop: 2 }}>{step.description}</p>
+              <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, lineHeight: 1.5, marginTop: 2 }}>{step.description}</p>
             </div>
           </div>
         ))}
@@ -353,7 +353,7 @@ function WorkflowGuide() {
 
       <div style={{ marginTop: spacing[5], paddingTop: spacing[4], borderTop: `1px solid ${colors.border}` }}>
         <div style={{ ...styles.label, fontSize: fontSize['2xs'], marginBottom: spacing[2] }}>Typical Workflow</div>
-        <ol style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, lineHeight: 2, paddingLeft: spacing[5], margin: 0 }}>
+        <ol style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, lineHeight: 2, paddingLeft: spacing[5], margin: 0 }}>
           <li>Customize content in the Shopify theme builder (images, copy, colors)</li>
           <li>Click <strong style={{ color: colors.ink }}>Pull Settings</strong> to save your work locally</li>
           <li>Make code changes here (new sections, bug fixes, snippets)</li>
@@ -420,7 +420,7 @@ export default function Dashboard() {
             }}>
               ATTOMIK FACTORY
             </h1>
-            <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>v2.0</span>
+            <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>v2.0</span>
           </div>
           <div style={{ display: 'flex', gap: spacing[3] }}>
             <Link href="/clients/new" style={{ ...styles.btnDark, fontSize: fontSize.xs, padding: '8px 16px', textDecoration: 'none' }}>
@@ -446,14 +446,14 @@ export default function Dashboard() {
               <h2 style={{ fontFamily: font.heading, fontSize: fontSize['4xl'], fontWeight: fontWeight.extrabold, letterSpacing: letterSpacing.tight, color: colors.ink }}>
                 Stores
               </h2>
-              <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>{stores.length}</span>
+              <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>{stores.length}</span>
               <div style={{ flex: 1, height: 1, background: colors.border }} />
             </div>
 
             {loading ? (
               <div style={{ padding: `${spacing[16]}px 0`, textAlign: 'center' }}>
                 <div className="spinner" style={{ margin: '0 auto', marginBottom: spacing[3], borderColor: colors.border, borderTopColor: colors.ink }} />
-                <span style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>Loading stores...</span>
+                <span style={{ fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted }}>Loading stores...</span>
               </div>
             ) : stores.length === 0 ? (
               <div style={{
@@ -463,7 +463,7 @@ export default function Dashboard() {
                 <p style={{ fontFamily: font.heading, fontSize: fontSize['2xl'], fontWeight: fontWeight.extrabold, color: colors.ink, textTransform: 'uppercase', marginBottom: spacing[2] }}>
                   No stores connected
                 </p>
-                <p style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted, maxWidth: 400, margin: '0 auto', lineHeight: 1.6 }}>
+                <p style={{ fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted, maxWidth: 400, margin: '0 auto', lineHeight: 1.6 }}>
                   Generate a new store or connect an existing Shopify store to manage it from here.
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: spacing[3], marginTop: spacing[6] }}>

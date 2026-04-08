@@ -52,7 +52,7 @@ function ColorSchemePanel({ variants, selected }: { variants: ColorVariant[]; se
             style={{
               padding: `${spacing[1]}px ${spacing[3]}px`,
               borderRadius: radius.xs,
-              fontFamily: font.mono,
+              fontFamily: font.heading,
               fontSize: fontSize['2xs'],
               textTransform: 'uppercase',
               letterSpacing: letterSpacing.wider,
@@ -76,8 +76,8 @@ function ColorSchemePanel({ variants, selected }: { variants: ColorVariant[]; se
               border: `1px solid ${colors.border}`,
               flexShrink: 0,
             }} />
-            <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.muted }}>{label}</span>
-            <span style={{ marginLeft: 'auto', fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.subtle }}>
+            <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.muted }}>{label}</span>
+            <span style={{ marginLeft: 'auto', fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.subtle }}>
               {variant.theme_settings[key] || ''}
             </span>
           </div>
@@ -138,7 +138,7 @@ function CopyPreview({ config }: { config: GeneratedConfig }) {
     }
   }
 
-  if (items.length === 0) return <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>No copy preview available</p>;
+  if (items.length === 0) return <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>No copy preview available</p>;
 
   return (
     <div style={{ background: colors.paper, border: `1px solid ${colors.border}`, borderRadius: radius.xl, boxShadow: shadow.card, overflow: 'hidden' }}>
@@ -153,7 +153,7 @@ function CopyPreview({ config }: { config: GeneratedConfig }) {
           }}
         >
           <span style={{ ...styles.label, fontSize: fontSize['2xs'], minWidth: 80, flexShrink: 0, paddingTop: 2 }}>{item.label}</span>
-          <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.ink, lineHeight: 1.5 }}>{item.value}</span>
+          <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.ink, lineHeight: 1.5 }}>{item.value}</span>
         </div>
       ))}
     </div>
@@ -245,7 +245,7 @@ export default function StoreDetailPage() {
       <div style={{ minHeight: '100vh', background: colors.cream, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center' }}>
           <div className="spinner" style={{ margin: '0 auto', marginBottom: spacing[3], borderColor: colors.border, borderTopColor: colors.ink }} />
-          <span style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>Loading store...</span>
+          <span style={{ fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted }}>Loading store...</span>
         </div>
       </div>
     );
@@ -279,7 +279,7 @@ export default function StoreDetailPage() {
               {client.brand_name}
             </h1>
             {storeAlias && (
-              <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.subtle, background: colors.cream, padding: '2px 8px', borderRadius: radius.xs }}>
+              <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.subtle, background: colors.cream, padding: '2px 8px', borderRadius: radius.xs }}>
                 {storeAlias}
               </span>
             )}
@@ -315,15 +315,15 @@ export default function StoreDetailPage() {
           </div>
           <div>
             <div style={{ ...styles.label, fontSize: fontSize['2xs'], marginBottom: 4 }}>Store URL</div>
-            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.ink }}>{client.store_url || '—'}</p>
+            <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.ink }}>{client.store_url || '—'}</p>
           </div>
           <div>
             <div style={{ ...styles.label, fontSize: fontSize['2xs'], marginBottom: 4 }}>Category</div>
-            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.ink }}>{config?.brief?.category || '—'}</p>
+            <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.ink }}>{config?.brief?.category || '—'}</p>
           </div>
           <div>
             <div style={{ ...styles.label, fontSize: fontSize['2xs'], marginBottom: 4 }}>Created</div>
-            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.ink }}>
+            <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.ink }}>
               {new Date(client.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </p>
           </div>
@@ -346,7 +346,7 @@ export default function StoreDetailPage() {
             {output && (
               <pre style={{
                 marginTop: spacing[3], background: colors.ink, color: output.success ? colors.accent : colors.dangerSoft,
-                borderRadius: radius.md, padding: spacing[4], fontFamily: font.mono, fontSize: fontSize.xs,
+                borderRadius: radius.md, padding: spacing[4], fontFamily: font.heading, fontSize: fontSize.xs,
                 lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', maxHeight: 200, overflow: 'auto',
               }}>
                 {output.text}
@@ -372,7 +372,7 @@ export default function StoreDetailPage() {
                   ].filter(r => r.value).map((row, i) => (
                     <div key={i} style={{ padding: `${spacing[3]}px ${spacing[5]}px`, borderBottom: `1px solid ${colors.cream}`, display: 'flex', gap: spacing[4] }}>
                       <span style={{ ...styles.label, fontSize: fontSize['2xs'], minWidth: 70, flexShrink: 0, paddingTop: 2 }}>{row.label}</span>
-                      <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.ink, lineHeight: 1.5 }}>{row.value}</span>
+                      <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.ink, lineHeight: 1.5 }}>{row.value}</span>
                     </div>
                   ))}
                 </div>
@@ -408,7 +408,7 @@ export default function StoreDetailPage() {
                           width: 8, height: 8, borderRadius: '50%',
                           background: tpl.data ? colors.success : colors.disabled,
                         }} />
-                        <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.ink }}>{tpl.label}</span>
+                        <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.ink }}>{tpl.label}</span>
                       </div>
                       {tpl.data && (
                         <button
@@ -440,7 +440,7 @@ export default function StoreDetailPage() {
             <p style={{ fontFamily: font.heading, fontSize: fontSize['2xl'], fontWeight: fontWeight.extrabold, color: colors.ink, textTransform: 'uppercase', marginBottom: spacing[2] }}>
               No config generated yet
             </p>
-            <p style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted, maxWidth: 400, margin: '0 auto', lineHeight: 1.6 }}>
+            <p style={{ fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted, maxWidth: 400, margin: '0 auto', lineHeight: 1.6 }}>
               Generate a store configuration to see colors, copy, and templates here.
             </p>
             <Link href="/clients/new" style={{ ...styles.btnPrimary, marginTop: spacing[6], textDecoration: 'none', display: 'inline-flex' }}>

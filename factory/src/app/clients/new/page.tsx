@@ -91,7 +91,7 @@ function Steps({ current }: { current: number }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontFamily: font.mono,
+                fontFamily: font.heading,
                 fontSize: fontSize.xs,
                 border: `1px solid ${isActive ? colors.accent : isDone ? colors.borderStrong : colors.border}`,
                 color: isActive ? colors.accent : isDone ? colors.borderStrong : colors.muted,
@@ -102,7 +102,7 @@ function Steps({ current }: { current: number }) {
             </div>
             <span
               style={{
-                fontFamily: font.mono,
+                fontFamily: font.heading,
                 fontSize: fontSize.xs,
                 textTransform: 'uppercase',
                 letterSpacing: letterSpacing.wider,
@@ -461,7 +461,7 @@ export default function NewClientPage() {
             <h2 style={{ fontFamily: font.heading, fontWeight: fontWeight.heading, fontSize: fontSize['5xl'], color: colors.ink, textTransform: 'uppercase', letterSpacing: letterSpacing.tight, marginBottom: spacing[1] }}>
               Scan Brand
             </h2>
-            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[10] }}>
+            <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[10] }}>
               Paste a brand URL to auto-extract colors, fonts, products, and identity.
             </p>
 
@@ -498,7 +498,7 @@ export default function NewClientPage() {
               style={{
                 background: 'none',
                 border: 'none',
-                fontFamily: font.mono,
+                fontFamily: font.heading,
                 fontSize: fontSize.xs,
                 color: colors.muted,
                 textDecoration: 'underline',
@@ -512,7 +512,7 @@ export default function NewClientPage() {
             {scanning && (
               <div style={{ display: 'flex', alignItems: 'center', gap: spacing[3], padding: `${spacing[12]}px 0` }}>
                 <div className="spinner spinner-sm" />
-                <span style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>Scanning brand...</span>
+                <span style={{ fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted }}>Scanning brand...</span>
               </div>
             )}
 
@@ -521,7 +521,7 @@ export default function NewClientPage() {
                 border: `1px solid ${colors.dangerSoft}`,
                 background: 'rgba(185,28,28,0.08)',
                 padding: `${spacing[3]}px ${spacing[4]}px`,
-                fontFamily: font.mono,
+                fontFamily: font.heading,
                 fontSize: fontSize.xs,
                 color: colors.dangerSoft,
                 borderRadius: radius.sm,
@@ -534,7 +534,7 @@ export default function NewClientPage() {
             {scraped && !scanning && (
               <div style={{ border: `1px solid ${colors.border}`, borderRadius: radius.xl, overflow: 'hidden' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: spacing[3], borderBottom: `1px solid ${colors.border}`, padding: `${spacing[3]}px ${spacing[5]}px` }}>
-                  <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.accent }}>Brand detected</span>
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.accent }}>Brand detected</span>
                   {scraped.platform && (
                     <span className="badge badge-black" style={{ fontSize: fontSize['2xs'] }}>{scraped.platform}</span>
                   )}
@@ -563,7 +563,7 @@ export default function NewClientPage() {
                             }}
                             style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer' }}
                           />
-                          <span style={{ display: 'block', marginTop: 4, textAlign: 'center', fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.muted }}>{color}</span>
+                          <span style={{ display: 'block', marginTop: 4, textAlign: 'center', fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.muted }}>{color}</span>
                         </label>
                       ))}
                     </div>
@@ -574,7 +574,7 @@ export default function NewClientPage() {
                       <span style={labelStyle}>Fonts</span>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: spacing[1] }}>
                         {scraped.fonts.map(f => (
-                          <span key={f} style={{ border: `1px solid ${colors.border}`, padding: `${spacing[1]}px ${spacing[2]}px`, fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText, borderRadius: radius.xs }}>{f}</span>
+                          <span key={f} style={{ border: `1px solid ${colors.border}`, padding: `${spacing[1]}px ${spacing[2]}px`, fontFamily: font.heading, fontSize: fontSize.xs, color: colors.grayText, borderRadius: radius.xs }}>{f}</span>
                         ))}
                       </div>
                     </div>
@@ -600,7 +600,7 @@ export default function NewClientPage() {
                         {scraped.products.slice(0, 6).map(p => (
                           <div key={p.title} style={{ display: 'flex', alignItems: 'center', gap: spacing[3] }}>
                             {p.image && <div style={{ width: 32, height: 32, flexShrink: 0, overflow: 'hidden', border: `1px solid ${colors.border}`, borderRadius: radius.xs }}><img src={p.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>}
-                            <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText }}>{p.title}</span>
+                            <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.grayText }}>{p.title}</span>
                           </div>
                         ))}
                       </div>
@@ -628,7 +628,7 @@ export default function NewClientPage() {
             <h2 style={{ fontFamily: font.heading, fontWeight: fontWeight.heading, fontSize: fontSize['5xl'], color: colors.ink, textTransform: 'uppercase', letterSpacing: letterSpacing.tight, marginBottom: spacing[1] }}>
               Brand Brief
             </h2>
-            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[10] }}>
+            <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, marginBottom: spacing[10] }}>
               Fill in the details. The more specific, the better the output.
             </p>
 
@@ -678,7 +678,7 @@ export default function NewClientPage() {
                           background: selected ? colors.accent : 'transparent',
                           color: selected ? colors.ink : colors.muted,
                           padding: `6px ${spacing[3]}px`,
-                          fontFamily: font.mono,
+                          fontFamily: font.heading,
                           fontSize: fontSize.xs,
                           textTransform: 'uppercase',
                           letterSpacing: letterSpacing.wider,
@@ -714,7 +714,7 @@ export default function NewClientPage() {
                 border: `1px solid ${colors.dangerSoft}`,
                 background: 'rgba(185,28,28,0.08)',
                 padding: `${spacing[3]}px ${spacing[4]}px`,
-                fontFamily: font.mono,
+                fontFamily: font.heading,
                 fontSize: fontSize.xs,
                 color: colors.dangerSoft,
                 borderRadius: radius.sm,
@@ -757,13 +757,13 @@ export default function NewClientPage() {
                   {['Analyzing brand colors...', 'Generating store copy...', 'Building homepage config...'].map((label, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: spacing[2] }}>
                       {genStep > i + 1 ? (
-                        <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.accent }}>&#10003;</span>
+                        <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.accent }}>&#10003;</span>
                       ) : genStep === i + 1 ? (
                         <div className="spinner spinner-sm" />
                       ) : (
                         <span style={{ display: 'inline-block', width: 10, height: 10, border: `1px solid ${colors.border}`, borderRadius: 2 }} />
                       )}
-                      <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: genStep > i + 1 ? colors.accent : genStep === i + 1 ? colors.paper : colors.muted }}>
+                      <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: genStep > i + 1 ? colors.accent : genStep === i + 1 ? colors.paper : colors.muted }}>
                         {label}
                       </span>
                     </div>
@@ -771,22 +771,22 @@ export default function NewClientPage() {
                 </div>
 
                 {genStep === 2 && (
-                  <p style={{ marginTop: spacing[3], fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>
+                  <p style={{ marginTop: spacing[3], fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted }}>
                     {['Writing hero headlines...', 'Crafting product descriptions...', 'Building FAQ responses...', 'Generating review copy...', 'Assembling section order...'][loadingMsg % 5]}
                   </p>
                 )}
 
                 <div style={{ marginTop: spacing[4], display: 'flex', alignItems: 'baseline', gap: spacing[3] }}>
-                  <span style={{ fontFamily: font.mono, fontSize: fontSize.lg, fontVariantNumeric: 'tabular-nums', color: colors.grayText }}>
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize.lg, fontVariantNumeric: 'tabular-nums', color: colors.grayText }}>
                     {Math.floor(elapsed / 60)}:{String(elapsed % 60).padStart(2, '0')}
                   </span>
-                  <span style={{ fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted }}>
                     Generation typically takes 30–60 seconds
                   </span>
                 </div>
 
                 {elapsed > 90 && (
-                  <p style={{ marginTop: spacing[2], fontFamily: font.mono, fontSize: fontSize.xs, color: '#eab308' }}>
+                  <p style={{ marginTop: spacing[2], fontFamily: font.heading, fontSize: fontSize.xs, color: '#eab308' }}>
                     This is taking longer than usual… still working
                   </p>
                 )}
@@ -797,7 +797,7 @@ export default function NewClientPage() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                style={{ ...styles.btnGhost, border: 'none', fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, background: 'none', cursor: 'pointer' }}
+                style={{ ...styles.btnGhost, border: 'none', fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, background: 'none', cursor: 'pointer' }}
               >
                 &larr; Back to scan
               </button>
@@ -816,14 +816,14 @@ export default function NewClientPage() {
                 <button
                   type="button"
                   onClick={() => { setStep(2); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); setError(null); }}
-                  style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
+                  style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
                 >
                   Regenerate
                 </button>
                 <button
                   type="button"
                   onClick={() => { setStep(1); setBrief(INITIAL); setScanUrl(''); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); }}
-                  style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
+                  style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
                 >
                   Start Over
                 </button>
@@ -858,7 +858,7 @@ export default function NewClientPage() {
                           transition: `border-color ${transition.fast}`,
                         }}
                       >
-                        <span style={{ display: 'block', marginBottom: 4, fontFamily: font.mono, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>{variant.name.replace('_', ' ')}</span>
+                        <span style={{ display: 'block', marginBottom: 4, fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>{variant.name.replace('_', ' ')}</span>
                         <div style={{ display: 'flex', gap: 2 }}>
                           {swatches.map((color, j) => (
                             <div key={j} style={{ width: 16, height: 16, backgroundColor: color || colors.ink, border: `1px solid ${colors.border}`, borderRadius: 2 }} />
@@ -896,7 +896,7 @@ export default function NewClientPage() {
                       border: `1px dashed ${colors.border}`,
                       background: 'transparent',
                       padding: `${spacing[2]}px ${spacing[3]}px`,
-                      fontFamily: font.mono,
+                      fontFamily: font.heading,
                       fontSize: fontSize['2xs'],
                       color: colors.muted,
                       cursor: 'pointer',
@@ -925,8 +925,8 @@ export default function NewClientPage() {
                           }}
                           style={{ width: 24, height: 24, cursor: 'pointer', border: `1px solid ${colors.border}`, background: 'transparent', borderRadius: 2, padding: 0 }}
                         />
-                        <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.grayText }}>{label}</span>
-                        <span style={{ marginLeft: 'auto', fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.muted }}>{colorVariants[selectedVariant].theme_settings[key] || ''}</span>
+                        <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.grayText }}>{label}</span>
+                        <span style={{ marginLeft: 'auto', fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.muted }}>{colorVariants[selectedVariant].theme_settings[key] || ''}</span>
                       </label>
                     ))}
                   </div>
@@ -943,7 +943,7 @@ export default function NewClientPage() {
                       onClick={() => setPreviewTab(tab)}
                       style={{
                         padding: `${spacing[3]}px ${spacing[5]}px`,
-                        fontFamily: font.mono,
+                        fontFamily: font.heading,
                         fontSize: fontSize.sm,
                         textTransform: 'uppercase',
                         letterSpacing: letterSpacing.wider,
@@ -965,14 +965,14 @@ export default function NewClientPage() {
                 <div style={{ padding: spacing[5] }}>
                   {previewTab === 'homepage' && (() => {
                     const preview = extractPreview();
-                    if (!preview) return <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>No preview available</span>;
+                    if (!preview) return <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>No preview available</span>;
                     return (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[4] }}>
                         {preview.heroHeadline && (
                           <div>
                             <span style={{ ...labelStyle, color: colors.muted }}>Hero</span>
                             <p style={{ fontFamily: font.heading, fontSize: fontSize['2xl'], fontWeight: fontWeight.heading, color: colors.ink, textTransform: 'uppercase' }}>{preview.heroHeadline}</p>
-                            {preview.heroSub && <p style={{ marginTop: 4, fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>{preview.heroSub}</p>}
+                            {preview.heroSub && <p style={{ marginTop: 4, fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>{preview.heroSub}</p>}
                           </div>
                         )}
                         {preview.tickerItems.length > 0 && (
@@ -980,7 +980,7 @@ export default function NewClientPage() {
                             <span style={{ ...labelStyle, color: colors.muted }}>Ticker</span>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                               {preview.tickerItems.map((item, i) => (
-                                <span key={i} style={{ border: `1px solid ${colors.border}`, padding: `2px ${spacing[2]}px`, fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.grayText, borderRadius: radius.xs }}>{item}</span>
+                                <span key={i} style={{ border: `1px solid ${colors.border}`, padding: `2px ${spacing[2]}px`, fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.grayText, borderRadius: radius.xs }}>{item}</span>
                               ))}
                             </div>
                           </div>
@@ -990,7 +990,7 @@ export default function NewClientPage() {
                             <span style={{ ...labelStyle, color: colors.muted }}>Pillars</span>
                             <div style={{ display: 'flex', gap: spacing[3] }}>
                               {preview.pillarHeadlines.slice(0, 3).map((h, i) => (
-                                <span key={i} style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText }}>{h}</span>
+                                <span key={i} style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.grayText }}>{h}</span>
                               ))}
                             </div>
                           </div>
@@ -998,8 +998,8 @@ export default function NewClientPage() {
                         {preview.faqQ && (
                           <div>
                             <span style={{ ...labelStyle, color: colors.muted }}>FAQ</span>
-                            <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: colors.ink }}>{preview.faqQ}</p>
-                            <p style={{ marginTop: 4, fontFamily: font.mono, fontSize: fontSize.sm, color: colors.muted }}>{preview.faqA}</p>
+                            <p style={{ fontFamily: font.heading, fontSize: fontSize.xs, fontWeight: fontWeight.bold, color: colors.ink }}>{preview.faqQ}</p>
+                            <p style={{ marginTop: 4, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.muted }}>{preview.faqA}</p>
                           </div>
                         )}
                       </div>
@@ -1007,13 +1007,13 @@ export default function NewClientPage() {
                   })()}
                   {previewTab === 'pdp' && (() => {
                     const pdp = extractPdpPreview();
-                    if (!pdp) return <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted }}>No PDP preview available</span>;
+                    if (!pdp) return <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>No PDP preview available</span>;
                     return (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: spacing[4] }}>
                         {pdp.badgeText && (
                           <div>
                             <span style={{ ...labelStyle, color: colors.muted }}>Badge</span>
-                            <p style={{ fontFamily: font.mono, fontSize: fontSize.body, color: colors.ink }}>
+                            <p style={{ fontFamily: font.heading, fontSize: fontSize.body, color: colors.ink }}>
                               {pdp.badgeEmoji && <span style={{ marginRight: 4 }}>{pdp.badgeEmoji}</span>}
                               {pdp.badgeText}
                             </p>
@@ -1026,14 +1026,14 @@ export default function NewClientPage() {
                               {pdp.checklistItems.map((item, i) => (
                                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: spacing[2] }}>
                                   <span style={{ color: colors.accent }}>&#10003;</span>
-                                  <span style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.grayText }}>{item}</span>
+                                  <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.grayText }}>{item}</span>
                                 </div>
                               ))}
                             </div>
                             {pdp.valueTag && (
                               <div style={{ marginTop: spacing[2], border: `1px solid ${colors.border}`, padding: `${spacing[2]}px ${spacing[3]}px`, borderRadius: radius.sm }}>
-                                <span style={{ fontFamily: font.mono, fontSize: fontSize['2xs'], fontWeight: fontWeight.bold, color: colors.accent }}>{pdp.valueTag}</span>
-                                {pdp.valueText && <span style={{ marginLeft: spacing[2], fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.muted }}>{pdp.valueText}</span>}
+                                <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], fontWeight: fontWeight.bold, color: colors.accent }}>{pdp.valueTag}</span>
+                                {pdp.valueText && <span style={{ marginLeft: spacing[2], fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.muted }}>{pdp.valueText}</span>}
                               </div>
                             )}
                           </div>
@@ -1043,7 +1043,7 @@ export default function NewClientPage() {
                             <span style={{ ...labelStyle, color: colors.muted }}>{pdp.perksLabel || 'Perks'}</span>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                               {pdp.perksItems.map((perk, i) => (
-                                <span key={i} style={{ border: `1px solid ${colors.border}`, padding: `2px ${spacing[2]}px`, fontFamily: font.mono, fontSize: fontSize['2xs'], color: colors.grayText, borderRadius: radius.xs }}>{perk}</span>
+                                <span key={i} style={{ border: `1px solid ${colors.border}`, padding: `2px ${spacing[2]}px`, fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.grayText, borderRadius: radius.xs }}>{perk}</span>
                               ))}
                             </div>
                           </div>

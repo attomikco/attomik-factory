@@ -313,7 +313,7 @@ export const styles = {
 
   // Labels
   label: {
-    fontFamily: font.mono,
+    fontFamily: font.heading,
     fontSize: fontSize.caption,
     fontWeight: fontWeight.semibold,
     textTransform: 'uppercase' as const,
@@ -321,7 +321,7 @@ export const styles = {
     color: colors.muted,
   },
   labelAccent: {
-    fontFamily: font.mono,
+    fontFamily: font.heading,
     fontSize: fontSize.caption,
     fontWeight: fontWeight.semibold,
     textTransform: 'uppercase' as const,
@@ -407,7 +407,7 @@ export const styles = {
 
   // Inputs
   input: {
-    fontFamily: font.mono,
+    fontFamily: font.heading,
     fontSize: fontSize.base,
     color: colors.ink,
     background: colors.paper,
