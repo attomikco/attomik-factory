@@ -1496,8 +1496,8 @@
           "content_block": {
             "type": "content",
             "settings": {
-              "heading": "{{footer_tagline}}",
-              "content": "",
+              "heading": "{{footer_about_heading}}",
+              "content": "{{footer_about_content}}",
               "button_label": "",
               "button_url": "",
               "logo_desktop_height": 70,

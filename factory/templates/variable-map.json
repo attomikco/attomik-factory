@@ -1020,6 +1020,18 @@
     "instructions": "Brand one-liner displayed below the logo in the footer. Under 10 words. Captures the brand promise or positioning (e.g. 'Simply Great Coffee', 'Real Fruit, Real Flavor')."
   },
   {
+    "key": "footer_about_heading",
+    "type": "text",
+    "section": "footer",
+    "instructions": "Footer content block heading. Usually 'About Us' or 'Our Story'. 2-3 words."
+  },
+  {
+    "key": "footer_about_content",
+    "type": "richtext",
+    "section": "footer",
+    "instructions": "Short brand description for the footer content block. 2-3 sentences explaining what the brand is and what it stands for. Warm and concise. Wrap in <p> tags."
+  },
+  {
     "key": "footer_newsletter_heading",
     "type": "text",
     "section": "footer",
