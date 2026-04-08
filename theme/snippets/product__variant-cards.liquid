@@ -93,6 +93,11 @@
     </div>
 
     {% comment %} Card grid {% endcomment %}
+    {%- liquid
+      assign variant_count = card_option.values | size
+      assign popular_index = variant_count | minus: 1 | divided_by: 2
+      assign last_index = variant_count | minus: 1
+    -%}
     <div class="ac-vc-grid ac-vc-grid--{{ section.id }}">
       {% for value in card_option.values %}
         {%- liquid
@@ -150,13 +155,13 @@
             if val_config.badge_color == 'secondary'
               assign badge_type = 'popular'
             endif
-          elsif option_available and forloop.first == false
-            if forloop.last
-              assign badge_text = 'Best Value'
-              assign badge_type = 'best'
-            else
+          elsif option_available
+            if forloop.index0 == popular_index and forloop.index0 != 0 and forloop.index0 != last_index
               assign badge_text = 'Popular'
               assign badge_type = 'popular'
+            elsif forloop.index0 == last_index and variant_count > 1
+              assign badge_text = 'Best Value'
+              assign badge_type = 'best'
             endif
           endif
 
