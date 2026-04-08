@@ -171,15 +171,24 @@
             assign per_unit_label = val_config.per_unit_label
           endif
 
-          # === SAVINGS (auto-calculate vs first variant) ===
+          # === SAVINGS (compare-at price first, then vs first variant) ===
           assign savings_pct = 0
           assign savings_label = ''
+          assign has_compare_at = false
+          if card_variant and card_variant.compare_at_price and card_variant.compare_at_price > card_variant.price
+            assign has_compare_at = true
+          endif
           if val_config and val_config.savings_label != blank
             assign savings_label = val_config.savings_label
-          elsif card_variant and first_variant_price and first_variant_price > 0 and forloop.first == false
-            if card_variant.price < first_variant_price
-              assign price_diff = first_variant_price | minus: card_variant.price
-              assign savings_pct = price_diff | times: 100 | divided_by: first_variant_price
+          elsif card_variant
+            if has_compare_at
+              assign base_price = card_variant.compare_at_price
+            else
+              assign base_price = first_variant_price
+            endif
+            if base_price and base_price > 0 and base_price > card_variant.price
+              assign price_diff = base_price | minus: card_variant.price
+              assign savings_pct = price_diff | times: 100 | divided_by: base_price
               if savings_pct > 0
                 assign savings_label = 'SAVE ' | append: savings_pct | append: '%'
               endif
@@ -256,13 +265,24 @@
             {% if option_available %}
 
               {% if card_variant %}
+                {% if has_compare_at %}
+                  <div
+                    class="ac-vc-compare"
+                    style="
+                      font-size: {{ block.settings.price_font_size }}px;
+                      color: {{ block.settings.price_color }};
+                      opacity: 0.5;
+                      text-decoration: line-through;
+                      font-family: var(--type__font-body-family, sans-serif);
+                    "
+                  >{{ card_variant.compare_at_price | money }}</div>
+                {% endif %}
                 <div
                   class="ac-vc-price"
                   style="
                     font-size: {{ block.settings.price_font_size }}px;
                     color: {{ block.settings.price_color }};
-
-                    font-family: var(--font-body-family, sans-serif);
+                    font-family: var(--type__font-body-family, sans-serif);
                   "
                 >{{ card_variant.price | money }}</div>
               {% endif %}
@@ -285,7 +305,8 @@
                   style="
                     font-size: {{ block.settings.savings_font_size }}px;
                     color: {{ block.settings.savings_color }};
-                    font-family: var(--font-body-family, sans-serif);
+                    font-family: var(--type__font-body-family, sans-serif);
+                    font-weight: 700;
                   "
                 >{{ savings_label }}</div>
               {% endif %}
