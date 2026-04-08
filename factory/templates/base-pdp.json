@@ -150,7 +150,7 @@
           "type": "accordion",
           "settings": {
             "title": "Ingredients",
-            "content": "",
+            "content": "{{pdp_ingredients_content}}",
             "icon": "",
             "spacing_top": 10,
             "spacing_bottom": 10,
@@ -165,7 +165,7 @@
           "type": "accordion",
           "settings": {
             "title": "Shipping Information",
-            "content": "",
+            "content": "{{pdp_shipping_content}}",
             "icon": "",
             "spacing_top": 10,
             "spacing_bottom": 10,

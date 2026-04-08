@@ -948,6 +948,18 @@
     "instructions": "Hex background color for the 'Best Value' badge on variant cards. Use brand primary color or a strong accent. Must differ from popular_badge_bg."
   },
   {
+    "key": "pdp_ingredients_content",
+    "type": "richtext",
+    "section": "pdp_accordion",
+    "instructions": "Ingredients or key materials list for the product accordion tab. Use <p> tags. For food/beverage brands list actual or representative ingredients. For skincare list key active ingredients. For supplements list key ingredients and amounts. Keep it realistic and category-appropriate. 3-5 lines."
+  },
+  {
+    "key": "pdp_shipping_content",
+    "type": "richtext",
+    "section": "pdp_accordion",
+    "instructions": "Shipping information for the product accordion tab. Use <p> tags. Include estimated delivery time, free shipping threshold if applicable, and return policy. Keep it concise — 2-3 short paragraphs."
+  },
+  {
     "key": "announcement_text",
     "type": "richtext",
     "section": "announcement",
