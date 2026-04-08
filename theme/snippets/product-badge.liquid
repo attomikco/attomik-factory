@@ -33,25 +33,32 @@
   <div
     {{ block.shopify_attributes }}
     style="
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      width: fit-content;
-      font-family: var(--type__font-heading-family, var(--type__font-body-family, sans-serif));
-      font-size: {{ badge_font_size }}px;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      width: fit-content !important;
+      font-family: var(--type__font-heading-family, var(--type__font-body-family, sans-serif)) !important;
+      font-size: {{ badge_font_size }}px !important;
       font-weight: {{ badge_font_weight }} !important;
-      text-transform: {{ badge_text_transform }};
-      letter-spacing: {{ badge_letter_spacing }}px;
-      color: {{ block.settings.badge_font_color | default: '#ffffff' }};
-      background-color: {{ block.settings.badge_bg_color | default: '#000000' | color_modify: 'alpha', bg_opacity }};
-      border: {{ badge_border_width }}px solid {{ badge_border_color | color_modify: 'alpha', border_opacity }};
-      border-radius: {{ badge_border_radius }}px;
-      padding: {{ badge_padding_y }}px {{ badge_padding_x }}px;
+      text-transform: {{ badge_text_transform }} !important;
+      letter-spacing: {{ badge_letter_spacing }}px !important;
+      color: {{ block.settings.badge_font_color | default: '#ffffff' }} !important;
+      background-color: {{ block.settings.badge_bg_color | default: '#000000' | color_modify: 'alpha', bg_opacity }} !important;
+      border: {{ badge_border_width }}px solid {{ badge_border_color | color_modify: 'alpha', border_opacity }} !important;
+      border-radius: {{ badge_border_radius }}px !important;
+      padding: {{ badge_padding_y }}px {{ badge_padding_x }}px !important;
+      line-height: 1.4 !important;
     "
   >
     {% if block.settings.badge_emoji != blank %}
-      <span>{{ block.settings.badge_emoji }}</span>
+      <span style="font-size: {{ badge_font_size }}px !important;">{{ block.settings.badge_emoji }}</span>
     {% endif %}
-    <span>{{ block.settings.badge_text | default: 'Badge Text' }}</span>
+    <span style="
+      font-size: {{ badge_font_size }}px !important;
+      font-weight: {{ badge_font_weight }} !important;
+      text-transform: {{ badge_text_transform }} !important;
+      letter-spacing: {{ badge_letter_spacing }}px !important;
+      font-family: inherit !important;
+    ">{{ block.settings.badge_text | default: 'Badge Text' }}</span>
   </div>
 </div>
