@@ -142,26 +142,26 @@ export const fontWeight = {
 // Use as fontSize.body, fontSize.lg, etc.
 
 export const fontSize = {
-  '2xs':  9,
-  xs:     10,
-  sm:     11,
-  caption: 12,   // labels, captions
-  body:   13,    // default body
-  md:     14,    // nav items, inputs
-  base:   15,    // comfortable reading
-  lg:     16,    // subtext, help
-  xl:     17,
-  '2xl':  18,
-  '3xl':  20,
-  '4xl':  22,
-  '5xl':  24,
-  '6xl':  26,
-  '7xl':  28,
-  '8xl':  32,
-  '9xl':  36,
-  '10xl': 42,
-  '11xl': 56,
-  display: 96,   // hero / splash
+  '2xs':  10,
+  xs:     12,
+  sm:     13,
+  caption: 14,   // labels, captions
+  body:   15,    // default body
+  md:     16,    // nav items, inputs
+  base:   17,    // comfortable reading
+  lg:     18,    // subtext, help
+  xl:     20,
+  '2xl':  21,
+  '3xl':  23,
+  '4xl':  25,
+  '5xl':  28,
+  '6xl':  30,
+  '7xl':  32,
+  '8xl':  37,
+  '9xl':  41,
+  '10xl': 48,
+  '11xl': 64,
+  display: 110,  // hero / splash
 } as const
 
 // ── SPACING ───────────────────────────────────────────────────
