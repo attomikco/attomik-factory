@@ -18,7 +18,7 @@
             "badge_text": "Fair Trade Certified · Slow Brewed",
             "badge_emoji": "☕",
             "icon": "check",
-            "font_size": 12,
+            "font_size": 10,
             "font_weight": "700",
             "text_transform": "uppercase",
             "letter_spacing": 1,
@@ -103,12 +103,12 @@
             "savings_color": "#1d1d1e",
             "shipping_font_size": 11,
             "shipping_color": "#1d1d1e",
-            "popular_badge_bg": "#1d1d1e",
+            "popular_badge_bg": "#ffc600",
             "popular_badge_text": "#000000",
             "badge_font_size": 9,
             "badge_border_radius": 20,
             "best_badge_bg": "#ffc600",
-            "best_badge_text": "#ffffff"
+            "best_badge_text": "#1d1d1e"
           }
         },
         "b78b560b-e1c2-428d-ad73-fb5f8aac6d58": {
