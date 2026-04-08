@@ -8,6 +8,7 @@ interface StoreEntry {
   alias: string;
   store_url: string;
   brand_name: string;
+  client_id?: string;
 }
 
 // ── Add Store Modal ──────────────────────────────────────────────────────────
@@ -185,9 +186,20 @@ function StoreCard({ store, onResult }: { store: StoreEntry; onResult: (t: strin
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
         <div>
-          <h3 style={{ fontFamily: font.heading, fontSize: fontSize['3xl'], fontWeight: fontWeight.extrabold, color: colors.ink, letterSpacing: letterSpacing.tight }}>
-            {store.brand_name}
-          </h3>
+          {store.client_id ? (
+            <Link href={`/stores/${store.client_id}`} style={{ textDecoration: 'none' }}>
+              <h3 style={{ fontFamily: font.heading, fontSize: fontSize['3xl'], fontWeight: fontWeight.extrabold, color: colors.ink, letterSpacing: letterSpacing.tight, cursor: 'pointer' }}
+                onMouseEnter={e => { e.currentTarget.style.color = colors.accentDark; }}
+                onMouseLeave={e => { e.currentTarget.style.color = colors.ink; }}
+              >
+                {store.brand_name}
+              </h3>
+            </Link>
+          ) : (
+            <h3 style={{ fontFamily: font.heading, fontSize: fontSize['3xl'], fontWeight: fontWeight.extrabold, color: colors.ink, letterSpacing: letterSpacing.tight }}>
+              {store.brand_name}
+            </h3>
+          )}
           <p style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, marginTop: 2 }}>
             {store.store_url}
           </p>
@@ -242,7 +254,15 @@ function StoreCard({ store, onResult }: { store: StoreEntry; onResult: (t: strin
       </div>
 
       {/* Links */}
-      <div style={{ display: 'flex', gap: spacing[2], flexWrap: 'wrap', paddingTop: spacing[2], borderTop: `1px solid ${colors.border}` }}>
+      <div style={{ display: 'flex', gap: spacing[2], flexWrap: 'wrap', paddingTop: spacing[2], borderTop: `1px solid ${colors.border}`, alignItems: 'center' }}>
+        {store.client_id && (
+          <>
+            <Link href={`/stores/${store.client_id}`}
+              style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.accent, textDecoration: 'none', fontWeight: fontWeight.bold }}
+            >Manage</Link>
+            <span style={{ color: colors.border }}>·</span>
+          </>
+        )}
         <a href={`https://${store.store_url}/admin`} target="_blank" rel="noopener noreferrer"
           style={{ fontFamily: font.mono, fontSize: fontSize.xs, color: colors.muted, textDecoration: 'none' }}
           onMouseEnter={e => { e.currentTarget.style.color = colors.accent; }}
@@ -355,9 +375,21 @@ export default function Dashboard() {
   const fetchStores = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/stores');
-      const data = await res.json();
-      setStores(data.stores || []);
+      const [storesRes, clientsRes] = await Promise.all([
+        fetch('/api/stores'),
+        fetch('/api/clients'),
+      ]);
+      const storesData = await storesRes.json();
+      const clientsData = await clientsRes.json();
+      const storeList: StoreEntry[] = storesData.stores || [];
+      const clients = clientsData.clients || [];
+
+      // Match stores to Supabase clients by store_url
+      const enriched = storeList.map(s => {
+        const match = clients.find((c: { store_url: string; id: string }) => c.store_url === s.store_url);
+        return { ...s, client_id: match?.id };
+      });
+      setStores(enriched);
     } catch {
       setStores([]);
     } finally {

@@ -272,6 +272,52 @@ export default function NewClientPage() {
       setSelectedVariant(0);
       setPreviewTab('homepage');
       setStep(3);
+
+      // Save to Supabase
+      try {
+        // Create or find client
+        const clientRes = await fetch('/api/clients', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            brand_name: brief.brand_name,
+            store_url: brief.store_url || '',
+            api_key: brief.api_key || '',
+            status: 'draft',
+          }),
+        });
+        const clientData = await clientRes.json();
+        const clientId = clientData.client?.id;
+
+        if (clientId) {
+          await fetch('/api/clients/config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              client_id: clientId,
+              config: {
+                color_variants: data.color_variants || [],
+                selected_variant: 0,
+                index_json: data.index_json || null,
+                product_json: data.product_json || null,
+                about_json: data.about_json || null,
+                brief: {
+                  brand_name: brief.brand_name,
+                  one_liner: brief.one_liner,
+                  category: brief.category,
+                  target_audience: brief.target_audience,
+                  brand_vibe: brief.brand_vibe,
+                  primary_color: brief.primary_color,
+                  secondary_color: brief.secondary_color,
+                },
+              },
+            }),
+          });
+        }
+      } catch {
+        // Silent fail — config save is non-critical
+        console.warn('Failed to save config to Supabase');
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Generation failed');
     } finally {
