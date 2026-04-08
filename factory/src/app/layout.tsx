@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${barlow.variable} ${dmMono.variable} antialiased`}>
+      <body className={`${barlow.variable} ${dmMono.variable} ${barlow.className} antialiased`}>
         {children}
       </body>
     </html>
