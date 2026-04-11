@@ -53,6 +53,21 @@ interface ScrapedBrand {
   url?: string;
 }
 
+interface ImageMapEntry {
+  section_id: string;
+  section_type: string;
+  block_id: string | null;
+  block_type: string | null;
+  setting_id: string;
+  role: 'hero_background' | 'founder_portrait' | 'lifestyle' | 'product' | 'ugc';
+  instructions: string;
+}
+
+interface ImageAssignment extends ImageMapEntry {
+  url: string | null;
+  source_tag: string | null;
+}
+
 interface BrandBrief {
   brand_name: string;
   one_liner: string;
@@ -67,6 +82,108 @@ interface BrandBrief {
   scraped_brand?: ScrapedBrand;
   store_url?: string;
   api_key?: string;
+}
+
+// ---------------------------------------------------------------------------
+// Step 0 — Image Assignment
+// ---------------------------------------------------------------------------
+
+// Which scraped tags satisfy each image-map role, in priority order.
+// First-match wins; later options are fallbacks when the preferred tag runs out.
+const ROLE_TAG_PRIORITY: Record<ImageMapEntry['role'], string[]> = {
+  hero_background:  ['hero', 'lifestyle', 'collection', 'product', 'other'],
+  founder_portrait: ['lifestyle', 'other', 'hero'],
+  lifestyle:        ['lifestyle', 'hero', 'collection', 'other', 'product'],
+  product:          ['product', 'collection', 'hero', 'lifestyle', 'other'],
+  ugc:              ['lifestyle', 'other', 'hero'],
+};
+
+async function assignImages(
+  scrapedImages: { url: string; tag: string }[],
+): Promise<ImageAssignment[]> {
+  console.log('[Step 0] Assigning scraped images to template slots');
+
+  const imageMap = await loadJSON<ImageMapEntry[]>('templates/image-map.json');
+
+  // Bucket scraped images by tag for round-robin consumption.
+  const pools: Record<string, string[]> = {};
+  for (const img of scrapedImages) {
+    (pools[img.tag] ||= []).push(img.url);
+  }
+  // Track which URLs are already used so we don't assign the same photo twice
+  // unless we exhaust the pool.
+  const used = new Set<string>();
+
+  function takeForRole(role: ImageMapEntry['role']): { url: string; tag: string } | null {
+    const priority = ROLE_TAG_PRIORITY[role];
+    // First pass: unused images in priority order.
+    for (const tag of priority) {
+      const bucket = pools[tag];
+      if (!bucket) continue;
+      const pick = bucket.find(u => !used.has(u));
+      if (pick) {
+        used.add(pick);
+        return { url: pick, tag };
+      }
+    }
+    // Second pass: allow reuse from the preferred tag, then any tag.
+    for (const tag of priority) {
+      const bucket = pools[tag];
+      if (bucket && bucket.length > 0) {
+        return { url: bucket[0], tag };
+      }
+    }
+    // Last resort: any scraped image.
+    if (scrapedImages.length > 0) {
+      return { url: scrapedImages[0].url, tag: scrapedImages[0].tag };
+    }
+    return null;
+  }
+
+  const assignments: ImageAssignment[] = imageMap.map(entry => {
+    const pick = takeForRole(entry.role);
+    return {
+      ...entry,
+      url: pick?.url ?? null,
+      source_tag: pick?.tag ?? null,
+    };
+  });
+
+  const filled = assignments.filter(a => a.url).length;
+  console.log(`[Step 0] Assigned ${filled}/${assignments.length} image slots`);
+  return assignments;
+}
+
+function injectImageAssignments(
+  indexJson: Record<string, unknown>,
+  assignments: ImageAssignment[],
+): Record<string, unknown> {
+  const sections = (indexJson.sections || {}) as Record<string, {
+    settings?: Record<string, unknown>;
+    blocks?: Record<string, { settings?: Record<string, unknown> }>;
+  }>;
+
+  let injected = 0;
+  for (const a of assignments) {
+    if (!a.url) continue;
+    const section = sections[a.section_id];
+    if (!section) continue;
+
+    if (a.block_id === null) {
+      section.settings = section.settings || {};
+      section.settings[a.setting_id] = a.url;
+      injected++;
+    } else {
+      const block = section.blocks?.[a.block_id];
+      if (!block) continue;
+      block.settings = block.settings || {};
+      block.settings[a.setting_id] = a.url;
+      injected++;
+    }
+  }
+
+  console.log(`[Step 0] Injected ${injected} image URLs into index.json`);
+  return indexJson;
 }
 
 // ---------------------------------------------------------------------------
@@ -540,6 +657,11 @@ export async function POST(request: NextRequest) {
     brief.secondary_color = secondaryColor;
 
     // -----------------------------------------------------------------------
+    // Step 0 — Image Assignment
+    // -----------------------------------------------------------------------
+    const imageAssignments = await assignImages(scraped?.images || []);
+
+    // -----------------------------------------------------------------------
     // Step 1 — Color System
     // -----------------------------------------------------------------------
     let colorVariants: ColorVariant[];
@@ -576,7 +698,10 @@ export async function POST(request: NextRequest) {
     // -----------------------------------------------------------------------
     // Step 3 — Template Merge (index + product)
     // -----------------------------------------------------------------------
-    const { index: indexJson, product: productJson, about: aboutJson } = await mergeTemplates(generatedValues);
+    const { index: indexJsonRaw, product: productJson, about: aboutJson } = await mergeTemplates(generatedValues);
+
+    // Inject assigned image URLs into merged index.json settings.
+    const indexJson = injectImageAssignments(indexJsonRaw, imageAssignments);
 
     // -----------------------------------------------------------------------
     // Step 4 — Assemble: merge base-settings + color variants
@@ -601,6 +726,7 @@ export async function POST(request: NextRequest) {
       index_json: indexJson,
       product_json: productJson,
       about_json: aboutJson,
+      image_assignments: imageAssignments,
       brand_data: scraped || {
         name: brief.brand_name,
         colors: [primaryColor, secondaryColor],

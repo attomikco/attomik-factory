@@ -23,6 +23,27 @@ interface ColorVariant {
   theme_settings: Record<string, string>;
 }
 
+interface ImageAssignment {
+  section_id: string;
+  section_type: string;
+  block_id: string | null;
+  block_type: string | null;
+  setting_id: string;
+  role: string;
+  instructions: string;
+  url: string | null;
+  source_tag: string | null;
+}
+
+interface DeployResult {
+  preview_url: string;
+  shop_name: string;
+  theme_name: string;
+  uploaded_images_count: number;
+  total_images: number;
+  rewritten_slots: number;
+}
+
 const COLOR_TOKENS = [
   { key: 'color_background_body', label: 'Body' },
   { key: 'color_foreground_body', label: 'Text' },
@@ -186,7 +207,15 @@ export default function NewClientPage() {
   const [indexJson, setIndexJson] = useState<Record<string, unknown> | null>(null);
   const [productJson, setProductJson] = useState<Record<string, unknown> | null>(null);
   const [aboutJson, setAboutJson] = useState<Record<string, unknown> | null>(null);
+  const [imageAssignments, setImageAssignments] = useState<ImageAssignment[]>([]);
   const [previewTab, setPreviewTab] = useState<'homepage' | 'pdp'>('homepage');
+
+  // Deploy state
+  const [deployStoreUrl, setDeployStoreUrl] = useState('');
+  const [deployApiKey, setDeployApiKey] = useState('');
+  const [deploying, setDeploying] = useState(false);
+  const [deployResult, setDeployResult] = useState<DeployResult | null>(null);
+  const [deployError, setDeployError] = useState<string | null>(null);
 
   const scraped = brief.scraped_brand;
 
@@ -269,9 +298,16 @@ export default function NewClientPage() {
       setIndexJson(data.index_json || null);
       setProductJson(data.product_json || null);
       setAboutJson(data.about_json || null);
+      setImageAssignments(data.image_assignments || []);
       setSelectedVariant(0);
       setPreviewTab('homepage');
       setStep(3);
+
+      // Seed deploy form from brief fields
+      setDeployStoreUrl(brief.store_url || '');
+      setDeployApiKey(brief.api_key || '');
+      setDeployResult(null);
+      setDeployError(null);
 
       // Save to Supabase
       try {
@@ -420,6 +456,50 @@ export default function NewClientPage() {
     return {
       current: variant?.theme_settings || {},
     };
+  }
+
+  const uniqueImageCount = (() => {
+    const set = new Set<string>();
+    for (const a of imageAssignments) {
+      if (a.url) set.add(a.url);
+    }
+    return set.size;
+  })();
+
+  async function handleDeploy() {
+    if (!deployStoreUrl.trim() || !deployApiKey.trim() || !indexJson) return;
+
+    setDeploying(true);
+    setDeployError(null);
+    setDeployResult(null);
+
+    try {
+      const res = await fetch('/api/deploy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          store_url: deployStoreUrl.trim().replace(/^https?:\/\//, '').replace(/\/$/, ''),
+          api_key: deployApiKey.trim(),
+          index_json: indexJson,
+          settings_data: buildSettingsData(),
+          image_assignments: imageAssignments,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Deploy failed');
+      setDeployResult({
+        preview_url: data.preview_url,
+        shop_name: data.shop_name,
+        theme_name: data.theme_name,
+        uploaded_images_count: data.uploaded_images_count ?? 0,
+        total_images: data.total_images ?? 0,
+        rewritten_slots: data.rewritten_slots ?? 0,
+      });
+    } catch (err) {
+      setDeployError(err instanceof Error ? err.message : 'Deploy failed');
+    } finally {
+      setDeploying(false);
+    }
   }
 
   // ── Render ────────────────────────────────────────────────────────────────
@@ -1079,6 +1159,84 @@ export default function NewClientPage() {
               >
                 Download about.json
               </button>
+            </div>
+
+            {/* Deploy to Store */}
+            <div style={{ marginTop: spacing[8], background: colors.paper, border: `1px solid ${colors.border}`, borderRadius: radius.xl, overflow: 'hidden' }}>
+              <div style={{ borderBottom: `1px solid ${colors.border}`, padding: `${spacing[3]}px ${spacing[5]}px`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={labelStyle}>Deploy to Shopify</span>
+                <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.muted }}>
+                  {uniqueImageCount} image{uniqueImageCount === 1 ? '' : 's'} to upload · {imageAssignments.length} slot{imageAssignments.length === 1 ? '' : 's'}
+                </span>
+              </div>
+
+              <div style={{ padding: spacing[5], display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing[4] }}>
+                <label style={{ display: 'flex', flexDirection: 'column', gap: spacing[2] }}>
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>Store URL</span>
+                  <input
+                    type="text"
+                    placeholder="yf0y9j-hu.myshopify.com"
+                    value={deployStoreUrl}
+                    onChange={(e) => setDeployStoreUrl(e.target.value)}
+                    disabled={deploying}
+                    style={{ padding: `${spacing[2]}px ${spacing[3]}px`, border: `1px solid ${colors.border}`, borderRadius: radius.sm, background: colors.cream, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.ink }}
+                  />
+                </label>
+                <label style={{ display: 'flex', flexDirection: 'column', gap: spacing[2] }}>
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>Admin API Token</span>
+                  <input
+                    type="password"
+                    placeholder="shpat_…"
+                    value={deployApiKey}
+                    onChange={(e) => setDeployApiKey(e.target.value)}
+                    disabled={deploying}
+                    style={{ padding: `${spacing[2]}px ${spacing[3]}px`, border: `1px solid ${colors.border}`, borderRadius: radius.sm, background: colors.cream, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.ink }}
+                  />
+                </label>
+              </div>
+
+              <div style={{ padding: `0 ${spacing[5]}px ${spacing[5]}px`, display: 'flex', alignItems: 'center', gap: spacing[4] }}>
+                <button
+                  type="button"
+                  onClick={handleDeploy}
+                  disabled={deploying || !deployStoreUrl.trim() || !deployApiKey.trim() || !indexJson}
+                  style={{
+                    ...styles.btnPrimary,
+                    opacity: (deploying || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 0.4 : 1,
+                    cursor: (deploying || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 'not-allowed' : 'pointer',
+                  }}
+                >
+                  {deploying ? `Uploading ${uniqueImageCount} image${uniqueImageCount === 1 ? '' : 's'}…` : 'Deploy to Store'}
+                </button>
+
+                {deploying && (
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>
+                    This can take ~{Math.max(15, uniqueImageCount * 3)}s while Shopify ingests the images.
+                  </span>
+                )}
+
+                {deployError && (
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: '#c93030' }}>
+                    {deployError}
+                  </span>
+                )}
+
+                {deployResult && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: spacing[4] }}>
+                    <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>
+                      Deployed · {deployResult.uploaded_images_count}/{deployResult.total_images} images uploaded · {deployResult.rewritten_slots} slots filled
+                    </span>
+                    <a
+                      href={deployResult.preview_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.accent, textDecoration: 'underline' }}
+                    >
+                      Open preview →
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
