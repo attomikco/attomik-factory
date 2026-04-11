@@ -88,6 +88,7 @@ export async function POST(request: NextRequest) {
       theme_name,
       '--path',
       THEME_DIR,
+      '--nodelete',
     ];
     for (const f of onlyFiles) {
       args.push('--only', f);

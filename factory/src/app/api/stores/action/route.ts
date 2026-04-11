@@ -37,13 +37,17 @@ const ACTION_DESCRIPTIONS: Record<ActionType, string> = {
 function buildArgs(action: ActionType, storeUrl: string, themeId: number, template?: string): string[] {
   const themeFlag = ['--theme', String(themeId)];
   const common = ['--store', storeUrl, '--path', THEME_PATH, ...themeFlag, '--force'];
+  // --nodelete prevents the push from syncing away remote files that aren't in
+  // the local theme dir or the --only list. Without this, an earlier deploy
+  // quietly wiped layout/theme.liquid and config/settings_schema.json.
+  const pushSafe = [...common, '--nodelete'];
 
   switch (action) {
     case 'push':
-      return ['theme', 'push', ...common];
+      return ['theme', 'push', ...pushSafe];
 
     case 'push-code':
-      return ['theme', 'push', ...common,
+      return ['theme', 'push', ...pushSafe,
         '--only', 'sections/*.liquid',
         '--only', 'snippets/*',
         '--only', 'assets/*',
@@ -62,7 +66,7 @@ function buildArgs(action: ActionType, storeUrl: string, themeId: number, templa
 
     case 'push-template':
       if (!template) throw new Error('Template name required for push-template');
-      return ['theme', 'push', ...common,
+      return ['theme', 'push', ...pushSafe,
         '--only', `templates/${template}`,
         '--only', 'sections/*.liquid',
         '--only', 'snippets/*',

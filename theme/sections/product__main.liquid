@@ -266,38 +266,24 @@
                     {% render 'product__upsell', block: block %}
 
                   {% when 'options' %}
-                    {% assign has_cards_for_this_option = false %}
-                    {% for b in section.blocks %}
-                      {% if b.type == 'variant_cards' and b.settings.option_name == block.settings.option_name %}
-                        {% assign has_cards_for_this_option = true %}
-                      {% endif %}
-                    {% endfor %}
-                    {% if has_cards_for_this_option %}
-                      <div aria-hidden="true" style="display:none;">
-                        {% render 'product__options',
-                          block: block,
-                          enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
-                        %}
-                      </div>
-                    {% else %}
-                      <div
-                        class="
-                          options-{{ section.id }}
-                          {{ block.settings.color_scheme }}
-                          {{ block.settings.color_border }}
-                          {{ block.settings.style_border }}
-                        "
-                        style="
-                          padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
-                          padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
-                        "
-                      >
-                        {% render 'product__options',
-                          block: block,
-                          enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
-                        %}
-                      </div>
-                    {% endif %}
+                    <div
+                      class="
+                        options-{{ section.id }}
+                        {{ block.settings.color_scheme }}
+                        {{ block.settings.color_border }}
+                        {{ block.settings.style_border }}
+                      "
+                      style="
+                        padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
+                        padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
+                        {% if variant_cards_option_name %}visibility:hidden;height:0;overflow:hidden;position:absolute;{% endif %}
+                      "
+                    >
+                      {% render 'product__options',
+                        block: block,
+                        enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
+                      %}
+                    </div>
 
                   {% when 'add' %}
                     <div
@@ -459,38 +445,24 @@
                         {% render 'product__upsell', block: block %}
 
                       {% when 'options' %}
-                        {% assign has_cards_for_this_option = false %}
-                        {% for b in section.blocks %}
-                          {% if b.type == 'variant_cards' and b.settings.option_name == block.settings.option_name %}
-                            {% assign has_cards_for_this_option = true %}
-                          {% endif %}
-                        {% endfor %}
-                        {% if has_cards_for_this_option %}
-                          <div aria-hidden="true" style="display:none;">
-                            {% render 'product__options',
-                              block: block,
-                              enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
-                            %}
-                          </div>
-                        {% else %}
-                          <div
-                            class="
-                              options-{{ section.id }}
-                              {{ block.settings.color_scheme }}
-                              {{ block.settings.color_border }}
-                              {{ block.settings.style_border }}
-                            "
-                            style="
-                              padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
-                              padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
-                            "
-                          >
-                            {% render 'product__options',
-                              block: block,
-                              enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
-                            %}
-                          </div>
-                        {% endif %}
+                        <div
+                          class="
+                            options-{{ section.id }}
+                            {{ block.settings.color_scheme }}
+                            {{ block.settings.color_border }}
+                            {{ block.settings.style_border }}
+                          "
+                          style="
+                            padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
+                            padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
+                            {% if variant_cards_option_name %}visibility:hidden;height:0;overflow:hidden;position:absolute;{% endif %}
+                          "
+                        >
+                          {% render 'product__options',
+                            block: block,
+                            enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
+                          %}
+                        </div>
 
                       {% when 'add' %}
                         <div
@@ -643,38 +615,24 @@
                         {% render 'product__upsell', block: block %}
 
                       {% when 'options' %}
-                        {% assign has_cards_for_this_option = false %}
-                        {% for b in section.blocks %}
-                          {% if b.type == 'variant_cards' and b.settings.option_name == block.settings.option_name %}
-                            {% assign has_cards_for_this_option = true %}
-                          {% endif %}
-                        {% endfor %}
-                        {% if has_cards_for_this_option %}
-                          <div aria-hidden="true" style="display:none;">
-                            {% render 'product__options',
-                              block: block,
-                              enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
-                            %}
-                          </div>
-                        {% else %}
-                          <div
-                            class="
-                              options-{{ section.id }}
-                              {{ block.settings.color_scheme }}
-                              {{ block.settings.color_border }}
-                              {{ block.settings.style_border }}
-                            "
-                            style="
-                              padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
-                              padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
-                            "
-                          >
-                            {% render 'product__options',
-                              block: block,
-                              enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
-                            %}
-                          </div>
-                        {% endif %}
+                        <div
+                          class="
+                            options-{{ section.id }}
+                            {{ block.settings.color_scheme }}
+                            {{ block.settings.color_border }}
+                            {{ block.settings.style_border }}
+                          "
+                          style="
+                            padding-top:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_top }}px;{% else %}0;{% endif %}
+                            padding-bottom:{% if product.selected_or_first_available_selling_plan_allocation or product.has_only_default_variant == false %}{{ block.settings.spacing_bottom }}px;{% else %}0;{% endif %}
+                            {% if variant_cards_option_name %}visibility:hidden;height:0;overflow:hidden;position:absolute;{% endif %}
+                          "
+                        >
+                          {% render 'product__options',
+                            block: block,
+                            enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
+                          %}
+                        </div>
 
                       {% when 'add' %}
                         <div
