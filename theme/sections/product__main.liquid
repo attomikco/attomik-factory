@@ -268,12 +268,12 @@
                   {% when 'options' %}
                     {% assign has_cards_for_this_option = false %}
                     {% for b in section.blocks %}
-                      {% if b.type == 'variant-cards' and b.settings.option_name == block.settings.option_name %}
+                      {% if b.type == 'variant_cards' and b.settings.option_name == block.settings.option_name %}
                         {% assign has_cards_for_this_option = true %}
                       {% endif %}
                     {% endfor %}
                     {% if has_cards_for_this_option %}
-                      <div aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;clip:rect(0,0,0,0);">
+                      <div aria-hidden="true" style="display:none;">
                         {% render 'product__options',
                           block: block,
                           enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
@@ -461,12 +461,12 @@
                       {% when 'options' %}
                         {% assign has_cards_for_this_option = false %}
                         {% for b in section.blocks %}
-                          {% if b.type == 'variant-cards' and b.settings.option_name == block.settings.option_name %}
+                          {% if b.type == 'variant_cards' and b.settings.option_name == block.settings.option_name %}
                             {% assign has_cards_for_this_option = true %}
                           {% endif %}
                         {% endfor %}
                         {% if has_cards_for_this_option %}
-                          <div aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;clip:rect(0,0,0,0);">
+                          <div aria-hidden="true" style="display:none;">
                             {% render 'product__options',
                               block: block,
                               enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
@@ -645,12 +645,12 @@
                       {% when 'options' %}
                         {% assign has_cards_for_this_option = false %}
                         {% for b in section.blocks %}
-                          {% if b.type == 'variant-cards' and b.settings.option_name == block.settings.option_name %}
+                          {% if b.type == 'variant_cards' and b.settings.option_name == block.settings.option_name %}
                             {% assign has_cards_for_this_option = true %}
                           {% endif %}
                         {% endfor %}
                         {% if has_cards_for_this_option %}
-                          <div aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;clip:rect(0,0,0,0);">
+                          <div aria-hidden="true" style="display:none;">
                             {% render 'product__options',
                               block: block,
                               enable_default_selling_plan_widget: section.settings.enable_default_selling_plan_widget
