@@ -220,7 +220,6 @@ export default function NewClientPage() {
 
   // Deploy state
   const [deployStoreUrl, setDeployStoreUrl] = useState('');
-  const [deployApiKey, setDeployApiKey] = useState('');
   const [deploying, setDeploying] = useState(false);
   const [deployResult, setDeployResult] = useState<DeployResult | null>(null);
   const [deployError, setDeployError] = useState<string | null>(null);
@@ -317,7 +316,6 @@ export default function NewClientPage() {
 
       // Seed deploy form from brief fields
       setDeployStoreUrl(brief.store_url || '');
-      setDeployApiKey(brief.api_key || '');
       setDeployResult(null);
       setDeployError(null);
 
@@ -470,16 +468,8 @@ export default function NewClientPage() {
     };
   }
 
-  const uniqueImageCount = (() => {
-    const set = new Set<string>();
-    for (const a of imageAssignments) {
-      if (a.url) set.add(a.url);
-    }
-    return set.size;
-  })();
-
   async function loadThemeList() {
-    if (!deployStoreUrl.trim() || !deployApiKey.trim()) return;
+    if (!deployStoreUrl.trim()) return;
     setLoadingThemes(true);
     setThemeListError(null);
     try {
@@ -488,7 +478,6 @@ export default function NewClientPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           store_url: deployStoreUrl.trim().replace(/^https?:\/\//, '').replace(/\/$/, ''),
-          api_key: deployApiKey.trim(),
         }),
       });
       const data = await res.json();
@@ -509,7 +498,7 @@ export default function NewClientPage() {
 
   const selectedTheme = themeOptions.find(t => t.id === selectedThemeId) || null;
   const deployBlockedReason = (() => {
-    if (!deployStoreUrl.trim() || !deployApiKey.trim()) return 'Enter store URL and token';
+    if (!deployStoreUrl.trim()) return 'Enter store URL';
     if (themeOptions.length === 0) return 'Load theme list to pick a target';
     if (!selectedTheme) return 'Choose a theme';
     if (selectedTheme.role === 'main') return 'Refusing to target the live published theme';
@@ -529,23 +518,23 @@ export default function NewClientPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           store_url: deployStoreUrl.trim().replace(/^https?:\/\//, '').replace(/\/$/, ''),
-          api_key: deployApiKey.trim(),
           theme_id: selectedTheme.id,
           theme_name: selectedTheme.name,
           index_json: indexJson,
           settings_data: buildSettingsData(),
-          image_assignments: imageAssignments,
+          product_json: productJson,
+          about_json: aboutJson,
         }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Deploy failed');
       setDeployResult({
         preview_url: data.preview_url,
-        shop_name: data.shop_name,
+        shop_name: data.shop || selectedTheme.name,
         theme_name: data.theme_name,
-        uploaded_images_count: data.uploaded_images_count ?? 0,
-        total_images: data.total_images ?? 0,
-        rewritten_slots: data.rewritten_slots ?? 0,
+        uploaded_images_count: 0,
+        total_images: 0,
+        rewritten_slots: 0,
       });
     } catch (err) {
       setDeployError(err instanceof Error ? err.message : 'Deploy failed');
@@ -1216,13 +1205,13 @@ export default function NewClientPage() {
             {/* Deploy to Store */}
             <div style={{ marginTop: spacing[8], background: colors.paper, border: `1px solid ${colors.border}`, borderRadius: radius.xl, overflow: 'hidden' }}>
               <div style={{ borderBottom: `1px solid ${colors.border}`, padding: `${spacing[3]}px ${spacing[5]}px`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={labelStyle}>Deploy to Shopify</span>
+                <span style={labelStyle}>Deploy to Shopify (CLI)</span>
                 <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: colors.muted }}>
-                  {uniqueImageCount} image{uniqueImageCount === 1 ? '' : 's'} to upload · {imageAssignments.length} slot{imageAssignments.length === 1 ? '' : 's'}
+                  {imageAssignments.length} image slot{imageAssignments.length === 1 ? '' : 's'} populated · uses ambient Shopify CLI auth
                 </span>
               </div>
 
-              <div style={{ padding: spacing[5], display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing[4] }}>
+              <div style={{ padding: spacing[5] }}>
                 <label style={{ display: 'flex', flexDirection: 'column', gap: spacing[2] }}>
                   <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>Store URL</span>
                   <input
@@ -1234,31 +1223,20 @@ export default function NewClientPage() {
                     style={{ padding: `${spacing[2]}px ${spacing[3]}px`, border: `1px solid ${colors.border}`, borderRadius: radius.sm, background: colors.cream, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.ink }}
                   />
                 </label>
-                <label style={{ display: 'flex', flexDirection: 'column', gap: spacing[2] }}>
-                  <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>Admin API Token</span>
-                  <input
-                    type="password"
-                    placeholder="shpat_…"
-                    value={deployApiKey}
-                    onChange={(e) => { setDeployApiKey(e.target.value); setThemeOptions([]); setSelectedThemeId(null); }}
-                    disabled={deploying}
-                    style={{ padding: `${spacing[2]}px ${spacing[3]}px`, border: `1px solid ${colors.border}`, borderRadius: radius.sm, background: colors.cream, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.ink }}
-                  />
-                </label>
               </div>
 
               <div style={{ padding: `0 ${spacing[5]}px ${spacing[4]}px`, display: 'flex', alignItems: 'center', gap: spacing[3] }}>
                 <button
                   type="button"
                   onClick={loadThemeList}
-                  disabled={loadingThemes || deploying || !deployStoreUrl.trim() || !deployApiKey.trim()}
+                  disabled={loadingThemes || deploying || !deployStoreUrl.trim()}
                   style={{
                     ...styles.btnGhost,
                     fontFamily: font.heading,
                     fontSize: fontSize.xs,
                     padding: `${spacing[2]}px ${spacing[4]}px`,
-                    opacity: (loadingThemes || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 0.4 : 1,
-                    cursor: (loadingThemes || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 'not-allowed' : 'pointer',
+                    opacity: (loadingThemes || !deployStoreUrl.trim()) ? 0.4 : 1,
+                    cursor: (loadingThemes || !deployStoreUrl.trim()) ? 'not-allowed' : 'pointer',
                   }}
                 >
                   {loadingThemes ? 'Loading themes…' : themeOptions.length > 0 ? 'Reload themes' : 'Load theme list'}
@@ -1305,7 +1283,7 @@ export default function NewClientPage() {
                     cursor: (deploying || !!deployBlockedReason) ? 'not-allowed' : 'pointer',
                   }}
                 >
-                  {deploying ? `Uploading ${uniqueImageCount} image${uniqueImageCount === 1 ? '' : 's'}…` : 'Deploy to Store'}
+                  {deploying ? 'Pushing via shopify CLI…' : 'Deploy to Store'}
                 </button>
 
                 {!deploying && deployBlockedReason && (
@@ -1316,7 +1294,7 @@ export default function NewClientPage() {
 
                 {deploying && (
                   <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>
-                    This can take ~{Math.max(15, uniqueImageCount * 3)}s while Shopify ingests the images.
+                    Writing theme files and running shopify theme push — can take 30–90s.
                   </span>
                 )}
 
@@ -1329,7 +1307,7 @@ export default function NewClientPage() {
                 {deployResult && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: spacing[4] }}>
                     <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>
-                      Deployed · {deployResult.uploaded_images_count}/{deployResult.total_images} images uploaded · {deployResult.rewritten_slots} slots filled
+                      Deployed to {deployResult.theme_name}
                     </span>
                     <a
                       href={deployResult.preview_url}
