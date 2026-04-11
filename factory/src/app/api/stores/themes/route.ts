@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
-import { assertStoreAllowed, normalizeStoreUrl } from '@/lib/deploy-guard';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 const execFileAsync = promisify(execFile);
+
+const STORES_FILE = join(process.cwd(), '..', 'stores.json');
+
+interface StoreEntry {
+  alias: string;
+  store_url: string;
+  brand_name: string;
+}
 
 interface RawTheme {
   id: number | string;
@@ -11,29 +20,35 @@ interface RawTheme {
   role: string;
 }
 
+async function loadStores(): Promise<StoreEntry[]> {
+  try {
+    const raw = await readFile(STORES_FILE, 'utf-8');
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { store_url } = await request.json();
-    if (!store_url) {
-      return NextResponse.json({ error: 'Missing store_url' }, { status: 400 });
+    const { alias } = await request.json();
+    if (!alias) {
+      return NextResponse.json({ error: 'Missing alias' }, { status: 400 });
     }
 
-    const allowlistError = assertStoreAllowed(store_url);
-    if (allowlistError) {
-      return NextResponse.json({ error: allowlistError }, { status: 403 });
+    const stores = await loadStores();
+    const store = stores.find(s => s.alias === alias);
+    if (!store) {
+      return NextResponse.json({ error: `Store "${alias}" not found` }, { status: 404 });
     }
-
-    const normalized = normalizeStoreUrl(store_url);
 
     try {
       const { stdout } = await execFileAsync(
         'shopify',
-        ['theme', 'list', '--store', normalized, '--json'],
+        ['theme', 'list', '--store', store.store_url, '--json'],
         { timeout: 60_000, maxBuffer: 2 * 1024 * 1024 },
       );
 
-      // The CLI may print a banner / update-available notice before the JSON.
-      // Extract the first top-level array.
       const jsonStart = stdout.indexOf('[');
       const jsonEnd = stdout.lastIndexOf(']');
       if (jsonStart < 0 || jsonEnd < 0 || jsonEnd < jsonStart) {
@@ -50,7 +65,7 @@ export async function POST(request: NextRequest) {
         role: t.role,
       }));
 
-      return NextResponse.json({ themes });
+      return NextResponse.json({ themes, store_url: store.store_url });
     } catch (err: unknown) {
       const e = err as { stdout?: string; stderr?: string; message?: string; code?: string };
       if (e.code === 'ENOENT') {
@@ -60,7 +75,7 @@ export async function POST(request: NextRequest) {
         );
       }
       const detail = (e.stderr || e.stdout || e.message || 'theme list failed').toString();
-      console.error('[deploy/themes] shopify theme list failed:', detail);
+      console.error('[stores/themes] shopify theme list failed:', detail);
       return NextResponse.json(
         { error: `shopify theme list failed: ${detail.slice(0, 1500)}` },
         { status: 500 },

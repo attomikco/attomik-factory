@@ -34,15 +34,16 @@ const ACTION_DESCRIPTIONS: Record<ActionType, string> = {
   'push-template': 'Push a specific template + code',
 };
 
-function buildArgs(action: ActionType, storeUrl: string, template?: string): string[] {
-  const base = ['theme'];
+function buildArgs(action: ActionType, storeUrl: string, themeId: number, template?: string): string[] {
+  const themeFlag = ['--theme', String(themeId)];
+  const common = ['--store', storeUrl, '--path', THEME_PATH, ...themeFlag, '--force'];
 
   switch (action) {
     case 'push':
-      return [...base, 'push', '--store', storeUrl, '--path', THEME_PATH, '--force'];
+      return ['theme', 'push', ...common];
 
     case 'push-code':
-      return [...base, 'push', '--store', storeUrl, '--path', THEME_PATH, '--force',
+      return ['theme', 'push', ...common,
         '--only', 'sections/*.liquid',
         '--only', 'snippets/*',
         '--only', 'assets/*',
@@ -50,18 +51,18 @@ function buildArgs(action: ActionType, storeUrl: string, template?: string): str
       ];
 
     case 'pull-settings':
-      return [...base, 'pull', '--store', storeUrl, '--path', THEME_PATH, '--force',
+      return ['theme', 'pull', ...common,
         '--only', 'config/settings_data.json',
         '--only', 'templates/*',
         '--only', 'sections/*-group.json',
       ];
 
     case 'pull':
-      return [...base, 'pull', '--store', storeUrl, '--path', THEME_PATH, '--force'];
+      return ['theme', 'pull', ...common];
 
     case 'push-template':
       if (!template) throw new Error('Template name required for push-template');
-      return [...base, 'push', '--store', storeUrl, '--path', THEME_PATH, '--force',
+      return ['theme', 'push', ...common,
         '--only', `templates/${template}`,
         '--only', 'sections/*.liquid',
         '--only', 'snippets/*',
@@ -74,11 +75,18 @@ function buildArgs(action: ActionType, storeUrl: string, template?: string): str
 
 export async function POST(request: NextRequest) {
   try {
-    const { alias, action, template } = await request.json();
+    const { alias, action, template, theme_id } = await request.json();
 
     if (!alias || !action) {
       return NextResponse.json(
         { error: 'Missing required fields: alias, action' },
+        { status: 400 },
+      );
+    }
+
+    if (typeof theme_id !== 'number') {
+      return NextResponse.json(
+        { error: 'Missing required field: theme_id (select a target theme first)' },
         { status: 400 },
       );
     }
@@ -100,7 +108,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const args = buildArgs(action as ActionType, store.store_url, template);
+    const args = buildArgs(action as ActionType, store.store_url, theme_id, template);
     const description = ACTION_DESCRIPTIONS[action as ActionType];
 
     console.log(`[Action] ${description} → ${store.store_url}`);

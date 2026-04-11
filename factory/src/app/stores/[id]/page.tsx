@@ -162,20 +162,31 @@ function CopyPreview({ config }: { config: GeneratedConfig }) {
 
 // ── Action Button ────────────────────────────────────────────────────────────
 
-function ActionButton({ label, action, alias, variant = 'ghost', onResult }: {
+interface ThemeOption {
+  id: number;
+  name: string;
+  role: string;
+}
+
+function ActionButton({ label, action, alias, themeId, disabled, disabledReason, variant = 'ghost', onResult }: {
   label: string; action: string; alias: string;
+  themeId: number | null;
+  disabled?: boolean;
+  disabledReason?: string | null;
   variant?: 'ghost' | 'primary' | 'dark';
   onResult: (output: string, success: boolean) => void;
 }) {
   const [running, setRunning] = useState(false);
+  const blocked = disabled || themeId === null;
 
   const handleClick = async () => {
+    if (blocked || themeId === null) return;
     setRunning(true);
     try {
       const res = await fetch('/api/stores/action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ alias, action }),
+        body: JSON.stringify({ alias, action, theme_id: themeId }),
       });
       const data = await res.json();
       onResult(data.output || data.error || 'Done', data.success ?? res.ok);
@@ -187,9 +198,16 @@ function ActionButton({ label, action, alias, variant = 'ghost', onResult }: {
   };
 
   const btnStyle = variant === 'primary' ? styles.btnPrimary : variant === 'dark' ? styles.btnDark : styles.btnGhost;
+  const effectiveCursor = running ? 'wait' : blocked ? 'not-allowed' : 'pointer';
+  const effectiveOpacity = running ? 0.5 : blocked ? 0.35 : 1;
 
   return (
-    <button onClick={handleClick} disabled={running} style={{ ...btnStyle, fontSize: fontSize.xs, padding: '8px 14px', opacity: running ? 0.5 : 1, cursor: running ? 'wait' : 'pointer' }}>
+    <button
+      onClick={handleClick}
+      disabled={running || blocked}
+      title={blocked ? (disabledReason || 'Select a theme first') : undefined}
+      style={{ ...btnStyle, fontSize: fontSize.xs, padding: '8px 14px', opacity: effectiveOpacity, cursor: effectiveCursor }}
+    >
       {running && <span className="spinner spinner-sm" style={{ borderColor: 'rgba(0,0,0,0.15)', borderTopColor: 'currentColor', marginRight: 6 }} />}
       {label}
     </button>
@@ -207,6 +225,12 @@ export default function StoreDetailPage() {
   const [loading, setLoading] = useState(true);
   const [output, setOutput] = useState<{ text: string; success: boolean } | null>(null);
   const [storeAlias, setStoreAlias] = useState<string>('');
+
+  // Shared theme picker state for action buttons
+  const [themes, setThemes] = useState<ThemeOption[]>([]);
+  const [selectedThemeId, setSelectedThemeId] = useState<number | null>(null);
+  const [loadingThemes, setLoadingThemes] = useState(false);
+  const [themeListError, setThemeListError] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -239,6 +263,41 @@ export default function StoreDetailPage() {
     }
     load();
   }, [clientId]);
+
+  useEffect(() => {
+    if (!storeAlias) return;
+    let cancelled = false;
+    async function loadThemes() {
+      setLoadingThemes(true);
+      setThemeListError(null);
+      try {
+        const res = await fetch('/api/stores/themes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ alias: storeAlias }),
+        });
+        const data = await res.json();
+        if (cancelled) return;
+        if (!res.ok) throw new Error(data.error || 'Failed to load themes');
+        const list: ThemeOption[] = data.themes || [];
+        setThemes(list);
+        // Auto-select the development theme if present, otherwise first non-main, otherwise nothing.
+        const dev = list.find(t => t.role === 'development');
+        const unpub = list.find(t => t.role === 'unpublished');
+        const firstSafe = list.find(t => t.role !== 'main');
+        setSelectedThemeId(dev?.id ?? unpub?.id ?? firstSafe?.id ?? null);
+      } catch (err) {
+        if (cancelled) return;
+        setThemeListError(err instanceof Error ? err.message : 'Failed to load themes');
+        setThemes([]);
+        setSelectedThemeId(null);
+      } finally {
+        if (!cancelled) setLoadingThemes(false);
+      }
+    }
+    loadThemes();
+    return () => { cancelled = true; };
+  }, [storeAlias]);
 
   if (loading) {
     return (
@@ -330,17 +389,66 @@ export default function StoreDetailPage() {
         </div>
 
         {/* Actions */}
-        {storeAlias && (
+        {storeAlias && (() => {
+          const selectedTheme = themes.find(t => t.id === selectedThemeId) || null;
+          const themeBlockedReason = (() => {
+            if (loadingThemes) return 'Loading themes…';
+            if (themeListError) return themeListError;
+            if (themes.length === 0) return 'No themes found on this store';
+            if (!selectedTheme) return 'Select a target theme';
+            if (selectedTheme.role === 'main') return 'Refusing to target the live published theme';
+            return null;
+          })();
+
+          return (
           <Section title="Actions">
             <div style={{
               background: colors.paper, border: `1px solid ${colors.border}`, borderRadius: radius.xl,
               padding: spacing[5], boxShadow: shadow.card,
-              display: 'flex', gap: spacing[3], alignItems: 'center', flexWrap: 'wrap',
             }}>
-              <ActionButton label="Push Code" action="push-code" alias={storeAlias} variant="primary" onResult={(text, success) => setOutput({ text, success })} />
-              <ActionButton label="Push Full Theme" action="push" alias={storeAlias} variant="dark" onResult={(text, success) => setOutput({ text, success })} />
-              <ActionButton label="Pull Settings" action="pull-settings" alias={storeAlias} onResult={(text, success) => setOutput({ text, success })} />
-              <ActionButton label="Pull Full Theme" action="pull" alias={storeAlias} onResult={(text, success) => setOutput({ text, success })} />
+              {/* Target theme picker */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: spacing[3], marginBottom: spacing[4] }}>
+                <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>
+                  Target theme
+                </span>
+                <select
+                  value={selectedThemeId ?? ''}
+                  onChange={(e) => setSelectedThemeId(e.target.value ? Number(e.target.value) : null)}
+                  disabled={loadingThemes || themes.length === 0}
+                  style={{
+                    padding: `${spacing[2]}px ${spacing[3]}px`,
+                    border: `1px solid ${colors.border}`,
+                    borderRadius: radius.sm,
+                    background: colors.cream,
+                    fontFamily: font.heading,
+                    fontSize: fontSize.xs,
+                    color: colors.ink,
+                    minWidth: 260,
+                  }}
+                >
+                  {loadingThemes && <option value="">Loading…</option>}
+                  {!loadingThemes && themes.length === 0 && <option value="">(no themes)</option>}
+                  {!loadingThemes && themes.length > 0 && <option value="">— choose —</option>}
+                  {themes.map(t => (
+                    <option key={t.id} value={t.id}>
+                      {t.name} {t.role === 'main' ? '⚠ LIVE' : `(${t.role})`}
+                    </option>
+                  ))}
+                </select>
+                {themeBlockedReason && (
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], color: selectedTheme?.role === 'main' ? '#c93030' : colors.muted }}>
+                    {themeBlockedReason}
+                  </span>
+                )}
+              </div>
+
+              {/* Action buttons */}
+              <div style={{ display: 'flex', gap: spacing[3], alignItems: 'center', flexWrap: 'wrap' }}>
+                <ActionButton label="Push Code" action="push-code" alias={storeAlias} themeId={selectedThemeId} disabled={!!themeBlockedReason} disabledReason={themeBlockedReason} variant="primary" onResult={(text, success) => setOutput({ text, success })} />
+                <ActionButton label="Push Full Theme" action="push" alias={storeAlias} themeId={selectedThemeId} disabled={!!themeBlockedReason} disabledReason={themeBlockedReason} variant="dark" onResult={(text, success) => setOutput({ text, success })} />
+                <ActionButton label="Pull Settings" action="pull-settings" alias={storeAlias} themeId={selectedThemeId} disabled={!!themeBlockedReason} disabledReason={themeBlockedReason} onResult={(text, success) => setOutput({ text, success })} />
+                <ActionButton label="Pull Full Theme" action="pull" alias={storeAlias} themeId={selectedThemeId} disabled={!!themeBlockedReason} disabledReason={themeBlockedReason} onResult={(text, success) => setOutput({ text, success })} />
+              </div>
             </div>
 
             {output && (
@@ -353,7 +461,8 @@ export default function StoreDetailPage() {
               </pre>
             )}
           </Section>
-        )}
+          );
+        })()}
 
         {config ? (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing[6] }}>
