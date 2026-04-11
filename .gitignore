@@ -4,3 +4,11 @@ node_modules/
 .next/
 .DS_Store
 *.log
+
+# Shopify-managed theme files — written locally by /api/deploy before push,
+# but source-of-truth lives in Shopify, not in the repo.
+theme/templates/index.json
+theme/templates/product.json
+theme/templates/page.about.json
+theme/templates/collection.json
+theme/config/settings_data.json
