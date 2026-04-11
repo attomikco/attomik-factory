@@ -24,6 +24,27 @@ interface IndexJson {
   order?: string[];
 }
 
+// ---------------------------------------------------------------------------
+// Store allowlist guard
+// ---------------------------------------------------------------------------
+
+function normalizeStoreUrl(raw: string): string {
+  return raw.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/$/, '');
+}
+
+export function assertStoreAllowed(storeUrl: string): string | null {
+  const allowedRaw = process.env.DEPLOY_ALLOWED_STORES || '';
+  const allowed = allowedRaw.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  if (allowed.length === 0) {
+    return 'DEPLOY_ALLOWED_STORES is not configured. Add the store to .env.local and restart the dev server to enable deploys.';
+  }
+  const normalized = normalizeStoreUrl(storeUrl);
+  if (!allowed.includes(normalized)) {
+    return `Store "${normalized}" is not in DEPLOY_ALLOWED_STORES. Allowed: ${allowed.join(', ')}.`;
+  }
+  return null;
+}
+
 async function shopifyFetch(storeUrl: string, apiKey: string, path: string, options?: RequestInit) {
   const url = `https://${storeUrl}/admin/api/${API_VERSION}${path}`;
   const res = await fetch(url, {
@@ -236,18 +257,55 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 0. Store allowlist — strict: refuses unknown stores and refuses when env is empty
+    const allowlistError = assertStoreAllowed(store_url);
+    if (allowlistError) {
+      return NextResponse.json({ error: allowlistError }, { status: 403 });
+    }
+
     // 1. Verify connection
     const shopData = await shopifyFetch(store_url, api_key, '/shop.json');
     const shopName = shopData.shop?.name || store_url;
 
-    // 2. Get published theme
+    // 2. Resolve target theme — require explicit theme_name or theme_id, never guess
     const themesData = await shopifyFetch(store_url, api_key, '/themes.json');
-    const publishedTheme = themesData.themes?.find((t: ShopifyTheme) => t.role === 'main');
+    const themes: ShopifyTheme[] = themesData.themes || [];
+
+    const requestedThemeId = body.theme_id as number | undefined;
+    const requestedThemeName = body.theme_name as string | undefined;
+    const confirmLive = body.confirm_live === true;
+
+    if (!requestedThemeId && !requestedThemeName) {
+      return NextResponse.json(
+        {
+          error: 'No target theme specified. Provide theme_name or theme_id.',
+          available_themes: themes.map(t => ({ id: t.id, name: t.name, role: t.role })),
+        },
+        { status: 400 },
+      );
+    }
+
+    const publishedTheme = requestedThemeId
+      ? themes.find(t => t.id === requestedThemeId)
+      : themes.find(t => t.name === requestedThemeName);
 
     if (!publishedTheme) {
       return NextResponse.json(
-        { error: 'No published theme found on this store' },
+        {
+          error: `Theme "${requestedThemeName ?? requestedThemeId}" not found on ${store_url}.`,
+          available_themes: themes.map(t => ({ id: t.id, name: t.name, role: t.role })),
+        },
         { status: 404 },
+      );
+    }
+
+    if (publishedTheme.role === 'main' && !confirmLive) {
+      return NextResponse.json(
+        {
+          error: `Refusing to deploy to "${publishedTheme.name}" because it is the live published theme (role: main). Pass { "confirm_live": true } to override.`,
+          theme: { id: publishedTheme.id, name: publishedTheme.name, role: publishedTheme.role },
+        },
+        { status: 403 },
       );
     }
 

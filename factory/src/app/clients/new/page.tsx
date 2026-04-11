@@ -44,6 +44,14 @@ interface DeployResult {
   rewritten_slots: number;
 }
 
+interface ShopifyThemeOption {
+  id: number;
+  name: string;
+  role: string;
+}
+
+const PREFERRED_DEV_THEME_NAME = 'Jolene (Attomik Factory)';
+
 const COLOR_TOKENS = [
   { key: 'color_background_body', label: 'Body' },
   { key: 'color_foreground_body', label: 'Text' },
@@ -216,6 +224,10 @@ export default function NewClientPage() {
   const [deploying, setDeploying] = useState(false);
   const [deployResult, setDeployResult] = useState<DeployResult | null>(null);
   const [deployError, setDeployError] = useState<string | null>(null);
+  const [themeOptions, setThemeOptions] = useState<ShopifyThemeOption[]>([]);
+  const [selectedThemeId, setSelectedThemeId] = useState<number | null>(null);
+  const [loadingThemes, setLoadingThemes] = useState(false);
+  const [themeListError, setThemeListError] = useState<string | null>(null);
 
   const scraped = brief.scraped_brand;
 
@@ -466,8 +478,46 @@ export default function NewClientPage() {
     return set.size;
   })();
 
+  async function loadThemeList() {
+    if (!deployStoreUrl.trim() || !deployApiKey.trim()) return;
+    setLoadingThemes(true);
+    setThemeListError(null);
+    try {
+      const res = await fetch('/api/deploy/themes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          store_url: deployStoreUrl.trim().replace(/^https?:\/\//, '').replace(/\/$/, ''),
+          api_key: deployApiKey.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to load themes');
+      const themes: ShopifyThemeOption[] = data.themes || [];
+      setThemeOptions(themes);
+      const preferred = themes.find(t => t.name === PREFERRED_DEV_THEME_NAME);
+      const firstSafe = themes.find(t => t.role !== 'main');
+      setSelectedThemeId(preferred?.id ?? firstSafe?.id ?? null);
+    } catch (err) {
+      setThemeListError(err instanceof Error ? err.message : 'Failed to load themes');
+      setThemeOptions([]);
+      setSelectedThemeId(null);
+    } finally {
+      setLoadingThemes(false);
+    }
+  }
+
+  const selectedTheme = themeOptions.find(t => t.id === selectedThemeId) || null;
+  const deployBlockedReason = (() => {
+    if (!deployStoreUrl.trim() || !deployApiKey.trim()) return 'Enter store URL and token';
+    if (themeOptions.length === 0) return 'Load theme list to pick a target';
+    if (!selectedTheme) return 'Choose a theme';
+    if (selectedTheme.role === 'main') return 'Refusing to target the live published theme';
+    return null;
+  })();
+
   async function handleDeploy() {
-    if (!deployStoreUrl.trim() || !deployApiKey.trim() || !indexJson) return;
+    if (deployBlockedReason || !indexJson || !selectedTheme) return;
 
     setDeploying(true);
     setDeployError(null);
@@ -480,6 +530,8 @@ export default function NewClientPage() {
         body: JSON.stringify({
           store_url: deployStoreUrl.trim().replace(/^https?:\/\//, '').replace(/\/$/, ''),
           api_key: deployApiKey.trim(),
+          theme_id: selectedTheme.id,
+          theme_name: selectedTheme.name,
           index_json: indexJson,
           settings_data: buildSettingsData(),
           image_assignments: imageAssignments,
@@ -1177,7 +1229,7 @@ export default function NewClientPage() {
                     type="text"
                     placeholder="yf0y9j-hu.myshopify.com"
                     value={deployStoreUrl}
-                    onChange={(e) => setDeployStoreUrl(e.target.value)}
+                    onChange={(e) => { setDeployStoreUrl(e.target.value); setThemeOptions([]); setSelectedThemeId(null); }}
                     disabled={deploying}
                     style={{ padding: `${spacing[2]}px ${spacing[3]}px`, border: `1px solid ${colors.border}`, borderRadius: radius.sm, background: colors.cream, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.ink }}
                   />
@@ -1188,26 +1240,79 @@ export default function NewClientPage() {
                     type="password"
                     placeholder="shpat_…"
                     value={deployApiKey}
-                    onChange={(e) => setDeployApiKey(e.target.value)}
+                    onChange={(e) => { setDeployApiKey(e.target.value); setThemeOptions([]); setSelectedThemeId(null); }}
                     disabled={deploying}
                     style={{ padding: `${spacing[2]}px ${spacing[3]}px`, border: `1px solid ${colors.border}`, borderRadius: radius.sm, background: colors.cream, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.ink }}
                   />
                 </label>
               </div>
 
+              <div style={{ padding: `0 ${spacing[5]}px ${spacing[4]}px`, display: 'flex', alignItems: 'center', gap: spacing[3] }}>
+                <button
+                  type="button"
+                  onClick={loadThemeList}
+                  disabled={loadingThemes || deploying || !deployStoreUrl.trim() || !deployApiKey.trim()}
+                  style={{
+                    ...styles.btnGhost,
+                    fontFamily: font.heading,
+                    fontSize: fontSize.xs,
+                    padding: `${spacing[2]}px ${spacing[4]}px`,
+                    opacity: (loadingThemes || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 0.4 : 1,
+                    cursor: (loadingThemes || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 'not-allowed' : 'pointer',
+                  }}
+                >
+                  {loadingThemes ? 'Loading themes…' : themeOptions.length > 0 ? 'Reload themes' : 'Load theme list'}
+                </button>
+
+                {themeOptions.length > 0 && (
+                  <label style={{ display: 'flex', alignItems: 'center', gap: spacing[2], flex: 1 }}>
+                    <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>Target theme</span>
+                    <select
+                      value={selectedThemeId ?? ''}
+                      onChange={(e) => setSelectedThemeId(e.target.value ? Number(e.target.value) : null)}
+                      disabled={deploying}
+                      style={{ flex: 1, padding: `${spacing[2]}px ${spacing[3]}px`, border: `1px solid ${colors.border}`, borderRadius: radius.sm, background: colors.cream, fontFamily: font.heading, fontSize: fontSize.sm, color: colors.ink }}
+                    >
+                      <option value="">— choose —</option>
+                      {themeOptions.map(t => (
+                        <option key={t.id} value={t.id}>
+                          {t.name} {t.role === 'main' ? '⚠ LIVE' : `(${t.role})`}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                )}
+
+                {themeListError && (
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: '#c93030' }}>{themeListError}</span>
+                )}
+              </div>
+
+              {selectedTheme && selectedTheme.role === 'main' && (
+                <div style={{ margin: `0 ${spacing[5]}px ${spacing[4]}px`, padding: spacing[3], background: '#fff4f4', border: '1px solid #c93030', borderRadius: radius.sm, fontFamily: font.heading, fontSize: fontSize.xs, color: '#8a1f1f' }}>
+                  ⚠ &quot;{selectedTheme.name}&quot; is the live published theme — deploy is blocked.
+                </div>
+              )}
+
               <div style={{ padding: `0 ${spacing[5]}px ${spacing[5]}px`, display: 'flex', alignItems: 'center', gap: spacing[4] }}>
                 <button
                   type="button"
                   onClick={handleDeploy}
-                  disabled={deploying || !deployStoreUrl.trim() || !deployApiKey.trim() || !indexJson}
+                  disabled={deploying || !!deployBlockedReason || !indexJson}
                   style={{
                     ...styles.btnPrimary,
-                    opacity: (deploying || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 0.4 : 1,
-                    cursor: (deploying || !deployStoreUrl.trim() || !deployApiKey.trim()) ? 'not-allowed' : 'pointer',
+                    opacity: (deploying || !!deployBlockedReason) ? 0.4 : 1,
+                    cursor: (deploying || !!deployBlockedReason) ? 'not-allowed' : 'pointer',
                   }}
                 >
                   {deploying ? `Uploading ${uniqueImageCount} image${uniqueImageCount === 1 ? '' : 's'}…` : 'Deploy to Store'}
                 </button>
+
+                {!deploying && deployBlockedReason && (
+                  <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>
+                    {deployBlockedReason}
+                  </span>
+                )}
 
                 {deploying && (
                   <span style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>
