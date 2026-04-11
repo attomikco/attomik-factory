@@ -168,6 +168,12 @@ interface ThemeOption {
   role: string;
 }
 
+interface ThemeColor {
+  key: string;
+  label: string;
+  hex: string | null;
+}
+
 function ActionButton({ label, action, alias, themeId, disabled, disabledReason, variant = 'ghost', onResult }: {
   label: string; action: string; alias: string;
   themeId: number | null;
@@ -231,6 +237,11 @@ export default function StoreDetailPage() {
   const [selectedThemeId, setSelectedThemeId] = useState<number | null>(null);
   const [loadingThemes, setLoadingThemes] = useState(false);
   const [themeListError, setThemeListError] = useState<string | null>(null);
+
+  // Current theme colors from pulled settings_data.json
+  const [themeColors, setThemeColors] = useState<ThemeColor[]>([]);
+  const [loadingColors, setLoadingColors] = useState(false);
+  const [colorsError, setColorsError] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -297,6 +308,33 @@ export default function StoreDetailPage() {
     }
     loadThemes();
     return () => { cancelled = true; };
+  }, [storeAlias]);
+
+  const loadColors = async () => {
+    if (!storeAlias) return;
+    setLoadingColors(true);
+    setColorsError(null);
+    try {
+      const res = await fetch('/api/stores/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ alias: storeAlias }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to read colors');
+      setThemeColors(data.colors || []);
+    } catch (err) {
+      setColorsError(err instanceof Error ? err.message : 'Failed to read colors');
+      setThemeColors([]);
+    } finally {
+      setLoadingColors(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!storeAlias) return;
+    loadColors();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeAlias]);
 
   if (loading) {
@@ -463,6 +501,80 @@ export default function StoreDetailPage() {
           </Section>
           );
         })()}
+
+        {/* Current Theme Colors */}
+        {storeAlias && (
+          <Section title="Current Theme Colors">
+            <div style={{
+              background: colors.ink,
+              border: `1px solid ${colors.border}`,
+              borderRadius: radius.xl,
+              padding: spacing[5],
+              boxShadow: shadow.card,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing[4] }}>
+                <span style={{ fontFamily: font.heading, fontSize: fontSize['2xs'], textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>
+                  Pulled from theme/config/settings_data.json
+                </span>
+                <button
+                  type="button"
+                  onClick={loadColors}
+                  disabled={loadingColors}
+                  style={{
+                    ...styles.btnGhost,
+                    fontFamily: font.heading,
+                    fontSize: fontSize['2xs'],
+                    padding: '6px 12px',
+                    color: colors.paper,
+                    borderColor: colors.muted,
+                    opacity: loadingColors ? 0.4 : 1,
+                    cursor: loadingColors ? 'wait' : 'pointer',
+                  }}
+                >
+                  {loadingColors ? 'Refreshing…' : 'Refresh Colors'}
+                </button>
+              </div>
+
+              {colorsError && (
+                <div style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.dangerSoft, marginBottom: spacing[3] }}>
+                  {colorsError}
+                </div>
+              )}
+
+              {!loadingColors && !colorsError && themeColors.length === 0 && (
+                <div style={{ fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted }}>
+                  No colors loaded. Run Pull Settings first.
+                </div>
+              )}
+
+              {themeColors.length > 0 && (
+                <div style={{ display: 'flex', gap: spacing[4], alignItems: 'center', flexWrap: 'wrap' }}>
+                  {themeColors.map(c => (
+                    <div
+                      key={c.key}
+                      title={`${c.label} — ${c.hex || '(unset)'}`}
+                      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: spacing[2] }}
+                    >
+                      <div
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: '50%',
+                          backgroundColor: c.hex || 'transparent',
+                          border: `1px solid ${c.hex ? 'rgba(255,255,255,0.2)' : colors.dangerSoft}`,
+                          boxShadow: c.hex ? '0 2px 6px rgba(0,0,0,0.3)' : 'none',
+                        }}
+                      />
+                      <span style={{ fontFamily: font.heading, fontSize: 9, textTransform: 'uppercase', letterSpacing: letterSpacing.wider, color: colors.muted }}>
+                        {c.hex || '—'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </Section>
+        )}
 
         {config ? (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing[6] }}>
