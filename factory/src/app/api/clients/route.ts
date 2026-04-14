@@ -24,14 +24,20 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'brand_name required' }, { status: 400 });
   }
 
-  // Check if client exists by store_url
-  if (store_url) {
-    const { data: existing } = await supabase
+  // Check if a client row already exists for this store_url. We guard on the
+  // trimmed value instead of the raw one so an empty string falls through to
+  // the insert branch with store_url='' rather than creating duplicates.
+  // .limit(1) tolerates legacy duplicate rows (which would break .single()).
+  const storeUrlKey = (store_url || '').trim();
+  if (storeUrlKey) {
+    const { data: matches } = await supabase
       .from('clients')
       .select('id')
-      .eq('store_url', store_url)
-      .single();
+      .eq('store_url', storeUrlKey)
+      .order('created_at', { ascending: true })
+      .limit(1);
 
+    const existing = matches?.[0];
     if (existing) {
       // Update existing
       const { data, error } = await supabase

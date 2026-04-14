@@ -321,52 +321,9 @@ export default function NewClientPage() {
       setDeployResult(null);
       setDeployError(null);
 
-      // Save to Supabase
-      try {
-        // Create or find client
-        const clientRes = await fetch('/api/clients', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            brand_name: brief.brand_name,
-            store_url: brief.store_url || '',
-            api_key: brief.api_key || '',
-            status: 'draft',
-          }),
-        });
-        const clientData = await clientRes.json();
-        const clientId = clientData.client?.id;
-
-        if (clientId) {
-          await fetch('/api/clients/config', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              client_id: clientId,
-              config: {
-                color_variants: data.color_variants || [],
-                selected_variant: 0,
-                index_json: data.index_json || null,
-                product_json: data.product_json || null,
-                about_json: data.about_json || null,
-                footer_group_json: data.footer_group_json || null,
-                brief: {
-                  brand_name: brief.brand_name,
-                  one_liner: brief.one_liner,
-                  category: brief.category,
-                  target_audience: brief.target_audience,
-                  brand_vibe: brief.brand_vibe,
-                  primary_color: brief.primary_color,
-                  secondary_color: brief.secondary_color,
-                },
-              },
-            }),
-          });
-        }
-      } catch {
-        // Silent fail — config save is non-critical
-        console.warn('Failed to save config to Supabase');
-      }
+      // Note: Supabase save is deferred to handleDeploy, where deployStoreUrl
+      // is known. Saving here with brief.store_url='' would create orphan
+      // client rows that the dashboard cannot link to stores.json entries.
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Generation failed');
     } finally {
@@ -540,6 +497,54 @@ export default function NewClientPage() {
         total_images: 0,
         rewritten_slots: 0,
       });
+
+      // Save the generated config to Supabase now that we know the real
+      // target store_url. /api/clients POST dedupes by store_url so this
+      // upserts the existing client row rather than creating a new one,
+      // and the config lands under a client_id that the dashboard can link.
+      try {
+        const normalizedStoreUrl = deployStoreUrl.trim().replace(/^https?:\/\//, '').replace(/\/$/, '');
+        const clientRes = await fetch('/api/clients', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            brand_name: brief.brand_name,
+            store_url: normalizedStoreUrl,
+            api_key: brief.api_key || '',
+            status: 'deployed',
+          }),
+        });
+        const clientData = await clientRes.json();
+        const clientId = clientData.client?.id;
+        if (clientId) {
+          await fetch('/api/clients/config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              client_id: clientId,
+              config: {
+                color_variants: colorVariants,
+                selected_variant: selectedVariant,
+                index_json: indexJson,
+                product_json: productJson,
+                about_json: aboutJson,
+                footer_group_json: footerGroupJson,
+                brief: {
+                  brand_name: brief.brand_name,
+                  one_liner: brief.one_liner,
+                  category: brief.category,
+                  target_audience: brief.target_audience,
+                  brand_vibe: brief.brand_vibe,
+                  primary_color: brief.primary_color,
+                  secondary_color: brief.secondary_color,
+                },
+              },
+            }),
+          });
+        }
+      } catch {
+        console.warn('Failed to save config to Supabase after deploy');
+      }
     } catch (err) {
       setDeployError(err instanceof Error ? err.message : 'Deploy failed');
     } finally {
