@@ -1098,6 +1098,24 @@
     "instructions": "Shopify internal URL for the footer content-block button (shopify://collections/... or shopify://pages/...). Empty string if footer_cta_label is empty."
   },
   {
+    "key": "footer_instagram_handle",
+    "type": "text",
+    "section": "footer",
+    "instructions": "Instagram handle without the @ (e.g. 'jolenecoffee'). Infer from scraped brand data: prefer an explicit handle in scraped content, otherwise derive from the brand name (lowercase, strip spaces and punctuation — e.g. 'Jolene Coffee' → 'jolenecoffee'). This is a best-guess; the client can override in Shopify admin. Return empty string if you cannot produce a plausible handle."
+  },
+  {
+    "key": "footer_richtext_heading",
+    "type": "text",
+    "section": "footer",
+    "instructions": "Optional heading above the follow-us text in the footer Rich Text section. Usually blank — return empty string unless a short label (1-3 words, e.g. 'Stay Connected', 'Follow Along') actively improves the layout."
+  },
+  {
+    "key": "footer_richtext_content",
+    "type": "richtext",
+    "section": "footer",
+    "instructions": "Short richtext with an Instagram follow link, baked with the brand's Instagram handle. Format exactly: <p>Follow us <a href=\"https://instagram.com/HANDLE\">@HANDLE</a> for daily inspiration</p> — replace HANDLE with footer_instagram_handle. If footer_instagram_handle is empty, return empty string."
+  },
+  {
     "key": "_note_footer_nav_menus",
     "type": "note",
     "section": "footer",
