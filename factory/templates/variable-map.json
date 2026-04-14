@@ -1107,13 +1107,13 @@
     "key": "footer_richtext_heading",
     "type": "text",
     "section": "footer",
-    "instructions": "Optional heading above the follow-us text in the footer Rich Text section. Usually blank — return empty string unless a short label (1-3 words, e.g. 'Stay Connected', 'Follow Along') actively improves the layout."
+    "instructions": "Visible main text of the footer Rich Text section — plain text, NO HTML. Format exactly: 'Follow us @HANDLE' where HANDLE is footer_instagram_handle (e.g. 'Follow us @jolenecoffee'). The theme renders this as the primary text in the block; do not include <a>, <p>, or any markup — Shopify will strip it since the field type is `text`, not `richtext`. If footer_instagram_handle is empty, return empty string."
   },
   {
     "key": "footer_richtext_content",
     "type": "richtext",
     "section": "footer",
-    "instructions": "Short richtext with an Instagram follow link, baked with the brand's Instagram handle. Format exactly: <p>Follow us <a href=\"https://instagram.com/HANDLE\">@HANDLE</a> for daily inspiration</p> — replace HANDLE with footer_instagram_handle. If footer_instagram_handle is empty, return empty string."
+    "instructions": "Unused — always return empty string. Kept as a placeholder wired to the Rich Text section's `content` setting in case we re-enable a body paragraph later."
   },
   {
     "key": "_note_footer_nav_menus",
