@@ -215,6 +215,7 @@ export default function NewClientPage() {
   const [indexJson, setIndexJson] = useState<Record<string, unknown> | null>(null);
   const [productJson, setProductJson] = useState<Record<string, unknown> | null>(null);
   const [aboutJson, setAboutJson] = useState<Record<string, unknown> | null>(null);
+  const [footerGroupJson, setFooterGroupJson] = useState<Record<string, unknown> | null>(null);
   const [imageAssignments, setImageAssignments] = useState<ImageAssignment[]>([]);
   const [previewTab, setPreviewTab] = useState<'homepage' | 'pdp'>('homepage');
 
@@ -309,6 +310,7 @@ export default function NewClientPage() {
       setIndexJson(data.index_json || null);
       setProductJson(data.product_json || null);
       setAboutJson(data.about_json || null);
+      setFooterGroupJson(data.footer_group_json || null);
       setImageAssignments(data.image_assignments || []);
       setSelectedVariant(0);
       setPreviewTab('homepage');
@@ -347,6 +349,7 @@ export default function NewClientPage() {
                 index_json: data.index_json || null,
                 product_json: data.product_json || null,
                 about_json: data.about_json || null,
+                footer_group_json: data.footer_group_json || null,
                 brief: {
                   brand_name: brief.brand_name,
                   one_liner: brief.one_liner,
@@ -936,14 +939,14 @@ export default function NewClientPage() {
               <div style={{ display: 'flex', gap: spacing[4] }}>
                 <button
                   type="button"
-                  onClick={() => { setStep(2); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); setError(null); }}
+                  onClick={() => { setStep(2); setIndexJson(null); setProductJson(null); setAboutJson(null); setFooterGroupJson(null); setColorVariants([]); setError(null); }}
                   style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
                 >
                   Regenerate
                 </button>
                 <button
                   type="button"
-                  onClick={() => { setStep(1); setBrief(INITIAL); setScanUrl(''); setIndexJson(null); setProductJson(null); setAboutJson(null); setColorVariants([]); }}
+                  onClick={() => { setStep(1); setBrief(INITIAL); setScanUrl(''); setIndexJson(null); setProductJson(null); setAboutJson(null); setFooterGroupJson(null); setColorVariants([]); }}
                   style={{ ...styles.btnGhost, border: 'none', background: 'none', fontFamily: font.heading, fontSize: fontSize.xs, color: colors.muted, cursor: 'pointer' }}
                 >
                   Start Over
@@ -1177,7 +1180,7 @@ export default function NewClientPage() {
             </div>
 
             {/* Download buttons */}
-            <div style={{ marginTop: spacing[6], display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: spacing[3] }}>
+            <div style={{ marginTop: spacing[6], display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: spacing[3] }}>
               <button type="button" onClick={() => download(indexJson, 'index.json')} style={styles.btnPrimary}>
                 Download index.json
               </button>
@@ -1199,6 +1202,14 @@ export default function NewClientPage() {
                 style={{ ...styles.btnDark, opacity: aboutJson ? 1 : 0.3, cursor: aboutJson ? 'pointer' : 'not-allowed' }}
               >
                 Download about.json
+              </button>
+              <button
+                type="button"
+                onClick={() => footerGroupJson && download(footerGroupJson, 'footer-group.json')}
+                disabled={!footerGroupJson}
+                style={{ ...styles.btnDark, opacity: footerGroupJson ? 1 : 0.3, cursor: footerGroupJson ? 'pointer' : 'not-allowed' }}
+              >
+                Download footer-group.json
               </button>
             </div>
 

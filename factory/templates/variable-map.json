@@ -1086,40 +1086,22 @@
     "instructions": "Full Facebook page URL (e.g. 'https://facebook.com/brandname') or empty string."
   },
   {
-    "key": "footer_col_1_heading",
+    "key": "footer_cta_label",
     "type": "text",
     "section": "footer",
-    "instructions": "Footer column 1 heading (e.g. 'Shop', 'Products'). One word, labels the link group below."
+    "instructions": "Footer content-block button label (e.g. 'Shop All', 'Our Story'). 1-3 words. Leave empty string if no CTA wanted."
   },
   {
-    "key": "footer_col_1_links",
-    "type": "richtext",
+    "key": "footer_cta_url",
+    "type": "url",
     "section": "footer",
-    "instructions": "Footer column 1 navigation links as richtext list. Include 3-5 links relevant to shopping (e.g. All Products, Best Sellers, Bundles, Subscribe)."
+    "instructions": "Shopify internal URL for the footer content-block button (shopify://collections/... or shopify://pages/...). Empty string if footer_cta_label is empty."
   },
   {
-    "key": "footer_col_2_heading",
-    "type": "text",
+    "key": "_note_footer_nav_menus",
+    "type": "note",
     "section": "footer",
-    "instructions": "Footer column 2 heading (e.g. 'Company', 'About'). One word, labels the link group below."
-  },
-  {
-    "key": "footer_col_2_links",
-    "type": "richtext",
-    "section": "footer",
-    "instructions": "Footer column 2 navigation links as richtext list. Include 3-5 links relevant to the brand (e.g. Our Story, FAQ, Blog, Press)."
-  },
-  {
-    "key": "footer_col_3_heading",
-    "type": "text",
-    "section": "footer",
-    "instructions": "Footer column 3 heading (e.g. 'Support', 'Help'). One word, labels the link group below."
-  },
-  {
-    "key": "footer_col_3_links",
-    "type": "richtext",
-    "section": "footer",
-    "instructions": "Footer column 3 navigation links as richtext list. Include 3-5 links relevant to support (e.g. Contact Us, Shipping, Returns, Terms)."
+    "instructions": "Footer navigation columns (Shop / Company / Support link groups) are rendered by the theme__footer section's `menu` blocks, which resolve Shopify admin linklists by handle (main-menu, customer-account-main-menu, footer). They CANNOT be populated by the factory — they must be configured per store in Shopify Admin → Online Store → Navigation. This is a non-generatable placeholder entry; the generation pipeline skips type 'note'."
   },
   {
     "key": "footer_legal_text",

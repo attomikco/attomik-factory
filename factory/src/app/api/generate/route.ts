@@ -431,13 +431,12 @@ ANNOUNCEMENT BAR:
 - Wrap in <p> tags since it is a richtext field
 
 FOOTER:
-- footer_tagline: brand one-liner — distilled version of the hero subhead, under 10 words
-- footer_col_1_heading: "Shop" — link group for product collections
-- footer_col_1_links: richtext with product/collection links (All Products, Best Sellers, Bundles, Subscribe)
-- footer_col_2_heading: "Company" — link group for brand pages
-- footer_col_2_links: richtext with brand links (About, Our Story, Press, Sustainability)
-- footer_col_3_heading: "Support" — link group for help pages
-- footer_col_3_links: richtext with support links (FAQ, Contact, Shipping & Returns, Terms)
+- footer_tagline: brand one-liner — distilled version of the hero subhead, under 10 words. Wires into the footer content block's heading.
+- footer_about_heading: short content-block section heading (e.g. "About Us", "Our Story"). 2-3 words.
+- footer_about_content: richtext in <p> tags — 2-3 sentence brand description that wires into the footer content block's body.
+- footer_cta_label: 1-3 word button label for the footer content block (e.g. "Shop All", "Our Story"). Return "" if no CTA is warranted.
+- footer_cta_url: Shopify internal URL (shopify://collections/... or shopify://pages/...) for the footer content-block button. Return "" when footer_cta_label is empty.
+- Footer navigation columns (Shop / Company / Support link groups) are Shopify admin linklists — DO NOT generate values for them. They're configured per store in Shopify Admin → Online Store → Navigation.
 - Social URLs (footer_instagram_url, footer_tiktok_url, footer_facebook_url): always return "" — client fills these in
 - footer_legal_text: generate an appropriate legal disclaimer based on product category:
   - Beverage with alcohol/THC: include age verification and regulatory disclaimer
@@ -603,6 +602,7 @@ interface MergedTemplates {
   index: Record<string, unknown>;
   product: Record<string, unknown>;
   about: Record<string, unknown>;
+  footerGroup: Record<string, unknown>;
 }
 
 async function mergeTemplates(
@@ -635,8 +635,18 @@ async function mergeTemplates(
   const aboutStr = applyValuesToTemplate(JSON.stringify(baseAbout), values);
   const aboutResult = JSON.parse(aboutStr);
 
-  console.log('[Step 3] Template merge complete (index + product + about)');
-  return { index: indexResult, product: pdpResult, about: aboutResult };
+  // Merge Footer group template (sections/footer-group.json)
+  const baseFooterGroup = await loadJSON<Record<string, unknown>>('templates/base-footer-group.json');
+  const footerGroupStr = applyValuesToTemplate(JSON.stringify(baseFooterGroup), values);
+  const footerGroupResult = JSON.parse(footerGroupStr);
+
+  console.log('[Step 3] Template merge complete (index + product + about + footer-group)');
+  return {
+    index: indexResult,
+    product: pdpResult,
+    about: aboutResult,
+    footerGroup: footerGroupResult,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -698,7 +708,12 @@ export async function POST(request: NextRequest) {
     // -----------------------------------------------------------------------
     // Step 3 — Template Merge (index + product)
     // -----------------------------------------------------------------------
-    const { index: indexJsonRaw, product: productJson, about: aboutJson } = await mergeTemplates(generatedValues);
+    const {
+      index: indexJsonRaw,
+      product: productJson,
+      about: aboutJson,
+      footerGroup: footerGroupJson,
+    } = await mergeTemplates(generatedValues);
 
     // Inject assigned image URLs into merged index.json settings.
     const indexJson = injectImageAssignments(indexJsonRaw, imageAssignments);
@@ -726,6 +741,7 @@ export async function POST(request: NextRequest) {
       index_json: indexJson,
       product_json: productJson,
       about_json: aboutJson,
+      footer_group_json: footerGroupJson,
       image_assignments: imageAssignments,
       brand_data: scraped || {
         name: brief.brand_name,
