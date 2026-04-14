@@ -24,6 +24,7 @@ interface DeployBody {
   settings_data?: Record<string, unknown>;
   product_json?: Record<string, unknown>;
   about_json?: Record<string, unknown>;
+  footer_group_json?: Record<string, unknown>;
 }
 
 async function writeThemeFile(relPath: string, data: Record<string, unknown>): Promise<void> {
@@ -35,7 +36,16 @@ async function writeThemeFile(relPath: string, data: Record<string, unknown>): P
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as DeployBody;
-    const { store_url, theme_name, theme_id, index_json, settings_data, product_json, about_json } = body;
+    const {
+      store_url,
+      theme_name,
+      theme_id,
+      index_json,
+      settings_data,
+      product_json,
+      about_json,
+      footer_group_json,
+    } = body;
 
     if (!store_url || !theme_name || typeof theme_id !== 'number') {
       return NextResponse.json(
@@ -71,6 +81,10 @@ export async function POST(request: NextRequest) {
     if (about_json) {
       await writeThemeFile('templates/page.about.json', about_json);
       onlyFiles.push('templates/page.about.json');
+    }
+    if (footer_group_json) {
+      await writeThemeFile('sections/footer-group.json', footer_group_json);
+      onlyFiles.push('sections/footer-group.json');
     }
 
     if (onlyFiles.length === 0) {

@@ -527,6 +527,7 @@ export default function NewClientPage() {
           settings_data: buildSettingsData(),
           product_json: productJson,
           about_json: aboutJson,
+          footer_group_json: footerGroupJson,
         }),
       });
       const data = await res.json();
