@@ -43,6 +43,14 @@
 %}
 
 {% unless product == null %}
+  {% comment %} Hide this block if variant_cards block exists for this option {% endcomment %}
+  {% assign ac_has_cards = false %}
+  {% for b in section.blocks %}
+    {% if b.type == 'variant_cards' %}
+      {% assign ac_has_cards = true %}
+    {% endif %}
+  {% endfor %}
+  {% unless ac_has_cards %}
   {% comment %} Options selectors {% endcomment %}
   {% comment %} Shown unless js is disabled {% endcomment %}
   <div
@@ -1069,4 +1077,5 @@
       </div>
     </div>
   {% endif %}
+  {% endunless %}
 {% endunless %}
