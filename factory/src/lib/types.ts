@@ -21,6 +21,7 @@ export interface GeneratedConfig {
   index_json: Record<string, unknown>;
   product_json: Record<string, unknown> | null;
   about_json: Record<string, unknown> | null;
+  footer_group_json: Record<string, unknown> | null;
   brief: {
     brand_name: string;
     one_liner: string;

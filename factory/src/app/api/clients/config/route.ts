@@ -59,3 +59,40 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ config: data });
 }
+
+// PATCH — update latest config for a client in place (no new version)
+export async function PATCH(request: NextRequest) {
+  const { client_id, config } = await request.json();
+
+  if (!client_id || !config) {
+    return NextResponse.json({ error: 'client_id and config required' }, { status: 400 });
+  }
+
+  const { data: latest, error: latestError } = await supabase
+    .from('brand_configs')
+    .select('id')
+    .eq('client_id', client_id)
+    .order('version', { ascending: false })
+    .limit(1)
+    .single();
+
+  if (latestError || !latest) {
+    return NextResponse.json(
+      { error: 'No existing config to update — POST a new one first' },
+      { status: 404 },
+    );
+  }
+
+  const { data, error } = await supabase
+    .from('brand_configs')
+    .update({ config })
+    .eq('id', latest.id)
+    .select()
+    .single();
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ config: data });
+}
