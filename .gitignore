@@ -12,3 +12,4 @@ theme/templates/product.json
 theme/templates/page.about.json
 theme/templates/collection.json
 theme/config/settings_data.json
+theme/sections/footer-group.json
