@@ -50,7 +50,6 @@
       {% assign ac_has_cards = true %}
     {% endif %}
   {% endfor %}
-  {% unless ac_has_cards %}
   {% comment %} Options selectors {% endcomment %}
   {% comment %} Shown unless js is disabled {% endcomment %}
   <div
@@ -62,6 +61,7 @@
       {% endif %}
     "
   >
+    {% unless ac_has_cards %}
     {% comment %} Warning {% endcomment %}
     <p
       class="type--small !text-red-500"
@@ -615,6 +615,7 @@
           {% endif %}
       </div>
     {% endfor %}
+    {% endunless %}
 
     <script type="application/json">
       {{ product.selected_or_first_available_variant | json }}
@@ -1077,5 +1078,4 @@
       </div>
     </div>
   {% endif %}
-  {% endunless %}
 {% endunless %}
